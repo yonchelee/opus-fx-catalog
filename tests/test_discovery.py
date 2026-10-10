@@ -304,6 +304,15 @@ class JudgeUnits(unittest.TestCase):
         for name, desc, topics in [('zig-gamedev', 'Dev repo for @zig-gamedev libs and sample applications', ['demos']),
                                    ('remocn', 'Production-ready animations, transitions, backgrounds, and scenes for Remotion', ['remotion', 'shadcn'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
+        for name, desc, topics in [('prettymaps', 'Draw pretty maps from OpenStreetMap data!', ['generative-art']),
+                                   ('triangula', 'Generate high-quality triangulated art from images.', ['generative-art']),
+                                   ('KinoBloom', 'Bloom effect for Unity', ['effect', 'shader', 'unity']),
+                                   ('Sticker', 'Holographic sticker effects for SwiftUI views.', ['shader']),
+                                   ('generativeart', 'Generative Art in Go', ['generative-art']),
+                                   ('stable-diffusion-docker', 'Run the official Stable Diffusion releases in a Docker container', ['generative-art']),
+                                   ('drawsvg', 'Programmatically generate SVG (vector) images, animations, and interactive Jupyter widgets', ['animation'])]:
+            self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'Python'}, '', ['index.html'], cfg)['kind'], 'library', name)
+        self.assertEqual(judge.classify_repo({'name': 'portfolio', 'description': 'Personal portfolio (2018)', 'topics': ['threejs', 'animation'], 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'app')
         for name, desc, topics in [('fieldplay', 'A vector field explorer', ['glsl', 'particles', 'webgl']),
                                    ('HologramShader', 'Test of an hologram material made in Unity.', ['effect', 'shader'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'GLSL'}, '', ['index.html'], cfg)['kind'], 'effect', name)

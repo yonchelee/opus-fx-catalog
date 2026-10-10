@@ -83,6 +83,9 @@ def classify_repo(repo, readme, contents, cfg):
 
     namedesc = words(name.replace('-', ' ').replace('_', ' ') + ' ' + desc)
     tool = any_word(cfg['library_words'], namedesc)
+    # 설명이 '만들어 준다'는 동사로 시작하거나, 특정 프레임워크용 부품·특정 언어 구현이면 도구
+    d0 = re.sub(r'^[^a-z0-9]+', '', desc.lower())
+    tool += [m.group(0).strip() for pat in cfg.get('tool_patterns', []) for m in [re.search(pat, d0)] if m]
     # 패키지 설치 안내(npm install --save 이름 등)가 있으면 라이브러리. 이름 없는 'npm install'(데모 의존성 설치)은 제외
     npm_pkg = ('package.json' in files and re.search(r'\b(?:npm|yarn|pnpm) (?:i|install|add)(?: -{1,2}[\w-]+)* [@a-z][\w./@-]*', readme or '', re.I) is not None) \
         or '.npmignore' in files
