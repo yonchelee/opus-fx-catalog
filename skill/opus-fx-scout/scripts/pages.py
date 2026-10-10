@@ -27,6 +27,56 @@ VERIFY = {'unverified': ('미검증', '이 사이트에서 직접 실행해 보�
           'reproduced': ('재현 확인', '같은 프롬프트로 비슷한 결과가 나오는 것을 확인했습니다.')}
 
 
+FXN = {'3d': '3D 씬·카메라', 'shader': '셰이더·글로우', 'reel': '모션 쇼릴', 'game': '플레이어블 게임', 'paint': '페인터리·손그림',
+       'ui': 'UI·제품 데모', 'particles': '파티클·입자', 'audio': '사운드 동기화', 'liquid': '유체·물리', 'cosmic': '우주·자연',
+       'pixel': '픽셀아트', 'morph': '모핑·트랜지션', 'glitch': '글리치·레트로', 'kinetic': '키네틱 타이포', 'data': '데이터·지도', 'etc': '기타'}
+ENVS = {'chat': 'Claude 채팅 미리보기에서 바로 볼 수 있는 HTML 한 장 (외부 라이브러리는 CDN 으로)',
+        'code': 'Claude Code 로 만드는 프로젝트 파일 (실행 방법까지 알려 주기)',
+        'video': 'MP4 영상 파일로 내보낼 수 있는 구성 (Remotion 등, 렌더링 명령까지 알려 주기)'}
+ENV_LABEL = {'chat': 'Claude 채팅 (HTML 한 장)', 'code': 'Claude Code (프로젝트)', 'video': '영상 파일 (MP4)'}
+
+
+def build_request(r, o, uses):
+    """assets/apply.js buildRequest 와 글자 하나까지 같아야 한다(tests/apply.test.mjs 가 생성 페이지로 대조)."""
+    ed = r.get('ed') or {}
+    g = ed.get('guide') or {}
+    ref = g.get('brief') or ' — '.join(x for x in [title_of(r), ', '.join(FXN[f] for f in r.get('fx') or [] if f != 'etc')] if x)
+    lines = ['다음 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.', '',
+             '[참고한 효과]', ref, f'(출처: @{r["author"]}{", " + r["post_url"] if r.get("post_url") else ""})', '',
+             f'[내 용도] {o.get("use") or (uses[0] if uses else "자유롭게 정해 주세요")}',
+             f'[들어갈 문구] {o.get("text") or "임의로 정해 주세요"}',
+             f'[색상] {o.get("color") or "원본 분위기를 유지해 주세요"}',
+             f'[실행 환경] {ENVS.get(o.get("env")) or ENVS["chat"]}', '',
+             '[조건]',
+             '- 원본을 그대로 복제하지 말고, 위 용도와 문구에 맞게 구성을 바꿔 주세요.',
+             '- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.',
+             '- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.']
+    if not g.get('brief') and r.get('prompt'):
+        p = r['prompt']
+        lines += ['', '[원본 프롬프트 — 일부만 공개됨, 빠진 부분은 알아서 채워 주세요]' if r.get('partial') else '[원본 프롬프트 — 기법 참고용]',
+                  p[:1200] + (' …' if len(p) > 1200 else '')]
+    return '\n'.join(lines)
+
+
+def default_env(r):
+    return 'chat' if level_of(r) in (0, 1) else 'code'
+
+
+def apply_section(r, use_titles):
+    env = default_env(r)
+    uses = [t for _, t in use_titles]
+    opts = ''.join(f'<option value="{k}"{" selected" if k == env else ""}>{t}</option>' for k, t in ENV_LABEL.items())
+    return (f'<section class="dsec" id="apply"><h3><span class="n">7</span>적용용 요청문 만들기</h3>'
+            '<p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p>'
+            '<div class="apply">'
+            f'<label>용도<input id="ap-use" placeholder="{h(uses[0] if uses else "예: 랜딩 페이지 첫 화면")}"></label>'
+            '<label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label>'
+            '<label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label>'
+            f'<label>실행 환경<select id="ap-env">{opts}</select></label></div>'
+            f'<pre class="prompt" id="ap-out" aria-live="polite">{h(build_request(r, {"env": env}, uses))}</pre>'
+            '<div class="acts"><button type="button" class="btn primary" id="cp-req">적용용 요청문 복사</button></div></section>')
+
+
 def item_path(item_id):
     src, slug = item_id.split(':', 1)
     return f'fx/{quote(src, safe="")}/{quote(slug, safe="")}/'
@@ -175,7 +225,7 @@ def item_page(r, uses, related, root='../../../'):
 {sec('4', '실행 순서', '<ol>' + ''.join(f'<li>{h(s)}</li>' for s in g.get('steps') or []) + '</ol>' if g.get('steps') else '')}
 {sec('5', '바꾸면 좋은 변수', '<div class="vars">' + ''.join(f'<div><b>{h(x.get("name", ""))}</b><span>{h(x.get("hint", ""))}</span></div>' for x in g.get('variables') or []) + '</div>' if g.get('variables') else '')}
 {sec('6', '원본 프롬프트', ('<p class="warn">원작자가 프롬프트 일부만 공개했습니다. 아래는 전체가 아닙니다.</p>' if r.get('partial') else '') + f'<pre class="prompt" id="dprompt">{h(r.get("prompt") or "(프롬프트 없음)")}</pre>')}
-<div id="applyslot"></div>
+{apply_section(r, use_titles)}
 {sec('8', '출처와 검증', f'<ul><li>원작자 @{h(r["author"])}' + (f' · <a href="{h(r["post_url"])}" target="_blank" rel="noopener">원본 게시물</a>' if r.get('post_url') else '') + (f' · <a href="{h(r["prompt_url"])}" target="_blank" rel="noopener">프롬프트 출처</a>' if r.get('prompt_url') else '') + f'</li><li>{vline}</li>' + (f'<li>부족한 조건: {h(vr["missing"])}</li>' if vr.get('missing') else '') + (f'<li>원본 X 게시물 좋아요 {fmt_likes(r["likes"])} — 이 사이트의 평가가 아닙니다.</li>' if r.get('likes') is not None else '') + f'<li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID {h(r["id"])} · 수집 {h(r.get("added", ""))}</li></ul>')}
 {sec('', '같은 용도의 다른 작품', f'<ul class="list">{rel}</ul>') if rel else ''}
 </main>

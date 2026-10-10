@@ -62,7 +62,21 @@ Before modeling anything, build a source file from: the 1899-1905 Sanborn fire i
 Build everything in Blender Python. No downloaded meshes, textures or HDRIs. Write reusable generators (Victorian commercial facade, mansard roof, bay windows, awnings, painted signage, gas and electric street lamps, cable car, horse-drawn wagon, early automobile) and assemble the street from the source file, so every building traces back to data.
 
 Provide a 10 second video up the street.</pre></section>
-<div id="applyslot"></div>
+<section class="dsec" id="apply"><h3><span class="n">7</span>적용용 요청문 만들기</h3><p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p><div class="apply"><label>용도<input id="ap-use" placeholder="예: 랜딩 페이지 첫 화면"></label><label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label><label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label><label>실행 환경<select id="ap-env"><option value="chat">Claude 채팅 (HTML 한 장)</option><option value="code" selected>Claude Code (프로젝트)</option><option value="video">영상 파일 (MP4)</option></select></label></div><pre class="prompt" id="ap-out" aria-live="polite">다음 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.
+
+[참고한 효과]
+오래된 지도·사진·필름 등 역사 자료를 먼저 조사해 건물마다 출처와 신뢰도를 기록한 뒤, 그 자료만 근거로 3D 코드를 생성하는 기법을 설명한다. 외부 메쉬나 텍스처를 쓰지 않고 반복 요소는 재사용 가능한 생성기로 만든다.
+(출처: @alexalbert__, https://x.com/alexalbert__/status/2102466523164274839)
+
+[내 용도] 자유롭게 정해 주세요
+[들어갈 문구] 임의로 정해 주세요
+[색상] 원본 분위기를 유지해 주세요
+[실행 환경] Claude Code 로 만드는 프로젝트 파일 (실행 방법까지 알려 주기)
+
+[조건]
+- 원본을 그대로 복제하지 말고, 위 용도와 문구에 맞게 구성을 바꿔 주세요.
+- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.
+- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.</pre><div class="acts"><button type="button" class="btn primary" id="cp-req">적용용 요청문 복사</button></div></section>
 <section class="dsec"><h3><span class="n">8</span>출처와 검증</h3><ul><li>원작자 @alexalbert__ · <a href="https://x.com/alexalbert__/status/2102466523164274839" target="_blank" rel="noopener">원본 게시물</a> · <a href="https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/alexalbert-274839.md" target="_blank" rel="noopener">프롬프트 출처</a></li><li>검증: <b>미검증</b> — 이 사이트에서 직접 실행해 보지 않았습니다.</li><li>부족한 조건: Blender 렌더링을 직접 돌려 10초 영상 결과를 봐야 완성도를 확인할 수 있다</li><li>원본 X 게시물 좋아요 1,152 — 이 사이트의 평가가 아닙니다.</li><li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID yihui:alexalbert-274839 · 수집 2026-09-26</li></ul></section>
 
 </main>

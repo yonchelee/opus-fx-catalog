@@ -38,3 +38,21 @@ test('입력이 비면 기본 안내로 채운다', () => {
   assert.match(t, /임의로 정해 주세요/);
   assert.match(t, /원본 분위기를 유지/);
 });
+
+// 생성 페이지(파이썬 pages.build_request)의 기본 요청문이 브라우저 buildRequest 와 같은지
+import {readdirSync, readFileSync, statSync} from 'node:fs';
+const unescape = s => s.replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+const root = new URL('../fx/', import.meta.url);
+const pages = [];
+for (const src of readdirSync(root)) for (const slug of readdirSync(new URL(src + '/', root))) pages.push(new URL(`${src}/${slug}/index.html`, root));
+test('생성 페이지마다 7번 칸이 HTML 에 있고, 기본 요청문이 브라우저 함수와 같다', () => {
+  assert.ok(pages.length >= 12);
+  for (const p of pages) {
+    const html = readFileSync(p, 'utf8');
+    const data = JSON.parse(html.match(/<script type="application\/json" id="item">([\s\S]*?)<\/script>/)[1].replace(/<\\\//g, '</'));
+    const out = html.match(/<pre class="prompt" id="ap-out"[^>]*>([\s\S]*?)<\/pre>/);
+    assert.ok(out, `${p.pathname}: 7번 칸 없음`);
+    const env = data.level <= 1 ? 'chat' : 'code';
+    assert.equal(unescape(out[1]), buildRequest(data, {env}, data.uses), p.pathname);
+  }
+});

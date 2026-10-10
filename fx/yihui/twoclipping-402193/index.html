@@ -84,7 +84,21 @@ Never put will-change on anything the camera scales or the text renders blurry. 
 &lt;start&gt;
 Ask me for the inputs, then show me the state list on the beat grid before you write any code.
 &lt;/start&gt;</pre></section>
-<div id="applyslot"></div>
+<section class="dsec" id="apply"><h3><span class="n">7</span>적용용 요청문 만들기</h3><p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p><div class="apply"><label>용도<input id="ap-use" placeholder="제품·UI 소개 애니메이션"></label><label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label><label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label><label>실행 환경<select id="ap-env"><option value="chat">Claude 채팅 (HTML 한 장)</option><option value="code" selected>Claude Code (프로젝트)</option><option value="video">영상 파일 (MP4)</option></select></label></div><pre class="prompt" id="ap-out" aria-live="polite">다음 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.
+
+[참고한 효과]
+하나의 UI 요소가 잘리지 않고 크기·모서리·색을 바꾸며 여러 상태(버튼, 로더, 슬라이더, 탭, 차트, 커맨드팔레트 등)로 연속 변신하는 모션을 만든다. 모든 전환은 커서의 클릭과 드래그로 일어나고, 스프링 물성으로 자연스럽게 움직이며 마지막 장면이 첫 장면과 같아 루프된다. 음악 비트에 맞춰 전환 타이밍을 잡고 motion blur로 부드럽게 마무리한다.
+(출처: @twoclipping, https://x.com/twoclipping/status/2103273003555402193)
+
+[내 용도] 제품·UI 소개 애니메이션
+[들어갈 문구] 임의로 정해 주세요
+[색상] 원본 분위기를 유지해 주세요
+[실행 환경] Claude Code 로 만드는 프로젝트 파일 (실행 방법까지 알려 주기)
+
+[조건]
+- 원본을 그대로 복제하지 말고, 위 용도와 문구에 맞게 구성을 바꿔 주세요.
+- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.
+- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.</pre><div class="acts"><button type="button" class="btn primary" id="cp-req">적용용 요청문 복사</button></div></section>
 <section class="dsec"><h3><span class="n">8</span>출처와 검증</h3><ul><li>원작자 @twoclipping · <a href="https://x.com/twoclipping/status/2103273003555402193" target="_blank" rel="noopener">원본 게시물</a> · <a href="https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/twoclipping-402193.md" target="_blank" rel="noopener">프롬프트 출처</a></li><li>검증: <b>미검증</b> — 이 사이트에서 직접 실행해 보지 않았습니다.</li><li>부족한 조건: Playwright 렌더링과 ffmpeg 합성까지 실제로 돌려 60fps 영상으로 매끄럽게 나오는지 확인 필요</li><li>원본 X 게시물 좋아요 1.3만 — 이 사이트의 평가가 아닙니다.</li><li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID yihui:twoclipping-402193 · 수집 2026-09-26</li></ul></section>
 <section class="dsec"><h3><span class="n"></span>같은 용도의 다른 작품</h3><ul class="list"><li><a class="row" href="../../../fx/yihui/iamtanzil-120030/"><img src="https://media.skillry.dev/opus-5-5/iamtanzil-120030/original.31773009f1.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>e바이크 엑스레이 제품 히어로</b><span>마우스로 외관을 지우면 내부 구조가 드러나는 커서 추적 엑스레이 제품 히어로 섹션</span></div></a></li><li><a class="row" href="../../../fx/yihui/op7418-818226/"><img src="https://media.skillry.dev/opus-5-5/op7418-818226/original.bd3cd48590.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>모바일 게임 보상 연출</b><span>카드가 금빛 광선 속에서 열리며 등급마다 색과 파티클이 바뀌는 가챠 보상 화면.</span></div></a></li><li><a class="row" href="../../../fx/yihui/bthreeagency-827092/"><img src="https://media.skillry.dev/opus-5-5/bthreeagency-827092/original.353cb53c14.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>뱃지 해금 애니메이션</b><span>금테 육각 뱃지가 커서를 따라 기울며 금빛 파티클과 함께 떠오르는 해금 연출.</span></div></a></li></ul></section>
 </main>

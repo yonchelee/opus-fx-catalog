@@ -54,7 +54,21 @@
 <section class="dsec"><h3><span class="n">4</span>실행 순서</h3><ol><li>보여줄 데이터 주제와 비교 연도를 정한다</li><li>관련 공개 데이터를 찾아 날짜·수치를 정리한다</li><li>Claude Code에 손그림 펜화 스타일과 색수차 연출을 프롬프트로 전달한다</li><li>JavaScript 신시사이저로 테마에 맞는 멜로디를 만들게 한다</li><li>지도와 데이터가 등장하는 순서를 3분 분량으로 구성한다</li><li>렌더링 후 손글씨 요소가 겹치거나 읽기 어려운 부분을 수정한다</li></ol></section>
 <section class="dsec"><h3><span class="n">5</span>바꾸면 좋은 변수</h3><div class="vars"><div><b>지역과 데이터</b><span>다른 나라·도시의 기후 데이터로 바꾼다</span></div><div><b>그림체</b><span>연필 대신 수채화나 잉크 느낌으로 바꿀 수 있다</span></div><div><b>멜로디</b><span>신시사이저 톤과 템포를 주제 분위기에 맞게 바꾼다</span></div></div></section>
 <section class="dsec"><h3><span class="n">6</span>원본 프롬프트</h3><pre class="prompt" id="dprompt">All right, this is an empty repo. Make me a 3-minute animated visualization using JavaScript, or you can do it in TypeScript if you want, about Japan&#x27;s hot weather in 2026. Pull some online data to see why it was hot and how it compares to other years. I really want the animation to be visually appealing. I wanted to use a hand-drawn pencil style with a little bit of tasteful chromatic aberration. And maybe a bit of a pastiche look but it&#x27;s supposed to look really, really cool. Also, use a JavaScript synthesizer to make a melody for this visualization that goes along with the theme.</pre></section>
-<div id="applyslot"></div>
+<section class="dsec" id="apply"><h3><span class="n">7</span>적용용 요청문 만들기</h3><p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p><div class="apply"><label>용도<input id="ap-use" placeholder="지도·데이터 시각화"></label><label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label><label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label><label>실행 환경<select id="ap-env"><option value="chat">Claude 채팅 (HTML 한 장)</option><option value="code" selected>Claude Code (프로젝트)</option><option value="video">영상 파일 (MP4)</option></select></label></div><pre class="prompt" id="ap-out" aria-live="polite">다음 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.
+
+[참고한 효과]
+손으로 그린 듯한 연필 드로잉 스타일에 약간의 색수차를 더해, 지도나 도표 위에 실제 데이터를 순서대로 겹쳐 보여주는 3분 내외 애니메이션을 만든다. 크림색 종이 질감 배경과 손글씨풍 라벨·날짜 스탬프로 아날로그 인포그래픽 느낌을 낸다. 전체 분위기에 맞는 멜로디를 자체 신시사이저로 작곡해 배경음악으로 쓴다.
+(출처: @GroundControl, https://x.com/GroundControl/status/2103678647777230877)
+
+[내 용도] 지도·데이터 시각화
+[들어갈 문구] 임의로 정해 주세요
+[색상] 원본 분위기를 유지해 주세요
+[실행 환경] Claude Code 로 만드는 프로젝트 파일 (실행 방법까지 알려 주기)
+
+[조건]
+- 원본을 그대로 복제하지 말고, 위 용도와 문구에 맞게 구성을 바꿔 주세요.
+- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.
+- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.</pre><div class="acts"><button type="button" class="btn primary" id="cp-req">적용용 요청문 복사</button></div></section>
 <section class="dsec"><h3><span class="n">8</span>출처와 검증</h3><ul><li>원작자 @GroundControl · <a href="https://x.com/GroundControl/status/2103678647777230877" target="_blank" rel="noopener">원본 게시물</a> · <a href="https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/groundcontrol-230877.md" target="_blank" rel="noopener">프롬프트 출처</a></li><li>검증: <b>미검증</b> — 같은 프롬프트로 만들어 봤지만 처음 5초에는 크림색 종이 위 제목만 나와, 손그림 지도와 데이터 표현이 원본처럼 나오는지는 확인하지 못했습니다. 원본은 3분 분량입니다. (2026-10-10, Claude Code 세션에서 원본 프롬프트로 HTML 한 장을 만들어 헤드리스 Chrome에서 렌더링 (claude.ai 채팅 미리보기 아님)) · <a href="../../../verify/yihui/groundcontrol-230877/result.png">만들어 본 결과 화면</a></li><li>부족한 조건: 3분 전체 애니메이션을 실제로 렌더링해 데이터 정확도와 타이밍을 확인해야 한다</li><li>원본 X 게시물 좋아요 4 — 이 사이트의 평가가 아닙니다.</li><li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID yihui:groundcontrol-230877 · 수집 2026-09-26</li></ul></section>
 <section class="dsec"><h3><span class="n"></span>같은 용도의 다른 작품</h3><ul class="list"><li><a class="row" href="../../../fx/yihui/stewchan2-369810/"><img src="https://media.skillry.dev/opus-5-5/stewchan2-369810/original.90f3ff875a.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>SEO 백링크 네트워크 그래프</b><span>사이트 노드들이 가중치 점수로 서로 연결되며 중요도가 전파되는 과정을 보여주는 다이어그램.</span></div></a></li></ul></section>
 </main>

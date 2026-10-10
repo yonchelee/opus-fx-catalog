@@ -55,7 +55,21 @@
 <section class="dsec"><h3><span class="n">5</span>바꾸면 좋은 변수</h3><div class="vars"><div><b>뱃지 디자인</b><span>육각형 대신 원형·방패형 등 다른 모양으로 교체</span></div><div><b>컬러</b><span>금색 톤을 브랜드 포인트 컬러로 변경</span></div><div><b>문구</b><span>&#x27;Early Explorer&#x27; 같은 뱃지 이름과 설명 문구 교체</span></div></div></section>
 <section class="dsec"><h3><span class="n">6</span>원본 프롬프트</h3><pre class="prompt" id="dprompt">Using the linked Figma frame build a badge unlock screen. Match the design exactly. Use the file&#x27;s assets, lighting, type and layout and add only the motion. Animate the badge so it feels premium and celebratory. Build its scene and then celebrate with gold particles. Treat the badge as a solid 3D object that tilts toward the
 cursor following the rules of physics. Keep it fast and smooth, it should not be bouncy.</pre></section>
-<div id="applyslot"></div>
+<section class="dsec" id="apply"><h3><span class="n">7</span>적용용 요청문 만들기</h3><p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p><div class="apply"><label>용도<input id="ap-use" placeholder="제품·UI 소개 애니메이션"></label><label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label><label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label><label>실행 환경<select id="ap-env"><option value="chat">Claude 채팅 (HTML 한 장)</option><option value="code" selected>Claude Code (프로젝트)</option><option value="video">영상 파일 (MP4)</option></select></label></div><pre class="prompt" id="ap-out" aria-live="polite">다음 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.
+
+[참고한 효과]
+뱃지 같은 보상 오브젝트를 단단한 3D 입체물로 취급해 커서를 따라 물리적으로 기울어지게 만들고, 주변에 입자 효과로 축하 분위기를 더하는 연출이다. 통통 튀는 과장된 모션 대신 빠르고 매끄러운 움직임을 유지하는 것이 핵심이다. 원본 디자인 파일의 조명·타이포·레이아웃을 그대로 따르면서 모션만 새로 입히는 방식으로 작업한다.
+(출처: @BThreeAgency, https://x.com/BThreeAgency/status/2103739079745827092)
+
+[내 용도] 제품·UI 소개 애니메이션
+[들어갈 문구] 임의로 정해 주세요
+[색상] 원본 분위기를 유지해 주세요
+[실행 환경] Claude Code 로 만드는 프로젝트 파일 (실행 방법까지 알려 주기)
+
+[조건]
+- 원본을 그대로 복제하지 말고, 위 용도와 문구에 맞게 구성을 바꿔 주세요.
+- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.
+- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.</pre><div class="acts"><button type="button" class="btn primary" id="cp-req">적용용 요청문 복사</button></div></section>
 <section class="dsec"><h3><span class="n">8</span>출처와 검증</h3><ul><li>원작자 @BThreeAgency · <a href="https://x.com/BThreeAgency/status/2103739079745827092" target="_blank" rel="noopener">원본 게시물</a> · <a href="https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/bthreeagency-827092.md" target="_blank" rel="noopener">프롬프트 출처</a></li><li>검증: <b>미검증</b> — 이 사이트에서 직접 실행해 보지 않았습니다.</li><li>부족한 조건: Figma 원본 없이 재현했을 때 레이아웃이 동일하게 나오는지 확인이 필요하다.</li><li>원본 X 게시물 좋아요 11 — 이 사이트의 평가가 아닙니다.</li><li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID yihui:bthreeagency-827092 · 수집 2026-09-26</li></ul></section>
 <section class="dsec"><h3><span class="n"></span>같은 용도의 다른 작품</h3><ul class="list"><li><a class="row" href="../../../fx/yihui/twoclipping-402193/"><img src="https://media.skillry.dev/opus-5-5/twoclipping-402193/original.9c664f011f.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>음악 플레이어 UI 모핑</b><span>버튼 하나가 음악 플레이어·슬라이더·탭·차트로 끊김없이 모핑하는 UI 상태 전환 데모</span></div></a></li><li><a class="row" href="../../../fx/yihui/iamtanzil-120030/"><img src="https://media.skillry.dev/opus-5-5/iamtanzil-120030/original.31773009f1.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>e바이크 엑스레이 제품 히어로</b><span>마우스로 외관을 지우면 내부 구조가 드러나는 커서 추적 엑스레이 제품 히어로 섹션</span></div></a></li><li><a class="row" href="../../../fx/yihui/op7418-818226/"><img src="https://media.skillry.dev/opus-5-5/op7418-818226/original.bd3cd48590.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>모바일 게임 보상 연출</b><span>카드가 금빛 광선 속에서 열리며 등급마다 색과 파티클이 바뀌는 가챠 보상 화면.</span></div></a></li></ul></section>
 </main>

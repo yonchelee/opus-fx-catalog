@@ -129,7 +129,21 @@
 - 结算后是否还有东西在不该动的时候继续抖动？
 
 最后告诉我：每个阶段的时长，以及哪些参数可以调整演出强度。</pre></section>
-<div id="applyslot"></div>
+<section class="dsec" id="apply"><h3><span class="n">7</span>적용용 요청문 만들기</h3><p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p><div class="apply"><label>용도<input id="ap-use" placeholder="제품·UI 소개 애니메이션"></label><label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label><label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label><label>실행 환경<select id="ap-env"><option value="chat">Claude 채팅 (HTML 한 장)</option><option value="code" selected>Claude Code (프로젝트)</option><option value="video">영상 파일 (MP4)</option></select></label></div><pre class="prompt" id="ap-out" aria-live="polite">다음 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.
+
+[참고한 효과]
+카드나 상자 같은 보상 오브젝트가 방사형 빛 속에 떠 있다가, 탭할 때마다 흔들림과 빛 흡수로 긴장감을 쌓고 마지막에 화면 전체가 번쩍이며 폭발하듯 열리는 연출이다. 등급이 오를 때마다 주색과 광원 색이 단계적으로 바뀌고, 열린 뒤에는 보상 카드가 곡선을 그리며 튀어나와 숫자가 올라가는 결산 단계로 이어진다. 3D 모델링과 카툰풍 셰이딩, 단계별 파티클 연출을 조합해 상업 게임 수준의 완성도를 낸다.
+(출처: @op7418, https://x.com/op7418/status/2104085484347818226)
+
+[내 용도] 제품·UI 소개 애니메이션
+[들어갈 문구] 임의로 정해 주세요
+[색상] 원본 분위기를 유지해 주세요
+[실행 환경] Claude Code 로 만드는 프로젝트 파일 (실행 방법까지 알려 주기)
+
+[조건]
+- 원본을 그대로 복제하지 말고, 위 용도와 문구에 맞게 구성을 바꿔 주세요.
+- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.
+- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.</pre><div class="acts"><button type="button" class="btn primary" id="cp-req">적용용 요청문 복사</button></div></section>
 <section class="dsec"><h3><span class="n">8</span>출처와 검증</h3><ul><li>원작자 @op7418 · <a href="https://x.com/op7418/status/2104085484347818226" target="_blank" rel="noopener">원본 게시물</a> · <a href="https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/op7418-818226.md" target="_blank" rel="noopener">프롬프트 출처</a></li><li>검증: <b>미검증</b> — 이 사이트에서 직접 실행해 보지 않았습니다.</li><li>부족한 조건: 브라우저에서 직접 렌더링해 등급별 전환과 파티클 타이밍을 확인해야 한다.</li><li>원본 X 게시물 좋아요 1,229 — 이 사이트의 평가가 아닙니다.</li><li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID yihui:op7418-818226 · 수집 2026-09-28</li></ul></section>
 <section class="dsec"><h3><span class="n"></span>같은 용도의 다른 작품</h3><ul class="list"><li><a class="row" href="../../../fx/yihui/twoclipping-402193/"><img src="https://media.skillry.dev/opus-5-5/twoclipping-402193/original.9c664f011f.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>음악 플레이어 UI 모핑</b><span>버튼 하나가 음악 플레이어·슬라이더·탭·차트로 끊김없이 모핑하는 UI 상태 전환 데모</span></div></a></li><li><a class="row" href="../../../fx/yihui/iamtanzil-120030/"><img src="https://media.skillry.dev/opus-5-5/iamtanzil-120030/original.31773009f1.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>e바이크 엑스레이 제품 히어로</b><span>마우스로 외관을 지우면 내부 구조가 드러나는 커서 추적 엑스레이 제품 히어로 섹션</span></div></a></li><li><a class="row" href="../../../fx/yihui/bthreeagency-827092/"><img src="https://media.skillry.dev/opus-5-5/bthreeagency-827092/original.353cb53c14.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>뱃지 해금 애니메이션</b><span>금테 육각 뱃지가 커서를 따라 기울며 금빛 파티클과 함께 떠오르는 해금 연출.</span></div></a></li></ul></section>
 </main>

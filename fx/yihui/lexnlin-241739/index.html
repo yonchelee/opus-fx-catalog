@@ -54,7 +54,21 @@
 <section class="dsec"><h3><span class="n">4</span>실행 순서</h3><ol><li>Claude 채팅에 원본 프롬프트를 붙여 넣는다</li><li>건축물의 형태(뒤집힌 피라미드 대신 다른 구조)를 바꿔 달라고 요청한다</li><li>지형 요소(폭포, 고리형 구조물, 산맥)를 늘리거나 바꾼다</li><li>카메라 이동 속도와 범위를 조정해 달라고 요청한다</li><li>색감이나 조명 분위기를 다듬어 달라고 후속 요청한다</li></ol></section>
 <section class="dsec"><h3><span class="n">5</span>바꾸면 좋은 변수</h3><div class="vars"><div><b>건축물 형태</b><span>뒤집힌 피라미드 대신 다른 기이한 구조로 바꿀 수 있다</span></div><div><b>지형</b><span>폭포·협곡·숲 등 구성 요소를 바꿀 수 있다</span></div><div><b>색감</b><span>전체 팔레트를 따뜻하거나 차갑게 바꿀 수 있다</span></div></div></section>
 <section class="dsec"><h3><span class="n">6</span>원본 프롬프트</h3><pre class="prompt" id="dprompt">Create a cinematic browser-based 3D world that can be explored freely with a camera, focused on breathtaking landscapes and extraordinary original architecture. Fill the world with huge strange buildings, monumental structures, surreal ruins, cliffs, valleys, forests, water, and unusual ultra-detailed forms that feel mysterious and awe-inspiring. This is not a game and not combat-focused, the goal is pure exploration, atmosphere, composition, and visual discovery. Make the world feel epic, highly detailed, and completely original, with architecture that looks weird, ambitious, and unforgettable.</pre></section>
-<div id="applyslot"></div>
+<section class="dsec" id="apply"><h3><span class="n">7</span>적용용 요청문 만들기</h3><p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p><div class="apply"><label>용도<input id="ap-use" placeholder="웹사이트 배경·히어로 효과"></label><label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label><label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label><label>실행 환경<select id="ap-env"><option value="chat" selected>Claude 채팅 (HTML 한 장)</option><option value="code">Claude Code (프로젝트)</option><option value="video">영상 파일 (MP4)</option></select></label></div><pre class="prompt" id="ap-out" aria-live="polite">다음 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.
+
+[참고한 효과]
+전투나 게임 목표 없이 자유 카메라로 탐험하는 3D 세계를 만드는 기법을 설명한다. 거대하고 기이한 건축물, 초현실적 지형, 몽환적인 분위기를 강조하고 독창적인 형태를 지시한다.
+(출처: @LexnLin, https://x.com/LexnLin/status/2103194052850241739)
+
+[내 용도] 웹사이트 배경·히어로 효과
+[들어갈 문구] 임의로 정해 주세요
+[색상] 원본 분위기를 유지해 주세요
+[실행 환경] Claude 채팅 미리보기에서 바로 볼 수 있는 HTML 한 장 (외부 라이브러리는 CDN 으로)
+
+[조건]
+- 원본을 그대로 복제하지 말고, 위 용도와 문구에 맞게 구성을 바꿔 주세요.
+- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.
+- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.</pre><div class="acts"><button type="button" class="btn primary" id="cp-req">적용용 요청문 복사</button></div></section>
 <section class="dsec"><h3><span class="n">8</span>출처와 검증</h3><ul><li>원작자 @LexnLin · <a href="https://x.com/LexnLin/status/2103194052850241739" target="_blank" rel="noopener">원본 게시물</a> · <a href="https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/lexnlin-241739.md" target="_blank" rel="noopener">프롬프트 출처</a></li><li>검증: <b>미검증</b> — 이 사이트에서 직접 실행해 보지 않았습니다.</li><li>부족한 조건: 직접 탐험해 봐야 카메라 조작감과 프레임 속도를 확인할 수 있다</li><li>원본 X 게시물 좋아요 621 — 이 사이트의 평가가 아닙니다.</li><li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID yihui:lexnlin-241739 · 수집 2026-09-26</li></ul></section>
 <section class="dsec"><h3><span class="n"></span>같은 용도의 다른 작품</h3><ul class="list"><li><a class="row" href="../../../fx/yihui/mounnna-497266/"><img src="https://media.skillry.dev/opus-5-5/mounnna-497266/original.ce992e530a.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>저폴리 조각 로고 리빌</b><span>와이어프레임에서 저폴리 조각이 모여 앱 로고가 완성되는 슬로우 리빌 영상</span></div></a></li><li><a class="row" href="../../../fx/yihui/iamtanzil-120030/"><img src="https://media.skillry.dev/opus-5-5/iamtanzil-120030/original.31773009f1.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>e바이크 엑스레이 제품 히어로</b><span>마우스로 외관을 지우면 내부 구조가 드러나는 커서 추적 엑스레이 제품 히어로 섹션</span></div></a></li><li><a class="row" href="../../../fx/yihui/ishuagra02-678129/"><img src="https://media.skillry.dev/opus-5-5/ishuagra02-678129/original.e1a27bcc2b.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>파티클로 그린 해변 러너</b><span>수천 개 빛 입자로 그린 산타모니카 해변, 달리는 인물 뒤로 리본 궤적이 흐른다</span></div></a></li><li><a class="row" href="../../../fx/yihui/mandelduck-768972/"><img src="https://media.skillry.dev/opus-5-5/mandelduck-768972/original.4020d15134.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>반 고흐 그림 속 고양이 찾기</b><span>별이 빛나는 밤 화풍 그대로 걸어 다니며 숨은 고양이를 찾는 3D 탐험 게임</span></div></a></li></ul></section>
 </main>

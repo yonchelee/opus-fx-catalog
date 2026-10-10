@@ -171,6 +171,14 @@ try {
       const r = await p.goto(BASE + u, {waitUntil: 'networkidle'});
       ok(`정적 페이지 ${u}`, r.status() === 200 && (await p.title()).includes('효과 갤러리'));
     }
+    {
+      const nojs = await browser.newContext({javaScriptEnabled: false});
+      const q = await nojs.newPage();
+      await q.goto(BASE + 'fx/yihui/groundcontrol-230877/', {waitUntil: 'load'});
+      const h3 = await q.$$eval('.dsec h3', e => e.map(x => x.textContent));
+      ok('스크립트 없이도 작품 페이지 1~8칸(7번 요청문 포함)', h3.some(t => /^7적용용 요청문/.test(t)) && (await q.textContent('#ap-out')).includes('[참고한 효과]'), h3.map(t => t.slice(0, 2)).join(','));
+      await nojs.close();
+    }
     await p.goto(BASE + 'fx/yihui/stewchan2-369810/', {waitUntil: 'networkidle'});
     await p.reload({waitUntil: 'networkidle'});
     ok('작품 페이지 새로고침', (await p.textContent('h1')).length > 2);
