@@ -6,8 +6,9 @@
      한국어 조사(을·를·에 …)가 붙어도 묶음을 찾는다.
    - 영문 동의어는 단어 앞 경계에서만 맞춘다(map 이 bitmap 에 걸리지 않게).
    - 점수(검색어마다 가장 높은 곳 하나): 제목에 입력한 말 그대로 20 > 제목에 동의어 16 > 편집 검색어·설명 10
-     > 용도·효과 분류 같은 넓은 분류 4 > 작성자 3 > 프롬프트 본문 1.
-     넓은 분류(예: 용도 '지도·데이터 시각화', 효과 '데이터·지도')는 여러 작품을 한꺼번에 묶으므로 제목 일치보다 한참 뒤에 둔다.
+     > 작성자 3 > 프롬프트 본문 2 > 용도·효과 분류 같은 넓은 분류 1.
+     넓은 분류(예: 용도 '지도·데이터 시각화', 효과 '데이터·지도')는 자동 분류로 여러 작품을 한꺼번에 묶어
+     '지도'를 직접 다루지 않는 작품(차트만 있는 UI 등)도 걸린다. 그래서 본문에 실제로 나오는 작품보다도 뒤에 둔다.
      같은 점수 안에서는 호출한 쪽의 정렬을 그대로 둔다(정렬은 안정적이다). */
 
 import {FXN, CAT, LV} from './data.js';
@@ -58,9 +59,9 @@ export function prepare(r, uses) {
     title: normalize([ed.title_ko, r.title].filter(Boolean).join(' | ')),
     f: [
       [10, normalize([ed.summary_ko, ...(ed.keywords || [])].filter(Boolean).join(' | '))],
-      [4, normalize([...useTitles, ...(r.fx || []).map(f => FXN[f] + ' ' + f), CAT[r.category], r.category, LV[r.level], ...(r.tech || [])].filter(Boolean).join(' | '))],
+      [1, normalize([...useTitles, ...(r.fx || []).map(f => FXN[f] + ' ' + f), CAT[r.category], r.category, LV[r.level], ...(r.tech || [])].filter(Boolean).join(' | '))],
       [3, normalize('@' + (r.author || '') + ' ' + (r.author || ''))],
-      [1, normalize(r.prompt)]
+      [2, normalize(r.prompt)]
     ]
   };
 }

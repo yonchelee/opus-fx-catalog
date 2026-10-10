@@ -83,3 +83,10 @@ test('뜻이 갈리는 동의어로 엉뚱한 작품을 올리지 않는다 (geo
   const r = hits('지도').slice(0, 3).map(x => x.title || '');
   assert.ok(!r.some(t => /SEO vs GEO/i.test(t)), r.join(' / '));
 });
+
+test('넓은 분류에만 걸린 작품은 본문에 실제로 나오는 작품보다 뒤 (지도 → 음악 플레이어)', () => {
+  const r = hits('지도');
+  const music = r.findIndex(x => x.id === 'yihui:twoclipping-402193');
+  const bodyHits = r.filter(x => /\bmaps?\b|globe|地图|지도/i.test(x.prompt)).length;
+  assert.ok(music === -1 || music >= bodyHits, `음악 플레이어 ${music}위, 본문 일치 ${bodyHits}개`);
+});
