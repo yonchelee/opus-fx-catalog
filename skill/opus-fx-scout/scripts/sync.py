@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from classify import classify, FX_NAME, LEVEL_NAME  # noqa: E402
 import store  # noqa: E402
 import likes  # noqa: E402
+import build_site  # noqa: E402
 
 TODAY = datetime.date.today().isoformat()
 
@@ -157,6 +158,11 @@ def main():
             except Exception as e:  # noqa: BLE001
                 errors.append(f'likes: {e}')
             store.save_to_dir(a.out, merged, store.load_sources(), TODAY)
+            # editorial.json(손 편집)은 여기서 쓰지 않는다. 작품·용도 페이지와 sitemap 만 다시 만든다.
+            try:
+                build_site.build(a.out)
+            except Exception as e:  # noqa: BLE001
+                errors.append(f'site: {e}')
             store.save_overlay([], TODAY)  # now durable in the repo clone
             where = f'wrote {a.out}/catalog.json ({len(merged)} rows) - commit and push it'
         elif a.write_bundle:
