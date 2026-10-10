@@ -3,7 +3,7 @@
 import {FX, FXN, CAT, LV, LV_LONG, NEED, VERIFY, mergeEditorial, usesOf, verifyOf, levelOf, titleOf, fmtLikes, itemPath, SITE} from './data.js';
 import {synonymIndex, prepare, search} from './search.js';
 import {buildRequest} from './apply.js';
-import {shareLink} from './store.js';
+import {shareLink, favs, toggleFav} from './store.js';
 
 const PAGE = 48;
 const BASE_TITLE = document.title;
@@ -27,7 +27,7 @@ $('theme').onclick = () => {
 let DATA = [], PREP = [], ED = {uses: {}}, SYN = new Map();
 const BYID = new Map();
 let rows = [], shown = 0;
-const S = {q: '', use: '', fx: new Set(), sort: 'likes', cat: '', lv: '', full: '', vid: '', pick: null};
+const S = {q: '', use: '', fx: new Set(), sort: 'likes', cat: '', lv: '', full: '', vid: '', fav: '', pick: null};
 
 /* ---------- 주소 ↔ 상태 ---------- */
 function readURL() {
@@ -40,6 +40,7 @@ function readURL() {
   S.lv = ['1', '2'].includes(p.get('lv')) ? p.get('lv') : '';
   S.full = p.get('full') === '1' ? '1' : '';
   S.vid = p.get('vid') === '1' ? '1' : '';
+  S.fav = p.get('fav') === '1' ? '1' : '';
   const ids = (p.get('pick') || '').split(',').map(s => s.trim()).filter(Boolean);
   S.pick = ids.length ? ids : null;
 }
@@ -50,7 +51,7 @@ function stateQuery() {
   if (S.use) p.set('use', S.use);
   if (S.fx.size) p.set('fx', [...S.fx].join(','));
   if (S.sort !== 'likes') p.set('sort', S.sort);
-  for (const k of ['cat', 'lv', 'full', 'vid']) if (S[k]) p.set(k, S[k]);
+  for (const k of ['cat', 'lv', 'full', 'vid', 'fav']) if (S[k]) p.set(k, S[k]);
   return p;
 }
 function writeURL() {
@@ -87,6 +88,7 @@ function load() {
 function syncControls() {
   $('q').value = S.q; $('sort').value = S.sort;
   for (const k of ['cat', 'lv', 'full', 'vid']) $(k).value = S[k];
+  $('fav').checked = !!S.fav;
   document.body.classList.toggle('picking', !!S.pick);
   $('pickbar').classList.toggle('on', !!S.pick);
   if (S.pick) $('pickmsg').textContent = `추천 후보 ${S.pick.length}개`;
@@ -96,6 +98,7 @@ function buildUses() {
   DATA.forEach(r => r._uses.forEach(u => n[u] = (n[u] || 0) + 1));
   $('uses').innerHTML = Object.entries(ED.uses).map(([k, u]) =>
     `<button type="button" class="use" data-use="${k}" aria-pressed="${S.use === k}">${esc(u.title)}<small>${n[k] || 0}</small></button>`).join('') +
+    `<button type="button" class="use" id="favchip" aria-pressed="${!!S.fav}">★ 즐겨찾기<small>${favs().length}</small></button>` +
     '<a class="use" href="use/">용도별 안내 →</a>';
 }
 function buildIndex() {
@@ -110,6 +113,7 @@ function featured() {
 function buildFeatured() {
   const f = featured();
   $('featured').hidden = !f.length;
+  FAVS = new Set(favs());
   $('fgrid').innerHTML = f.slice(0, 6).map(r => card(r)).join('');
   $('ft-all').hidden = f.length <= 6;
 }
@@ -123,10 +127,13 @@ $('find').addEventListener('submit', e => {
   $('all').scrollIntoView({block: 'start', behavior: reduced() ? 'auto' : 'smooth'});
 });
 $('q').addEventListener('input', () => { S.q = $('q').value.trim(); changed(); });
+function setFav(on) { S.fav = on ? '1' : ''; syncControls(); buildUses(); changed(); }
+$('fav').addEventListener('change', () => setFav($('fav').checked));
 $('uses').addEventListener('click', e => {
-  const b = e.target.closest('.use'); if (!b) return;
+  if (e.target.closest('#favchip')) return setFav(!S.fav);
+  const b = e.target.closest('.use[data-use]'); if (!b) return;
   S.use = S.use === b.dataset.use ? '' : b.dataset.use;
-  [...$('uses').children].forEach(x => x.setAttribute('aria-pressed', x.dataset.use === S.use));
+  [...$('uses').querySelectorAll('[data-use]')].forEach(x => x.setAttribute('aria-pressed', x.dataset.use === S.use));
   changed();
 });
 $('index').addEventListener('click', e => {
@@ -144,19 +151,19 @@ $('ft-all').onclick = () => {
   changed('pick'); $('all').scrollIntoView({block: 'start'});
 };
 function clearAll() {
-  Object.assign(S, {q: '', use: '', cat: '', lv: '', full: '', vid: '', pick: null});
+  Object.assign(S, {q: '', use: '', cat: '', lv: '', full: '', vid: '', fav: '', pick: null});
   S.fx.clear(); syncControls(); buildUses(); buildIndex(); changed();
 }
 $('showall').onclick = clearAll;
 
 /* ---------- 켜진 필터 ---------- */
-const OPT = {cat: v => CAT[v], lv: v => v === '1' ? '채팅에서 바로' : 'Claude Code까지', full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음'};
+const OPT = {cat: v => CAT[v], lv: v => v === '1' ? '채팅에서 바로' : 'Claude Code까지', full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음', fav: () => '즐겨찾기만'};
 function activeChips() {
   const chips = [];
   if (S.q) chips.push(['q', `검색: ${S.q}`]);
   if (S.use) chips.push(['use', `용도: ${ED.uses[S.use]?.title || S.use}`]);
   S.fx.forEach(f => chips.push(['fx:' + f, `효과: ${FXN[f]}`]));
-  for (const k of ['cat', 'lv', 'full', 'vid']) if (S[k]) chips.push([k, OPT[k](S[k])]);
+  for (const k of ['cat', 'lv', 'full', 'vid', 'fav']) if (S[k]) chips.push([k, OPT[k](S[k])]);
   $('active').innerHTML = chips.length ? chips.map(([k, t]) =>
     `<span class="chipx">${esc(t)}<button type="button" data-k="${esc(k)}" aria-label="${esc(t)} 해제">×</button></span>`).join('') +
     (chips.length > 1 ? '<button type="button" class="clearall" id="clearall">전체 해제</button>' : '') : '';
@@ -176,8 +183,8 @@ $('active').addEventListener('click', e => {
 /* ---------- 목록 ---------- */
 function filtered() {
   if (S.pick) return S.pick.map(i => BYID.get(i)).filter(Boolean);
-  const lv = +S.lv;
-  let pool = DATA.filter(r => (!S.cat || r.category === S.cat) && (!lv || levelOf(r) <= lv) && (!S.full || !r.partial) &&
+  const lv = +S.lv, F = S.fav ? new Set(favs()) : null;
+  let pool = DATA.filter(r => (!F || F.has(r.id)) && (!S.cat || r.category === S.cat) && (!lv || levelOf(r) <= lv) && (!S.full || !r.partial) &&
     (!S.vid || r.mp4) && (!S.use || r._uses.includes(S.use)) && [...S.fx].every(f => r.fx.includes(f)));
   if (S.sort === 'likes') pool = pool.slice().sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
   if (!S.q) return pool;
@@ -186,12 +193,16 @@ function filtered() {
   const prep = PREP.filter(p => order.has(p.r)).sort((a, b) => order.get(a.r) - order.get(b.r));
   return search(prep, S.q, SYN);
 }
+let FAVS = new Set();
 function render() {
+  FAVS = new Set(favs());
   rows = filtered();
   activeChips();
   $('count').textContent = `${rows.length} / ${DATA.length}`;
   $('grid').innerHTML = '';
-  if (!rows.length) {
+  if (!rows.length && S.fav && !favs().length) {
+    status('<h3>아직 즐겨찾기한 작품이 없습니다</h3><p>작품을 열고 ☆ 즐겨찾기를 누르면 여기에 모입니다. 즐겨찾기는 이 브라우저에만 저장됩니다.</p><div class="row"><button type="button" data-fix="all">전체 작품 보기</button></div>');
+  } else if (!rows.length) {
     track('search_empty', {count: 0, use: S.use || undefined});
     status(`<h3>조건에 맞는 작품이 없습니다</h3>
       ${S.q ? `<p>“${esc(S.q)}” 대신 더 짧은 말이나 영어로 찾아보세요. 예: 지도 → map, 로고 → logo.</p>` : ''}
@@ -219,7 +230,7 @@ function card(r, num) {
   const ed = r.ed || {}, u = r._uses[0], v = verifyOf(r);
   const useline = u ? (ED.uses[u]?.title || u) : (CAT[r.category] || '');
   return `<button class="card" type="button" data-id="${esc(r.id)}">
-    <div class="media">${num ? `<span class="num">${num}</span>` : ''}${ed.featured ? '<span class="pin">추천</span>' : ''}${thumb(r)}${r.mp4 ? '<span class="play">▶ 영상 링크</span>' : ''}</div>
+    <div class="media">${num ? `<span class="num">${num}</span>` : ''}${ed.featured ? '<span class="pin">추천</span>' : ''}${FAVS.has(r.id) ? '<span class="fav-on" aria-label="즐겨찾기한 작품">★</span>' : ''}${thumb(r)}${r.mp4 ? '<span class="play">▶ 영상 링크</span>' : ''}</div>
     <div class="body">
       <div class="title">${esc(titleOf(r))}</div>
       ${ed.title_ko && r.title ? `<div class="orig">${esc(r.title)}</div>` : ''}
@@ -271,7 +282,7 @@ document.addEventListener('click', e => {
 /* ---------- 상세 ---------- */
 /* 작품 주소: ?item=<id>. 열 때 기록(pushState)해서 뒤로가기가 창을 닫게 한다.
    직접 들어온 주소(새로고침 포함)는 기록을 더하지 않고, 닫을 때 주소에서 item 만 지운다. */
-let opener = null, pushed = null, popClosing = false;
+let opener = null, pushed = null, popClosing = false, favDirty = false;
 const itemParam = () => new URLSearchParams(location.search).get('item');
 function urlWithItem(id) {
   const p = stateQuery(); if (id) p.set('item', id);
@@ -375,8 +386,12 @@ function copyText(t, btn, ev) {
 }
 function bindDetail(r) {
   $('acts').innerHTML = `<button type="button" class="btn primary" id="cp-orig" data-id="${esc(r.id)}">${r.partial ? '원본 프롬프트 복사 (일부 공개)' : '원본 프롬프트 복사'}</button>`;
-  $('acts').insertAdjacentHTML('beforeend', `<button type="button" class="btn" id="share">공유</button>${r.ed && r.ed.guide ? `<a class="btn" href="${itemPath(r.id)}">작품 페이지</a>` : ''}`);
+  $('acts').insertAdjacentHTML('beforeend', `<button type="button" class="btn" id="favbtn" aria-pressed="false"></button><button type="button" class="btn" id="share">공유</button>${r.ed && r.ed.guide ? `<a class="btn" href="${itemPath(r.id)}">작품 페이지</a>` : ''}`);
   $('cp-orig').onclick = e => copyText(r.prompt || '', e.currentTarget, 'copy_original');
+  const paintFav = () => { const on = favs().includes(r.id); $('favbtn').setAttribute('aria-pressed', on); $('favbtn').textContent = on ? '★ 즐겨찾기됨' : '☆ 즐겨찾기'; };
+  paintFav();
+  $('favbtn').onclick = () => { const on = toggleFav(r.id); paintFav(); track('favorite', {id: r.id, on}); favDirty = true; };
+  $('acts').insertAdjacentHTML('afterend', '<p class="note">즐겨찾기는 로그인 없이 이 브라우저에만 저장됩니다. 다른 기기·브라우저에서는 보이지 않습니다.</p>');
   $('share').onclick = async e => { const how = await shareLink({title: titleOf(r), url: shareURL(r)}, e.currentTarget, flash); track('share', {id: r.id, how}); };
   $('applyslot').outerHTML = applyBlock(r);
   bindApply(r);
@@ -394,7 +409,14 @@ $('dlg').addEventListener('close', () => {
     else history.replaceState(null, '', urlWithItem(null));
   }
   pushed = null;
-  if (opener && document.contains(opener)) opener.focus();
+  if (favDirty) {
+    /* 별 표시를 고치려고 다시 그리면 누른 카드가 바뀐다. 같은 작품 카드를 찾아 포커스를 돌려준다. */
+    favDirty = false;
+    const id = opener && opener.dataset ? opener.dataset.id : null, inFeat = !!(opener && opener.closest && opener.closest('#fgrid'));
+    const y = scrollY; buildUses(); buildFeatured(); render(); scrollTo(0, y);
+    if (id) opener = document.querySelector(`${inFeat ? '#fgrid' : '#grid'} .card[data-id="${CSS.escape(id)}"]`) || opener;
+  }
+  if (opener && document.contains(opener)) opener.focus({preventScroll: true});
 });
 $('dlg').addEventListener('click', e => { if (e.target === $('dlg')) $('dlg').close(); });
 

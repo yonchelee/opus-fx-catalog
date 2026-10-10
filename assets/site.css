@@ -92,7 +92,7 @@ body.picking .featured,body.picking .tools,body.picking .filters,body.picking .a
 .media .none{position:absolute;inset:0;display:grid;place-items:center;color:#BDB3A3;font-size:13px;padding:12px;text-align:center}
 .num{position:absolute;top:8px;left:8px;min-width:32px;height:32px;padding:0 8px;background:var(--yl-yellow);color:var(--yl-on-bright);border:var(--yl-bw) solid #17171A;font-family:var(--yl-mono);font-weight:500;font-size:15px;display:grid;place-items:center;z-index:2}
 .pin{position:absolute;top:8px;right:8px;z-index:2;font-size:12px;font-weight:800;padding:2px 8px;background:var(--yl-yellow);color:#17171A;border:var(--yl-bw) solid #17171A}
-.fav-on{position:absolute;top:8px;left:8px;z-index:2;font-size:13px;line-height:1;padding:4px 6px;background:#17171A;color:var(--yl-yellow);border:1px solid #FFF3E2}
+.fav-on{position:absolute;bottom:8px;left:8px;z-index:2;font-size:13px;line-height:1;padding:4px 6px;background:#17171A;color:var(--yl-yellow);border:1px solid #FFF3E2}
 .play{position:absolute;right:8px;bottom:8px;font-size:11px;font-weight:600;padding:2px 7px;background:#17171A;color:#FFF3E2;border:1px solid #FFF3E2;z-index:2}
 .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:7px;min-width:0;flex:1}
 .title{font-size:16px;font-weight:800;letter-spacing:-.02em;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -157,6 +157,7 @@ dialog::backdrop{background:rgb(23 23 26 / .72)}
 .dmedia video,.dmedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .dmedia .none{position:absolute;inset:0;display:grid;place-content:center;gap:10px;text-align:center;color:#E8DCC8;padding:16px;font-size:14px}
 .dmedia .none a{color:var(--yl-yellow);font-weight:700}
+[hidden]{display:none!important}
 .dbody{padding:18px 20px 22px;display:flex;flex-direction:column;gap:14px}
 .dhead h2{margin:4px 0 0;font-size:clamp(20px,3vw,26px);font-weight:800;letter-spacing:-.025em;line-height:1.3}
 .dhead .orig{white-space:normal}
