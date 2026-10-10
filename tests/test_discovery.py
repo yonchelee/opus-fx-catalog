@@ -255,6 +255,14 @@ class JudgeUnits(unittest.TestCase):
         r = {'name': 'vizceral', 'description': 'WebGL visualization for displaying animated traffic graphs', 'topics': [], 'language': 'JavaScript'}
         self.assertEqual(judge.classify_repo(r, 'npm install --save vizceral', ['package.json', 'src'], cfg)['kind'], 'library')
         self.assertEqual(judge.classify_repo(r, 'run `npm install` then `npm start`', ['package.json', 'src'], cfg)['kind'], 'effect')
+        self.assertEqual(judge.classify_repo(r, 'vizceral is a component for displaying traffic data', ['src'], cfg)['kind'], 'library', 'README 자기소개')
+        self.assertEqual(judge.classify_repo(r, '', ['.npmignore', 'src'], cfg)['kind'], 'library', 'npm 배포 파일')
+
+    def test_single_effect_not_collection_from_reference_links(self):
+        cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
+        r = {'name': 'WebGL-Fluid-Simulation', 'description': 'Play with fluids in your browser (works even on mobile)', 'topics': ['fluid', 'webgl', 'simulation'], 'language': 'JavaScript'}
+        md = '# WebGL Fluid\n[Play here](https://x.github.io/)\n## References\nhttps://github.com/haxiomic/GPU-Fluid-Experiments'
+        self.assertEqual(judge.classify_repo(r, md, ['index.html', 'script.js'], cfg)['kind'], 'effect')
 
     def test_popular_tools_are_not_effects(self):
         cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
