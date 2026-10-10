@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Opus 효과 갤러리</title>
+<meta name="description" content="Claude로 실제 만들어진 모션그래픽·3D·셰이더 효과를 눈으로 보고 고르는 갤러리">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: header → effect tiles → sticky filter bar → thumbnail grid → detail dialog */
+:root{
+  --bg:#f6f6f7; --surface:#fff; --fg:#1c1c1f; --muted:#6c6c75; --line:#e3e3e7;
+  --accent:#3b5bdb; --accent-soft:#e8ecfc; --ok:#2b8a3e; --warn:#b26a00; --media:#e9e9ee;
+  --sans:"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121215; --surface:#1b1b20; --fg:#ececf1; --muted:#9a9aa6; --line:#2c2c34;
+  --accent:#8ea2ff; --accent-soft:#252b48; --ok:#69db7c; --warn:#ffc063; --media:#24242b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121215; --surface:#1b1b20; --fg:#ececf1; --muted:#9a9aa6; --line:#2c2c34;
+  --accent:#8ea2ff; --accent-soft:#252b48; --ok:#69db7c; --warn:#ffc063; --media:#24242b; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.55}
+.wrap{max-width:1200px;margin:0 auto;padding:40px 16px 64px}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header h1{font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.02em;margin:4px 0 0;text-wrap:balance}
+header p{color:var(--muted);margin:8px 0 0;max-width:66ch}
+a{color:var(--accent)}
+.pickbar{display:none;margin-top:20px;padding:14px 16px;border-radius:12px;background:var(--accent-soft);color:var(--fg)}
+body.picking .index,body.picking .bar{display:none}
+.pickbar.on{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.pickbar b{font-weight:500}
+.pickbar button{all:unset;cursor:pointer;color:var(--accent);font-size:14px}
+.index{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:24px}
+.fx{all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:6px;padding:10px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-size:14px}
+.fx span{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.fx:hover{border-color:var(--accent)}
+.fx[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.fx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 0;margin-top:16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar input,.bar select{font:inherit;font-size:14px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:0}
+.bar input{flex:1 1 220px}
+.bar button{font:inherit;font-size:13px;background:none;border:0;color:var(--accent);cursor:pointer;padding:8px}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:20px}
+.card{all:unset;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.card:hover{border-color:var(--accent)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.media{position:relative;aspect-ratio:16/9;background:var(--media);overflow:hidden}
+.media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media .none{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:13px}
+.num{position:absolute;top:8px;left:8px;min-width:28px;height:28px;padding:0 8px;border-radius:999px;background:var(--accent);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;z-index:2}
+.play{position:absolute;right:8px;bottom:8px;font-size:11px;font-family:var(--mono);padding:2px 6px;border-radius:6px;background:rgb(0 0 0 / .6);color:#fff;z-index:2}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.title{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.meta{font-size:12px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:11px;padding:1px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.lv1{color:var(--ok)} .lv4{color:var(--warn)}
+.more{display:block;margin:24px auto 0;font:inherit;font-size:14px;padding:10px 20px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.empty{color:var(--muted);padding:40px 0;text-align:center;grid-column:1/-1}
+dialog{width:min(920px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:0;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--fg)}
+dialog::backdrop{background:rgb(0 0 0 / .55)}
+.dmedia{aspect-ratio:16/9;background:#000;display:grid;place-items:center}
+.dmedia video,.dmedia img{width:100%;height:100%;object-fit:contain}
+.dbody{padding:16px 20px 20px;display:flex;flex-direction:column;gap:10px}
+.dbody h2{margin:0;font-size:20px;letter-spacing:-.01em}
+.links{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px}
+.links button{all:unset;cursor:pointer;color:var(--accent)}
+.prompt{margin:0;padding:12px;border-radius:10px;background:var(--bg);font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:300px;overflow:auto}
+.note{font-size:12px;color:var(--warn)}
+.close{all:unset;cursor:pointer;font-size:22px;line-height:1;padding:6px 10px;color:#fff;background:rgb(0 0 0 / .5);border-radius:999px;position:absolute;right:10px;top:10px;z-index:3}
+footer{margin-top:48px;font-size:12px;color:var(--muted)}
+footer a{color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="label">Made with Claude · effect gallery</div>
+  <h1>효과 갤러리</h1>
+  <p>Claude로 실제 만들어진 모션그래픽·3D·셰이더·인터랙티브 작품을 눈으로 보고 고르는 곳입니다. 썸네일에 마우스를 올리면 움직임이, 누르면 영상과 원본 프롬프트가 나옵니다. <span id="synced"></span></p>
+</header>
+
+<div class="pickbar" id="pickbar" role="status">
+  <b id="pickmsg"></b>
+  <span>마음에 드는 번호를 Claude에게 알려 주세요.</span>
+  <button type="button" id="showall">전체 보기</button>
+</div>
+
+<div class="index" id="index" role="group" aria-label="효과 필터"></div>
+
+<div class="bar">
+  <input id="q" type="search" placeholder="검색 (예: map, watercolor, 지도, logo)" aria-label="검색">
+  <select id="cat" aria-label="장르">
+    <option value="">모든 장르</option><option value="motion">모션그래픽</option><option value="explainer">설명 영상</option><option value="3d">3D 씬</option><option value="interactive">게임·인터랙티브</option>
+  </select>
+  <select id="lv" aria-label="만들 수 있는 곳">
+    <option value="">모든 환경</option><option value="1">채팅에서 바로</option><option value="2">Claude Code까지</option>
+  </select>
+  <select id="vid" aria-label="미리보기">
+    <option value="">미리보기 전체</option><option value="1">영상 재생되는 것만</option>
+  </select>
+  <button id="reset" type="button">초기화</button>
+  <span class="count" id="count"></span>
+</div>
+
+<div class="grid" id="grid"></div>
+<button class="more" id="more" type="button" hidden>더 보기</button>
+
+<footer>
+  <p>모든 영상과 프롬프트의 권리는 각 원작자에게 있습니다. 미리보기는 원본 게시물·skillry.dev의 공개 주소를 그대로 불러오며, 원본이 지워지면 보이지 않을 수 있습니다.</p>
+  <p>데이터 출처: <a href="https://github.com/yihui-dev/awesome-opus5-5-videos">yihui-dev/awesome-opus5-5-videos</a> (MIT) · <a href="https://github.com/Li-Evan/awesome-opus-5.5-video-prompts">Li-Evan/awesome-opus-5.5-video-prompts</a> (CC BY 4.0). 효과 분류는 프롬프트 키워드로 자동 산출했습니다. 카탈로그: <a href="https://github.com/yonchelee/opus-fx-catalog">yonchelee/opus-fx-catalog</a></p>
+</footer>
+</div>
+
+<dialog id="dlg" aria-labelledby="dtitle">
+  <button class="close" type="button" id="dclose" aria-label="닫기">×</button>
+  <div class="dmedia" id="dmedia"></div>
+  <div class="dbody">
+    <div class="meta" id="dmeta"></div>
+    <h2 id="dtitle"></h2>
+    <div class="chips" id="dchips"></div>
+    <div class="links" id="dlinks"></div>
+    <div class="note" id="dnote"></div>
+    <pre class="prompt" id="dprompt"></pre>
+  </div>
+</dialog>
+
+<script>
+const FX=[['3d','3D 씬·카메라'],['shader','셰이더·글로우'],['reel','모션 쇼릴'],['game','플레이어블 게임'],['paint','페인터리·손그림'],['ui','UI·제품 데모'],['particles','파티클·입자'],['audio','사운드 동기화'],['liquid','유체·물리'],['cosmic','우주·자연'],['pixel','픽셀아트'],['morph','모핑·트랜지션'],['glitch','글리치·레트로'],['kinetic','키네틱 타이포'],['data','데이터·지도'],['etc','기타']];
+const FXN=Object.fromEntries(FX);
+const CAT={motion:'모션그래픽',explainer:'설명 영상','3d':'3D 씬',interactive:'게임·인터랙티브'};
+const LV={1:'채팅에서 바로',2:'Claude Code',3:'외부 프로그램',4:'외부 AI·API'};
+const NEED={render:'MP4 렌더링',remotion:'Remotion',node:'Node.js 프로젝트',python:'Python',blender:'Blender',engine:'게임엔진',figma:'Figma',genvideo:'영상 생성 AI',genimage:'이미지 생성 AI',genaudio:'음성·음악 생성 AI',assets:'내 자료 필요'};
+const PAGE=48;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const titleOf=r=>r.title||(r.prompt||'').replace(/\s+/g,' ').trim().slice(0,70)||r.slug;
+const params=new URLSearchParams(location.search);
+let DATA=[],rows=[],shown=0,pick=null;
+const sel=new Set((params.get('fx')||'').split(',').filter(Boolean));
+
+fetch('catalog.json').then(r=>r.json()).then(j=>{
+  DATA=j.items.sort((a,b)=>(b.added||'').localeCompare(a.added||'')||a.id.localeCompare(b.id));
+  $('synced').textContent=`${DATA.length}개 · ${j.synced} 갱신.`;
+  const ids=(params.get('pick')||'').split(',').map(s=>s.trim()).filter(Boolean);
+  if(ids.length){
+    const by=new Map(DATA.flatMap(r=>[[r.id,r],[r.slug,r]]));
+    pick=ids.map(i=>by.get(i)).filter(Boolean);
+    $('pickmsg').textContent=`추천 후보 ${pick.length}개`;
+    $('pickbar').classList.add('on');document.body.classList.add('picking');
+  }
+  $('q').value=params.get('q')||'';
+  buildIndex();render();
+}).catch(()=>{$('grid').innerHTML='<div class="empty">카탈로그를 불러오지 못했습니다. 잠시 뒤 새로고침해 주세요.</div>'});
+
+function buildIndex(){
+  const cnt={};DATA.forEach(r=>r.fx.forEach(f=>cnt[f]=(cnt[f]||0)+1));
+  $('index').innerHTML=FX.filter(([k])=>cnt[k]).sort((a,b)=>(a[0]==='etc')-(b[0]==='etc')||cnt[b[0]]-cnt[a[0]])
+    .map(([k,n])=>`<button class="fx" type="button" data-k="${k}" aria-pressed="${sel.has(k)}">${n}<span>${cnt[k]}</span></button>`).join('');
+}
+$('index').addEventListener('click',e=>{const b=e.target.closest('.fx');if(!b)return;const k=b.dataset.k;sel.has(k)?sel.delete(k):sel.add(k);b.setAttribute('aria-pressed',sel.has(k));pick=null;$('pickbar').classList.remove('on');render()});
+['q','cat','lv','vid'].forEach(id=>$(id).addEventListener('input',()=>{pick=null;$('pickbar').classList.remove('on');render()}));
+$('reset').onclick=$('showall').onclick=()=>{sel.clear();pick=null;document.body.classList.remove('picking');$('pickbar').classList.remove('on');['q','cat','lv','vid'].forEach(id=>$(id).value='');history.replaceState(null,'',location.pathname);buildIndex();render()};
+$('more').onclick=()=>draw();
+
+function render(){
+  if(pick){rows=pick}else{
+    const q=$('q').value.trim().toLowerCase(),c=$('cat').value,lv=+$('lv').value,vid=$('vid').value;
+    rows=DATA.filter(r=>(!c||r.category===c)&&(!lv||r.level<=lv)&&(!vid||r.mp4)&&[...sel].every(f=>r.fx.includes(f))
+      &&(!q||(r.prompt+' '+(r.title||'')+' '+r.author).toLowerCase().includes(q)));
+  }
+  $('count').textContent=`${rows.length} / ${DATA.length}`;
+  $('grid').innerHTML=rows.length?'':'<div class="empty">조건에 맞는 작품이 없습니다. 효과 타일을 하나 줄여 보세요.</div>';
+  shown=0;draw();
+}
+function draw(){
+  const html=rows.slice(shown,shown+PAGE).map((r,i)=>card(r,shown+i)).join('');
+  $('grid').insertAdjacentHTML('beforeend',html);shown+=PAGE;$('more').hidden=shown>=rows.length;
+}
+function card(r,i){
+  const img=r.thumb?`<img src="${esc(r.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'none',textContent:'미리보기 없음'}))">`:'<div class="none">미리보기 없음</div>';
+  return `<button class="card" type="button" data-i="${DATA.indexOf(r)}">
+    <div class="media">${pick?`<span class="num">${i+1}</span>`:''}${img}${r.mp4?'<span class="play">▶ 영상</span>':''}</div>
+    <div class="body"><div class="title">${esc(titleOf(r))}</div>
+    <div class="meta"><span>@${esc(r.author)}</span><span>${CAT[r.category]||''}</span><span class="lv${r.level}">${LV[r.level]}</span></div>
+    <div class="chips">${r.fx.filter(f=>f!=='etc').slice(0,4).map(f=>`<span class="chip">${FXN[f]}</span>`).join('')}</div></div></button>`;
+}
+/* hover preview: muted mp4 if we have one, otherwise the animated preview image */
+const grid=$('grid');
+grid.addEventListener('pointerover',e=>{
+  const c=e.target.closest('.card');if(!c||c.dataset.hover||e.pointerType==='touch')return;
+  const r=DATA[c.dataset.i],m=c.querySelector('.media');c.dataset.hover=1;
+  if(r.mp4){const v=Object.assign(document.createElement('video'),{src:r.mp4,muted:true,loop:true,playsInline:true,autoplay:true});v.setAttribute('referrerpolicy','no-referrer');v.onerror=()=>v.remove();m.appendChild(v)}
+  else if(r.preview){const p=new Image();p.referrerPolicy='no-referrer';p.onload=()=>{const im=m.querySelector('img');if(im){im.dataset.src=im.src;im.src=r.preview}};p.src=r.preview}
+});
+grid.addEventListener('pointerout',e=>{
+  const c=e.target.closest('.card');if(!c||c.contains(e.relatedTarget))return;
+  delete c.dataset.hover;c.querySelector('video')?.remove();const im=c.querySelector('img[data-src]');if(im){im.src=im.dataset.src;delete im.dataset.src}
+});
+grid.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)open(DATA[c.dataset.i])});
+
+function open(r){
+  const src=r.mp4_hd||r.mp4;
+  $('dmedia').innerHTML=src?`<video controls autoplay muted playsinline loop poster="${esc(r.thumb||'')}" src="${esc(src)}"></video>`
+    :(r.preview||r.thumb)?`<img src="${esc(r.preview||r.thumb)}" alt="" referrerpolicy="no-referrer" onerror="this.src='${esc(r.thumb||'')}'">`:'';
+  $('dmeta').innerHTML=`<span>@${esc(r.author)}</span><span>${CAT[r.category]||''}</span><span class="lv${r.level}">${LV[r.level]}</span><span>${esc(r.id)}</span>`;
+  $('dtitle').textContent=titleOf(r);
+  $('dchips').innerHTML=r.fx.map(f=>`<span class="chip">${FXN[f]}</span>`).join('');
+  $('dlinks').innerHTML=[r.post_url&&`<a href="${esc(r.post_url)}" target="_blank" rel="noopener">원본 게시물</a>`,
+    r.video_url&&!/twimg/.test(r.video_url)&&`<a href="${esc(r.video_url)}" target="_blank" rel="noopener">영상 페이지</a>`,
+    r.prompt_url&&`<a href="${esc(r.prompt_url)}" target="_blank" rel="noopener">프롬프트 원문</a>`,
+    `<button type="button" id="copy">프롬프트 복사</button>`,`<button type="button" id="copyid">ID 복사</button>`].filter(Boolean).join('');
+  $('dnote').textContent=[r.partial?'프롬프트 일부만 공개된 작품입니다.':'',r.needs?.length?'필요한 것: '+r.needs.map(n=>NEED[n]||n).join(', '):''].filter(Boolean).join(' · ');
+  $('dprompt').textContent=r.prompt||'(프롬프트 없음)';
+  $('copy').onclick=e=>copy(r.prompt,e.target);$('copyid').onclick=e=>copy(r.id,e.target);
+  $('dlg').showModal();
+}
+async function copy(t,b){const o=b.textContent;try{await navigator.clipboard.writeText(t);b.textContent='복사됨'}catch{b.textContent='복사 실패'}setTimeout(()=>b.textContent=o,1500)}
+$('dclose').onclick=()=>$('dlg').close();
+$('dlg').addEventListener('close',()=>{$('dmedia').innerHTML=''});
+$('dlg').addEventListener('click',e=>{if(e.target===$('dlg'))$('dlg').close()});
+</script>
+</body>
+</html>

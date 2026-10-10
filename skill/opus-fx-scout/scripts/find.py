@@ -5,6 +5,7 @@
   python3 find.py --fx paint 3d --max-level 2 --full
   python3 find.py --show yihui:alexalbert-274839          # full prompt + needs
   python3 find.py --since 2026-09-28                       # recently added
+  python3 find.py --board ID ID ...                        # numbered board + gallery link
   python3 find.py --stats
 
 Scoring is a rough first pass so you read the right 10-15 prompts in full;
@@ -54,6 +55,7 @@ def main():
     ap.add_argument('--top', type=int, default=15)
     ap.add_argument('--show', nargs='*')
     ap.add_argument('--stats', action='store_true')
+    ap.add_argument('--board', nargs='*', help='ids in the order to show them')
     a = ap.parse_args()
 
     rows = store.load_catalog()
@@ -64,6 +66,18 @@ def main():
             print(f'  {k:9} {n:12} {sum(k in r["fx"] for r in rows)}')
         for lv, n in LEVEL_NAME.items():
             print(f'  level {lv} {n}: {sum(r["level"] == lv for r in rows)}')
+        return
+    if a.board:
+        by = {r['id']: r for r in rows} | {r['slug']: r for r in rows}
+        picked = [by[i] for i in a.board if i in by]
+        for n, r in enumerate(picked, 1):
+            title = r.get('title') or r['prompt'].replace(chr(10), ' ')[:70]
+            vis = '영상' if r.get('mp4') else ('미리보기' if r.get('thumb') else '미리보기 없음')
+            print(f"{n}. {title} — @{r['author']} · {LEVEL_NAME[r['level']]} · {vis} · {r['id']}")
+        print('\nGALLERY ' + store.GALLERY + '?pick=' + ','.join(r['id'] for r in picked))
+        missing = [i for i in a.board if i not in by]
+        if missing:
+            print('not found:', ' '.join(missing))
         return
     if a.show:
         by = {r['id']: r for r in rows} | {r['slug']: r for r in rows}

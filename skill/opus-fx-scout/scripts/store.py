@@ -17,6 +17,7 @@ BUNDLE = SKILL / 'data' / 'catalog.json'
 BUNDLE_SOURCES = SKILL / 'data' / 'sources.json'
 REMOTE_REPO = os.environ.get('OPUS_FX_REPO', 'yonchelee/opus-fx-catalog')
 REMOTE_RAW = f'https://raw.githubusercontent.com/{REMOTE_REPO}/main'
+GALLERY = os.environ.get('OPUS_FX_GALLERY', 'https://yonchelee.github.io/opus-fx-catalog/')
 HOME = Path(os.environ.get('OPUS_FX_HOME', Path.home() / '.cache' / 'opus-fx-scout'))
 OVERLAY = HOME / 'overlay.json'
 OVERLAY_SOURCES = HOME / 'sources.json'

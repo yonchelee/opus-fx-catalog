@@ -15,7 +15,7 @@ entries.json for --add is a list of objects with at least:
 category must be one of: motion, explainer, 3d, interactive.
 'added' is the date the row entered the catalog, not the post date.
 """
-import argparse, datetime, json, os, signal, subprocess, sys, tempfile, urllib.request
+import argparse, datetime, json, os, re, signal, subprocess, sys, tempfile, urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -53,7 +53,23 @@ def normalize(src_id, v, tpl=None, model=None):
         'category': v.get('category', ''), 'tech': v.get('tech_tags', []),
         'prompt': v.get('prompt', ''), 'partial': bool(v.get('prompt_partial', False)),
         'added': v.get('added') or TODAY, 'fx': fx, 'needs': needs, 'level': level,
+        **media(v),
     }
+
+
+MEDIA = ('title', 'thumb', 'preview', 'mp4', 'mp4_hd')
+
+
+def media(v):
+    """Preview media for the gallery. skillry rows carry a poster; their
+    animated preview sits next to it as preview.webp (same pattern other
+    collections hotlink). Rows added by hand may pass these keys directly."""
+    out = {k: v[k] for k in MEDIA if v.get(k)}
+    poster = v.get('poster_url')
+    if poster:
+        out.setdefault('thumb', poster)
+        out.setdefault('preview', re.sub(r'/[^/]+$', '/preview.webp', poster))
+    return out
 
 
 def merge(current, incoming):
@@ -61,6 +77,10 @@ def merge(current, incoming):
     new, changed = [], []
     for r in incoming:
         old = by_id.get(r['id'])
+        if old:  # keep media found elsewhere (e.g. enrich_media.py) that this source lacks
+            for k in MEDIA:
+                if not r.get(k) and old.get(k):
+                    r[k] = old[k]
         if old is None:
             new.append(r)
         elif old != r:
