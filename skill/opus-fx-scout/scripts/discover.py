@@ -196,6 +196,9 @@ class Run:
             return True
         if c.get('rules_version') != self.cfg['judge'].get('rules_version'):
             return True  # 판정 규칙이 바뀌었다 — 다시 판정
+        ov = self.overrides.get(c['id'])
+        if ov and ov.get('status') in ('held', 'published') and ov['status'] != c.get('status'):
+            return True  # 사람 조정이 새로 생겼다 — 다음 회차에 바로 반영(별 추적 대상도 함께 바뀜)
         last = c.get('last_checked')
         return not last or (popularity.parse(self.now) - popularity.parse(last)).days >= self.cfg['judge']['enrich_stale_days']
 

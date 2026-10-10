@@ -495,9 +495,6 @@ class StarsPartial(Base):
         self.assertEqual(eff['status'], 'published')
         # 사람이 보류로 정함 — 같은 규칙 버전이어도 내려가야 하고, 철회·공개 집계에 섞이지 않는다
         (self.d / 'editorial.json').write_text(json.dumps({'discovery_overrides': {'items': {eff['id']: {'status': 'held', 'reason': '시험'}}}}))
-        cfg = json.loads((self.d / 'discovery/config.json').read_text())
-        cfg['judge']['enrich_stale_days'] = 0
-        (self.d / 'discovery/config.json').write_text(json.dumps(cfg))
         log = self.run_once(FakeClient({}, stars=stars), now='2026-10-11T06:00:00Z', today=TODAY + timedelta(days=1))
         eff = next(c for c in self.cands().values() if c['full_name'] == 'maker/aurora-shader')
         self.assertEqual(eff['status'], 'held')
