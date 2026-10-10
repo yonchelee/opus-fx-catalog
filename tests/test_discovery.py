@@ -390,12 +390,17 @@ class JudgeUnits(unittest.TestCase):
                                    ('keyloom', 'Design Beautiful Motion Graphics Videos', ['motion-graphics']),
                                    ('Text_Effects', 'Add dynamic text animations to your Minecraft world', ['animation']),
                                    ('BAGEL', 'ROS Bag Visualizer', ['visualization', 'webgl']),
-                                   ('OpenGemCutting', 'Open-source parametric gemstone faceting workbench', ['threejs', 'animation'])]:
+                                   ('OpenGemCutting', 'Open-source parametric gemstone faceting workbench', ['threejs', 'animation']),
+                                   ('stampstudio', 'An online, open source stamp creator.', ['animation', 'canvas']),
+                                   ('jit-motion', '把任意产品简介，一键生成单文件 HTML 宣传动画视频', ['gsap', 'animation']),
+                                   ('WinUI.Composition.Hlsl', 'HLSL Composition effects and liquid glass brushes for WinUI', ['shader'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
         self.assertEqual(judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': '', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[0], 'held', '설명 없음')
         self.assertIn('미러 저장소', judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': 'Read-only mirror of https://codeberg.org/x/y', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[1])
         self.assertEqual(judge.classify_repo({'name': 'portfolio', 'description': 'Personal portfolio (2018)', 'topics': ['threejs', 'animation'], 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'app')
         for name, desc, topics in [('fieldplay', 'A vector field explorer', ['glsl', 'particles', 'webgl']),
+                                   ('moyun', '墨韵 · 实时 GPU 水墨流体', ['webgl']),
+                                   ('iwrzwr-visual-archive', '160+ experimental visualization studies across 25+ categories', ['generative-art', 'creative-coding']),
                                    ('WebGPU-Ocean', 'A real-time 3D fluid simulation implemented in WebGPU', ['webgpu', 'fluid-simulation']),
                                    ('HologramShader', 'Test of an hologram material made in Unity.', ['effect', 'shader'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'GLSL'}, '', ['index.html'], cfg)['kind'], 'effect', name)

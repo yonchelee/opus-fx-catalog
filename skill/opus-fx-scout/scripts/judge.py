@@ -99,9 +99,11 @@ def classify_repo(repo, readme, contents, cfg):
     # README 첫 문단의 자기소개("X is a component/library…")도 도구 신호
     intro = re.sub(r'!\[[^\]]*\]\([^)]*\)|<[^>]+>', ' ', (readme or '')[:800])
     self_tool = re.search(r'\b(is|are) an? (\w+ ){0,3}(component|library|framework|plugin|tool|toolkit|engine|sdk|package|module|wrapper)\b', intro, re.I) is not None
-    # 작품 신호: 이름·설명에 있거나, 주제에만 있다면 시각 기술 주제(셰이더·파티클 등)와 함께 있을 때만
-    effect_sig = any_word(cfg['effect_words'], namedesc) or (
-        any_word(cfg['effect_words'], words(' '.join(t.replace('-', ' ') for t in topics))) if set(topics) & set(cfg.get('visual_topics', [])) else [])
+    # 작품 신호: 이름·설명에 있어야 한다(한·중·일 설명 포함). 주제(topics)에만 있으면 관련성 불확실 — 보류
+    effect_sig = any_word(cfg['effect_words'], namedesc) + [w for w in cfg.get('effect_words_cjk', []) if w in desc]
+    if not effect_sig and not cfg.get('effect_from_description_only') and set(topics) & set(cfg.get('visual_topics', [])):
+        effect_sig = any_word(cfg['effect_words'], words(' '.join(t.replace('-', ' ') for t in topics)))
+    tool += [w for w in cfg.get('tool_words_cjk', []) if w in desc]
     app = any_word(cfg.get('app_words', []), namedesc + ' ' + ' '.join(topics).replace('-', ' ') + ' ')
     if 'awesome' in name or 'awesome-list' in topics or 'awesome' in topics or any_word(cfg['list_words'], namedesc) or (links > 60 and (only_docs or not code_files)):
         kind = 'list'
@@ -178,7 +180,7 @@ def decide(c, cfg, homepage_owner=None):
     if (c.get('stars') or 0) < cfg['min_stars_publish']:
         reasons.append(f"별 {c.get('stars') or 0}개 — 공개 기준 {cfg['min_stars_publish']}개 미만")
     if c['kind'] == 'unknown':
-        reasons.append('작품 유형 판단 불가 — 이름·설명·주제에 데모·효과·애니메이션 같은 작품 신호가 없음')
+        reasons.append('관련성 불확실 — 이름·설명에 데모·효과·애니메이션 같은 작품 신호가 없음(주제에만 있거나 아예 없음)')
     return ('held', reasons) if reasons else ('published', ['필수 조건 충족: 관련성·미리보기 또는 데모·코드·라이선스·원작자'])
 
 
