@@ -351,7 +351,10 @@ class JudgeUnits(unittest.TestCase):
                                    ('animate', 'Procedural animation in any style for Claude Code: short single-file scenes', ['animation']),
                                    ('p5.capture', 'super easy recording for p5.js animations', ['p5js', 'animation']),
                                    ('ShapeUp-public', 'A 3D Modeler Made in a Week', ['3d', 'graphics']),
-                                   ('webgpu-dummy', 'A rendering engine', ['webgpu'])]:
+                                   ('webgpu-dummy', 'A rendering engine', ['webgpu']),
+                                   ('libossia', 'A modern C++, cross-environment distributed object model for creative coding', ['creative-coding']),
+                                   ('quokka', 'Two-moment AMR radiation hydrodynamics (with self-gravity, particles, chemistry)', ['simulation', 'particles']),
+                                   ('keyloom', 'Design Beautiful Motion Graphics Videos', ['motion-graphics'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
         self.assertEqual(judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': '', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[0], 'held', '설명 없음')
         self.assertEqual(judge.classify_repo({'name': 'portfolio', 'description': 'Personal portfolio (2018)', 'topics': ['threejs', 'animation'], 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'app')
