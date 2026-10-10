@@ -30,7 +30,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      OPUS_FX_HOME: ${{ runner.temp }}/opus-fx
+      OPUS_FX_HOME: /tmp/opus-fx
     steps:
       - uses: actions/checkout@v4
         with:
