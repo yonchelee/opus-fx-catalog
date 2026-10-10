@@ -1,0 +1,125 @@
+# 카탈로그 갱신 — 등록 출처 동기화 · GitHub 신규 후보 발굴 · 별 수 기록 → 생성·검증 → 커밋 → Pages 빌드 → 공개 확인
+# 매일: daily (06:17 KST) · 매주 월 05:47 KST: weekly(넓은 생성일 구간) · 수동: Actions 화면의 Run workflow
+# 사람 판단이 필요한 '새 프롬프트 모음' 발굴은 클라우드 Routine(월 08:47 KST)이 맡는다 — 이 작업과 겹치지 않는다.
+name: catalog-update
+
+on:
+  schedule:
+    - cron: '17 21 * * *'    # 매일 21:17 UTC = 06:17 KST
+    - cron: '47 20 * * 0'    # 일 20:47 UTC = 월 05:47 KST (weekly)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'daily 또는 weekly'
+        type: choice
+        options: [daily, weekly]
+        default: daily
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:            # 중복 실행 방지: 한 번에 하나, 뒤에 온 실행은 기다린다
+  group: catalog-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      OPUS_FX_HOME: ${{ runner.temp }}/opus-fx
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 실행 모드
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then m="${{ inputs.mode }}";
+          elif [ "${{ github.event.schedule }}" = "47 20 * * 0" ]; then m=weekly; else m=daily; fi
+          echo "mode=$m" >> "$GITHUB_OUTPUT"; echo "mode=$m"
+
+      - name: 파이프라인 (동기화 → 발굴 → 생성 → 검증)
+        id: pipe
+        run: |
+          set +e
+          python3 skill/opus-fx-scout/scripts/pipeline.py --dir . --mode "${{ steps.mode.outputs.mode }}"
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: 시험
+        id: tests
+        if: steps.pipe.outputs.code == '0'
+        continue-on-error: true
+        run: |
+          python3 -m unittest discover -s tests
+          node --test
+
+      - name: 실패하면 불완전한 결과를 버리고 실패 기록만 남김
+        if: steps.pipe.outputs.code != '0' || steps.tests.outcome != 'success'
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          p = pathlib.Path('status.json'); s = json.loads(p.read_text())
+          s.setdefault('stages', {}).setdefault('publish', {})
+          s['stages']['publish'].update(ok=False, last_attempt=s['updated'],
+              message='수집·생성·검증·시험 중 실패 — 이번 결과는 배포하지 않음 (pipeline=${{ steps.pipe.outputs.code }}, tests=${{ steps.tests.outcome }})')
+          p.write_text(json.dumps(s, ensure_ascii=False, indent=1) + '\n')
+          PY
+          cp status.json "$RUNNER_TEMP/status.json"; cp -r discovery/runs "$RUNNER_TEMP/runs"
+          git checkout -- . && git clean -fdq
+          cp "$RUNNER_TEMP/status.json" status.json; cp -r "$RUNNER_TEMP/runs/." discovery/runs/
+          echo "FAILED=1" >> "$GITHUB_ENV"
+
+      - name: 커밋·push (충돌 시 최신 main 위로 다시)
+        id: commit
+        run: |
+          git config user.name "opus-fx-catalog bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "변경 없음"; echo "pushed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          msg="catalog: ${{ steps.mode.outputs.mode }} 갱신 (run ${{ github.run_id }})"
+          [ -n "$FAILED" ] && msg="status: 갱신 실패 기록 (run ${{ github.run_id }})"
+          git commit -qm "$msg"
+          for i in 1 2 3; do
+            if git push origin HEAD:main; then echo "pushed=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+            git pull --rebase origin main || { git rebase --abort; echo "rebase 충돌 — 다음 회차로"; exit 1; }
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: Pages 빌드 요청과 공개 확인
+        if: steps.commit.outputs.pushed == 'true'
+        run: |
+          sha=$(git rev-parse HEAD)
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "빌드 요청 실패 — push 로 시작된 빌드를 기다림"
+          for i in $(seq 1 30); do
+            s=$(gh api "repos/${{ github.repository }}/pages/builds/latest" --jq '.status + " " + .commit')
+            echo "$s"
+            case "$s" in "built $sha") break;; errored*) echo "Pages 빌드 실패"; exit 1;; esac
+            sleep 20
+          done
+          case "$s" in "built $sha") ;; *) echo "Pages 빌드를 확인하지 못함"; exit 1;; esac
+          for i in $(seq 1 12); do
+            rid=$(curl -s "https://yonchelee.github.io/opus-fx-catalog/status.json?v=$RANDOM$i" | python3 -c "import json,sys;print(json.load(sys.stdin).get('run_id'))" || true)
+            [ "$rid" = "${{ github.run_id }}" ] && { echo "공개 사이트 확인: status.json run_id=$rid"; break; }
+            sleep 15
+          done
+          [ "$rid" = "${{ github.run_id }}" ] || { echo "공개 사이트 status.json 이 이번 실행이 아님 ($rid)"; exit 1; }
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://yonchelee.github.io/opus-fx-catalog/github.json?v=$RANDOM")
+          [ "$code" = 200 ] || { echo "github.json $code"; exit 1; }
+
+      - name: 실패로 끝내기
+        if: env.FAILED == '1'
+        run: |
+          echo "이번 회차는 수집·검증 실패로 배포하지 않았다. discovery/runs 의 기록을 보라."
+          exit 1

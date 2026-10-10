@@ -173,6 +173,40 @@ try {
   }
 
   {
+    /* GitHub 코드 작품 — github.json 이 있을 때만 */
+    const gh = JSON.parse(await (await fetch(BASE + 'github.json')).text()).items || [];
+    for (const [w, h, mob] of [[1280, 800, false], [390, 844, true]]) {
+      const p = await page({viewport: {width: w, height: h}, isMobile: mob, hasTouch: mob});
+      await p.goto(BASE, {waitUntil: 'networkidle'}); await ready(p);
+      ok(`${w}: 자료 갱신 시각 표시`, /자료 갱신:/.test(await p.textContent('#fresh')));
+      if (!gh.length) { ok(`${w}: GitHub 작품 없음(건너뜀)`, true); await p.close(); continue; }
+      ok(`${w}: 최근 발견 칸`, await p.locator('#recent').isVisible() && await p.locator('#rgrid .card').count() > 0);
+      await p.goto(BASE + '?src=gh', {waitUntil: 'networkidle'}); await ready(p);
+      const n = await p.locator('#grid .card').count();
+      ok(`${w}: 출처 필터 GitHub`, n === Math.min(gh.length, 48), `${n}/${gh.length}`);
+      const foot = await p.textContent('#grid .card .foot');
+      ok(`${w}: 카드에 저장소 ★ (X ♥ 아님)`, /저장소 ★/.test(foot) && !/X ♥/.test(foot), foot.trim());
+      ok(`${w}: 프롬프트 없음·코드 제공 표시`, /프롬프트 없음·코드 제공|프롬프트 파일·코드/.test(await p.textContent('#grid .card .badges')));
+      await p.selectOption('#sort', 'stars'); await p.waitForTimeout(150);
+      const st = await p.$$eval('#grid .card .xlikes', e => e.map(x => parseInt(x.textContent.replace(/[^\d]/g, ''))));
+      ok(`${w}: GitHub 별 많은 순`, st.every((v, i, a) => i === 0 || a[i - 1] >= v), st.slice(0, 5).join(','));
+      const c = p.locator('#grid .card').first();
+      if (mob) await c.tap(); else await c.click();
+      await p.waitForTimeout(400);
+      ok(`${w}: GitHub 작품에 프롬프트 복사 버튼 없음`, await p.locator('#cp-orig').count() === 0);
+      ok(`${w}: 저장소 열기 링크`, /github\.com\//.test(await p.getAttribute('#acts a.btn.primary', 'href')));
+      ok(`${w}: 6번 칸은 원본 프롬프트 없음 안내`, /원본 프롬프트 없음 · 코드 제공|프롬프트 파일/.test(await p.textContent('#dlg')));
+      ok(`${w}: 요청문에 저장소 주소·사이트가 만든 요청문 안내`, /\[참고한 저장소\] https:\/\/github\.com\//.test(await p.textContent('#ap-out')) && /원본 프롬프트가 아님/.test(await p.textContent('#dlg')));
+      ok(`${w}: 상태는 자동 발굴/미리보기 확인(재현 아님)`, /자동 발굴|미리보기 확인/.test(await p.textContent('.dhead .badges')) && !/재현 확인/.test(await p.textContent('.dhead .badges')));
+      const id = new URL(p.url()).searchParams.get('item');
+      ok(`${w}: GitHub 작품 주소 gh:`, /^gh:\d+$/.test(id || ''), id);
+      await p.reload({waitUntil: 'networkidle'}); await p.waitForTimeout(500);
+      ok(`${w}: GitHub 작품 주소 새로고침`, await dlgOpen(p));
+      ok(`${w}: 콘솔 오류 없음(GitHub)`, p.errs.length === 0, p.errs.join(' | '));
+      await p.close();
+    }
+  }
+  {
     const p = await page();
     await p.route(/\.(mp4|webp|jpg|jpeg|png)(\?|$)/, r => r.request().url().startsWith(ORIGIN) ? r.continue() : r.abort());
     await p.goto(BASE + '?item=' + encodeURIComponent('yihui:twoclipping-402193'), {waitUntil: 'networkidle'}); await p.waitForTimeout(800);
@@ -181,6 +215,8 @@ try {
     const fb = await p.evaluate(() => { const n = document.querySelector('#dlg .dmedia .none'); return n && !n.hidden && !!n.querySelector('a'); });
     ok('영상 실패 → 대체 화면과 원본 링크', fb);
     await p.keyboard.press('Escape');
+    /* 썸네일은 화면에 들어올 때 불러온다(loading=lazy). 목록을 화면에 보이게 한 뒤 확인한다. */
+    await p.evaluate(() => document.getElementById('grid').scrollIntoView()); await p.waitForTimeout(800);
     ok('썸네일 실패 → 대체 문구', await p.locator('#grid .media .none').count() > 0);
     await p.close();
   }
