@@ -1,0 +1,12 @@
+{
+  "name": "opus-fx-catalog",
+  "private": true,
+  "type": "module",
+  "description": "갤러리 시험용 의존성만 담는다. 사이트는 빌드 없이 정적 파일로 공개된다.",
+  "scripts": {
+    "test": "python3 -m unittest discover -s tests && node --test && node tests/e2e.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.40.0"
+  }
+}

@@ -41,3 +41,25 @@ export function itemPath(id) {
 export const verifyOf = r => (r.ed && r.ed.verify && VERIFY[r.ed.verify.status]) ? r.ed.verify.status : 'unverified';
 export const titleOf = r => (r.ed && r.ed.title_ko) || r.title || (r.prompt || '').replace(/\s+/g, ' ').trim().slice(0, 70) || r.slug;
 export const fmtLikes = n => n == null ? '' : (n >= 10000 ? (n / 10000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '') + '만' : n.toLocaleString('ko-KR'));
+
+/* 용도 판정. 편집에서 고른 용도(ed.uses)가 먼저, 없으면 editorial.json uses[*].match 규칙으로 넓게 찾는다.
+   규칙 결과는 "키워드로 찾은" 것이라 정적 용도 페이지에는 싣지 않는다(편집에서 고른 것만).
+   파이썬 쪽: pages.py uses_of(). */
+const compiled = new WeakMap();
+function rulesOf(uses) {
+  if (!compiled.has(uses)) {
+    compiled.set(uses, Object.entries(uses || {}).map(([k, u]) => {
+      const m = u.match || {};
+      return {k, re: m.re ? new RegExp(m.re, 'i') : null, fx: m.fx || [], level: m.level || [], full: !!m.full_prompt};
+    }));
+  }
+  return compiled.get(uses);
+}
+export function usesOf(r, uses) {
+  if (r.ed && r.ed.uses && r.ed.uses.length) return r.ed.uses;
+  const text = (r.title || '') + ' ' + (r.prompt || '');
+  return rulesOf(uses).filter(u =>
+    (u.re && u.re.test(text)) || u.fx.some(f => (r.fx || []).includes(f)) ||
+    (u.level.length && u.level.includes(r.level) && (!u.full || !r.partial))
+  ).map(u => u.k);
+}
