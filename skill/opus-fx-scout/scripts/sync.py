@@ -21,6 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from classify import classify, FX_NAME, LEVEL_NAME  # noqa: E402
 import store  # noqa: E402
+import likes  # noqa: E402
 
 TODAY = datetime.date.today().isoformat()
 
@@ -58,6 +59,7 @@ def normalize(src_id, v, tpl=None, model=None):
 
 
 MEDIA = ('title', 'thumb', 'preview', 'mp4', 'mp4_hd')
+STATS = ('likes', 'likes_at')  # filled by likes.py, never by a source
 
 
 def media(v):
@@ -80,6 +82,9 @@ def merge(current, incoming):
         if old:  # keep media found elsewhere (e.g. enrich_media.py) that this source lacks
             for k in MEDIA:
                 if not r.get(k) and old.get(k):
+                    r[k] = old[k]
+            for k in STATS:
+                if k in old:
                     r[k] = old[k]
         if old is None:
             new.append(r)
@@ -145,6 +150,12 @@ def main():
     # (`| head`) must not cost us the write.
     if not a.dry_run and (new or changed or a.out):
         if a.out:
+            # 갤러리의 좋아요순 정렬용. 막힌 네트워크에서는 옛 값을 그대로 둔다.
+            try:
+                up, bad, _ = likes.refresh(merged)
+                print(f'likes: updated {up} · failed {bad}')
+            except Exception as e:  # noqa: BLE001
+                errors.append(f'likes: {e}')
             store.save_to_dir(a.out, merged, store.load_sources(), TODAY)
             store.save_overlay([], TODAY)  # now durable in the repo clone
             where = f'wrote {a.out}/catalog.json ({len(merged)} rows) - commit and push it'

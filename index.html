@@ -106,6 +106,7 @@ body.picking .index,body.picking .bar,body.picking .sec{display:none}
 .meta{font-size:12.5px;color:var(--yl-ink-3);display:flex;gap:4px 10px;flex-wrap:wrap}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:11.5px;font-weight:600;padding:1px 7px;border:1.5px solid var(--yl-line);color:var(--yl-ink)}
+.likes{font-weight:700;color:var(--yl-ink);font-variant-numeric:tabular-nums}
 .lv1::before,.lv2::before,.lv3::before,.lv4::before{content:"";display:inline-block;width:8px;height:8px;margin-right:5px;border:1.5px solid var(--yl-line);vertical-align:0}
 .lv1::before{background:var(--yl-mint)} .lv2::before{background:var(--yl-yellow)} .lv3::before,.lv4::before{background:var(--yl-accent)}
 .more{display:flex;align-items:center;margin:40px auto 0;font:inherit;font-size:15px;font-weight:700;min-height:48px;padding:0 24px;background:var(--yl-yellow);color:var(--yl-on-bright);border:var(--yl-bw) solid var(--yl-line);box-shadow:var(--yl-shadow);cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
@@ -146,7 +147,7 @@ footer .legal a{color:var(--yl-ink-3);font-weight:500;text-decoration:none}
   .index{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bar{position:static}
   .bar input{flex-basis:100%}
-  .bar select{flex:1 1 calc(33% - 8px)}
+  .bar select{flex:1 1 calc(50% - 8px)}
   .grid{gap:20px}
   .dbody{padding:16px}
   dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
@@ -205,6 +206,9 @@ footer .legal a{color:var(--yl-ink-3);font-weight:500;text-decoration:none}
 
 <div class="bar">
   <input id="q" type="search" placeholder="검색 (예: map, watercolor, 지도, logo)" aria-label="검색">
+  <select id="sort" aria-label="정렬">
+    <option value="likes">좋아요 많은 순</option><option value="new">최신순</option>
+  </select>
   <select id="cat" aria-label="장르">
     <option value="">모든 장르</option><option value="motion">모션그래픽</option><option value="explainer">설명 영상</option><option value="3d">3D 씬</option><option value="interactive">게임·인터랙티브</option>
   </select>
@@ -225,7 +229,7 @@ footer .legal a{color:var(--yl-ink-3);font-weight:500;text-decoration:none}
 <footer>
   <div class="in">
     <p>모든 영상과 프롬프트의 권리는 각 원작자에게 있습니다. 미리보기는 원본 게시물·skillry.dev의 공개 주소를 그대로 불러오며, 원본이 지워지면 보이지 않을 수 있습니다.</p>
-    <p>데이터 출처: <a href="https://github.com/yihui-dev/awesome-opus5-5-videos">yihui-dev/awesome-opus5-5-videos</a> (MIT) · <a href="https://github.com/Li-Evan/awesome-opus-5.5-video-prompts">Li-Evan/awesome-opus-5.5-video-prompts</a> (CC BY 4.0). 효과 분류는 프롬프트 키워드로 자동 산출했습니다. 카탈로그: <a href="https://github.com/yonchelee/opus-fx-catalog">yonchelee/opus-fx-catalog</a></p>
+    <p>데이터 출처: <a href="https://github.com/yihui-dev/awesome-opus5-5-videos">yihui-dev/awesome-opus5-5-videos</a> (MIT) · <a href="https://github.com/Li-Evan/awesome-opus-5.5-video-prompts">Li-Evan/awesome-opus-5.5-video-prompts</a> (CC BY 4.0). 효과 분류는 프롬프트 키워드로 자동 산출했습니다. 좋아요 수는 원본 X 게시물 기준이며 매주 갱신합니다. 카탈로그: <a href="https://github.com/yonchelee/opus-fx-catalog">yonchelee/opus-fx-catalog</a></p>
     <div class="legal"><span>© 2026 YOUNGCHAE LEE</span><a href="https://www.yonchelee.com/">YONCHELEE.COM</a></div>
   </div>
 </footer>
@@ -254,6 +258,7 @@ const $=id=>document.getElementById(id);
 /* 테마는 홈과 같은 키(yl-theme)로 기억한다. 도메인이 달라 홈의 선택이 넘어오지는 않는다. */
 $('theme').onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;try{localStorage.setItem('yl-theme',t)}catch(e){}};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtLikes=n=>n==null?'':'♥ '+(n>=10000?(n/10000).toFixed(n>=100000?0:1).replace(/\.0$/,'')+'만':n.toLocaleString('ko-KR'));
 const titleOf=r=>r.title||(r.prompt||'').replace(/\s+/g,' ').trim().slice(0,70)||r.slug;
 const params=new URLSearchParams(location.search);
 let DATA=[],rows=[],shown=0,pick=null;
@@ -270,6 +275,7 @@ fetch('catalog.json').then(r=>r.json()).then(j=>{
     $('pickbar').classList.add('on');document.body.classList.add('picking');
   }
   $('q').value=params.get('q')||'';
+  if(params.get('sort')==='new')$('sort').value='new';
   buildIndex();render();
 }).catch(()=>{$('grid').innerHTML='<div class="empty">카탈로그를 불러오지 못했습니다. 잠시 뒤 새로고침해 주세요.</div>'});
 
@@ -279,8 +285,8 @@ function buildIndex(){
     .map(([k,n])=>`<button class="fx" type="button" data-k="${k}" aria-pressed="${sel.has(k)}">${n}<span>${cnt[k]}</span></button>`).join('');
 }
 $('index').addEventListener('click',e=>{const b=e.target.closest('.fx');if(!b)return;const k=b.dataset.k;sel.has(k)?sel.delete(k):sel.add(k);b.setAttribute('aria-pressed',sel.has(k));pick=null;$('pickbar').classList.remove('on');render()});
-['q','cat','lv','vid'].forEach(id=>$(id).addEventListener('input',()=>{pick=null;$('pickbar').classList.remove('on');render()}));
-$('reset').onclick=$('showall').onclick=()=>{sel.clear();pick=null;document.body.classList.remove('picking');$('pickbar').classList.remove('on');['q','cat','lv','vid'].forEach(id=>$(id).value='');history.replaceState(null,'',location.pathname);buildIndex();render()};
+['q','sort','cat','lv','vid'].forEach(id=>$(id).addEventListener('input',()=>{pick=null;$('pickbar').classList.remove('on');render()}));
+$('reset').onclick=$('showall').onclick=()=>{sel.clear();pick=null;document.body.classList.remove('picking');$('pickbar').classList.remove('on');['q','cat','lv','vid'].forEach(id=>$(id).value='');$('sort').value='likes';history.replaceState(null,'',location.pathname);buildIndex();render()};
 $('more').onclick=()=>draw();
 
 function render(){
@@ -288,6 +294,8 @@ function render(){
     const q=$('q').value.trim().toLowerCase(),c=$('cat').value,lv=+$('lv').value,vid=$('vid').value;
     rows=DATA.filter(r=>(!c||r.category===c)&&(!lv||r.level<=lv)&&(!vid||r.mp4)&&[...sel].every(f=>r.fx.includes(f))
       &&(!q||(r.prompt+' '+(r.title||'')+' '+r.author).toLowerCase().includes(q)));
+    /* DATA 는 최신순. 좋아요순은 수가 없는 항목(지워진 게시물·X 밖)을 맨 뒤로, 같으면 최신순. */
+    if($('sort').value==='likes')rows=rows.slice().sort((a,b)=>(b.likes??-1)-(a.likes??-1));
   }
   $('count').textContent=`${rows.length} / ${DATA.length}`;
   $('grid').innerHTML=rows.length?'':'<div class="empty">조건에 맞는 작품이 없습니다. 효과 타일을 하나 줄여 보세요.</div>';
@@ -302,7 +310,7 @@ function card(r,i){
   return `<button class="card" type="button" data-i="${DATA.indexOf(r)}">
     <div class="media">${pick?`<span class="num">${i+1}</span>`:''}${img}${r.mp4?'<span class="play">▶ 영상</span>':''}</div>
     <div class="body"><div class="title">${esc(titleOf(r))}</div>
-    <div class="meta"><span>@${esc(r.author)}</span><span>${CAT[r.category]||''}</span><span class="lv${r.level}">${LV[r.level]}</span></div>
+    <div class="meta">${r.likes!=null?`<span class="likes">${fmtLikes(r.likes)}</span>`:''}<span>@${esc(r.author)}</span><span>${CAT[r.category]||''}</span><span class="lv${r.level}">${LV[r.level]}</span></div>
     <div class="chips">${r.fx.filter(f=>f!=='etc').slice(0,4).map(f=>`<span class="chip">${FXN[f]}</span>`).join('')}</div></div></button>`;
 }
 /* hover preview: muted mp4 if we have one, otherwise the animated preview image */
@@ -323,7 +331,7 @@ function open(r){
   const src=r.mp4_hd||r.mp4;
   $('dmedia').innerHTML=src?`<video controls autoplay muted playsinline loop poster="${esc(r.thumb||'')}" src="${esc(src)}"></video>`
     :(r.preview||r.thumb)?`<img src="${esc(r.preview||r.thumb)}" alt="" referrerpolicy="no-referrer" onerror="this.src='${esc(r.thumb||'')}'">`:'';
-  $('dmeta').innerHTML=`<span>@${esc(r.author)}</span><span>${CAT[r.category]||''}</span><span class="lv${r.level}">${LV[r.level]}</span><span>${esc(r.id)}</span>`;
+  $('dmeta').innerHTML=`${r.likes!=null?`<span class="likes">${fmtLikes(r.likes)}</span>`:''}<span>@${esc(r.author)}</span><span>${CAT[r.category]||''}</span><span class="lv${r.level}">${LV[r.level]}</span><span>${esc(r.id)}</span>`;
   $('dtitle').textContent=titleOf(r);
   $('dchips').innerHTML=r.fx.map(f=>`<span class="chip">${FXN[f]}</span>`).join('');
   $('dlinks').innerHTML=[r.post_url&&`<a href="${esc(r.post_url)}" target="_blank" rel="noopener">원본 게시물</a>`,

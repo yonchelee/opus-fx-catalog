@@ -5,9 +5,9 @@
 Claude(Opus 5.5 등)로 실제 만들어진 모션그래픽·3D·셰이더·인터랙티브 효과의 프롬프트 카탈로그입니다.
 `opus-fx-scout` 스킬이 이 저장소를 읽어 결과물에 맞는 효과를 추천하고, 주간 자가서칭이 새 항목을 여기에 커밋합니다.
 
-- `catalog.json` — 항목 전체 (`synced` 날짜 + `items`). 항목마다 원작자 게시물, 영상, 프롬프트 원문 링크, 효과 분류(fx), 필요 도구(needs), 실행 단계(level 1~4)
+- `catalog.json` — 항목 전체 (`synced` 날짜 + `items`). 항목마다 원작자 게시물, 영상, 프롬프트 원문 링크, 효과 분류(fx), 필요 도구(needs), 실행 단계(level 1~4), 좋아요 수(likes·likes_at — `skill/opus-fx-scout/scripts/likes.py`가 X 게시물에서 받아 옴, `sync.py --out` 때 6일 지난 값만 갱신)
 - `sources.json` — 등록된 소스와 채택 이유
-- `index.html` — 갤러리 페이지 (GitHub Pages, main 브랜치 루트). `?pick=id,id`로 후보만 번호 붙여 보기, `?q=`·`?fx=`로 필터
+- `index.html` — 갤러리 페이지 (GitHub Pages, main 브랜치 루트). `?pick=id,id`로 후보만 번호 붙여 보기, `?q=`·`?fx=`로 필터, 기본은 좋아요 많은 순이고 `?sort=new`면 최신순
 - 미리보기는 원본 게시물·skillry.dev의 공개 주소를 그대로 불러옵니다(저장소에 이미지를 저장하지 않음). 썸네일·MP4 주소 일부는 Li-Evan 모음에서 게시물 번호로 맞춰 가져왔습니다(`skill/opus-fx-scout/scripts/enrich_media.py`).
 
 ## 출처와 권리
