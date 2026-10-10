@@ -250,14 +250,22 @@ class Trend(unittest.TestCase):
 
 
 class JudgeUnits(unittest.TestCase):
+    def test_npm_package_install_means_library(self):
+        cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
+        r = {'name': 'vizceral', 'description': 'WebGL visualization for displaying animated traffic graphs', 'topics': [], 'language': 'JavaScript'}
+        self.assertEqual(judge.classify_repo(r, 'npm install --save vizceral', ['package.json', 'src'], cfg)['kind'], 'library')
+        self.assertEqual(judge.classify_repo(r, 'run `npm install` then `npm start`', ['package.json', 'src'], cfg)['kind'], 'effect')
+
     def test_popular_tools_are_not_effects(self):
         cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
         tools = [('p5.js', 'p5.js is a client-side JS platform that empowers artists', ['creative-coding']),
                  ('xterm.js', 'A terminal for the web', ['webgl']), ('wgpu', 'A cross-platform, safe, pure-Rust graphics API.', ['webgpu']),
                  ('olive', 'Free open-source non-linear video editor', ['animation']), ('umbrella', 'Broadly scoped ecosystem & mono-repository of 215 TypeScript projects', ['generative-art']),
-                 ('cobe', '5KB WebGL globe lib.', ['webgl']), ('glslViewer', 'Console-based GLSL Sandbox for 2D/3D shaders', ['shader'])]
+                 ('cobe', '5KB WebGL globe lib.', ['webgl']), ('glslViewer', 'Console-based GLSL Sandbox for 2D/3D shaders', ['shader']),
+                 ('three-mesh-bvh', 'A BVH implementation to speed up raycasting and enable spatial queries', ['threejs']),
+                 ('vox-director', 'Turn one topic into a finished Vox-style paper-collage explainer/ad video. Claude Code skill', ['motion-graphics'])]
         for name, desc, topics in tools:
-            k = judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind']
+            k = judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'JavaScript'}, '## Examples\nexamples below', ['index.html'], cfg)['kind']
             self.assertIn(k, ('library', 'unknown'), f'{name} → {k}')
         effects = [('WebGL-Fluid-Simulation', 'Play with fluids in your browser (works even on mobile)', ['webgl', 'fluid-simulation']),
                    ('matrix', 'matrix (web-based green code rain, made with love)', ['webgl'])]

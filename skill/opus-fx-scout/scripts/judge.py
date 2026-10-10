@@ -83,14 +83,15 @@ def classify_repo(repo, readme, contents, cfg):
 
     namedesc = words(name.replace('-', ' ').replace('_', ' ') + ' ' + desc)
     tool = any_word(cfg['library_words'], namedesc)
-    npm_pkg = 'package.json' in files and re.search(r'\b(npm|yarn|pnpm) (i|install|add) (?!-)', readme or '') is not None
+    # 패키지 설치 안내(npm install --save 이름 등)가 있으면 라이브러리. 이름 없는 'npm install'(데모 의존성 설치)은 제외
+    npm_pkg = 'package.json' in files and re.search(r'\b(?:npm|yarn|pnpm) (?:i|install|add)(?: -{1,2}[\w-]+)* [@a-z][\w./@-]*', readme or '', re.I) is not None
     effect_sig = any_word(cfg['effect_words'], head)
     if 'awesome' in name or 'awesome-list' in topics or 'awesome' in topics or any_word(cfg['list_words'], namedesc) or (links > 60 and (only_docs or not code_files)):
         kind = 'list'
     elif tool or set(topics) & set(cfg['library_topics']) or npm_pkg:
         # 도구·라이브러리·플랫폼·앱. 효과를 '만드는' 쪽이지 완성된 효과가 아니다.
         kind = 'library'
-    elif any_word(cfg['collection_words'], head) or any_word(['collection of', 'examples', 'experiments'], words((readme or '')[:1500])):
+    elif any_word(cfg['collection_words'], head) or (effect_sig and any_word(['collection of', 'examples', 'experiments'], words((readme or '')[:1500]))):
         kind = 'collection'
     elif effect_sig and (code_files or repo.get('language')):
         kind = 'effect'
