@@ -1,0 +1,26 @@
+[
+ {
+  "id": "lievan",
+  "name": "Li-Evan/awesome-opus-5.5-video-prompts",
+  "type": "manual",
+  "repo": "Li-Evan/awesome-opus-5.5-video-prompts",
+  "branch": "main",
+  "path": "data/*.yaml",
+  "prompt_url_tpl": "https://github.com/Li-Evan/awesome-opus-5.5-video-prompts/blob/main/prompts/{category}.md",
+  "model": "Opus 5.5",
+  "status": "manual",
+  "note": "334개 프롬프트를 작성자 원 게시물에서 원문 그대로 옮긴 모음 (CC BY 4.0, 출처 표기 필요). YAML 형식이라 sync.py 자동 동기화 대상이 아님 → discovery.md의 수동 반영 절차. yihui와 겹치지 않는 133개를 2026-10-03에 반영."
+ },
+ {
+  "id": "yihui",
+  "name": "yihui-dev/awesome-opus5-5-videos",
+  "type": "videos_json",
+  "repo": "yihui-dev/awesome-opus5-5-videos",
+  "branch": "main",
+  "path": "data/videos.json",
+  "prompt_url_tpl": "https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/{slug}.md",
+  "model": "Opus 5.5",
+  "status": "active",
+  "note": "메인 소스. X에 올라온 Opus 5.5 영상의 프롬프트 모음. 영상은 skillry.dev 링크."
+ }
+]
