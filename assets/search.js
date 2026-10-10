@@ -5,7 +5,9 @@
    - 각 검색어는 동의어 묶음(editorial.json synonyms)으로 넓힌다: 지도 → map, globe …
      한국어 조사(을·를·에 …)가 붙어도 묶음을 찾는다.
    - 영문 동의어는 단어 앞 경계에서만 맞춘다(map 이 bitmap 에 걸리지 않게).
-   - 점수: 편집 제목·검색어·용도 10 > 영문 제목·효과·장르 6 > 작성자 3 > 프롬프트 본문 1.
+   - 점수(검색어마다 가장 높은 곳 하나): 제목에 입력한 말 그대로 20 > 제목에 동의어 16 > 편집 검색어·설명 10
+     > 용도·효과 분류 같은 넓은 분류 4 > 작성자 3 > 프롬프트 본문 1.
+     넓은 분류(예: 용도 '지도·데이터 시각화', 효과 '데이터·지도')는 여러 작품을 한꺼번에 묶으므로 제목 일치보다 한참 뒤에 둔다.
      같은 점수 안에서는 호출한 쪽의 정렬을 그대로 둔다(정렬은 안정적이다). */
 
 import {FXN, CAT, LV} from './data.js';
@@ -53,9 +55,10 @@ export function prepare(r, uses) {
   const useTitles = (ed.uses || []).map(u => (uses && uses[u] && uses[u].title) || u);
   return {
     r,
+    title: normalize([ed.title_ko, r.title].filter(Boolean).join(' | ')),
     f: [
-      [10, normalize([ed.title_ko, ed.summary_ko, ...(ed.keywords || []), ...useTitles].filter(Boolean).join(' | '))],
-      [6, normalize([r.title, ...(r.fx || []).map(f => FXN[f] + ' ' + f), CAT[r.category], r.category, LV[r.level], ...(r.tech || [])].filter(Boolean).join(' | '))],
+      [10, normalize([ed.summary_ko, ...(ed.keywords || [])].filter(Boolean).join(' | '))],
+      [4, normalize([...useTitles, ...(r.fx || []).map(f => FXN[f] + ' ' + f), CAT[r.category], r.category, LV[r.level], ...(r.tech || [])].filter(Boolean).join(' | '))],
       [3, normalize('@' + (r.author || '') + ' ' + (r.author || ''))],
       [1, normalize(r.prompt)]
     ]
@@ -65,9 +68,9 @@ export function prepare(r, uses) {
 /* 0 이면 안 맞음. 아니면 점수. */
 export function score(p, terms) {
   let total = 0;
-  for (const alts of terms) {
+  for (const {term, alts} of terms) {
     const ms = alts.map(matcher);
-    let best = 0;
+    let best = matcher(term)(p.title) ? 20 : ms.some(m => m(p.title)) ? 16 : 0;
     for (const [w, text] of p.f) {
       if (w > best && ms.some(m => m(text))) best = w;
     }
@@ -78,7 +81,7 @@ export function score(p, terms) {
 }
 
 export function parseQuery(q, syn) {
-  return normalize(q).split(' ').filter(Boolean).map(t => expand(t, syn));
+  return normalize(q).split(' ').filter(Boolean).map(t => ({term: t, alts: expand(t, syn)}));
 }
 
 /* prepared 배열과 검색어 → 점수 높은 순(같으면 들어온 순서) */

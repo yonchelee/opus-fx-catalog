@@ -60,3 +60,26 @@ test('결과가 없는 검색어는 빈 배열', () => {
 test('빈 검색어는 전체를 그대로 순서대로', () => {
   assert.equal(hits('   ').length, items.length);
 });
+
+test('제목에 검색어가 있는 작품이 넓은 분류에만 걸린 작품보다 앞선다 (검토 지적: 지도)', () => {
+  const r = hits('지도');
+  const pos = id => r.findIndex(x => x.id === id);
+  const map = pos('yihui:groundcontrol-230877'), roas = pos('yihui:annacher-433425'), music = pos('yihui:twoclipping-402193');
+  assert.ok(map >= 0 && map < 3, `손그림 지도 ${map}위`);
+  assert.ok(roas === -1 || roas > map, `ROAS ${roas}위 · 지도 ${map}위`);
+  assert.ok(music === -1 || music > map, `음악 플레이어 ${music}위`);
+  const titleHit = x => /지도|\bmaps?\b|globe|geographic/i.test(((x.ed && x.ed.title_ko) || '') + ' ' + (x.title || ''));
+  const firstNon = r.findIndex(x => !titleHit(x));
+  assert.ok(r.slice(firstNon).every(x => !titleHit(x)), '제목 일치 작품이 모두 앞에 모여 있다');
+});
+
+test('입력한 말 그대로 일치가 동의어 일치보다 앞선다', () => {
+  const a = {id: 'x:syn', title: 'world globe spin', prompt: '', fx: [], author: 'a'};
+  const b = {id: 'x:exact', title: 'map reveal', prompt: '', fx: [], author: 'b'};
+  assert.deepEqual(search([prepare(a, {}), prepare(b, {})], 'map', syn).map(x => x.id), ['x:exact', 'x:syn']);
+});
+
+test('뜻이 갈리는 동의어로 엉뚱한 작품을 올리지 않는다 (geo ≠ 지리, SEO vs GEO)', () => {
+  const r = hits('지도').slice(0, 3).map(x => x.title || '');
+  assert.ok(!r.some(t => /SEO vs GEO/i.test(t)), r.join(' / '));
+});
