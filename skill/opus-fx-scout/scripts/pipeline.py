@@ -90,7 +90,8 @@ def main():
             ok = not [e for e in dl['errors'] if e.startswith('search:')]
             stages['discover'] = stage_status(stages, 'discover', ok, now,
                                               f"후보 {dl['counts']['new_candidates']} 새로 · 공개 {dl['counts']['published_new']} · 보류 {dl['counts']['held_new']}"
-                                              + (f" · 중단 {dl['stop']}" if dl['stop'] else ''))
+                                              + (f" · 중단 {dl['stop']}" if dl['stop'] else '')
+                                              + (f" · 확인 오류 {len([e for e in dl['errors'] if e.startswith('judge')])}건" if any(e.startswith('judge') for e in dl['errors']) else ''))
             stars_ok = dl['counts']['stars_failed'] == 0 and not [e for e in dl['errors'] if e.startswith('stars')]
             stages['stars'] = stage_status(stages, 'stars', stars_ok, now, f"별 기록 {dl['counts']['stars_updated']}")
             collected.append(ok)

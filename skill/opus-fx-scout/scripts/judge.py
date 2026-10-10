@@ -45,20 +45,27 @@ def readme_media(readme, full_name, branch):
     return None
 
 
+def host_of(url):
+    try:
+        return urlparse(url).netloc
+    except ValueError:  # README 의 깨진 주소
+        return ''
+
+
 def demo_url(repo, readme, cfg):
     hosts = cfg['demo_hosts']
     home = (repo.get('homepage') or '').strip()
-    if home.startswith('http') and any(urlparse(home).netloc.endswith(h) for h in hosts):
+    if home.startswith('http') and any(host_of(home).endswith(h) for h in hosts):
         return home
     for m in LINK.finditer(readme or ''):
         label, url = (m.group(1) or '').lower(), m.group(2) or m.group(3) or ''
         if not url or BADGE.search(url):
             continue
-        host = urlparse(url).netloc
+        host = host_of(url)
         if any(host.endswith(h) for h in hosts) and ('github.com' not in host):
             if re.search(r'demo|live|preview|try|play|view|site|open', label) or label == '' and 'github.io' in host:
                 return url.rstrip('.,')
-    return home if home.startswith('http') and 'github.com' not in home else None
+    return home if home.startswith('http') and host_of(home) and 'github.com' not in home else None
 
 
 def classify_repo(repo, readme, contents, cfg):
@@ -178,5 +185,8 @@ def decide(c, cfg, homepage_owner=None):
 def norm_url(u):
     if not u:
         return ''
-    p = urlparse(u.strip().lower())
+    try:
+        p = urlparse(u.strip().lower())
+    except ValueError:
+        return u.strip().lower()
     return (p.netloc.removeprefix('www.') + p.path).rstrip('/')

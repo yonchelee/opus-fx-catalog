@@ -242,6 +242,29 @@ class Discovery(Base):
         self.assertNotIn('gh:101', self.public())
         self.assertTrue(self.cands()['101']['reasons'][0].startswith('사람이 정함'))
 
+    def test_one_bad_candidate_does_not_stop_others(self):
+        bad = repo(108, 'bad-readme-effect', 'Broken readme shader effect demo', ['shader'], 50)
+        READMES['maker/bad-readme-effect'] = '[demo](http://[::1/x) ![p](p.gif)'
+        CONTENTS['maker/bad-readme-effect'] = ['index.html']
+        orig = judge.demo_url
+        def boom(repo, readme, cfg):
+            if repo['name'] == 'bad-readme-effect':
+                raise ValueError('Invalid IPv6 URL')
+            return orig(repo, readme, cfg)
+        judge.demo_url = boom
+        try:
+            log = self.run_once(FakeClient({'topic:shader': [bad, EFFECT]}, stars={'N101': node(101, 'aurora-shader', 40), 'N108': node(108, 'bad-readme-effect', 50)}))
+        finally:
+            judge.demo_url = orig
+        cs = self.cands()
+        self.assertEqual(cs['101']['status'], 'published', '다른 후보는 계속 처리')
+        self.assertEqual(cs['108'].get('judge_errors'), 1)
+        self.assertTrue(any('bad-readme-effect' in e for e in log['errors']))
+
+    def test_broken_url_in_readme_is_safe(self):
+        cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
+        self.assertIsNone(judge.demo_url({'homepage': 'http://[::1'}, '[live demo](http://[::1/x)', cfg))
+
     def test_editorial_untouched(self):
         before = (self.d / 'editorial.json').read_bytes()
         self.run_once(FakeClient({'topic:shader': [EFFECT]}, stars={'N101': node(101, 'aurora-shader', 40)}))

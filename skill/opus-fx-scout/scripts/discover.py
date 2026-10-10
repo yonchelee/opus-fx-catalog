@@ -210,58 +210,72 @@ class Run:
         todo.sort(key=lambda c: ({'published': 0, 'new': 1}.get(c.get('status'), 2), -(c.get('stars') or 0)))
         homes = {judge.norm_url(c.get('demo_url')): c['id'] for c in self.cands.values() if c.get('status') == 'published' and c.get('demo_url')}
         for c in todo:
-            was = c.get('status')
-            if not self.head_relevant(c) or c.get('fork'):
-                status, reasons = ('rejected', ['시각 효과와 관련 낮음 (이름·설명·주제)']) if not self.head_relevant(c) else ('held', ['포크 저장소'])
-                c.update(kind=c.get('kind') or 'unknown', relevant=False if status == 'rejected' else c.get('relevant'))
+            try:
+                self.judge_one(c, jc, homes)
+                c.pop('judge_errors', None)
+            except ghapi.Budget:
+                raise
+            except Exception as e:  # noqa: BLE001 — 후보 하나의 오류가 나머지를 막지 않게
+                c['judge_errors'] = c.get('judge_errors', 0) + 1
+                self.log['errors'].append(f"judge {c['full_name']}: {type(e).__name__}: {e}")
+                if c['judge_errors'] >= 3:
+                    c.update(status='held', reasons=[f'자동 확인 3회 실패 ({type(e).__name__}) — 사람 확인 필요'], last_checked=self.now,
+                             rules_version=jc.get('rules_version'))
+
+    def judge_one(self, c, jc, homes):
+        """후보 하나를 확인·판정한다. 오류는 호출한 쪽이 후보 단위로 받는다."""
+        was = c.get('status')
+        if not self.head_relevant(c) or c.get('fork'):
+            status, reasons = ('rejected', ['시각 효과와 관련 낮음 (이름·설명·주제)']) if not self.head_relevant(c) else ('held', ['포크 저장소'])
+            c.update(kind=c.get('kind') or 'unknown', relevant=False if status == 'rejected' else c.get('relevant'))
+        else:
+            readme = self.c.readme(c['full_name'])
+            contents = self.c.root_contents(c['full_name'])
+            self.log['counts']['enriched'] += 1
+            cl = judge.classify_repo(c, readme, contents, jc)
+            has_prompt, prompt_url = judge.prompt_info(readme, contents, c['full_name'], c.get('default_branch'))
+            level, env_text = judge.environment(c, contents, jc)
+            c.update(kind=cl['kind'], relevant=cl['relevant'], has_code=cl['has_code'], strong_topics=cl['strong_topics'],
+                     tool_words=cl['tool_words'], effect_words=cl['effect_words'],
+                     hits=cl['hits'], thumb=judge.readme_media(readme, c['full_name'], c.get('default_branch')),
+                     demo_url=judge.demo_url(c, readme, jc), has_prompt=has_prompt, prompt_url=prompt_url,
+                     level=level, env_text=env_text, ai_made=bool(re.search(r'\b(claude|opus|anthropic)\b', readme or '', re.I)))
+            dup = homes.get(judge.norm_url(c.get('demo_url')))
+            c['duplicate_of'] = dup if dup and dup != c['id'] else None
+            status, reasons = judge.decide(c, jc)
+        rv = self.cfg['judge'].get('rules_version')
+        if was == 'published' and status != 'published':
+            if c.get('rules_version') == rv:
+                # 같은 규칙인데 결과가 바뀜(별 감소·미리보기 일시 실패 등) — 한 번의 변동으로 내리지 않는다. 사유는 남긴다.
+                c['recheck'] = {'at': self.now, 'would_be': status, 'reasons': reasons}
+                status, reasons = 'published', c.get('reasons', reasons)
             else:
-                readme = self.c.readme(c['full_name'])
-                contents = self.c.root_contents(c['full_name'])
-                self.log['counts']['enriched'] += 1
-                cl = judge.classify_repo(c, readme, contents, jc)
-                has_prompt, prompt_url = judge.prompt_info(readme, contents, c['full_name'], c.get('default_branch'))
-                level, env_text = judge.environment(c, contents, jc)
-                c.update(kind=cl['kind'], relevant=cl['relevant'], has_code=cl['has_code'], strong_topics=cl['strong_topics'],
-                         tool_words=cl['tool_words'], effect_words=cl['effect_words'],
-                         hits=cl['hits'], thumb=judge.readme_media(readme, c['full_name'], c.get('default_branch')),
-                         demo_url=judge.demo_url(c, readme, jc), has_prompt=has_prompt, prompt_url=prompt_url,
-                         level=level, env_text=env_text, ai_made=bool(re.search(r'\b(claude|opus|anthropic)\b', readme or '', re.I)))
-                dup = homes.get(judge.norm_url(c.get('demo_url')))
-                c['duplicate_of'] = dup if dup and dup != c['id'] else None
-                status, reasons = judge.decide(c, jc)
-            rv = self.cfg['judge'].get('rules_version')
-            if was == 'published' and status != 'published':
-                if c.get('rules_version') == rv:
-                    # 같은 규칙인데 결과가 바뀜(별 감소·미리보기 일시 실패 등) — 한 번의 변동으로 내리지 않는다. 사유는 남긴다.
-                    c['recheck'] = {'at': self.now, 'would_be': status, 'reasons': reasons}
-                    status, reasons = 'published', c.get('reasons', reasons)
-                else:
-                    # 판정 규칙이 고쳐졌다 — 잘못 공개된 작품을 내린다. 기록은 남긴다.
-                    c['withdrawn'] = {'at': self.now, 'from_rules': c.get('rules_version'), 'to_rules': rv, 'reasons': reasons}
-                    self.log['counts']['withdrawn'] = self.log['counts'].get('withdrawn', 0) + 1
-            else:
-                c.pop('recheck', None)
-            c['rules_version'] = rv
-            if status != was:
-                c['status_since'] = self.now
-                if was in ('new', None):
-                    self.log['counts'][{'published': 'published_new', 'held': 'held_new', 'source': 'source_new', 'rejected': 'rejected_new'}[status]] += 1
-                elif status == 'published':
-                    self.log['counts']['published_new'] += 1
-                    if c.get('duplicate_of'):
-                        self.log['counts']['duplicates'] += 1
-            ov = self.overrides.get(c['id'])
-            if ov and ov.get('status') in ('held', 'published'):
-                # 사람이 정한 값이 자동 판정보다 우선한다
-                status, reasons = ov['status'], ['사람이 정함: ' + (ov.get('reason') or '')] + ([f'자동 판정은 {status}'] if status != ov['status'] else [])
-            c['status'], c['reasons'], c['last_checked'] = status, reasons, self.now
-            xs = self.xmap.get(c['full_name'].lower())
-            c['x_ids'] = sorted(xs) if xs else []
-            if status == 'published':
-                if c['id'] not in homes.values() and c.get('demo_url'):
-                    homes[judge.norm_url(c['demo_url'])] = c['id']
-                c['preview_ok'] = self.head_ok(c.get('thumb'))
-                c['demo_ok'] = self.head_ok(c.get('demo_url'))
+                # 판정 규칙이 고쳐졌다 — 잘못 공개된 작품을 내린다. 기록은 남긴다.
+                c['withdrawn'] = {'at': self.now, 'from_rules': c.get('rules_version'), 'to_rules': rv, 'reasons': reasons}
+                self.log['counts']['withdrawn'] = self.log['counts'].get('withdrawn', 0) + 1
+        else:
+            c.pop('recheck', None)
+        c['rules_version'] = rv
+        if status != was:
+            c['status_since'] = self.now
+            if was in ('new', None):
+                self.log['counts'][{'published': 'published_new', 'held': 'held_new', 'source': 'source_new', 'rejected': 'rejected_new'}[status]] += 1
+            elif status == 'published':
+                self.log['counts']['published_new'] += 1
+                if c.get('duplicate_of'):
+                    self.log['counts']['duplicates'] += 1
+        ov = self.overrides.get(c['id'])
+        if ov and ov.get('status') in ('held', 'published'):
+            # 사람이 정한 값이 자동 판정보다 우선한다
+            status, reasons = ov['status'], ['사람이 정함: ' + (ov.get('reason') or '')] + ([f'자동 판정은 {status}'] if status != ov['status'] else [])
+        c['status'], c['reasons'], c['last_checked'] = status, reasons, self.now
+        xs = self.xmap.get(c['full_name'].lower())
+        c['x_ids'] = sorted(xs) if xs else []
+        if status == 'published':
+            if c['id'] not in homes.values() and c.get('demo_url'):
+                homes[judge.norm_url(c['demo_url'])] = c['id']
+            c['preview_ok'] = self.head_ok(c.get('thumb'))
+            c['demo_ok'] = self.head_ok(c.get('demo_url'))
 
     def head_ok(self, url):
         """미리보기·데모 링크가 열리는지만 본다. 열린다고 재현 성공이 아니다."""
