@@ -110,9 +110,11 @@ function buildIndex() {
 function featured() {
   return DATA.filter(r => r.ed && r.ed.featured).sort((a, b) => (a.ed.featured_rank || 99) - (b.ed.featured_rank || 99));
 }
+/* 검색·필터 중에는 대표 효과를 접어 결과가 검색창 바로 아래 오게 한다. */
+const narrowing = () => !!(S.q || S.use || S.fx.size || S.cat || S.lv || S.full || S.vid || S.fav);
 function buildFeatured() {
   const f = featured();
-  $('featured').hidden = !f.length;
+  $('featured').hidden = !f.length || narrowing();
   FAVS = new Set(favs());
   $('fgrid').innerHTML = f.slice(0, 6).map(r => card(r)).join('');
   $('ft-all').hidden = f.length <= 6;
@@ -198,7 +200,9 @@ function render() {
   FAVS = new Set(favs());
   rows = filtered();
   activeChips();
-  $('count').textContent = `${rows.length} / ${DATA.length}`;
+  $('featured').hidden = !featured().length || narrowing();
+  $('all-h').textContent = S.q ? `‘${S.q}’ 검색 결과` : S.pick ? '추천 후보' : narrowing() ? '조건에 맞는 효과' : '전체 효과';
+  $('count').textContent = narrowing() || S.pick ? `${rows.length}개 · 전체 ${DATA.length}` : `${rows.length} / ${DATA.length}`;
   $('grid').innerHTML = '';
   if (!rows.length && S.fav && !favs().length) {
     status('<h3>아직 즐겨찾기한 작품이 없습니다</h3><p>작품을 열고 ☆ 즐겨찾기를 누르면 여기에 모입니다. 즐겨찾기는 이 브라우저에만 저장됩니다.</p><div class="row"><button type="button" data-fix="all">전체 작품 보기</button></div>');

@@ -55,6 +55,8 @@ try {
     await p.fill('#q', '지도'); await p.waitForTimeout(150);
     const n = parseInt(await p.textContent('#count'));
     ok('한국어 검색 "지도" 결과 있음', n > 5, `${n}건`);
+    ok('검색 중에는 대표 효과를 접음', await p.locator('#featured').isHidden());
+    ok('검색 결과 제목', (await p.textContent('#all-h')).includes('‘지도’ 검색 결과'));
     ok('검색어가 주소에 남음', new URL(p.url()).searchParams.get('q') === '지도');
     ok('켜진 조건 칩', await p.locator('.chipx').count() === 1);
     const titles = await p.$$eval('#grid .card .title', e => e.slice(0, 40).map(x => x.textContent).join(' '));
@@ -70,6 +72,7 @@ try {
     ok('주소에 fx 반영', new URL(p.url()).searchParams.get('fx') === '3d,shader');
     await p.click('#clearall'); await p.waitForTimeout(100);
     ok('전체 해제', await p.locator('.chipx').count() === 0);
+    ok('조건을 모두 풀면 대표 효과가 다시 보임', await p.locator('#featured').isVisible());
     await p.close();
   }
 
@@ -208,6 +211,13 @@ try {
       ok(`${name}/${scheme}: 대표 효과가 1.5화면 안`, m.ft < m.vh * 1.5, `${Math.round(m.ft)} / ${m.vh}`);
       ok(`${name}/${scheme}: 조작 요소 44px 이상`, m.small.length === 0, m.small.slice(0, 4).join(','));
       await p.screenshot({path: `${OUT}/${name}-${scheme}-1-open.png`});
+      if (name === 'phone' && scheme === 'light') {
+        await p.fill('#q', '지도'); await p.press('#q', 'Enter'); await p.waitForTimeout(400);
+        const [top, vh] = await p.evaluate(() => [document.querySelector('#grid .card').getBoundingClientRect().top, innerHeight]);
+        ok('폰: 검색하면 첫 결과가 바로 보임', top >= 0 && top < vh * 0.75, `${Math.round(top)} / ${vh}`);
+        await p.screenshot({path: `${OUT}/phone-search.png`});
+        await p.goto(BASE, {waitUntil: 'networkidle'}); await ready(p);
+      }
       const c = p.locator('#fgrid .card').first();
       if (touch) await c.tap(); else await c.click();
       await p.waitForTimeout(500);
