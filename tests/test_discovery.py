@@ -234,6 +234,14 @@ class Discovery(Base):
         self.assertIn('withdrawn', c)
         self.assertEqual(log['counts'].get('withdrawn'), 1)
 
+    def test_human_override_wins(self):
+        ed = json.loads((self.d / 'editorial.json').read_text())
+        ed['discovery_overrides'] = {'items': {'gh:101': {'status': 'held', 'reason': '라이브러리'}}}
+        (self.d / 'editorial.json').write_text(json.dumps(ed))
+        self.run_once(FakeClient({'topic:shader': [EFFECT]}, stars={'N101': node(101, 'aurora-shader', 40)}))
+        self.assertNotIn('gh:101', self.public())
+        self.assertTrue(self.cands()['101']['reasons'][0].startswith('사람이 정함'))
+
     def test_editorial_untouched(self):
         before = (self.d / 'editorial.json').read_bytes()
         self.run_once(FakeClient({'topic:shader': [EFFECT]}, stars={'N101': node(101, 'aurora-shader', 40)}))
@@ -312,6 +320,13 @@ class JudgeUnits(unittest.TestCase):
                                    ('stable-diffusion-docker', 'Run the official Stable Diffusion releases in a Docker container', ['generative-art']),
                                    ('drawsvg', 'Programmatically generate SVG (vector) images, animations, and interactive Jupyter widgets', ['animation'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'Python'}, '', ['index.html'], cfg)['kind'], 'library', name)
+        for name, desc, topics in [('aurora', 'A source-level GameCube & Wii compatibility layer', ['graphics']),
+                                   ('livecanvas', '一句话做成 Live 图。Turn a sentence into a Live Photo with animation', ['animation']),
+                                   ('ossos', 'Webbased Character Animation System', ['animation', 'webgl']),
+                                   ('creative-viewpager', 'Creative View Pager easy to use in Android', ['animation']),
+                                   ('podcast-maker', 'Fully automated video maker using motion graphics', ['motion-graphics'])]:
+            self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
+        self.assertEqual(judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': '', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[0], 'held', '설명 없음')
         self.assertEqual(judge.classify_repo({'name': 'portfolio', 'description': 'Personal portfolio (2018)', 'topics': ['threejs', 'animation'], 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'app')
         for name, desc, topics in [('fieldplay', 'A vector field explorer', ['glsl', 'particles', 'webgl']),
                                    ('HologramShader', 'Test of an hologram material made in Unity.', ['effect', 'shader'])]:

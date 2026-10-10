@@ -67,6 +67,8 @@ class Run:
                                               'source_new', 'rejected_new', 'duplicates', 'stars_updated', 'stars_failed',
                                               'renamed', 'gone', 'truncated_windows')}}
         self.xmap = self._x_links()
+        ed = read_json(self.root / 'editorial.json', {})
+        self.overrides = ((ed.get('discovery_overrides') or {}).get('items')) or {}
 
     # ---------- 공통 ----------
     def _x_links(self):
@@ -248,6 +250,10 @@ class Run:
                     self.log['counts']['published_new'] += 1
                     if c.get('duplicate_of'):
                         self.log['counts']['duplicates'] += 1
+            ov = self.overrides.get(c['id'])
+            if ov and ov.get('status') in ('held', 'published'):
+                # 사람이 정한 값이 자동 판정보다 우선한다
+                status, reasons = ov['status'], ['사람이 정함: ' + (ov.get('reason') or '')] + ([f'자동 판정은 {status}'] if status != ov['status'] else [])
             c['status'], c['reasons'], c['last_checked'] = status, reasons, self.now
             xs = self.xmap.get(c['full_name'].lower())
             c['x_ids'] = sorted(xs) if xs else []
@@ -302,7 +308,8 @@ class Run:
         out = []
         tc = self.cfg['trend']
         for c in sorted(self.cands.values(), key=lambda c: c['first_seen']):
-            if c.get('status') != 'published':
+            ov = self.overrides.get(c['id'])
+            if (ov.get('status') if ov else c.get('status')) != 'published':
                 continue
             t = popularity.trend(self.stars.get(str(c['repo_id'])), self.now, tc)
             fx, _, _ = classify(' '.join([c.get('name') or '', c.get('description') or ''] + c.get('topics', [])), [])

@@ -1386,5 +1386,9 @@
     "status": "unverified"
    }
   }
+ },
+ "discovery_overrides": {
+  "about": "GitHub 자동 판정을 사람이 바로잡는 곳. 키는 gh:<저장소 번호>. status 는 held(공개에서 뺌) 또는 published(공개). 자동 판정은 이 값을 덮어쓰지 않는다.",
+  "items": {}
  }
 }
