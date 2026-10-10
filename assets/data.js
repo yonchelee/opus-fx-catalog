@@ -71,9 +71,28 @@ function rulesOf(uses) {
 }
 export function usesOf(r, uses) {
   if (r.ed && r.ed.uses && r.ed.uses.length) return r.ed.uses;
-  const text = (r.title || '') + ' ' + (r.prompt || '');
+  const text = (r.title || '') + ' ' + (r.prompt || '') + ' ' + (r.desc || '') + ' ' + (r.topics || []).join(' ');
   return rulesOf(uses).filter(u =>
     (u.re && u.re.test(text)) || u.fx.some(f => (r.fx || []).includes(f)) ||
-    (u.level.length && u.level.includes(levelOf(r)) && (!u.full || !r.partial))
+    (u.level.length && !isGH(r) && u.level.includes(levelOf(r)) && (!u.full || !r.partial))
   ).map(u => u.k);
+}
+
+/* ---------- GitHub 작품·정렬 ---------- */
+export const KIND = {effect: '개별 효과', collection: '예제 모음', library: '라이브러리', list: '자료집'};
+export const CHECK = {discovered: '자동 발굴', preview: '미리보기 확인'};
+export const isGH = r => r.src === 'gh';
+export const repoStars = r => (r.repo && r.repo.stars != null ? r.repo.stars : null);
+
+/* 정렬. 대상이 다른 인기 지표(X 좋아요 = 게시물, 저장소 별 = 저장소)는 섞어 합산하지 않는다.
+   각 정렬은 그 지표가 없는 작품을 뒤로 보낸다(0 으로 치지 않는다). 같으면 들어온 순서(안정 정렬).
+   trend: 비교 기간을 채운 저장소만(r.trend). 나머지는 뒤에 '집계 중'. */
+export const SORTS = {
+  likes: (a, b) => (b.likes ?? -1) - (a.likes ?? -1),
+  stars: (a, b) => (repoStars(b) ?? -1) - (repoStars(a) ?? -1),
+  trend: (a, b) => ((b.trend && b.trend.delta) ?? -Infinity) - ((a.trend && a.trend.delta) ?? -Infinity),
+  new: (a, b) => (b.first_seen || b.added || '').localeCompare(a.first_seen || a.added || '')
+};
+export function sortRows(rows, mode) {
+  return SORTS[mode] ? rows.slice().sort(SORTS[mode]) : rows.slice();
 }

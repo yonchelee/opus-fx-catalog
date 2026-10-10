@@ -61,7 +61,7 @@ export function prepare(r, uses) {
     title: normalize([ed.title_ko, r.title].filter(Boolean).join(' | ')),
     author: normalize(r.author).replace(/^@/, ''),
     f: [
-      [10, normalize([ed.summary_ko, ...(ed.keywords || [])].filter(Boolean).join(' | '))],
+      [10, normalize([ed.summary_ko, ...(ed.keywords || []), r.desc, ...(r.topics || []).map(t => t.replace(/-/g, ' '))].filter(Boolean).join(' | '))],
       [1, normalize([...useTitles, ...(r.fx || []).map(f => FXN[f] + ' ' + f), CAT[r.category], r.category, LV[r.level], ...(r.tech || [])].filter(Boolean).join(' | '))],
       [2, normalize(r.prompt)]
     ]

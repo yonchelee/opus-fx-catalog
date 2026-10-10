@@ -37,6 +37,7 @@
   <span class="kicker">Made with Claude · <span id="total">646</span> works</span>
   <h1>보고 고르는 AI 모션·인터랙션<i>.</i></h1>
   <p>원하는 효과를 찾고, 프롬프트와 적용 방법을 확인하세요.</p>
+  <p class="fresh" id="fresh"></p>
 </header>
 
 <form class="find" id="find" role="search" action="./">
@@ -57,12 +58,22 @@
   <div class="fgrid" id="fgrid"></div>
 </section>
 
+<section class="featured" id="recent" aria-labelledby="rc-h" hidden>
+  <div class="sec"><h2 id="rc-h">최근 발견</h2><span>카탈로그에 새로 들어온 작품 (발견일 기준, 공개일과 다를 수 있음)</span><button type="button" class="linkish" id="rc-all">최근 발견 모두 보기</button></div>
+  <div class="fgrid" id="rgrid"></div>
+</section>
+
+<section class="featured" id="rising" aria-labelledby="rs-h" hidden>
+  <div class="sec"><h2 id="rs-h">최근 상승</h2><span id="rs-note">GitHub 저장소 별이 지난 7일 동안 많이 늘어난 순</span><button type="button" class="linkish" id="rs-all">최근 상승 모두 보기</button></div>
+  <div class="fgrid" id="sgrid"></div>
+</section>
+
 <section class="all" id="all" aria-labelledby="all-h">
   <div class="sec"><h2 id="all-h">전체 효과</h2><span id="count" class="count" aria-live="polite"></span></div>
   <div class="tools">
     <label class="sortlab"><span class="sr">정렬</span>
       <select id="sort">
-        <option value="rel">관련도순</option><option value="likes">X 좋아요 많은 순</option><option value="new">최근 수집순</option>
+        <option value="rel">관련도순</option><option value="likes">X 좋아요 많은 순</option><option value="stars">GitHub 별 많은 순</option><option value="trend">최근 상승 (GitHub 별 7일)</option><option value="new">최근 발견</option>
       </select>
     </label>
     <button type="button" class="ftoggle" id="ftoggle" aria-expanded="false" aria-controls="filters">상세 필터<span id="fcount"></span></button>
@@ -73,6 +84,7 @@
       <div class="index" id="index"></div>
     </fieldset>
     <div class="selects">
+      <label>출처<select id="src"><option value="">전체</option><option value="x">X 게시물</option><option value="gh">GitHub 저장소</option></select></label>
       <label>장르<select id="cat"><option value="">전체</option><option value="motion">모션그래픽</option><option value="explainer">설명 영상</option><option value="3d">3D 씬</option><option value="interactive">게임·인터랙티브</option></select></label>
       <label>실행 환경<select id="lv"><option value="">전체</option><option value="1">채팅에서 바로</option><option value="2">Claude Code까지</option><option value="0">환경 확인 필요</option></select></label>
       <label>프롬프트<select id="full"><option value="">전체</option><option value="1">전체 공개만</option></select></label>
@@ -80,6 +92,7 @@
       <label class="check"><input type="checkbox" id="fav"> 즐겨찾기만</label>
     </div>
   </div>
+  <p class="note" id="sortnote" hidden></p>
   <div class="active" id="active" aria-live="polite"></div>
   <div class="status" id="status" role="status"></div>
   <div class="grid" id="grid"></div>

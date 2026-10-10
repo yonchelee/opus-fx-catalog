@@ -6,7 +6,28 @@ export const ENVS = {
   code: 'Claude Code 로 만드는 프로젝트 파일 (실행 방법까지 알려 주기)',
   video: 'MP4 영상 파일로 내보낼 수 있는 구성 (Remotion 등, 렌더링 명령까지 알려 주기)'
 };
+/* GitHub 코드 기반 작품: 원본 프롬프트가 없다. 저장소 주소·구현할 효과·실행 환경을 담고, 프롬프트를 지어내지 않는다. */
+function buildRepoRequest(r, o, uses) {
+  const g = (r.ed && r.ed.guide) || {}, repo = r.repo || {};
+  const effect = g.brief || [r.desc || r.title, (r.topics || []).length ? `(주제: ${r.topics.slice(0, 8).join(', ')})` : ''].filter(Boolean).join(' ');
+  return [
+    '다음 GitHub 저장소의 효과를 참고해서 내 용도에 맞게 새로 만들어 주세요.', '',
+    `[참고한 저장소] ${repo.url || ''}${repo.license ? ` (라이선스 ${repo.license})` : ' (라이선스 표시 없음)'}`,
+    `[구현할 효과] ${effect}`,
+    `[원본 실행 환경] ${r.env_text || '저장소 README 참고'}`,
+    `(원작자 @${r.author}. 이 작품은 프롬프트가 아니라 코드로 공개됐습니다.)`, '',
+    `[내 용도] ${o.use || (uses[0] ? uses[0] : '자유롭게 정해 주세요')}`,
+    `[들어갈 문구] ${o.text || '임의로 정해 주세요'}`,
+    `[색상] ${o.color || '원본 분위기를 유지해 주세요'}`,
+    `[실행 환경] ${ENVS[o.env] || ENVS.chat}`, '',
+    '[조건]',
+    '- 저장소의 구현 방식을 참고하되, 코드를 그대로 옮길 때는 라이선스 조건과 출처 표기를 지켜 주세요.',
+    '- 문구·색상·크기·속도처럼 바꾸기 쉬운 값은 맨 위에 변수로 모아 주세요.',
+    '- 움직임 줄이기 설정(prefers-reduced-motion)에서는 정지 화면이나 단순한 전환을 보여 주세요.'
+  ].join('\n');
+}
 export function buildRequest(r, o, uses) {
+  if (r.src === 'gh') return buildRepoRequest(r, o, uses);
   const ed = r.ed || {}, g = ed.guide || {};
   const ref = g.brief || [titleOf(r), r.fx.filter(f => f !== 'etc').map(f => FXN[f]).join(', ')].filter(Boolean).join(' — ');
   const lines = [

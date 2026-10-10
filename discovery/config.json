@@ -1,0 +1,53 @@
+{
+ "about": "GitHub 신규 후보 발굴 설정. 검색어·흐름·예산·판정 기준을 여기서만 바꾼다. 날짜·별 조건은 흐름이 붙인다(검색어에는 넣지 않는다).",
+ "queries": [
+  {"id": "t-shader", "q": "topic:shader"},
+  {"id": "t-glsl", "q": "topic:glsl"},
+  {"id": "t-webgl", "q": "topic:webgl"},
+  {"id": "t-webgpu", "q": "topic:webgpu"},
+  {"id": "t-threejs", "q": "topic:threejs"},
+  {"id": "t-gsap", "q": "topic:gsap"},
+  {"id": "t-svg-animation", "q": "topic:svg-animation"},
+  {"id": "t-css-animation", "q": "topic:css-animation"},
+  {"id": "t-generative-art", "q": "topic:generative-art"},
+  {"id": "t-creative-coding", "q": "topic:creative-coding"},
+  {"id": "t-motion-graphics", "q": "topic:motion-graphics"},
+  {"id": "t-remotion", "q": "topic:remotion"},
+  {"id": "t-p5js", "q": "topic:p5js"},
+  {"id": "t-particles", "q": "topic:particles"},
+  {"id": "t-raymarching", "q": "topic:raymarching"},
+  {"id": "k-motion-graphics", "q": "\"motion graphics\" in:name,description"},
+  {"id": "k-animation-demo", "q": "\"animation demo\" in:name,description"},
+  {"id": "k-shader-demo", "q": "\"shader\" \"demo\" in:name,description"},
+  {"id": "k-text-effect", "q": "\"text effect\" in:name,description"},
+  {"id": "k-scroll-animation", "q": "\"scroll animation\" in:name,description"},
+  {"id": "k-webgl-effect", "q": "webgl effect in:name,description"},
+  {"id": "k-made-with-claude", "q": "\"made with claude\" animation in:readme"}
+ ],
+ "flows": {
+  "popular": {"about": "누적 별이 많은 관련 저장소", "stars": ">=300", "sort": "stars", "pages": 1, "queries_per_run": {"daily": 3, "weekly": 22}},
+  "new": {"about": "최근 생성된 새 저장소. 별 하한을 높이지 않는다", "stars": ">=1", "sort": "stars", "first_window_days": 14, "max_window_split_depth": 6},
+  "updated": {"about": "최근 갱신된 기존 저장소", "stars": ">=30", "sort": "updated", "pages": 1},
+  "backfill": {"about": "매주: 생성일 구간을 과거로 넓혀 간다", "stars": ">=5", "sort": "stars", "step_days": 30, "windows_per_query": 1, "oldest": "2015-01-01"}
+ },
+ "budget": {
+  "daily": {"search": 75, "core": 350, "graphql": 30, "minutes": 20},
+  "weekly": {"search": 220, "core": 700, "graphql": 30, "minutes": 40},
+  "search_interval_seconds": 2.2,
+  "max_wait_seconds": 90
+ },
+ "judge": {
+  "min_stars_publish": 3,
+  "enrich_stale_days": 14,
+  "strong_topics": ["shader", "shaders", "glsl", "webgl", "webgl2", "webgpu", "threejs", "three-js", "gsap", "generative-art", "creative-coding", "motion-graphics", "remotion", "svg-animation", "css-animation", "p5js", "p5-js", "particles", "particle-system", "demoscene", "shadertoy", "raymarching", "lottie", "canvas-animation", "animation", "vfx", "fluid-simulation", "text-effects"],
+  "vocab": ["shader", "glsl", "webgl", "webgpu", "three.js", "threejs", "gsap", "svg animation", "animation", "animated", "motion", "generative", "creative coding", "p5.js", "canvas", "particle", "remotion", "lottie", "framer motion", "raymarch", "demoscene", "visual effect", "vfx", "fluid", "text effect", "scroll", "transition", "kinetic", "glitch", "noise", "procedural"],
+  "list_words": ["awesome", "curated list", "list of", "resources", "collection of links", "roadmap", "cheatsheet", "interview"],
+  "library_words": ["library", "framework", "engine", "toolkit", "sdk", "plugin", "renderer", "npm package", "component library", "components for", "react hooks", "bindings", "wrapper", "cli"],
+  "library_topics": ["library", "framework", "npm", "npm-package", "plugin", "sdk", "component-library", "react-component", "vue-component", "game-engine", "rendering-engine", "javascript-library", "typescript-library"],
+  "collection_words": ["collection", "examples", "experiments", "demos", "sketches", "playground", "gallery", "showcase", "daily", "100 days", "challenge", "codevember", "genuary"],
+  "demo_hosts": ["github.io", "vercel.app", "netlify.app", "codepen.io", "codesandbox.io", "stackblitz.com", "glitch.me", "shadertoy.com", "openprocessing.org", "pages.dev", "web.app", "surge.sh"],
+  "native_languages": ["C#", "C++", "C", "Rust", "Swift", "Kotlin", "Java", "GDScript", "HLSL", "ShaderLab", "Objective-C"],
+  "native_topics": ["unity", "unity3d", "blender", "unreal-engine", "godot", "touchdesigner", "houdini", "openframeworks", "processing"]
+ },
+ "trend": {"window_days": 7, "max_window_days": 10, "min_delta": 5, "min_stars": 20, "keep_points": 180}
+}

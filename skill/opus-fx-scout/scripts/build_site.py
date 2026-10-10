@@ -19,6 +19,9 @@ def load(root):
     root = Path(root)
     cat = json.loads((root / 'catalog.json').read_text())
     ed = json.loads((root / 'editorial.json').read_text())
+    gh = root / 'github.json'  # discover.py 가 만드는 GitHub 공개 작품. 편집 정보는 이것에도 붙을 수 있다
+    if gh.exists():
+        cat = dict(cat, items=cat['items'] + json.loads(gh.read_text()).get('items', []))
     return cat, ed
 
 

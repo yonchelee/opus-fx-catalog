@@ -52,6 +52,9 @@ button{font:inherit;color:inherit}
 .hero h1{font-size:clamp(26px,4.4vw,44px);font-weight:800;line-height:1.12;letter-spacing:-.035em;margin:6px 0 0;text-wrap:balance}
 .hero h1 i{font-style:normal;color:var(--yl-accent)}
 .hero p{margin:6px 0 0;color:var(--yl-ink-2);font-size:clamp(14.5px,1.6vw,17px)}
+.hero .fresh{font-size:12.5px;color:var(--yl-ink-3);margin-top:4px}
+.hero .fresh:empty{display:none}
+.warnline{color:var(--yl-accent);font-weight:700}
 
 /* 검색 */
 .find{display:flex;margin-top:16px;max-width:760px;border:var(--yl-bw) solid var(--yl-line);box-shadow:var(--yl-shadow);background:var(--yl-bg-elev)}

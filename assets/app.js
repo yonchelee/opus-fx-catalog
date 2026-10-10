@@ -1,6 +1,6 @@
 /* 효과 갤러리 화면. 상태(검색어·용도·필터·정렬)를 하나로 두고, 바뀔 때마다 화면과 주소를 함께 고친다.
    데이터 병합: data.js · 검색: search.js · 생성 페이지: skill/opus-fx-scout/scripts/pages.py */
-import {FX, FXN, CAT, LV, LV_LONG, NEED, VERIFY, mergeEditorial, usesOf, verifyOf, levelOf, titleOf, fmtLikes, itemPath, SITE} from './data.js';
+import {FX, FXN, CAT, LV, LV_LONG, NEED, VERIFY, mergeEditorial, usesOf, verifyOf, levelOf, titleOf, fmtLikes, itemPath, SITE, KIND, CHECK, isGH, repoStars, sortRows} from './data.js';
 import {synonymIndex, prepare, search} from './search.js';
 import {buildRequest} from './apply.js';
 import {shareLink, favs, toggleFav} from './store.js';
@@ -27,7 +27,8 @@ $('theme').onclick = () => {
 let DATA = [], PREP = [], ED = {uses: {}}, SYN = new Map();
 const BYID = new Map();
 let rows = [], shown = 0;
-const S = {q: '', use: '', fx: new Set(), sort: '', cat: '', lv: '', full: '', vid: '', fav: '', pick: null};
+const S = {q: '', use: '', fx: new Set(), sort: '', src: '', cat: '', lv: '', full: '', vid: '', fav: '', pick: null};
+let STATUS = {};
 
 /* ---------- 주소 ↔ 상태 ---------- */
 function readURL() {
@@ -35,7 +36,8 @@ function readURL() {
   S.q = p.get('q') || '';
   S.use = ED.uses[p.get('use')] ? p.get('use') : '';
   S.fx = new Set((p.get('fx') || '').split(',').filter(f => FXN[f]));
-  S.sort = ['rel', 'likes', 'new'].includes(p.get('sort')) ? p.get('sort') : '';
+  S.sort = ['rel', 'likes', 'stars', 'trend', 'new'].includes(p.get('sort')) ? p.get('sort') : '';
+  S.src = ['x', 'gh'].includes(p.get('src')) ? p.get('src') : '';
   S.cat = CAT[p.get('cat')] ? p.get('cat') : '';
   S.lv = ['0', '1', '2'].includes(p.get('lv')) ? p.get('lv') : '';
   S.full = p.get('full') === '1' ? '1' : '';
@@ -51,7 +53,7 @@ function stateQuery() {
   if (S.use) p.set('use', S.use);
   if (S.fx.size) p.set('fx', [...S.fx].join(','));
   if (S.sort) p.set('sort', S.sort);
-  for (const k of ['cat', 'lv', 'full', 'vid', 'fav']) if (S[k]) p.set(k, S[k]);
+  for (const k of ['src', 'cat', 'lv', 'full', 'vid', 'fav']) if (S[k]) p.set(k, S[k]);
   return p;
 }
 function writeURL() {
@@ -65,17 +67,21 @@ function load() {
   status('<p>작품 목록을 불러오는 중입니다…</p>');
   Promise.all([
     fetch('catalog.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-    fetch('editorial.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
-  ]).then(([cat, ed]) => {
+    fetch('editorial.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
+    /* GitHub 작품·수집 상태는 없거나 못 받아도 X 목록은 보여 준다 */
+    fetch('github.json').then(r => r.ok ? r.json() : {items: []}).catch(() => ({items: [], failed: true})),
+    fetch('status.json', {cache: 'no-store'}).then(r => r.ok ? r.json() : {}).catch(() => ({}))
+  ]).then(([cat, ed, gh, st]) => {
     ED = {uses: {}, items: {}, ...ed};
+    STATUS = st || {};
     SYN = synonymIndex(ED.synonyms);
-    DATA = mergeEditorial(cat.items, ED).items
+    DATA = mergeEditorial(cat.items.concat(gh.items || []), ED).items
       .sort((a, b) => (b.added || '').localeCompare(a.added || '') || a.id.localeCompare(b.id));
     DATA.forEach(r => { r._level = levelOf(r, ED.level_check); r._uses = usesOf(r, ED.uses); BYID.set(r.id, r); if (!BYID.has(r.slug)) BYID.set(r.slug, r); });
     PREP = DATA.map(r => prepare(r, ED.uses));
     $('total').textContent = DATA.length;
     status('');
-    readURL(); syncControls(); buildUses(); buildIndex(); buildFeatured(); render();
+    readURL(); syncControls(); buildUses(); buildIndex(); buildFeatured(); buildRecent(); freshness(gh); render();
     openFromURL();
     document.dispatchEvent(new Event('fx:ready'));
   }).catch(() => {
@@ -87,7 +93,7 @@ function load() {
 /* ---------- 컨트롤 ---------- */
 function syncControls() {
   $('q').value = S.q; syncSort();
-  for (const k of ['cat', 'lv', 'full', 'vid']) $(k).value = S[k];
+  for (const k of ['src', 'cat', 'lv', 'full', 'vid']) $(k).value = S[k];
   $('fav').checked = !!S.fav;
   document.body.classList.toggle('picking', !!S.pick);
   $('pickbar').classList.toggle('on', !!S.pick);
@@ -118,7 +124,7 @@ function featured() {
   return DATA.filter(r => r.ed && r.ed.featured).sort((a, b) => (a.ed.featured_rank || 99) - (b.ed.featured_rank || 99));
 }
 /* 검색·필터 중에는 대표 효과를 접어 결과가 검색창 바로 아래 오게 한다. */
-const narrowing = () => !!(S.q || S.use || S.fx.size || S.cat || S.lv || S.full || S.vid || S.fav);
+const narrowing = () => !!(S.q || S.use || S.fx.size || S.src || S.cat || S.lv || S.full || S.vid || S.fav);
 function buildFeatured() {
   const f = featured();
   $('featured').hidden = !f.length || narrowing();
@@ -127,6 +133,29 @@ function buildFeatured() {
   $('ft-all').hidden = f.length <= 6;
 }
 
+/* 최근 발견: 카탈로그에 새로 들어온 순(발견일). 누적 인기작에 묻히지 않게 따로 보여 준다.
+   최근 상승: 비교 기간(7일)을 채운 저장소가 3개 이상일 때만. */
+const rising = () => sortRows(DATA.filter(r => r.trend), 'trend');
+function buildRecent() {
+  const quiet = narrowing() || !!S.pick;
+  const rec = sortRows(DATA, 'new').slice(0, 6), ris = rising();
+  $('recent').hidden = quiet || !rec.length;
+  $('rgrid').innerHTML = rec.map(r => card(r)).join('');
+  $('rising').hidden = quiet || ris.length < 3;
+  $('sgrid').innerHTML = ris.slice(0, 6).map(r => card(r)).join('');
+}
+const when = ts => ts ? new Date(ts).toLocaleString('ko-KR', {month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'}) : '';
+/* 마지막 수집 성공 시각. 실패했는데 최신 자료처럼 보이지 않게 실패를 따로 적는다. */
+function freshness(gh) {
+  const st = STATUS.stages || {}, parts = [];
+  for (const [k, name] of [['sync', '출처 동기화'], ['discover', 'GitHub 탐색']]) {
+    const s = st[k]; if (!s) continue;
+    if (s.ok) parts.push(`${name} ${when(s.last_success)} 성공`);
+    else parts.push(`<b class="warnline">${name} 최근 실패(${when(s.last_attempt)})${s.last_success ? ` — ${when(s.last_success)} 자료 기준` : ''}</b>`);
+  }
+  if (gh && gh.failed) parts.push('<b class="warnline">GitHub 작품 목록을 불러오지 못했습니다</b>');
+  $('fresh').innerHTML = parts.length ? '자료 갱신: ' + parts.join(' · ') : '';
+}
 function changed(why) {
   if (S.pick && why !== 'pick') { S.pick = null; syncControls(); }
   writeURL(); render();
@@ -150,34 +179,36 @@ $('index').addEventListener('click', e => {
   const k = b.dataset.k; S.fx.has(k) ? S.fx.delete(k) : S.fx.add(k);
   b.setAttribute('aria-pressed', S.fx.has(k)); changed();
 });
-for (const k of ['cat', 'lv', 'full', 'vid']) $(k).addEventListener('change', () => { S[k] = $(k).value; changed(); });
+for (const k of ['src', 'cat', 'lv', 'full', 'vid']) $(k).addEventListener('change', () => { S[k] = $(k).value; changed(); });
 $('sort').addEventListener('change', () => { const v = $('sort').value; S.sort = v === (S.q ? 'rel' : 'likes') ? '' : v; changed(); });
 $('ftoggle').onclick = () => {
   const open = !$('filters').classList.contains('open');
   $('filters').classList.toggle('open', open); $('ftoggle').setAttribute('aria-expanded', open);
 };
+$('rc-all').onclick = () => { S.sort = 'new'; changed(); $('all').scrollIntoView({block: 'start'}); };
+$('rs-all').onclick = () => { S.sort = 'trend'; changed(); $('all').scrollIntoView({block: 'start'}); };
 $('ft-all').onclick = () => {
   S.pick = featured().map(r => r.id); syncControls(); $('pickmsg').textContent = `추천작 ${S.pick.length}개`;
   changed('pick'); $('all').scrollIntoView({block: 'start'});
 };
 function clearAll() {
-  Object.assign(S, {q: '', use: '', cat: '', lv: '', full: '', vid: '', fav: '', pick: null});
+  Object.assign(S, {q: '', use: '', src: '', cat: '', lv: '', full: '', vid: '', fav: '', pick: null});
   S.fx.clear(); syncControls(); buildUses(); buildIndex(); changed();
 }
 $('showall').onclick = clearAll;
 
 /* ---------- 켜진 필터 ---------- */
-const OPT = {cat: v => CAT[v], lv: v => ({0: '환경 확인 필요', 1: '채팅에서 바로', 2: 'Claude Code까지'})[v], full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음', fav: () => '즐겨찾기만'};
+const OPT = {src: v => v === 'gh' ? 'GitHub 저장소' : 'X 게시물', cat: v => CAT[v], lv: v => ({0: '환경 확인 필요', 1: '채팅에서 바로', 2: 'Claude Code까지'})[v], full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음', fav: () => '즐겨찾기만'};
 function activeChips() {
   const chips = [];
   if (S.q) chips.push(['q', `검색: ${S.q}`]);
   if (S.use) chips.push(['use', `용도: ${ED.uses[S.use]?.title || S.use}`]);
   S.fx.forEach(f => chips.push(['fx:' + f, `효과: ${FXN[f]}`]));
-  for (const k of ['cat', 'lv', 'full', 'vid', 'fav']) if (S[k]) chips.push([k, OPT[k](S[k])]);
+  for (const k of ['src', 'cat', 'lv', 'full', 'vid', 'fav']) if (S[k]) chips.push([k, OPT[k](S[k])]);
   $('active').innerHTML = chips.length ? chips.map(([k, t]) =>
     `<span class="chipx">${esc(t)}<button type="button" data-k="${esc(k)}" aria-label="${esc(t)} 해제">×</button></span>`).join('') +
     (chips.length > 1 ? '<button type="button" class="clearall" id="clearall">전체 해제</button>' : '') : '';
-  const n = S.fx.size + ['cat', 'lv', 'full', 'vid'].filter(k => S[k]).length;
+  const n = S.fx.size + ['src', 'cat', 'lv', 'full', 'vid'].filter(k => S[k]).length;
   $('fcount').textContent = n ? ` ${n}` : '';
   $('andnote').innerHTML = S.fx.size > 1 ? `고른 <b>${S.fx.size}개를 모두 포함(AND)</b>한 작품만` : '여러 개 고르면 <b>모두 포함(AND)</b>한 작품만';
 }
@@ -194,10 +225,11 @@ $('active').addEventListener('click', e => {
 function filtered() {
   if (S.pick) return S.pick.map(i => BYID.get(i)).filter(Boolean);
   const F = S.fav ? new Set(favs()) : null;
-  let pool = DATA.filter(r => (!F || F.has(r.id)) && (!S.cat || r.category === S.cat) && (S.lv === '' || (S.lv === '0' ? levelOf(r) === 0 : S.lv === '1' ? levelOf(r) === 1 : [1, 2].includes(levelOf(r)))) && (!S.full || !r.partial) &&
+  let pool = DATA.filter(r => (!F || F.has(r.id)) && (!S.src || (S.src === 'gh') === isGH(r)) && (!S.cat || r.category === S.cat) && (S.lv === '' || (S.lv === '0' ? levelOf(r) === 0 : S.lv === '1' ? levelOf(r) === 1 : [1, 2].includes(levelOf(r)))) && (!S.full || !r.partial) &&
     (!S.vid || r.mp4) && (!S.use || r._uses.includes(S.use)) && [...S.fx].every(f => r.fx.includes(f)));
   const sort = effSort();
-  if (sort !== 'new') pool = pool.slice().sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
+  /* 최근 상승은 이력이 모자란 작품을 뒤로(별 많은 순) 보낸다. 관련도순의 같은 점수 안은 X 좋아요순. */
+  pool = sort === 'trend' ? sortRows(sortRows(pool, 'stars'), 'trend') : sortRows(pool, sort === 'rel' ? 'likes' : sort);
   if (!S.q) return pool;
   /* 관련도순: 관련도가 먼저, 같으면 X 좋아요순. 다른 정렬을 고르면 검색 결과를 그 정렬로만 늘어놓는다. */
   const order = new Map(pool.map((r, i) => [r, i]));
@@ -212,6 +244,13 @@ function render() {
   rows = filtered();
   activeChips();
   $('featured').hidden = !featured().length || narrowing();
+  buildRecent();
+  const sorted = effSort(), nrise = rising().length;
+  $('sortnote').hidden = !['trend', 'stars', 'likes'].includes(sorted);
+  $('sortnote').textContent = sorted === 'trend'
+    ? (nrise ? `최근 상승: GitHub 저장소 별이 7일 동안 늘어난 수. 비교 기간을 채운 저장소 ${nrise}개만 순위에 넣고, 나머지는 '집계 중'으로 뒤에 둡니다.` : '최근 상승은 별 수 이력이 7일 이상 쌓인 저장소만 계산합니다. 아직 집계 중이라 GitHub 별 많은 순으로 보여 줍니다.')
+    : sorted === 'stars' ? 'GitHub 별은 저장소의 인기입니다. 한 저장소에 효과가 여럿이어도 각 효과가 받은 별이 아닙니다. X 게시물 작품은 뒤에 둡니다.'
+    : 'X 좋아요는 원본 X 게시물의 인기입니다. GitHub 작품은 뒤에 둡니다.';
   $('all-h').textContent = S.q ? `‘${S.q}’ 검색 결과` : S.pick ? '추천 후보' : narrowing() ? '조건에 맞는 효과' : '전체 효과';
   $('count').textContent = narrowing() || S.pick ? `${rows.length}개 · 전체 ${DATA.length}` : `${rows.length} / ${DATA.length}`;
   $('grid').innerHTML = '';
@@ -241,7 +280,24 @@ function thumb(r) {
     ? `<img src="${esc(r.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" data-fallback="1">`
     : '<div class="none">미리보기 없음</div>';
 }
+const stars = n => n == null ? '' : n.toLocaleString('ko-KR');
+function ghCard(r, num) {
+  const ed = r.ed || {}, v = verifyOf(r), repo = r.repo || {};
+  const status = ed.verify && ed.verify.status && ed.verify.status !== 'unverified' ? VERIFY[v].label : CHECK[r.check] || '자동 발굴';
+  return `<button class="card" type="button" data-id="${esc(r.id)}">
+    <div class="media">${num ? `<span class="num">${num}</span>` : ''}${ed.featured ? '<span class="pin">추천</span>' : ''}${FAVS.has(r.id) ? '<span class="fav-on" aria-label="즐겨찾기한 작품">★</span>' : ''}${thumb(r)}${r.demo_url ? '<span class="play">데모 링크</span>' : ''}</div>
+    <div class="body">
+      <div class="title">${esc(titleOf(r))}</div>
+      <div class="orig">${esc(r.desc || r.slug)}</div>
+      <div class="useline">GitHub · ${esc(KIND[r.kind] || r.kind)}</div>
+      <div class="badges"><span class="b env${levelOf(r)}" title="${esc(r.env_text || LV_LONG[levelOf(r)])}">${LV[levelOf(r)]}</span>
+        <span class="b partial">${r.has_prompt ? '프롬프트 파일·코드' : '프롬프트 없음·코드 제공'}</span>
+        <span class="b v-${status === '자동 발굴' ? 'unverified' : 'partial'}" title="자동 발굴: 검색으로 찾아 조건을 확인 · 미리보기 확인: 미리보기나 데모 링크가 열림 (재현 확인 아님)">${esc(status)}</span></div>
+      <div class="foot"><span>@${esc(r.author)}</span>${repo.stars != null ? `<span class="xlikes" title="GitHub 저장소의 별 수 (${esc(when(repo.stars_at))} 측정) — 이 작품이 따로 받은 수가 아닙니다">저장소 ★ ${stars(repo.stars)}${r.trend ? ` · 7일 +${r.trend.delta}` : ''}</span>` : ''}</div>
+    </div></button>`;
+}
 function card(r, num) {
+  if (isGH(r)) return ghCard(r, num);
   const ed = r.ed || {}, u = r._uses[0], v = verifyOf(r);
   const useline = u ? (ED.uses[u]?.title || u) : (CAT[r.category] || '');
   return `<button class="card" type="button" data-id="${esc(r.id)}">
@@ -339,7 +395,42 @@ function media(r) {
   return none.replace(' hidden', '');
 }
 function sec(n, title, body) { return body ? `<section class="dsec"><h3><span class="n">${n}</span>${title}</h3>${body}</section>` : ''; }
+function ghDetail(r) {
+  const ed = r.ed || {}, g = ed.guide || {}, repo = r.repo || {}, v = verifyOf(r), vr = ed.verify || {};
+  const uses = r._uses.map(u => ED.uses[u]?.title || u);
+  const trend = r.trend ? `최근 7일 +${r.trend.delta} (${esc(when(r.trend.from))} → ${esc(when(r.trend.to))})` : '최근 상승: 집계 중 (별 수 이력이 7일 이상 쌓이면 계산)';
+  return `<button class="close" type="button" id="dclose" aria-label="닫기">×</button>
+  <div class="dmedia">${media(r)}</div>
+  <div class="dbody">
+    <div class="dhead">
+      <div class="meta"><span>@${esc(r.author)}</span><span>GitHub · ${esc(KIND[r.kind] || r.kind)}</span><span>발견 ${esc((r.first_seen || '').slice(0, 10))}</span>${repo.stars != null ? `<span title="GitHub 저장소의 별 수 — 이 작품이 따로 받은 수가 아닙니다">저장소 ★ ${stars(repo.stars)}</span>` : ''}</div>
+      <h2 tabindex="-1" id="dtitle">${esc(titleOf(r))}</h2>
+      <div class="orig">${esc(r.slug)}</div>
+      <div class="badges" style="margin-top:8px"><span class="b env${levelOf(r)}">${LV[levelOf(r)]}</span>
+        <span class="b partial">${r.has_prompt ? '프롬프트 파일·코드' : '프롬프트 없음·코드 제공'}</span>
+        <span class="b v-unverified">${esc(CHECK[r.check] || '자동 발굴')}</span>${v !== 'unverified' ? `<span class="b v-${v}">${VERIFY[v].label}</span>` : ''}</div>
+    </div>
+    <div class="acts" id="acts"></div>
+    ${sec('1', '어떤 효과인가', `<p>${esc(g.what || ed.summary_ko || r.desc || '저장소 설명이 없습니다.')}</p>${(r.topics || []).length ? `<p class="note">주제: ${esc(r.topics.join(', '))}</p>` : ''}${g.what ? '' : '<p class="note">저장소 설명을 그대로 옮겼습니다. 편집 설명은 아직 없습니다.</p>'}`)}
+    ${sec('2', '어디에 쓰면 좋은가', g.where ? `<p>${esc(g.where)}</p>` : (uses.length ? `<p>${esc(uses.join(', '))} <span class="note">(키워드로 자동 분류)</span></p>` : ''))}
+    ${sec('3', '필요한 것', `<ul><li>${esc(r.env_text || '실행 방법은 저장소 README 참고')}</li><li>라이선스: ${esc(repo.license || '표시 없음 — 코드 재사용 전 원작자 확인 필요')}</li></ul>`)}
+    ${sec('4', '실행 순서', g.steps && g.steps.length ? `<ol>${g.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>` : '')}
+    ${sec('5', '바꾸면 좋은 변수', g.variables && g.variables.length ? `<div class="vars">${g.variables.map(x => `<div><b>${esc(x.name)}</b><span>${esc(x.hint || '')}</span></div>`).join('')}</div>` : '')}
+    ${sec('6', '원본 프롬프트', r.has_prompt && r.prompt_url
+      ? `<p>저장소에 프롬프트 파일이 있습니다. 내용은 원본에서 확인하세요: <a href="${esc(r.prompt_url)}" target="_blank" rel="noopener">프롬프트 파일 열기</a></p>`
+      : '<p><b>원본 프롬프트 없음 · 코드 제공</b> — 이 작품은 코드로 공개됐습니다. 이 사이트는 프롬프트를 만들어 넣지 않습니다. 아래 7번 요청문은 사이트가 만든 것이며 원본이 아닙니다.</p>')}
+    <div id="applyslot"></div>
+    ${sec('8', '출처와 확인 상태', `<ul>
+      <li>원작자 @${esc(r.author)} · <a href="${esc(repo.url)}" target="_blank" rel="noopener">저장소</a>${r.demo_url ? ` · <a href="${esc(r.demo_url)}" target="_blank" rel="noopener">데모</a>` : ''}${repo.gone ? ' · <b class="warnline">지금 저장소에 접근할 수 없습니다</b>' : ''}</li>
+      <li>저장소 ★ ${stars(repo.stars)} (${esc(when(repo.stars_at))} 측정) · ${trend}</li>
+      <li>저장소 생성 ${esc((repo.created_at || '').slice(0, 10))} · 카탈로그 최초 발견 ${esc((r.first_seen || '').slice(0, 10))} · 마지막 확인 ${esc((r.last_checked || '').slice(0, 10))}</li>
+      <li>상태: <b>${esc(CHECK[r.check] || '자동 발굴')}</b>${r.check === 'preview' ? ' — 미리보기나 데모 링크가 열리는 것만 확인했습니다. 실제로 실행해 재현한 것은 아닙니다.' : ' — 검색으로 찾아 공개 조건(관련성·미리보기 또는 데모·코드·라이선스)을 자동 확인했습니다.'}${v !== 'unverified' ? ` · 재현: <b>${VERIFY[v].label}</b> ${esc(vr.note || '')}` : ''}</li>
+      ${(r.x_ids || []).length ? `<li>같은 작품의 X 게시물: ${r.x_ids.map(id => `<a href="?item=${encodeURIComponent(id)}">${esc(id)}</a>`).join(', ')}</li>` : ''}
+      <li class="note">코드·미리보기의 권리는 원작자에게 있습니다. 작품 ID ${esc(r.id)}</li></ul>`)}
+  </div>`;
+}
 function detail(r) {
+  if (isGH(r)) return ghDetail(r);
   const ed = r.ed || {}, g = ed.guide || {}, env = ed.env || {}, v = verifyOf(r), vr = ed.verify || {};
   const needs = [...(env.tools || []), ...(r.needs || []).map(n => NEED[n] || n)];
   const uses = r._uses.map(u => ED.uses[u]?.title || u);
@@ -366,6 +457,7 @@ function detail(r) {
       <li>원작자 @${esc(r.author)}${r.post_url ? ` · <a href="${esc(r.post_url)}" target="_blank" rel="noopener">원본 게시물</a>` : ''}${r.prompt_url ? ` · <a href="${esc(r.prompt_url)}" target="_blank" rel="noopener">프롬프트 출처</a>` : ''}</li>
       <li>검증: <b>${VERIFY[v].label}</b> — ${esc(vr.note || VERIFY[v].note)}${vr.date ? ` (${esc(vr.date)}${vr.env ? ', ' + esc(vr.env) : ''})` : ''}${vr.evidence ? ` · <a href="${esc(vr.evidence)}" target="_blank" rel="noopener">만들어 본 결과 화면</a>` : ''}</li>
       ${vr.missing ? `<li>부족한 조건: ${esc(vr.missing)}</li>` : ''}
+      ${DATA.filter(x => isGH(x) && (x.x_ids || []).includes(r.id)).map(x => `<li>같은 작품의 GitHub 저장소: <a href="?item=${encodeURIComponent(x.id)}">${esc(x.slug)}</a></li>`).join('')}
       <li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID ${esc(r.id)}</li></ul>`)}
   </div>`;
 }
@@ -374,7 +466,7 @@ function applyBlock(r) {
   const uses = r._uses.map(u => ED.uses[u]?.title || u);
   const env = levelOf(r) === 1 ? 'chat' : 'code';
   return sec('7', '적용용 요청문 만들기', `
-    <p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p>
+    <p class="note">${isGH(r) ? '사이트가 만든 요청문입니다(원본 프롬프트가 아님). 저장소 주소와 구현할 효과, 실행 환경을 담습니다. ' : ''}아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p>
     <div class="apply">
       <label>용도<input id="ap-use" list="ap-uses" placeholder="${esc(uses[0] || '예: 랜딩 페이지 첫 화면')}"><datalist id="ap-uses">${Object.values(ED.uses).map(u => `<option value="${esc(u.title)}">`).join('')}</datalist></label>
       <label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label>
@@ -400,9 +492,12 @@ function copyText(t, btn, ev) {
     .finally(() => setTimeout(() => btn.textContent = o, 1600));
 }
 function bindDetail(r) {
-  $('acts').innerHTML = `<button type="button" class="btn primary" id="cp-orig" data-id="${esc(r.id)}">${r.partial ? '원본 프롬프트 복사 (일부 공개)' : '원본 프롬프트 복사'}</button>`;
+  /* GitHub 코드 작품에는 원본 프롬프트가 없으므로 복사 버튼 대신 저장소·데모 링크를 둔다 */
+  $('acts').innerHTML = isGH(r)
+    ? `<a class="btn primary" href="${esc(r.repo.url)}" target="_blank" rel="noopener">저장소 열기</a>${r.demo_url ? `<a class="btn" href="${esc(r.demo_url)}" target="_blank" rel="noopener">데모 열기</a>` : ''}`
+    : `<button type="button" class="btn primary" id="cp-orig" data-id="${esc(r.id)}">${r.partial ? '원본 프롬프트 복사 (일부 공개)' : '원본 프롬프트 복사'}</button>`;
   $('acts').insertAdjacentHTML('beforeend', `<button type="button" class="btn" id="favbtn" aria-pressed="false"></button><button type="button" class="btn" id="share">공유</button>${r.ed && r.ed.guide ? `<a class="btn" href="${itemPath(r.id)}">작품 페이지</a>` : ''}`);
-  $('cp-orig').onclick = e => copyText(r.prompt || '', e.currentTarget, 'copy_original');
+  if ($('cp-orig')) $('cp-orig').onclick = e => copyText(r.prompt || '', e.currentTarget, 'copy_original');
   const paintFav = () => { const on = favs().includes(r.id); $('favbtn').setAttribute('aria-pressed', on); $('favbtn').textContent = on ? '★ 즐겨찾기됨' : '☆ 즐겨찾기'; };
   paintFav();
   $('favbtn').onclick = () => { const on = toggleFav(r.id); paintFav(); track('favorite', {id: r.id, on}); favDirty = true; };
