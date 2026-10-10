@@ -266,7 +266,8 @@ class Discovery(Base):
         self.assertIsNone(judge.demo_url({'homepage': 'http://[::1'}, '[live demo](http://[::1/x)', cfg))
 
     def test_copy_without_fork_flag_is_duplicate(self):
-        copy = repo(109, 'aurora-shader', 'Aurora borealis WebGL shader demo', ['shader', 'webgl'], 30, owner='copier', home='')
+        copy = repo(109, 'aurora-shader', 'Aurora borealis WebGL shader demo ---', ['shader', 'webgl'], 30, owner='copier', home='')
+        copy['created_at'] = '2026-10-07T00:00:00Z'  # 원본보다 나중에 생김
         READMES['copier/aurora-shader'] = READMES['maker/aurora-shader'].replace('maker.github.io', 'copier.github.io')
         CONTENTS['copier/aurora-shader'] = CONTENTS['maker/aurora-shader']
         log = self.run_once(FakeClient({'topic:shader': [EFFECT, copy]}, stars={'N101': node(101, 'aurora-shader', 40), 'N109': node(109, 'aurora-shader', 30, owner='copier')}))
@@ -371,6 +372,7 @@ class JudgeUnits(unittest.TestCase):
                                    ('OpenGemCutting', 'Open-source parametric gemstone faceting workbench', ['threejs', 'animation'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
         self.assertEqual(judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': '', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[0], 'held', '설명 없음')
+        self.assertIn('미러 저장소', judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': 'Read-only mirror of https://codeberg.org/x/y', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[1])
         self.assertEqual(judge.classify_repo({'name': 'portfolio', 'description': 'Personal portfolio (2018)', 'topics': ['threejs', 'animation'], 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'app')
         for name, desc, topics in [('fieldplay', 'A vector field explorer', ['glsl', 'particles', 'webgl']),
                                    ('WebGPU-Ocean', 'A real-time 3D fluid simulation implemented in WebGPU', ['webgpu', 'fluid-simulation']),

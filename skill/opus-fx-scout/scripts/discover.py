@@ -209,10 +209,11 @@ class Run:
         # 이미 공개한 작품을 먼저 다시 보고(규칙 개정 반영), 그다음 새 후보를 별 많은 순으로
         todo.sort(key=lambda c: ({'published': 0, 'new': 1}.get(c.get('status'), 2), -(c.get('stars') or 0)))
         homes = {judge.norm_url(c.get('demo_url')): c['id'] for c in self.cands.values() if c.get('status') == 'published' and c.get('demo_url')}
-        # 포크 표시 없이 통째로 옮긴 복사본: 이름과 설명이 같은 저장소는 먼저 발견한 쪽만 공개
-        for c in sorted(self.cands.values(), key=lambda c: (c['first_seen'], c['repo_id'])):
+        # 포크 표시 없이 통째로 옮긴 복사본: 이름이 같고 설명이 거의 같으면 먼저 생긴(created_at) 쪽만 공개
+        self.by_name = {}
+        for c in sorted(self.cands.values(), key=lambda c: (c.get('created_at') or '', c['repo_id'])):
             if c.get('status') == 'published':
-                homes.setdefault(self.copy_key(c), c['id'])
+                self.by_name.setdefault((c.get('name') or '').lower(), []).append(c)
         for c in todo:
             try:
                 self.judge_one(c, jc, homes)
@@ -244,7 +245,7 @@ class Run:
                      hits=cl['hits'], thumb=judge.readme_media(readme, c['full_name'], c.get('default_branch')),
                      demo_url=judge.demo_url(c, readme, jc), has_prompt=has_prompt, prompt_url=prompt_url,
                      level=level, env_text=env_text, ai_made=bool(re.search(r'\b(claude|opus|anthropic)\b', readme or '', re.I)))
-            dup = homes.get(judge.norm_url(c.get('demo_url'))) or homes.get(self.copy_key(c))
+            dup = homes.get(judge.norm_url(c.get('demo_url'))) or self.copy_of(c)
             c['duplicate_of'] = dup if dup and dup != c['id'] else None
             status, reasons = judge.decide(c, jc)
         rv = self.cfg['judge'].get('rules_version')
@@ -278,13 +279,26 @@ class Run:
         if status == 'published':
             if c.get('demo_url'):
                 homes.setdefault(judge.norm_url(c['demo_url']), c['id'])
-            homes.setdefault(self.copy_key(c), c['id'])
+            peers = self.by_name.setdefault((c.get('name') or '').lower(), [])
+            if c not in peers:
+                peers.append(c)
             c['preview_ok'] = self.head_ok(c.get('thumb'))
             c['demo_ok'] = self.head_ok(c.get('demo_url'))
 
-    @staticmethod
-    def copy_key(c):
-        return 'copy:' + (c.get('name') or '').lower() + '|' + re.sub(r'\W+', ' ', (c.get('description') or '').lower()).strip()
+    def copy_of(self, c):
+        """이름이 같고 설명 유사도 0.85 이상인, 먼저 생긴 공개 저장소의 id."""
+        from difflib import SequenceMatcher
+        norm = lambda t: re.sub(r'\W+', ' ', (t or '').lower()).strip()
+        mine = norm(c.get('description'))
+        if not mine:
+            return None
+        for o in self.by_name.get((c.get('name') or '').lower(), []):
+            if o['id'] == c['id']:
+                continue
+            older = (o.get('created_at') or '', o['repo_id']) < (c.get('created_at') or '', c['repo_id'])
+            if older and SequenceMatcher(None, mine, norm(o.get('description'))).ratio() >= 0.85:
+                return o['id']
+        return None
 
     def head_ok(self, url):
         """미리보기·데모 링크가 열리는지만 본다. 열린다고 재현 성공이 아니다."""

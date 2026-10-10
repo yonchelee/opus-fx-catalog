@@ -161,7 +161,7 @@ def decide(c, cfg, homepage_owner=None):
         return 'held', ['제작용 라이브러리·프레임워크·도구 — 완성된 작품으로 공개하지 않음' + (f" ({', '.join(c.get('tool_words') or [])})" if c.get('tool_words') else '')]
     if c.get('fork'):
         reasons.append('포크 저장소')
-    if c.get('mirror'):
+    if c.get('mirror') or re.search(r'\b(read-only )?mirror of\b', (c.get('description') or ''), re.I):
         reasons.append('미러 저장소')
     if c.get('duplicate_of'):
         reasons.append('중복 의심: ' + c['duplicate_of'])
