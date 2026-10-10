@@ -71,7 +71,7 @@ function load() {
     SYN = synonymIndex(ED.synonyms);
     DATA = mergeEditorial(cat.items, ED).items
       .sort((a, b) => (b.added || '').localeCompare(a.added || '') || a.id.localeCompare(b.id));
-    DATA.forEach(r => { r._uses = usesOf(r, ED.uses); BYID.set(r.id, r); if (!BYID.has(r.slug)) BYID.set(r.slug, r); });
+    DATA.forEach(r => { r._level = levelOf(r, ED.level_check); r._uses = usesOf(r, ED.uses); BYID.set(r.id, r); if (!BYID.has(r.slug)) BYID.set(r.slug, r); });
     PREP = DATA.map(r => prepare(r, ED.uses));
     $('total').textContent = DATA.length;
     status('');
@@ -159,7 +159,7 @@ function clearAll() {
 $('showall').onclick = clearAll;
 
 /* ---------- 켜진 필터 ---------- */
-const OPT = {cat: v => CAT[v], lv: v => v === '1' ? '채팅에서 바로' : 'Claude Code까지', full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음', fav: () => '즐겨찾기만'};
+const OPT = {cat: v => CAT[v], lv: v => v === '1' ? '채팅에서 바로' : 'Claude Code까지(확인 필요 포함)', full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음', fav: () => '즐겨찾기만'};
 function activeChips() {
   const chips = [];
   if (S.q) chips.push(['q', `검색: ${S.q}`]);
@@ -186,7 +186,7 @@ $('active').addEventListener('click', e => {
 function filtered() {
   if (S.pick) return S.pick.map(i => BYID.get(i)).filter(Boolean);
   const lv = +S.lv, F = S.fav ? new Set(favs()) : null;
-  let pool = DATA.filter(r => (!F || F.has(r.id)) && (!S.cat || r.category === S.cat) && (!lv || levelOf(r) <= lv) && (!S.full || !r.partial) &&
+  let pool = DATA.filter(r => (!F || F.has(r.id)) && (!S.cat || r.category === S.cat) && (!lv || (lv === 1 ? levelOf(r) === 1 : levelOf(r) <= lv)) && (!S.full || !r.partial) &&
     (!S.vid || r.mp4) && (!S.use || r._uses.includes(S.use)) && [...S.fx].every(f => r.fx.includes(f)));
   if (S.sort === 'likes') pool = pool.slice().sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
   if (!S.q) return pool;
@@ -239,7 +239,7 @@ function card(r, num) {
       <div class="title">${esc(titleOf(r))}</div>
       ${ed.title_ko && r.title ? `<div class="orig">${esc(r.title)}</div>` : ''}
       <div class="useline">${esc(useline)}</div>
-      <div class="badges"><span class="b env${levelOf(r)}">${LV[levelOf(r)]}</span>
+      <div class="badges"><span class="b env${levelOf(r)}" title="${esc(LV_LONG[levelOf(r)])}">${LV[levelOf(r)]}</span>
         <span class="b${r.partial ? ' partial' : ''}">${r.partial ? '프롬프트 일부' : '프롬프트 전체'}</span>
         <span class="b v-${v}">${VERIFY[v].label}</span></div>
       <div class="foot"><span>@${esc(r.author)}</span>${r.likes != null ? `<span class="xlikes" title="원본 X 게시물의 좋아요 수 — 이 사이트의 평가가 아닙니다">X ♥ ${fmtLikes(r.likes)}</span>` : ''}</div>

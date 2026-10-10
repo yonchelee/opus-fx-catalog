@@ -9,8 +9,9 @@
 export const FX = [['3d','3D 씬·카메라'],['shader','셰이더·글로우'],['reel','모션 쇼릴'],['game','플레이어블 게임'],['paint','페인터리·손그림'],['ui','UI·제품 데모'],['particles','파티클·입자'],['audio','사운드 동기화'],['liquid','유체·물리'],['cosmic','우주·자연'],['pixel','픽셀아트'],['morph','모핑·트랜지션'],['glitch','글리치·레트로'],['kinetic','키네틱 타이포'],['data','데이터·지도'],['etc','기타']];
 export const FXN = Object.fromEntries(FX);
 export const CAT = {motion:'모션그래픽', explainer:'설명 영상', '3d':'3D 씬', interactive:'게임·인터랙티브'};
-export const LV = {1:'채팅에서 바로', 2:'Claude Code', 3:'외부 프로그램', 4:'외부 AI·API'};
+export const LV = {0:'환경 확인 필요', 1:'채팅에서 바로', 2:'Claude Code', 3:'외부 프로그램', 4:'외부 AI·API'};
 export const LV_LONG = {
+  0: '자동 분류로는 채팅만으로 되는지 확실하지 않습니다. 프롬프트가 영상(MP4) 같은 결과물을 요구해, 원작처럼 만들려면 Claude Code와 렌더링 도구가 필요할 수 있습니다. 채팅 미리보기로는 움직임만 확인될 수 있습니다.',
   1: 'Claude 채팅 미리보기에서 바로 볼 수 있음',
   2: 'Claude Code 같은 개발 환경에서 파일을 만들어 실행',
   3: 'Blender·게임엔진 같은 외부 프로그램 필요',
@@ -38,8 +39,19 @@ export function itemPath(id) {
   return 'fx/' + encodeURIComponent(id.slice(0, i)) + '/' + encodeURIComponent(id.slice(i + 1)) + '/';
 }
 
-/* 실행 단계: 편집에서 바로잡은 값(ed.env.level)이 있으면 그것, 없으면 자동 분류 */
-export const levelOf = r => (r.ed && r.ed.env && LV[r.ed.env.level]) ? r.ed.env.level : r.level;
+/* 실행 단계(화면 표시용). 편집에서 확인한 작품은 편집 값(ed.env.level, 없으면 자동 분류)을 따른다.
+   편집하지 않은 작품이 자동으로 1(채팅)인데 영상 결과물을 요구하면 0(환경 확인 필요).
+   규칙은 editorial.json level_check 한 곳. 파이썬 쪽: pages.py level_of(). */
+const checkRe = new WeakMap();
+export function levelOf(r, check) {
+  if (r._level !== undefined) return r._level;
+  if (r.ed) return (r.ed.env && LV[r.ed.env.level] && r.ed.env.level > 0) ? r.ed.env.level : r.level;
+  if (r.level === 1 && check && check.re) {
+    if (!checkRe.has(check)) checkRe.set(check, new RegExp(check.re, 'i'));
+    if (checkRe.get(check).test((r.title || '') + ' ' + (r.prompt || ''))) return 0;
+  }
+  return r.level;
+}
 export const verifyOf = r => (r.ed && r.ed.verify && VERIFY[r.ed.verify.status]) ? r.ed.verify.status : 'unverified';
 export const titleOf = r => (r.ed && r.ed.title_ko) || r.title || (r.prompt || '').replace(/\s+/g, ' ').trim().slice(0, 70) || r.slug;
 export const fmtLikes = n => n == null ? '' : (n >= 10000 ? (n / 10000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '') + '만' : n.toLocaleString('ko-KR'));
@@ -62,6 +74,6 @@ export function usesOf(r, uses) {
   const text = (r.title || '') + ' ' + (r.prompt || '');
   return rulesOf(uses).filter(u =>
     (u.re && u.re.test(text)) || u.fx.some(f => (r.fx || []).includes(f)) ||
-    (u.level.length && u.level.includes(r.level) && (!u.full || !r.partial))
+    (u.level.length && u.level.includes(levelOf(r)) && (!u.full || !r.partial))
   ).map(u => u.k);
 }

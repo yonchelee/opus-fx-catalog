@@ -44,7 +44,7 @@ def fetch_text(src):
 
 
 def normalize(src_id, v, tpl=None, model=None):
-    fx, needs, level = classify(v.get('prompt', ''), v.get('tech_tags', []))
+    fx, needs, level = classify(classify_text(v.get('title'), v.get('prompt')), v.get('tech_tags', []))
     slug = v['slug']
     return {
         'id': f'{src_id}:{slug}', 'src': src_id, 'slug': slug,
@@ -60,6 +60,22 @@ def normalize(src_id, v, tpl=None, model=None):
 
 
 MEDIA = ('title', 'thumb', 'preview', 'mp4', 'mp4_hd')
+
+
+def classify_text(title, prompt):
+    """분류는 제목까지 본다. 'Blender' 가 제목에만 있는 작품이 '채팅에서 바로'로 잘못 분류됐었다."""
+    return (title or '') + '\n' + (prompt or '')
+
+
+def reclassify(rows):
+    """수동 소스처럼 다시 받지 않는 행도 같은 규칙으로 맞춘다. 바뀐 행 수를 돌려준다."""
+    n = 0
+    for r in rows:
+        fx, needs, level = classify(classify_text(r.get('title'), r.get('prompt')), r.get('tech') or [])
+        if (fx, needs, level) != (r.get('fx'), r.get('needs'), r.get('level')):
+            r['fx'], r['needs'], r['level'] = fx, needs, level
+            n += 1
+    return n
 STATS = ('likes', 'likes_at')  # filled by likes.py, never by a source
 
 
@@ -151,6 +167,7 @@ def main():
     # (`| head`) must not cost us the write.
     if not a.dry_run and (new or changed or a.out):
         if a.out:
+            print(f'reclassified {reclassify(merged)}')
             # 갤러리의 좋아요순 정렬용. 막힌 네트워크에서는 옛 값을 그대로 둔다.
             try:
                 up, bad, _ = likes.refresh(merged)

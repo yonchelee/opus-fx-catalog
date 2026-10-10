@@ -67,6 +67,14 @@ try {
     await p.click('[data-fix="all"]'); await p.waitForTimeout(150);
     ok('필터 모두 해제로 복구', await p.locator('#grid .card').count() > 0 && await p.inputValue('#q') === '');
 
+    await p.fill('#q', 'Blender 3D and self-made soundtrack'); await p.waitForTimeout(150);
+    ok('Blender 쇼릴은 채팅이 아니라 외부 프로그램', (await p.textContent('#grid .card .badges')).includes('외부 프로그램'));
+    await p.fill('#q', ''); await p.selectOption('#lv', '1'); await p.waitForTimeout(150);
+    const lvBadges = await p.$$eval('#grid .card .badges .b:first-child', e => e.map(x => x.textContent));
+    ok('"채팅에서 바로" 필터에는 그 표시만', lvBadges.length > 0 && lvBadges.every(t => t === '채팅에서 바로'), `${lvBadges.length}개`);
+    ok('"환경 확인 필요" 배지에 설명', await p.locator('#grid .b.env0').count() === 0);
+    await p.selectOption('#lv', ''); await p.waitForTimeout(150);
+    ok('전체에는 "환경 확인 필요" 표시가 있음', await p.locator('#grid .b.env0').count() > 0 && (await p.getAttribute('#grid .b.env0 >> nth=0', 'title')).includes('렌더링'));
     await p.click('.fx[data-k="3d"]'); await p.click('.fx[data-k="shader"]'); await p.waitForTimeout(100);
     ok('효과 여러 개는 AND 라고 표시', /2개를 모두 포함\(AND\)/.test(await p.textContent('#andnote')));
     ok('주소에 fx 반영', new URL(p.url()).searchParams.get('fx') === '3d,shader');

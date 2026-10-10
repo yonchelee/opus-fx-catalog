@@ -533,7 +533,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"liquid"
 ],
 "needs": [],
 "level": 1,
@@ -750,7 +750,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"ui"
 ],
 "needs": [],
 "level": 1,
@@ -884,7 +884,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"game"
 ],
 "needs": [],
 "level": 1,
@@ -912,6 +912,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
+"audio",
 "reel"
 ],
 "needs": [],
@@ -1313,7 +1314,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"3d"
 ],
 "needs": [
 "node"
@@ -1636,7 +1637,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"kinetic"
 ],
 "needs": [],
 "level": 1,
@@ -2018,7 +2019,8 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"kinetic",
+"particles"
 ],
 "needs": [],
 "level": 1,
@@ -2374,7 +2376,8 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"3d"
+"3d",
+"game"
 ],
 "needs": [],
 "level": 1,
@@ -2973,7 +2976,8 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"cosmic"
+"cosmic",
+"pixel"
 ],
 "needs": [],
 "level": 1,
@@ -3111,10 +3115,14 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
+"3d",
+"audio",
 "reel"
 ],
-"needs": [],
-"level": 1,
+"needs": [
+"blender"
+],
+"level": 3,
 "title": "Showreel with Blender 3D and self-made soundtrack",
 "thumb": "https://pbs.twimg.com/amplify_video_thumb/2103149570440024064/img/QKgvRP_unggJVH6M.jpg",
 "mp4": "https://video.twimg.com/amplify_video/2103149570440024064/vid/avc1/480x270/QY2lsjmsFBRZY8w-.mp4?tag=29",
@@ -3191,6 +3199,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
+"3d",
 "ui"
 ],
 "needs": [],
@@ -3301,7 +3310,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"3d"
 ],
 "needs": [],
 "level": 1,
@@ -3491,7 +3500,7 @@
 "partial": false,
 "added": "2026-10-03",
 "fx": [
-"etc"
+"reel"
 ],
 "needs": [],
 "level": 1,
@@ -4753,7 +4762,8 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"reel"
+"reel",
+"ui"
 ],
 "needs": [],
 "level": 1,
@@ -4819,7 +4829,9 @@
 "particles",
 "reel"
 ],
-"needs": [],
+"needs": [
+"assets"
+],
 "level": 1,
 "thumb": "https://media.skillry.dev/opus-5-5/ajith-io-615243/original.cd413c6a04.webp",
 "preview": "https://media.skillry.dev/opus-5-5/ajith-io-615243/preview.webp",
@@ -5763,7 +5775,8 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"reel"
+"reel",
+"ui"
 ],
 "needs": [],
 "level": 1,
@@ -6271,7 +6284,8 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"reel"
+"reel",
+"ui"
 ],
 "needs": [],
 "level": 1,
@@ -7388,8 +7402,10 @@
 "fx": [
 "3d"
 ],
-"needs": [],
-"level": 1,
+"needs": [
+"python"
+],
+"level": 2,
 "thumb": "https://media.skillry.dev/opus-5-5/dannnnnok-716687/original.ae4ba7f3d5.webp",
 "preview": "https://media.skillry.dev/opus-5-5/dannnnnok-716687/preview.webp",
 "title": "Python-rendered 3D cube and type reel",
@@ -7535,7 +7551,7 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"etc"
+"ui"
 ],
 "needs": [],
 "level": 1,
@@ -7598,6 +7614,7 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
+"game",
 "ui"
 ],
 "needs": [
@@ -8560,6 +8577,7 @@
 "added": "2026-09-26",
 "fx": [
 "3d",
+"cosmic",
 "shader"
 ],
 "needs": [],
@@ -10807,6 +10825,7 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
+"audio",
 "ui"
 ],
 "needs": [],
@@ -12052,7 +12071,7 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"etc"
+"ui"
 ],
 "needs": [],
 "level": 1,
@@ -12735,8 +12754,10 @@
 "fx": [
 "etc"
 ],
-"needs": [],
-"level": 1,
+"needs": [
+"remotion"
+],
+"level": 2,
 "thumb": "https://media.skillry.dev/opus-5-5/majorbaguette-834228/original.b0e3fa0a59.webp",
 "preview": "https://media.skillry.dev/opus-5-5/majorbaguette-834228/preview.webp",
 "title": "30-second Remotion presentation for Brieform",
@@ -12938,7 +12959,7 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"etc"
+"paint"
 ],
 "needs": [],
 "level": 1,
@@ -13273,6 +13294,7 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
+"cosmic",
 "shader"
 ],
 "needs": [],
@@ -13835,7 +13857,8 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"reel"
+"reel",
+"ui"
 ],
 "needs": [],
 "level": 1,
@@ -14665,6 +14688,7 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
+"data",
 "liquid"
 ],
 "needs": [],
@@ -15015,7 +15039,8 @@
 "partial": false,
 "added": "2026-09-26",
 "fx": [
-"audio"
+"audio",
+"glitch"
 ],
 "needs": [
 "render"
@@ -17719,7 +17744,8 @@
 "etc"
 ],
 "needs": [
-"remotion"
+"remotion",
+"render"
 ],
 "level": 2,
 "thumb": "https://media.skillry.dev/opus-5-5/thallisribeiro-829318/original.9cbf59b14e.webp",

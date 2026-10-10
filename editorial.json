@@ -273,6 +273,10 @@
    "tutorial"
   ]
  ],
+ "level_check": {
+  "about": "자동 분류가 '채팅에서 바로'(1)인데 프롬프트·제목이 영상 결과물을 요구하면 '환경 확인 필요'(0)로 보여 준다. 편집에서 확인한 작품(editorial items)은 편집 값을 따른다.",
+  "re": "\\b(videos?|mp4|render\\w*|show ?reels?|films?|soundtrack|export\\w*|seconds?|\\d+ ?s(ec)?|fps|trailer|commercial|promo)\\b|视频|影片|宣传片|秒|動画|영상"
+ },
  "items": {
   "yihui:twoclipping-402193": {
    "title_ko": "음악 플레이어 UI 모핑",

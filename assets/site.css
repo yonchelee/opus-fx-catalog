@@ -100,6 +100,7 @@ body.picking .featured,body.picking .tools,body.picking .filters,body.picking .a
 .useline{font-size:13px;font-weight:600;color:var(--yl-ink-2)}
 .badges{display:flex;flex-wrap:wrap;gap:5px}
 .b{font-size:11.5px;font-weight:700;padding:1px 7px;border:1.5px solid var(--yl-line);color:var(--yl-ink);white-space:nowrap}
+.b.env0{border-style:dashed;background:transparent}
 .b.env1{background:var(--yl-mint);color:#17171A}
 .b.env2{background:var(--yl-yellow);color:#17171A}
 .b.env3,.b.env4{background:var(--yl-accent);color:#FFF3E2}

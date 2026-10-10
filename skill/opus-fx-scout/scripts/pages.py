@@ -9,6 +9,7 @@
 화면 문구·규칙은 assets/app.js 상세 화면과 같게 유지한다(둘을 함께 고친다).
 """
 import json
+import re
 from html import escape as h
 from urllib.parse import quote
 
@@ -16,8 +17,9 @@ SITE = 'https://yonchelee.github.io/opus-fx-catalog/'
 MIN_USE_ITEMS = 3
 
 CAT = {'motion': '모션그래픽', 'explainer': '설명 영상', '3d': '3D 씬', 'interactive': '게임·인터랙티브'}
-LV = {1: '채팅에서 바로', 2: 'Claude Code', 3: '외부 프로그램', 4: '외부 AI·API'}
-LV_LONG = {1: 'Claude 채팅 미리보기에서 바로 볼 수 있음', 2: 'Claude Code 같은 개발 환경에서 파일을 만들어 실행',
+LV = {0: '환경 확인 필요', 1: '채팅에서 바로', 2: 'Claude Code', 3: '외부 프로그램', 4: '외부 AI·API'}
+LV_LONG = {0: '자동 분류로는 채팅만으로 되는지 확실하지 않습니다. 프롬프트가 영상(MP4) 같은 결과물을 요구해, 원작처럼 만들려면 Claude Code와 렌더링 도구가 필요할 수 있습니다. 채팅 미리보기로는 움직임만 확인될 수 있습니다.',
+           1: 'Claude 채팅 미리보기에서 바로 볼 수 있음', 2: 'Claude Code 같은 개발 환경에서 파일을 만들어 실행',
            3: 'Blender·게임엔진 같은 외부 프로그램 필요', 4: '영상·이미지 생성 AI 같은 외부 서비스 필요'}
 NEED = {'render': 'MP4 렌더링', 'remotion': 'Remotion', 'node': 'Node.js 프로젝트', 'python': 'Python', 'blender': 'Blender',
         'engine': '게임엔진', 'figma': 'Figma', 'genvideo': '영상 생성 AI', 'genimage': '이미지 생성 AI',
@@ -95,9 +97,17 @@ def fmt_likes(n):
     return f'{n:,}'
 
 
+LEVEL_CHECK = {}  # render() 가 editorial.json level_check 로 채운다
+
+
 def level_of(r):
-    lv = ((r.get('ed') or {}).get('env') or {}).get('level')
-    return lv if lv in LV else r['level']
+    """assets/data.js levelOf 와 같은 규칙."""
+    if r.get('ed') is not None:
+        lv = ((r.get('ed') or {}).get('env') or {}).get('level')
+        return lv if lv in LV and lv > 0 else r['level']
+    if r['level'] == 1 and LEVEL_CHECK.get('re') and re.search(LEVEL_CHECK['re'], ((r.get('title') or '') + ' ' + (r.get('prompt') or '')), re.I):
+        return 0
+    return r['level']
 
 
 def verify_of(r):
@@ -281,6 +291,8 @@ def use_index(uses, counts, root='../'):
 
 
 def render(items, editorial, synced):
+    LEVEL_CHECK.clear()
+    LEVEL_CHECK.update(editorial.get('level_check') or {})
     uses = editorial.get('uses') or {}
     edited = [r for r in items if r.get('ed')]
     rank = lambda r: (r['ed'].get('featured_rank') or 99, -(r.get('likes') or 0), r['id'])
