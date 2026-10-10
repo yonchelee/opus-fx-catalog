@@ -307,6 +307,8 @@
    "registry",
    "renderer",
    "rendering engine",
+   "robotics",
+   "ros",
    "runtime",
    "sample applications",
    "sandbox",
@@ -339,6 +341,7 @@
    "vue components",
    "web ui",
    "webui",
+   "workbench",
    "workflow",
    "wrapper"
   ],
@@ -468,7 +471,7 @@
    "code rain",
    "matrix rain"
   ],
-  "rules_version": 6,
+  "rules_version": 7,
   "app_words": [
    "admin",
    "bot",
@@ -528,7 +531,7 @@
    "p5js"
   ],
   "tool_patterns": [
-   "^\\W*(create|creates|design|designs|generate|generates|convert|converts|draw|draws|make|makes|build|builds|run|runs|render|renders|turn|turns|transform|transforms|easily|automatically|export|exports)\\b",
+   "^\\W*(add|adds|create|creates|design|designs|generate|generates|convert|converts|draw|draws|make|makes|build|builds|run|runs|render|renders|turn|turns|transform|transforms|easily|automatically|export|exports)\\b",
    "\\bfor (unity|unity3d|swiftui|compose|jetpack compose|compose multiplatform|react|react native|vue|svelte|angular|flutter|android|ios|godot|unreal|unreal engine|blender|after effects|figma|framer|webflow|tailwind|claude code|codex|cursor|agents|ai agents)\\b",
    "\\b(in|with|for) (go|golang|r|rust|python|julia|haskell|clojure|lisp|c\\+\\+|kotlin|swift|java|processing|openframeworks)\\b",
    "\\bturn (a|an|any|your|one|the) [\\w -]{1,30} into\\b"

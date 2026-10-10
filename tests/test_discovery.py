@@ -265,6 +265,17 @@ class Discovery(Base):
         cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
         self.assertIsNone(judge.demo_url({'homepage': 'http://[::1'}, '[live demo](http://[::1/x)', cfg))
 
+    def test_copy_without_fork_flag_is_duplicate(self):
+        copy = repo(109, 'aurora-shader', 'Aurora borealis WebGL shader demo', ['shader', 'webgl'], 30, owner='copier', home='')
+        READMES['copier/aurora-shader'] = READMES['maker/aurora-shader'].replace('maker.github.io', 'copier.github.io')
+        CONTENTS['copier/aurora-shader'] = CONTENTS['maker/aurora-shader']
+        log = self.run_once(FakeClient({'topic:shader': [EFFECT, copy]}, stars={'N101': node(101, 'aurora-shader', 40), 'N109': node(109, 'aurora-shader', 30, owner='copier')}))
+        cs = self.cands()
+        self.assertEqual(cs['101']['status'], 'published')
+        self.assertEqual(cs['109']['status'], 'held')
+        self.assertEqual(cs['109']['duplicate_of'], 'gh:101')
+        self.assertEqual(log['counts']['duplicates'], 1)
+
     def test_editorial_untouched(self):
         before = (self.d / 'editorial.json').read_bytes()
         self.run_once(FakeClient({'topic:shader': [EFFECT]}, stars={'N101': node(101, 'aurora-shader', 40)}))
@@ -354,7 +365,10 @@ class JudgeUnits(unittest.TestCase):
                                    ('webgpu-dummy', 'A rendering engine', ['webgpu']),
                                    ('libossia', 'A modern C++, cross-environment distributed object model for creative coding', ['creative-coding']),
                                    ('quokka', 'Two-moment AMR radiation hydrodynamics (with self-gravity, particles, chemistry)', ['simulation', 'particles']),
-                                   ('keyloom', 'Design Beautiful Motion Graphics Videos', ['motion-graphics'])]:
+                                   ('keyloom', 'Design Beautiful Motion Graphics Videos', ['motion-graphics']),
+                                   ('Text_Effects', 'Add dynamic text animations to your Minecraft world', ['animation']),
+                                   ('BAGEL', 'ROS Bag Visualizer', ['visualization', 'webgl']),
+                                   ('OpenGemCutting', 'Open-source parametric gemstone faceting workbench', ['threejs', 'animation'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
         self.assertEqual(judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': '', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[0], 'held', '설명 없음')
         self.assertEqual(judge.classify_repo({'name': 'portfolio', 'description': 'Personal portfolio (2018)', 'topics': ['threejs', 'animation'], 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'app')
