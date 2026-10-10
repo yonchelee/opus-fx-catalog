@@ -38,6 +38,8 @@ export function itemPath(id) {
   return 'fx/' + encodeURIComponent(id.slice(0, i)) + '/' + encodeURIComponent(id.slice(i + 1)) + '/';
 }
 
+/* 실행 단계: 편집에서 바로잡은 값(ed.env.level)이 있으면 그것, 없으면 자동 분류 */
+export const levelOf = r => (r.ed && r.ed.env && LV[r.ed.env.level]) ? r.ed.env.level : r.level;
 export const verifyOf = r => (r.ed && r.ed.verify && VERIFY[r.ed.verify.status]) ? r.ed.verify.status : 'unverified';
 export const titleOf = r => (r.ed && r.ed.title_ko) || r.title || (r.prompt || '').replace(/\s+/g, ' ').trim().slice(0, 70) || r.slug;
 export const fmtLikes = n => n == null ? '' : (n >= 10000 ? (n / 10000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '') + '만' : n.toLocaleString('ko-KR'));

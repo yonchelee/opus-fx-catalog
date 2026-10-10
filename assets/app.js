@@ -1,7 +1,8 @@
 /* 효과 갤러리 화면. 상태(검색어·용도·필터·정렬)를 하나로 두고, 바뀔 때마다 화면과 주소를 함께 고친다.
    데이터 병합: data.js · 검색: search.js · 생성 페이지: skill/opus-fx-scout/scripts/pages.py */
-import {FX, FXN, CAT, LV, LV_LONG, NEED, VERIFY, mergeEditorial, usesOf, verifyOf, titleOf, fmtLikes} from './data.js';
+import {FX, FXN, CAT, LV, LV_LONG, NEED, VERIFY, mergeEditorial, usesOf, verifyOf, levelOf, titleOf, fmtLikes} from './data.js';
 import {synonymIndex, prepare, search} from './search.js';
+import {buildRequest} from './apply.js';
 
 const PAGE = 48;
 const $ = id => document.getElementById(id);
@@ -172,7 +173,7 @@ $('active').addEventListener('click', e => {
 function filtered() {
   if (S.pick) return S.pick.map(i => BYID.get(i)).filter(Boolean);
   const lv = +S.lv;
-  let pool = DATA.filter(r => (!S.cat || r.category === S.cat) && (!lv || r.level <= lv) && (!S.full || !r.partial) &&
+  let pool = DATA.filter(r => (!S.cat || r.category === S.cat) && (!lv || levelOf(r) <= lv) && (!S.full || !r.partial) &&
     (!S.vid || r.mp4) && (!S.use || r._uses.includes(S.use)) && [...S.fx].every(f => r.fx.includes(f)));
   if (S.sort === 'likes') pool = pool.slice().sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
   if (!S.q) return pool;
@@ -219,7 +220,7 @@ function card(r, num) {
       <div class="title">${esc(titleOf(r))}</div>
       ${ed.title_ko && r.title ? `<div class="orig">${esc(r.title)}</div>` : ''}
       <div class="useline">${esc(useline)}</div>
-      <div class="badges"><span class="b env${r.level}">${LV[r.level]}</span>
+      <div class="badges"><span class="b env${levelOf(r)}">${LV[levelOf(r)]}</span>
         <span class="b${r.partial ? ' partial' : ''}">${r.partial ? '프롬프트 일부' : '프롬프트 전체'}</span>
         <span class="b v-${v}">${VERIFY[v].label}</span></div>
       <div class="foot"><span>@${esc(r.author)}</span>${r.likes != null ? `<span class="xlikes" title="원본 X 게시물의 좋아요 수 — 이 사이트의 평가가 아닙니다">X ♥ ${fmtLikes(r.likes)}</span>` : ''}</div>
@@ -295,25 +296,48 @@ function detail(r) {
       <div class="meta"><span>@${esc(r.author)}</span><span>${CAT[r.category] || ''}</span><span>수집 ${esc(r.added || '')}</span>${r.likes != null ? `<span title="원본 X 게시물의 좋아요 수 — 이 사이트의 평가가 아닙니다">X ♥ ${fmtLikes(r.likes)}</span>` : ''}</div>
       <h2 tabindex="-1" id="dtitle">${esc(titleOf(r))}</h2>
       ${ed.title_ko && r.title ? `<div class="orig">${esc(r.title)}</div>` : ''}
-      <div class="badges" style="margin-top:8px"><span class="b env${r.level}">${LV[r.level]}</span>
+      <div class="badges" style="margin-top:8px"><span class="b env${levelOf(r)}">${LV[levelOf(r)]}</span>
         <span class="b${r.partial ? ' partial' : ''}">${r.partial ? '프롬프트 일부 공개' : '프롬프트 전체 공개'}</span>
         <span class="b v-${v}">${VERIFY[v].label}</span></div>
     </div>
     <div class="acts" id="acts"></div>
     ${sec('1', '어떤 효과인가', g.what || ed.summary_ko ? `<p>${esc(g.what || ed.summary_ko)}</p>` : `<p>${esc(r.fx.filter(f => f !== 'etc').map(f => FXN[f]).join(' · ') || CAT[r.category] || '')}</p><p class="note">편집 설명이 아직 없는 작품입니다. 원본 프롬프트와 영상으로 판단해 주세요.</p>`)}
-    ${sec('2', '어디에 쓰면 좋은가', g.where ? `<p>${esc(g.where)}</p>` : (uses.length ? `<p>${esc(uses.join(', '))}${ed.uses ? '' : ' <span class="note">(키워드로 자동 분류)</span>'}</p>` : ''))}
-    ${sec('3', '필요한 것', `<ul><li>${esc(LV_LONG[r.level])}</li>${needs.map(n => `<li>${esc(n)}</li>`).join('')}${env.paid ? `<li>유료: ${esc(env.paid)}</li>` : ''}${env.assets ? `<li>내 자료: ${esc(env.assets)}</li>` : ''}</ul>`)}
+    ${sec('2', '어디에 쓰면 좋은가', g.where ? `<p>${esc(g.where)}</p>${ed.featured_reason ? `<p class="note">추천 이유: ${esc(ed.featured_reason)}</p>` : ''}` : (uses.length ? `<p>${esc(uses.join(', '))}${ed.uses ? '' : ' <span class="note">(키워드로 자동 분류)</span>'}</p>` : ''))}
+    ${sec('3', '필요한 것', `<ul><li>${esc(LV_LONG[levelOf(r)])}</li>${needs.map(n => `<li>${esc(n)}</li>`).join('')}${env.paid ? `<li>유료: ${esc(env.paid)}</li>` : ''}${env.assets ? `<li>내 자료: ${esc(env.assets)}</li>` : ''}</ul>`)}
     ${sec('4', '실행 순서', g.steps && g.steps.length ? `<ol>${g.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>` : '')}
     ${sec('5', '바꾸면 좋은 변수', g.variables && g.variables.length ? `<div class="vars">${g.variables.map(x => `<div><b>${esc(x.name)}</b><span>${esc(x.hint || '')}</span></div>`).join('')}</div>` : '')}
     ${sec('6', '원본 프롬프트', `${r.partial ? '<p class="warn">원작자가 프롬프트 일부만 공개했습니다. 아래는 전체가 아닙니다.</p>' : ''}<pre class="prompt" id="dprompt">${esc(r.prompt || '(프롬프트 없음)')}</pre>`)}
     <div id="applyslot"></div>
     ${sec('8', '출처와 검증', `<ul>
       <li>원작자 @${esc(r.author)}${r.post_url ? ` · <a href="${esc(r.post_url)}" target="_blank" rel="noopener">원본 게시물</a>` : ''}${r.prompt_url ? ` · <a href="${esc(r.prompt_url)}" target="_blank" rel="noopener">프롬프트 출처</a>` : ''}</li>
-      <li>검증: <b>${VERIFY[v].label}</b> — ${esc(vr.note || VERIFY[v].note)}${vr.date ? ` (${esc(vr.date)}${vr.env ? ', ' + esc(vr.env) : ''})` : ''}${vr.evidence ? ` · <a href="${esc(vr.evidence)}" target="_blank" rel="noopener">확인 기록</a>` : ''}</li>
+      <li>검증: <b>${VERIFY[v].label}</b> — ${esc(vr.note || VERIFY[v].note)}${vr.date ? ` (${esc(vr.date)}${vr.env ? ', ' + esc(vr.env) : ''})` : ''}${vr.evidence ? ` · <a href="${esc(vr.evidence)}" target="_blank" rel="noopener">만들어 본 결과 화면</a>` : ''}</li>
       ${vr.missing ? `<li>부족한 조건: ${esc(vr.missing)}</li>` : ''}
       <li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID ${esc(r.id)}</li></ul>`)}
   </div>`;
 }
+/* ---------- 적용용 요청문 (템플릿. 외부 AI 를 부르지 않는다) ---------- */
+function applyBlock(r) {
+  const uses = r._uses.map(u => ED.uses[u]?.title || u);
+  const env = levelOf(r) === 1 ? 'chat' : 'code';
+  return sec('7', '적용용 요청문 만들기', `
+    <p class="note">아래 칸을 채우면 내 작업에 맞춘 요청문이 만들어집니다. 틀에 값을 채운 것이라 원본과 같은 결과를 보장하지 않습니다. 입력한 내용은 이 화면 밖으로 보내지 않습니다.</p>
+    <div class="apply">
+      <label>용도<input id="ap-use" list="ap-uses" placeholder="${esc(uses[0] || '예: 랜딩 페이지 첫 화면')}"><datalist id="ap-uses">${Object.values(ED.uses).map(u => `<option value="${esc(u.title)}">`).join('')}</datalist></label>
+      <label>들어갈 문구<input id="ap-text" placeholder="예: 우리 카페 그랜드 오픈"></label>
+      <label>색상<input id="ap-color" placeholder="예: 크림 바탕에 진한 주황"></label>
+      <label>실행 환경<select id="ap-env">${Object.entries({chat: 'Claude 채팅 (HTML 한 장)', code: 'Claude Code (프로젝트)', video: '영상 파일 (MP4)'}).map(([k, t]) => `<option value="${k}"${k === env ? ' selected' : ''}>${t}</option>`).join('')}</select></label>
+    </div>
+    <pre class="prompt" id="ap-out" aria-live="polite"></pre>
+    <div class="acts"><button type="button" class="btn primary" id="cp-req" data-id="${esc(r.id)}">적용용 요청문 복사</button></div>`);
+}
+function bindApply(r) {
+  const uses = r._uses.map(u => ED.uses[u]?.title || u);
+  const upd = () => { $('ap-out').textContent = buildRequest(r, {use: $('ap-use').value.trim(), text: $('ap-text').value.trim(), color: $('ap-color').value.trim(), env: $('ap-env').value}, uses); };
+  ['ap-use', 'ap-text', 'ap-color', 'ap-env'].forEach(id => $(id).addEventListener('input', upd));
+  upd();
+  $('cp-req').onclick = e => copyText($('ap-out').textContent, e.currentTarget, 'copy_request');
+}
+
 function copyText(t, btn, ev) {
   const o = btn.textContent;
   navigator.clipboard.writeText(t).then(() => { btn.textContent = '복사됨'; track(ev, {id: btn.dataset.id}); })
@@ -323,6 +347,8 @@ function copyText(t, btn, ev) {
 function bindDetail(r) {
   $('acts').innerHTML = `<button type="button" class="btn primary" id="cp-orig" data-id="${esc(r.id)}">${r.partial ? '원본 프롬프트 복사 (일부 공개)' : '원본 프롬프트 복사'}</button>`;
   $('cp-orig').onclick = e => copyText(r.prompt || '', e.currentTarget, 'copy_original');
+  $('applyslot').outerHTML = applyBlock(r);
+  bindApply(r);
   const m = $('dlg').querySelector('[data-media]');
   if (m) m.addEventListener('error', () => { m.remove(); $('dlg').querySelector('.dmedia .none').hidden = false; });
   $('dclose').onclick = () => $('dlg').close();
