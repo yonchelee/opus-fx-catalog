@@ -471,7 +471,7 @@
    "code rain",
    "matrix rain"
   ],
-  "rules_version": 8,
+  "rules_version": 9,
   "app_words": [
    "admin",
    "bot",

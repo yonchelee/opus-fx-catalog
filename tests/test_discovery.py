@@ -277,6 +277,27 @@ class Discovery(Base):
         self.assertEqual(cs['109']['duplicate_of'], 'gh:101')
         self.assertEqual(log['counts']['duplicates'], 1)
 
+    def test_already_published_copy_is_withdrawn_on_rules_change(self):
+        # 실제 사례: 원본·복사본 둘 다 공개된 뒤, 각자 데모 주소를 가진 상태에서 규칙이 바뀌어 다시 판정
+        orig = repo(110, 'three-examples', 'WebGL Three.js Examples And Demo ---', ['threejs', 'webgl'], 2000, owner='a', home='https://a.github.io/three-examples/')
+        orig['created_at'] = '2024-07-02T00:00:00Z'
+        copy = repo(111, 'three-examples', 'WebGL Three.js Examples And Demo ---', ['threejs', 'webgl'], 30, owner='b', home='https://b.github.io/three-examples/')
+        copy['created_at'] = '2025-01-02T00:00:00Z'
+        for o in ('a', 'b'):
+            READMES[f'{o}/three-examples'] = '![p](p.gif)'
+            CONTENTS[f'{o}/three-examples'] = ['index.html']
+        stars = {'N110': node(110, 'three-examples', 2000, owner='a'), 'N111': node(111, 'three-examples', 30, owner='b')}
+        old = dict(self.cfg); old['judge'] = dict(self.cfg['judge'], rules_version=0)
+        (self.d / 'discovery/config.json').write_text(json.dumps(old))
+        self.run_once(FakeClient({'topic:shader': [copy]}, stars=stars))           # 복사본이 먼저 발견돼 공개
+        self.run_once(FakeClient({'topic:shader': [orig]}, stars=stars), now='2026-10-10T07:00:00Z')
+        self.assertEqual({'gh:110', 'gh:111'} & set(self.public()), {'gh:110', 'gh:111'})
+        (self.d / 'discovery/config.json').write_text(json.dumps(self.cfg))
+        self.run_once(FakeClient({}, stars=stars), now='2026-10-11T06:00:00Z', today=date(2026, 10, 11))
+        self.assertIn('gh:110', self.public(), '먼저 생긴 원본은 유지')
+        self.assertNotIn('gh:111', self.public(), '나중에 생긴 복사본은 내림')
+        self.assertEqual(self.cands()['111']['duplicate_of'], 'gh:110')
+
     def test_editorial_untouched(self):
         before = (self.d / 'editorial.json').read_bytes()
         self.run_once(FakeClient({'topic:shader': [EFFECT]}, stars={'N101': node(101, 'aurora-shader', 40)}))

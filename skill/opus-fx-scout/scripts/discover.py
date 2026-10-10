@@ -245,7 +245,9 @@ class Run:
                      hits=cl['hits'], thumb=judge.readme_media(readme, c['full_name'], c.get('default_branch')),
                      demo_url=judge.demo_url(c, readme, jc), has_prompt=has_prompt, prompt_url=prompt_url,
                      level=level, env_text=env_text, ai_made=bool(re.search(r'\b(claude|opus|anthropic)\b', readme or '', re.I)))
-            dup = homes.get(judge.norm_url(c.get('demo_url'))) or self.copy_of(c)
+            same_demo = homes.get(judge.norm_url(c.get('demo_url')))
+            # 공개 작품은 자기 데모 주소로 자기 자신을 찾는다 — 그때는 복사본 검사로 넘어간다
+            dup = (same_demo if same_demo != c['id'] else None) or self.copy_of(c)
             c['duplicate_of'] = dup if dup and dup != c['id'] else None
             status, reasons = judge.decide(c, jc)
         rv = self.cfg['judge'].get('rules_version')
