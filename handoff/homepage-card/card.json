@@ -1,0 +1,20 @@
+{
+  "slug": "effect-gallery",
+  "title": "효과 갤러리",
+  "title_en": "Effect Gallery",
+  "subtitle": "Claude로 만든 모션그래픽·3D·셰이더 646점을 눈으로 보고 고르는 곳",
+  "description": "오픈소스로 공개된 Claude 영상 프롬프트 모음을 효과별로 분류하고, 썸네일과 영상으로 바로 비교할 수 있게 만든 갤러리입니다. 고른 작품은 원본 프롬프트를 복사해 내 작업에 응용할 수 있고, 매주 자동으로 신작을 모아 갱신합니다.",
+  "description_short": "Claude로 만든 영상 효과 646점을 썸네일·영상으로 비교하는 갤러리. 매주 자동 갱신.",
+  "url": "https://yonchelee.github.io/opus-fx-catalog/",
+  "source_url": "https://github.com/yonchelee/opus-fx-catalog",
+  "image": {
+    "wide": "cover-1200x630.png",
+    "wide_small": "cover-600x315.png",
+    "square": "cover-800x800.png",
+    "alt": "효과 갤러리 표지: 어두운 배경에 '효과 갤러리' 제목과 기울어진 썸네일 격자"
+  },
+  "tags": ["Claude", "모션그래픽", "갤러리", "자동화"],
+  "date": "2026-10-10",
+  "status": "운영 중 · 매주 월요일 갱신",
+  "credits": "데이터: yihui-dev/awesome-opus5-5-videos (MIT), Li-Evan/awesome-opus-5.5-video-prompts (CC BY 4.0). 영상·프롬프트의 권리는 각 원작자에게 있음."
+}
