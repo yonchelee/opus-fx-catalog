@@ -13,7 +13,7 @@ $('theme').onclick = () => {
 };
 
 const m = document.querySelector('[data-media]');
-if (m) m.addEventListener('error', () => { m.remove(); document.querySelector('.dmedia .none').hidden = false; });
+if (m) m.addEventListener('error', () => { const box = m.parentNode; m.remove(); const n = box && box.querySelector('.none'); if (n) n.hidden = false; });
 
 function flash(btn, text) { const o = btn.textContent; btn.textContent = text; setTimeout(() => btn.textContent = o, 1600); }
 function copy(t, btn) {

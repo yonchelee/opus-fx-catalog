@@ -57,6 +57,18 @@ try {
     ok('한국어 검색 "지도" 결과 있음', n > 5, `${n}건`);
     ok('검색 중에는 대표 효과를 접음', await p.locator('#featured').isHidden());
     ok('검색 결과 제목', (await p.textContent('#all-h')).includes('‘지도’ 검색 결과'));
+    ok('검색 중 정렬은 관련도순으로 표시', await p.inputValue('#sort') === 'rel');
+    ok('검색 중 상세 필터는 접히고 켜진 조건만', await p.locator('#filters').isHidden() && await p.locator('#ftoggle').isVisible());
+    {
+      const [top, vh] = await p.evaluate(() => [document.querySelector('#grid .card').getBoundingClientRect().top, innerHeight]);
+      ok('데스크톱: 검색하면 첫 결과가 첫 화면 안', top > 0 && top < vh - 120, `${Math.round(top)} / ${vh}`);
+    }
+    await p.selectOption('#sort', 'likes'); await p.waitForTimeout(150);
+    const likes = await p.$$eval('#grid .card .xlikes', e => e.slice(0, 8).map(x => x.textContent));
+    const num = t => { const v = t.replace(/[^\d.만]/g, ''); return v.includes('만') ? parseFloat(v) * 10000 : parseFloat(v.replace(/,/g, '')); };
+    ok('검색 중 좋아요순을 고르면 좋아요 순서', likes.map(num).every((v, i, a) => i === 0 || a[i - 1] >= v), likes.join(','));
+    ok('고른 정렬이 주소에 남음', new URL(p.url()).searchParams.get('sort') === 'likes');
+    await p.selectOption('#sort', 'rel'); await p.waitForTimeout(100);
     ok('검색어가 주소에 남음', new URL(p.url()).searchParams.get('q') === '지도');
     ok('켜진 조건 칩', await p.locator('.chipx').count() === 1);
     const titles = await p.$$eval('#grid .card .title', e => e.slice(0, 40).map(x => x.textContent).join(' '));
@@ -73,6 +85,12 @@ try {
     const lvBadges = await p.$$eval('#grid .card .badges .b:first-child', e => e.map(x => x.textContent));
     ok('"채팅에서 바로" 필터에는 그 표시만', lvBadges.length > 0 && lvBadges.every(t => t === '채팅에서 바로'), `${lvBadges.length}개`);
     ok('"환경 확인 필요" 배지에 설명', await p.locator('#grid .b.env0').count() === 0);
+    await p.selectOption('#lv', '2'); await p.waitForTimeout(150);
+    const lv2 = await p.$$eval('#grid .card .badges .b:first-child', e => [...new Set(e.map(x => x.textContent))]);
+    ok('"Claude Code까지"에는 확인 필요가 없음', lv2.length > 0 && lv2.every(t => t === '채팅에서 바로' || t === 'Claude Code'), lv2.join(','));
+    await p.selectOption('#lv', '0'); await p.waitForTimeout(150);
+    const lv0 = await p.$$eval('#grid .card .badges .b:first-child', e => [...new Set(e.map(x => x.textContent))]);
+    ok('"환경 확인 필요"만 따로 고를 수 있음', lv0.length === 1 && lv0[0] === '환경 확인 필요', lv0.join(','));
     await p.selectOption('#lv', ''); await p.waitForTimeout(150);
     ok('전체에는 "환경 확인 필요" 표시가 있음', await p.locator('#grid .b.env0').count() > 0 && (await p.getAttribute('#grid .b.env0 >> nth=0', 'title')).includes('렌더링'));
     await p.click('.fx[data-k="3d"]'); await p.click('.fx[data-k="shader"]'); await p.waitForTimeout(100);

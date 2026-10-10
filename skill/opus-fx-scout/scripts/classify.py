@@ -57,7 +57,7 @@ NEEDS = [
     ('node', 2, 'Node.js 프로젝트 (React·Vite 등)', r'\breact(\.js)? ?(app|components?|\+|and remotion)|\bin react\b|\bvite\b|\bnext\.?js\b|\bnpm\b|\bnode\.?js\b'),
     ('python', 2, 'Python 분석 (numpy 등)', r'\bnumpy\b|\bpython\b|\blibrosa\b'),
     ('blender', 3, 'Blender', r'\bblender\b'),
-    ('engine', 3, '게임엔진·네이티브 (Unity·Unreal·C++)', r'\bunity\b|\bunreal engine\b|\bue5\b|\bgodot\b|c\+\+|\bswift ?ui\b'),
+    ('engine', 3, '게임엔진·네이티브 (Unity·Unreal·Raylib·C++)', r'\bunity\b|\bunreal engine\b|\bue5\b|\bgodot\b|c\+\+|\bswift ?ui\b|\braylib\w*|\bmonogame\b|\bsdl2\b|\blove2d\b|\bxcode\b|\bandroid studio\b'),
     ('figma', 2, 'Figma 커넥터', r'\bfigma\b'),
     ('genvideo', 4, '영상 생성 AI (Seedance·Kling·Veo 등)', r'\bseedance\b|\bkling\b|\bveo\b|\brunway (gen|ml)\w*|\bsora\b|\bhailuo\b'),
     ('genimage', 4, '이미지 생성 AI (Seedream·GPT Image 등)', r'\bseedream\b|\bmidjourney\b|\bgpt[- ]?image\b|\bnano[- ]?banana\b|\bflux (pro|dev|kontext|1)|\bmagnific\b|\bfal(\.ai)?\b|\bfoul api\b|\bimage gen\w*'),

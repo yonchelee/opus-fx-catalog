@@ -90,3 +90,18 @@ test('넓은 분류에만 걸린 작품은 본문에 실제로 나오는 작품�
   const bodyHits = r.filter(x => /\bmaps?\b|globe|地图|지도/i.test(x.prompt)).length;
   assert.ok(music === -1 || music >= bodyHits, `음악 플레이어 ${music}위, 본문 일치 ${bodyHits}개`);
 });
+
+test('작성자 아이디 일부나 다른 단어의 앞부분에 걸리지 않는다 (검토 지적: @mappletour, MapleStory)', () => {
+  const r = hits('지도');
+  assert.ok(!r.some(x => /mappletour/i.test(x.author)), '작성자 @mappletour');
+  assert.ok(!r.some(x => /maplestory/i.test(x.title || '') && !/\bmaps?\b|지도|globe|地图/i.test(x.prompt + (x.title || ''))), 'MapleStory');
+  const fake = [prepare({id: 'x:1', title: 'MapleStory clone', prompt: '', fx: [], author: 'mappletour'}, {})];
+  assert.equal(search(fake, 'map', syn).length, 0);
+  assert.equal(search(fake, 'mappletour', syn).length, 1, '아이디 전체는 찾는다');
+  assert.equal(search(fake, 'maple', syn).length, 1, '입력한 4글자 이상은 앞부분 일치');
+});
+
+test('복수형은 같은 말로 본다', () => {
+  const fake = [prepare({id: 'x:1', title: 'world maps', prompt: '', fx: [], author: 'a'}, {})];
+  assert.equal(search(fake, 'map', syn).length, 1);
+});

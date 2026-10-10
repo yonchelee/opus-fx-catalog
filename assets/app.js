@@ -27,7 +27,7 @@ $('theme').onclick = () => {
 let DATA = [], PREP = [], ED = {uses: {}}, SYN = new Map();
 const BYID = new Map();
 let rows = [], shown = 0;
-const S = {q: '', use: '', fx: new Set(), sort: 'likes', cat: '', lv: '', full: '', vid: '', fav: '', pick: null};
+const S = {q: '', use: '', fx: new Set(), sort: '', cat: '', lv: '', full: '', vid: '', fav: '', pick: null};
 
 /* ---------- 주소 ↔ 상태 ---------- */
 function readURL() {
@@ -35,9 +35,9 @@ function readURL() {
   S.q = p.get('q') || '';
   S.use = ED.uses[p.get('use')] ? p.get('use') : '';
   S.fx = new Set((p.get('fx') || '').split(',').filter(f => FXN[f]));
-  S.sort = p.get('sort') === 'new' ? 'new' : 'likes';
+  S.sort = ['rel', 'likes', 'new'].includes(p.get('sort')) ? p.get('sort') : '';
   S.cat = CAT[p.get('cat')] ? p.get('cat') : '';
-  S.lv = ['1', '2'].includes(p.get('lv')) ? p.get('lv') : '';
+  S.lv = ['0', '1', '2'].includes(p.get('lv')) ? p.get('lv') : '';
   S.full = p.get('full') === '1' ? '1' : '';
   S.vid = p.get('vid') === '1' ? '1' : '';
   S.fav = p.get('fav') === '1' ? '1' : '';
@@ -50,7 +50,7 @@ function stateQuery() {
   if (S.q) p.set('q', S.q);
   if (S.use) p.set('use', S.use);
   if (S.fx.size) p.set('fx', [...S.fx].join(','));
-  if (S.sort !== 'likes') p.set('sort', S.sort);
+  if (S.sort) p.set('sort', S.sort);
   for (const k of ['cat', 'lv', 'full', 'vid', 'fav']) if (S[k]) p.set(k, S[k]);
   return p;
 }
@@ -86,12 +86,19 @@ function load() {
 
 /* ---------- 컨트롤 ---------- */
 function syncControls() {
-  $('q').value = S.q; $('sort').value = S.sort;
+  $('q').value = S.q; syncSort();
   for (const k of ['cat', 'lv', 'full', 'vid']) $(k).value = S[k];
   $('fav').checked = !!S.fav;
   document.body.classList.toggle('picking', !!S.pick);
   $('pickbar').classList.toggle('on', !!S.pick);
   if (S.pick) $('pickmsg').textContent = `추천 후보 ${S.pick.length}개`;
+}
+/* 정렬: 고르지 않았으면 검색 중에는 관련도순, 아니면 X 좋아요순. '관련도순'은 검색 중에만 고를 수 있다. */
+const effSort = () => S.sort === 'rel' && !S.q ? 'likes' : (S.sort || (S.q ? 'rel' : 'likes'));
+function syncSort() {
+  const rel = $('sort').querySelector('option[value="rel"]');
+  rel.hidden = rel.disabled = !S.q;
+  $('sort').value = effSort();
 }
 function buildUses() {
   const n = {};
@@ -143,7 +150,8 @@ $('index').addEventListener('click', e => {
   const k = b.dataset.k; S.fx.has(k) ? S.fx.delete(k) : S.fx.add(k);
   b.setAttribute('aria-pressed', S.fx.has(k)); changed();
 });
-for (const k of ['sort', 'cat', 'lv', 'full', 'vid']) $(k).addEventListener('change', () => { S[k] = $(k).value; changed(); });
+for (const k of ['cat', 'lv', 'full', 'vid']) $(k).addEventListener('change', () => { S[k] = $(k).value; changed(); });
+$('sort').addEventListener('change', () => { const v = $('sort').value; S.sort = v === (S.q ? 'rel' : 'likes') ? '' : v; changed(); });
 $('ftoggle').onclick = () => {
   const open = !$('filters').classList.contains('open');
   $('filters').classList.toggle('open', open); $('ftoggle').setAttribute('aria-expanded', open);
@@ -159,7 +167,7 @@ function clearAll() {
 $('showall').onclick = clearAll;
 
 /* ---------- 켜진 필터 ---------- */
-const OPT = {cat: v => CAT[v], lv: v => v === '1' ? '채팅에서 바로' : 'Claude Code까지(확인 필요 포함)', full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음', fav: () => '즐겨찾기만'};
+const OPT = {cat: v => CAT[v], lv: v => ({0: '환경 확인 필요', 1: '채팅에서 바로', 2: 'Claude Code까지'})[v], full: () => '프롬프트 전체 공개', vid: () => '영상 링크 있음', fav: () => '즐겨찾기만'};
 function activeChips() {
   const chips = [];
   if (S.q) chips.push(['q', `검색: ${S.q}`]);
@@ -185,19 +193,22 @@ $('active').addEventListener('click', e => {
 /* ---------- 목록 ---------- */
 function filtered() {
   if (S.pick) return S.pick.map(i => BYID.get(i)).filter(Boolean);
-  const lv = +S.lv, F = S.fav ? new Set(favs()) : null;
-  let pool = DATA.filter(r => (!F || F.has(r.id)) && (!S.cat || r.category === S.cat) && (!lv || (lv === 1 ? levelOf(r) === 1 : levelOf(r) <= lv)) && (!S.full || !r.partial) &&
+  const F = S.fav ? new Set(favs()) : null;
+  let pool = DATA.filter(r => (!F || F.has(r.id)) && (!S.cat || r.category === S.cat) && (S.lv === '' || (S.lv === '0' ? levelOf(r) === 0 : S.lv === '1' ? levelOf(r) === 1 : [1, 2].includes(levelOf(r)))) && (!S.full || !r.partial) &&
     (!S.vid || r.mp4) && (!S.use || r._uses.includes(S.use)) && [...S.fx].every(f => r.fx.includes(f)));
-  if (S.sort === 'likes') pool = pool.slice().sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
+  const sort = effSort();
+  if (sort !== 'new') pool = pool.slice().sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
   if (!S.q) return pool;
-  /* 검색어가 있으면 관련도가 먼저, 같은 관련도 안에서는 고른 정렬 */
+  /* 관련도순: 관련도가 먼저, 같으면 X 좋아요순. 다른 정렬을 고르면 검색 결과를 그 정렬로만 늘어놓는다. */
   const order = new Map(pool.map((r, i) => [r, i]));
-  const prep = PREP.filter(p => order.has(p.r)).sort((a, b) => order.get(a.r) - order.get(b.r));
-  return search(prep, S.q, SYN);
+  const found = search(PREP.filter(p => order.has(p.r)).sort((a, b) => order.get(a.r) - order.get(b.r)), S.q, SYN);
+  return sort === 'rel' ? found : found.sort((a, b) => order.get(a) - order.get(b));
 }
 let FAVS = new Set();
 function render() {
   FAVS = new Set(favs());
+  syncSort();
+  document.body.classList.toggle('searching', !!S.q);
   rows = filtered();
   activeChips();
   $('featured').hidden = !featured().length || narrowing();
@@ -400,7 +411,8 @@ function bindDetail(r) {
   $('applyslot').outerHTML = applyBlock(r);
   bindApply(r);
   const m = $('dlg').querySelector('[data-media]');
-  if (m) m.addEventListener('error', () => { m.remove(); $('dlg').querySelector('.dmedia .none').hidden = false; });
+  /* 창을 닫으며 내용을 지울 때도 영상이 늦게 error 를 보낸다 — 그때는 대체 문구 칸이 없다. */
+  if (m) m.addEventListener('error', () => { const box = m.parentNode; m.remove(); const n = box && box.querySelector('.none'); if (n) n.hidden = false; });
   $('dclose').onclick = () => $('dlg').close();
 }
 $('dlg').addEventListener('close', () => {

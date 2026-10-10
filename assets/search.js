@@ -4,7 +4,9 @@
    - 검색어를 띄어쓰기로 나눠 모두 맞아야 결과에 든다(AND).
    - 각 검색어는 동의어 묶음(editorial.json synonyms)으로 넓힌다: 지도 → map, globe …
      한국어 조사(을·를·에 …)가 붙어도 묶음을 찾는다.
-   - 영문 동의어는 단어 앞 경계에서만 맞춘다(map 이 bitmap 에 걸리지 않게).
+   - 영문은 단어 전체로 맞춘다(복수형 s·es 허용). map 이 bitmap·maplestory 에 걸리지 않게.
+     입력한 말 그대로가 4글자 이상이면 앞부분 일치도 허용한다(입력 중 'partic' → particle).
+   - 작성자는 입력한 말이 아이디 전체와 같을 때만 맞춘다(@mappletour 가 'map'에 걸리지 않게). 동의어로 넓히지 않는다.
    - 점수(검색어마다 가장 높은 곳 하나): 제목에 입력한 말 그대로 20 > 제목에 동의어 16 > 편집 검색어·설명 10
      > 작성자 3 > 프롬프트 본문 2 > 용도·효과 분류 같은 넓은 분류 1.
      넓은 분류(예: 용도 '지도·데이터 시각화', 효과 '데이터·지도')는 자동 분류로 여러 작품을 한꺼번에 묶어
@@ -42,9 +44,9 @@ export function expand(term, syn) {
   return [t];
 }
 
-function matcher(alt) {
+function matcher(alt, prefix) {
   if (ASCII.test(alt)) {
-    const re = new RegExp('(^|[^a-z0-9])' + reEsc(alt));
+    const re = new RegExp('(^|[^a-z0-9])' + reEsc(alt) + (prefix ? '' : '(s|es)?($|[^a-z0-9])'));
     return s => re.test(s);
   }
   return s => s.includes(alt);
@@ -57,10 +59,10 @@ export function prepare(r, uses) {
   return {
     r,
     title: normalize([ed.title_ko, r.title].filter(Boolean).join(' | ')),
+    author: normalize(r.author).replace(/^@/, ''),
     f: [
       [10, normalize([ed.summary_ko, ...(ed.keywords || [])].filter(Boolean).join(' | '))],
       [1, normalize([...useTitles, ...(r.fx || []).map(f => FXN[f] + ' ' + f), CAT[r.category], r.category, LV[r.level], ...(r.tech || [])].filter(Boolean).join(' | '))],
-      [3, normalize('@' + (r.author || '') + ' ' + (r.author || ''))],
       [2, normalize(r.prompt)]
     ]
   };
@@ -70,8 +72,9 @@ export function prepare(r, uses) {
 export function score(p, terms) {
   let total = 0;
   for (const {term, alts} of terms) {
-    const ms = alts.map(matcher);
-    let best = matcher(term)(p.title) ? 20 : ms.some(m => m(p.title)) ? 16 : 0;
+    const ms = alts.map(a => matcher(a, a === term && ASCII.test(a) && a.length >= 4));
+    let best = matcher(term, ASCII.test(term) && term.length >= 4)(p.title) ? 20 : ms.some(m => m(p.title)) ? 16 : 0;
+    if (best < 3 && p.author && term.replace(/^@/, '') === p.author) best = 3;
     for (const [w, text] of p.f) {
       if (w > best && ms.some(m => m(text))) best = w;
     }
