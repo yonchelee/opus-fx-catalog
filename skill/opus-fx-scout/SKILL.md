@@ -85,6 +85,7 @@ python3 scripts/find.py --kw scroll parallax typography --any-fx kinetic morph -
 ### 6. 확인 후
 사용자가 고르면, 지금 환경에서 가능한 범위에서 바로 만들거나(채팅이면 HTML 아티팩트, Claude Code면 프로젝트),
 환경이 안 맞으면 어디서 무엇을 실행하면 되는지 안내합니다.
+짧은 MP4 클립이나 설명 영상처럼 전용 제작 스킬(HyperFrames 등)이 더 잘 만드는 결과물이면, `references/tooling.md` 5절대로 그 스킬에 응용 프롬프트를 브리프로 넘기는 길도 함께 제시합니다.
 
 ## 정직하게 알려야 할 것
 추천과 함께, 해당되는 것만 짧게 언급합니다.

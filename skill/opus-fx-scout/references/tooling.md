@@ -8,6 +8,7 @@
 2. needs별 도구와 확인 방법
 3. 플러그인·커넥터를 실제로 찾는 법
 4. 사용자에게 보여줄 형식
+5. 바로 넘길 수 있는 제작 스킬 (HyperFrames)
 
 ## 1. 실행 단계(level)
 
@@ -28,7 +29,7 @@ level은 원본 작품이 쓴 방식 기준입니다. 같은 효과를 더 가�
 |---|---|---|---|
 | (없음) | 브라우저 | - | HTML 하나 |
 | render | Playwright(헤드리스 Chromium) + ffmpeg | `npx playwright --version`, `ffmpeg -version` | 프레임 단위 캡처 후 MP4 인코딩. 대부분 원본이 이 방식 |
-| remotion | Node.js 18+ + Remotion | `node -v`, `npx remotion --version` | React로 영상 제작. Remotion 공식 에이전트 스킬이 있는지 검색해 볼 것 |
+| remotion | Node.js 18+ + Remotion | `node -v`, `npx remotion --version` | React로 영상 제작. Remotion 공식 에이전트 스킬이 있는지 검색해 볼 것. 같은 결과를 HTML로 만드는 HyperFrames도 대안 (5절) |
 | node | Node.js + npm (React·Vite·Next) | `node -v` | |
 | python | Python 3 + numpy (비트 분석 등) | `python3 -c "import numpy"` | 음악 박자 분석에 자주 쓰임 |
 | blender | Blender 설치 | `blender --version` | Blender를 Claude가 조작하는 MCP 서버(오픈소스)도 있음 → 검색 |
@@ -73,3 +74,36 @@ level은 원본 작품이 쓴 방식 기준입니다. 같은 효과를 더 가�
 
 지금 환경에 플러그인 검색 도구가 일부만 있으면 있는 것만 쓰고, 없는 도구 때문에 멈추지 마세요.
 마지막 질문 예: "어떤 걸로 진행할까요? 필요한 것 중 이미 있는 것과 설치해도 되는 것을 알려주세요."
+
+## 5. 바로 넘길 수 있는 제작 스킬 (HyperFrames)
+
+추천은 이 스킬이 하고, 실제 영상 제작은 전용 제작 스킬에 넘기는 게 나을 때가 있습니다.
+**HyperFrames**(HeyGen, 오픈소스, Apache-2.0, 제3자 도구)는 HTML로 장면을 짜고 헤드리스 Chrome + FFmpeg로 MP4를 렌더링하는 Claude Code 플러그인입니다.
+(2026-10-10에 저장소 heygen-com/hyperframes에서 확인한 내용입니다. 자주 바뀌므로 안내 전에 README를 다시 확인하세요.)
+
+- 실행 환경: Claude Code(로컬 또는 클라우드 세션). Node.js 22+, FFmpeg, macOS Apple Silicon 또는 Linux x64. **claude.ai 채팅에서는 쓸 수 없음**
+- 설치 (사용자 확인 후):
+  ```bash
+  claude plugin marketplace add heygen-com/hyperframes
+  claude plugin install hyperframes@hyperframes
+  # 스킬 하나만: npx skills add heygen-com/hyperframes --skill motion-graphics
+  ```
+- 진입점은 `/hyperframes`(알맞은 제작 스킬로 안내). 렌더 전에 미리보기를 보여주고 승인을 받는 흐름이라 바로 비용이 나가지 않음
+- 이미지 생성 키(Gemini 등)는 선택. 없으면 코드로 그리는 쪽으로 동작
+
+결과물에 따라 넘길 스킬:
+
+| 추천한 결과물 | HyperFrames 스킬 |
+|---|---|
+| 30초 이하, 내레이션 없는 짧은 그래픽: 키네틱 타이포, 숫자 카운트업, 차트, 로고 스팅, 하단 자막, **지도 애니메이션**(지역 강조·장소 연결·확대), 웹페이지·트윗·기사 카드 | `/motion-graphics` |
+| 길거나 여러 장면, 브랜드 릴 | `/general-video` |
+| 제품·서비스 런칭 영상 | `/product-launch-video` |
+| 글·메모·주제로 만드는 설명 영상 | `/faceless-explainer` |
+| 발표·인터랙티브 슬라이드 | `/slideshow` |
+| 카탈로그의 Remotion 프롬프트를 그대로 쓰고 싶을 때 | `/remotion-to-hyperframes`(기존 Remotion 코드 변환) |
+
+안내 방식:
+- 추천한 효과가 위 표에 맞으면 "만들려면 필요한 것" 표에 한 줄을 더합니다:
+  `| HyperFrames /motion-graphics (선택) | 이 연출을 짧은 MP4로 바로 제작 | 설치 여부 확인 필요 | Claude Code에서 위 설치 명령 |`
+- 응용 프롬프트는 그 스킬에 그대로 넘길 브리프로도 쓸 수 있다고 덧붙입니다.
+- 인터랙티브 웹(스크롤 전시, 게임, 3D 탐험)은 HyperFrames 대상이 아닙니다. 채팅 HTML이나 일반 웹 프로젝트로 안내합니다.
