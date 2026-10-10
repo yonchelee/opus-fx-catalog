@@ -420,3 +420,113 @@ class JudgeUnits(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class StarsPartial(Base):
+    """별 갱신 부분 실패·추적 범위."""
+    def _seed_two_published(self):
+        other = repo(120, 'ink-shader', 'Ink bleed shader effect demo', ['shader'], 60, home='https://maker.github.io/ink/')
+        READMES['maker/ink-shader'] = '![p](p.gif)'
+        CONTENTS['maker/ink-shader'] = ['index.html']
+        stars = {'N101': node(101, 'aurora-shader', 40), 'N120': node(120, 'ink-shader', 60)}
+        self.run_once(FakeClient({'topic:shader': [EFFECT, other]}, stars=stars))
+        return stars
+
+    def test_budget_mid_way_keeps_fetched_and_old_values(self):
+        stars = self._seed_two_published()
+        cfg = json.loads((self.d / 'discovery/config.json').read_text())
+        cfg['budget']['graphql_chunk'] = 1  # 1개씩 물어 두 번째에서 예산이 끊기게
+        (self.d / 'discovery/config.json').write_text(json.dumps(cfg))
+
+        class OneThenBudget(FakeClient):
+            n = 0
+            def repos_by_node(self, ids):
+                OneThenBudget.n += 1
+                if OneThenBudget.n >= 2:
+                    raise ghapi.Budget('graphql')
+                return super().repos_by_node(ids)
+        c2 = OneThenBudget({}, stars={'N101': node(101, 'aurora-shader', 45), 'N120': node(120, 'ink-shader', 70)})
+        log = self.run_once(c2, now='2026-10-11T06:00:00Z', today=TODAY + timedelta(days=1))
+        self.assertIn('stars', log['stop'] or '')
+        self.assertEqual((log['counts']['stars_updated'], log['counts']['stars_failed']), (1, 1))
+        pub = self.public()
+        at = sorted(r['repo']['stars_at'] for r in pub.values())
+        self.assertEqual(at, [NOW, '2026-10-11T06:00:00Z'], '받은 묶음은 반영, 못 받은 묶음은 옛 값과 옛 시각')
+        self.assertTrue(all(r['repo']['stars'] > 0 for r in pub.values()), '0 으로 적지 않는다')
+        series = json.loads((self.d / 'discovery/stars.json').read_text())
+        self.assertEqual(sorted(len(v) for v in series.values()), [1, 2], '못 받은 쪽은 점을 추가하지 않는다')
+
+    def test_tracked_excludes_held_libraries(self):
+        self.run_once(FakeClient({'topic:shader': [EFFECT, LIB, LOWSTAR]},
+                                 stars={'N101': node(101, 'aurora-shader', 40), 'N102': node(102, 'motionkit', 9000), 'N106': node(106, 'tiny-particles', 1)}))
+        run = discover.Run(self.d, 'daily', FakeClient({}), today=TODAY, now=NOW)
+        names = sorted(c['full_name'] for c in run.tracked_for_stars())
+        self.assertIn('maker/aurora-shader', names)
+        self.assertIn('maker/tiny-particles', names, '보류된 효과(별 부족)는 계속 잰다')
+        self.assertNotIn('maker/motionkit', names, '보류된 라이브러리는 재지 않는다')
+
+
+class PipelineReconcile(unittest.TestCase):
+    def test_live_mismatch_marks_publish_failed_not_success(self):
+        import pipeline
+        stages = {}
+        local = {'run_id': '111', 'updated': '2026-10-10T00:00:00Z'}
+        orig = pipeline.urllib.request.urlopen
+        class R:
+            def __init__(self, rid): self.rid = rid
+            def read(self): return json.dumps({'run_id': self.rid}).encode()
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+        pipeline.urllib.request.urlopen = lambda req, timeout=20: R('100')
+        try:
+            pipeline.reconcile_publish(stages, local, '2026-10-11T06:00:00Z')
+            self.assertFalse(stages['publish']['ok'])
+            self.assertIn('반영되지 않음', stages['publish']['message'])
+            self.assertNotIn('last_success', stages['publish'])
+            pipeline.urllib.request.urlopen = lambda req, timeout=20: R('111')
+            pipeline.reconcile_publish(stages, local, '2026-10-11T07:00:00Z')
+            self.assertTrue(stages['publish']['ok'])
+            self.assertEqual(stages['publish']['last_success'], '2026-10-10T00:00:00Z')
+            def boom(req, timeout=20): raise OSError('down')
+            pipeline.urllib.request.urlopen = boom
+            pipeline.reconcile_publish(stages, local, '2026-10-11T08:00:00Z')
+            self.assertTrue(stages['publish']['ok'], '사이트를 못 읽으면 이전 판단을 바꾸지 않는다')
+        finally:
+            pipeline.urllib.request.urlopen = orig
+
+
+class JudgeV11(unittest.TestCase):
+    def setUp(self):
+        self.cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
+
+    def cls(self, name, desc, topics, readme='', files=('index.html',), lang='JavaScript'):
+        return judge.classify_repo({'name': name, 'description': desc, 'topics': list(topics), 'language': lang}, readme, list(files), self.cfg)
+
+    def test_real_effects_are_relevant(self):
+        # 실제로 '관련 없음'으로 버려졌던 작품
+        for name, desc in [('RainEffect', 'Some experimental rain and water drop effects in different styles'),
+                           ('jquery.ripples', 'Add a water ripple effect to your background using WebGL.'),
+                           ('ShaderDemos', 'some shaders for cocos creator')]:
+            r = self.cls(name, desc, [])
+            # 1차 관문(head_relevant)은 'relevant 또는 hits 있음'이다 — README 를 받기 전이라 설명만으로 판단
+            self.assertTrue(r['relevant'] or r['hits'], name)
+        # 효과가 맞아도 게임 엔진용 셰이더 모음은 보류(라이브러리)로 가는 것이 맞다 — 관련성과 유형은 다른 판단
+        self.assertEqual(self.cls('ShaderDemos', 'some shaders for cocos creator', [])['kind'], 'library')
+
+    def test_real_tools_held(self):
+        # 실제로 효과(effect)로 잘못 판정됐던 저장소
+        for name, desc, topics in [('easydiffusion', 'An easy 1-click way to create beautiful artwork on your PC', ['generative-art']),
+                                   ('discoart', '🪩 Create Disco Diffusion artworks in one line', ['generative-art']),
+                                   ('ParticleTextView', '一个用粒子动画显示文字的 Android 自定义 View', ['particles', 'animation']),
+                                   ('Noble', 'A Minecraft shader pack that enhances your experience', ['glsl', 'shaders']),
+                                   ('MBTwitterScroll', "Recreate Twitter's profile page scrolling animation for UITableView and UIScrollView", ['animation'])]:
+            self.assertEqual(self.cls(name, desc, topics)['kind'], 'library', name)
+
+    def test_real_effects_stay_effects(self):
+        for name, desc, topics in [('WebGL-Fluid-Simulation', 'Play with fluids in your browser (works even on mobile)', ['webgl']),
+                                   ('matrix', 'matrix (web-based green code rain, made with love)', ['webgl']),
+                                   ('polygon-shredder', 'The polygon shredder that takes many cubes and turns them into confetti', ['webgl', 'threejs']),
+                                   ('differential-line', 'a generative algorithm', ['generative-art', 'animation']),
+                                   ('Burn-My-Windows', 'Disintegrate your windows with style.', ['glsl', 'shader-effects']),
+                                   ('fieldplay', 'A vector field explorer', ['glsl', 'particles', 'webgl'])]:
+            self.assertEqual(self.cls(name, desc, topics)['kind'], 'effect', name)

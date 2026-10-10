@@ -31,7 +31,7 @@ find.py는 셋을 합쳐 쓰고, `find.py --stats` 첫 줄에 어느 층이 몇 
 
 ## 자동 실행이 맡는 것과 사람이 맡는 것
 
-- **GitHub Actions(매일·매주)**: 등록 출처 동기화(`sync.py --out`)와 GitHub 전체 공개 저장소 발굴(`discover.py`)을 `pipeline.py` 로 돌리고 커밋·배포한다.
+- **GitHub Actions(매일·매주)**: 등록 출처 동기화(`sync.py --out`)와 GitHub 공개 저장소 키워드·기간별 탐색(`discover.py`)을 `pipeline.py` 로 돌리고 커밋·배포한다.
   클라우드 Routine 에서는 `sync.py` 를 다시 돌리지 않는다(중복 실행·커밋 충돌 방지).
 - **클라우드 Routine(매주 월)**: 아래 2단계(새 프롬프트 모음 발굴)만 한다. 발굴 결과 `discovery/candidates.json` 의 `status: source`(링크 자료집)도 다음 출처 후보로 함께 본다.
 

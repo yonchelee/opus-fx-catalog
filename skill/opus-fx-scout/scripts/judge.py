@@ -21,7 +21,8 @@ def words(text):
 
 
 def has_word(text, w):
-    return re.search(r'(^|[^a-z0-9])' + re.escape(w) + r'($|[^a-z0-9])', text) is not None
+    """낱말 단위 일치. 복수형(s·es)을 허용한다 — 'shaders'·'effects'가 'shader'·'effect'에 걸리도록."""
+    return re.search(r'(^|[^a-z0-9])' + re.escape(w) + r'(s|es)?($|[^a-z0-9])', text) is not None
 
 
 def raw_base(full_name, branch):

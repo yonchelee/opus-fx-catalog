@@ -11,8 +11,31 @@
   3  수집 단계가 모두 실패 → 커밋하지 않는다
   4  생성·검증 실패 → 커밋하지 않는다(불완전한 결과를 배포하지 않는다)
 """
-import argparse, json, os, subprocess, sys, traceback
+import argparse, json, os, subprocess, sys, traceback, urllib.request
 from pathlib import Path
+
+SITE_STATUS = 'https://yonchelee.github.io/opus-fx-catalog/status.json'
+
+
+def reconcile_publish(stages, local_status, now):
+    """지난 실행 결과가 공개 사이트에 실제로 올라갔는지 본다(Pages 빌드 실패·확인 실패 회복용).
+    사이트의 status.json run_id 가 저장소의 것과 다르면 지난 공개는 실패한 것 — 성공으로 남기지 않는다.
+    이번 실행이 다시 커밋·빌드하므로 미배포 변경은 여기서 회복된다."""
+    prev = local_status.get('run_id')
+    if not prev:
+        return
+    try:
+        with urllib.request.urlopen(urllib.request.Request(SITE_STATUS + '?v=' + now.replace(':', ''), headers={'Cache-Control': 'no-cache'}), timeout=20) as r:
+            live = json.loads(r.read().decode()).get('run_id')
+    except Exception as e:  # noqa: BLE001 — 사이트를 못 읽으면 판단하지 않는다
+        stages['publish'] = stage_status(stages, 'publish', stages.get('publish', {}).get('ok', False), now, f'공개 사이트 확인 불가: {type(e).__name__}')
+        stages['publish']['ok'] = stages.get('publish', {}).get('ok', False)
+        return
+    ok = live == prev
+    s = stage_status(stages, 'publish', ok, now, f'지난 실행 {prev} 공개됨' if ok else f'지난 실행 {prev} 이 공개 사이트에 반영되지 않음(사이트는 {live}) — 이번 실행이 다시 배포')
+    if ok:
+        s['last_success'] = local_status.get('updated', now)
+    stages['publish'] = s
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -65,12 +88,15 @@ def main():
     ap.add_argument('--skip-sync', action='store_true')
     ap.add_argument('--skip-discover', action='store_true')
     ap.add_argument('--run-id', default=os.environ.get('GITHUB_RUN_ID', ''))
+    ap.add_argument('--check-site', action='store_true', help='공개 사이트 status.json 과 대조해 지난 배포 결과를 기록(Actions 에서는 자동)')
     a = ap.parse_args()
     root = Path(a.dir).resolve()
     now = discover.now_iso()
     run_id = a.run_id or 'local-' + now.replace(':', '').replace('-', '')
     status = discover.read_json(root / 'status.json', {})
     stages = status.get('stages', {})
+    if os.environ.get('GITHUB_ACTIONS') or a.check_site:
+        reconcile_publish(stages, status, now)
     log = {'run_id': run_id, 'mode': a.mode, 'started': now, 'where': 'github-actions' if os.environ.get('GITHUB_ACTIONS') else 'local'}
     collected = []
 
@@ -115,7 +141,13 @@ def main():
 
     log['finished'] = discover.now_iso()
     log['exit'] = code
-    status = {'updated': log['finished'], 'run_id': run_id, 'mode': a.mode, 'stages': stages,
+    dc = (log.get('discover') or {}).get('counts') or {}
+    last_run = {'run_id': run_id, 'mode': a.mode, 'at': log['finished'], 'exit': code,
+                'candidates_new': dc.get('new_candidates', 0), 'published_new': dc.get('published_new', 0), 'held_new': dc.get('held_new', 0),
+                'withdrawn': dc.get('withdrawn', 0), 'source_new': dc.get('source_new', 0), 'rejected_new': dc.get('rejected_new', 0),
+                'stars_updated': dc.get('stars_updated', 0), 'stars_failed': dc.get('stars_failed', 0),
+                'stop': (log.get('discover') or {}).get('stop'), 'errors': len((log.get('discover') or {}).get('errors') or [])}
+    status = {'updated': log['finished'], 'run_id': run_id, 'mode': a.mode, 'stages': stages, 'last_run': last_run,
               'published_github': len(json.loads((root / 'github.json').read_text())['items']) if (root / 'github.json').exists() else 0}
     discover.write_json(root / 'status.json', status)
     runs = root / 'discovery/runs'

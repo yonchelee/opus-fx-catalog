@@ -314,33 +314,50 @@ class Run:
             return False
 
     # ---------- 별 수 ----------
+    def tracked_for_stars(self):
+        """별을 매일 재는 대상: 공개 작품과, 조건이 갖춰지면 공개될 수 있는 보류 후보(효과·모음·유형 미정).
+        보류된 라이브러리·앱·자료집까지 재면 GraphQL 예산(100개당 1회)을 금방 넘긴다."""
+        return [c for c in self.cands.values() if c.get('node_id') and
+                (c.get('status') == 'published' or (c.get('status') == 'held' and c.get('kind') in ('effect', 'collection', 'unknown')))]
+
     def refresh_stars(self):
-        tracked = [c for c in self.cands.values() if c.get('status') in ('published', 'held') and c.get('node_id')]
-        try:
-            nodes = self.c.repos_by_node([c['node_id'] for c in tracked])
-        except ghapi.Budget:
-            raise
-        except Exception as e:  # noqa: BLE001
-            self.log['errors'].append(f'stars: {e}')
-            self.log['counts']['stars_failed'] += len(tracked)
-            return
-        for c in tracked:
-            n = nodes.get(c['node_id'])
-            if not n:
-                c['gone'] = True  # 접근 불가 — 지우지 않고 표시만
-                self.log['counts']['gone'] += 1
-                continue
-            c.pop('gone', None)
-            if n['nameWithOwner'] != c['full_name']:
-                c.setdefault('former_names', []).append(c['full_name'])
-                c['full_name'], c['url'] = n['nameWithOwner'], n['url']
-                c['owner'], c['name'] = n['nameWithOwner'].split('/', 1)
-                self.log['counts']['renamed'] += 1
-            c['stars'], c['stars_at'] = n['stargazerCount'], self.now
-            c['archived'], c['pushed_at'] = n['isArchived'], n['pushedAt']
-            key = str(c['repo_id'])
-            self.stars[key] = popularity.add_point(self.stars.get(key), self.now, n['stargazerCount'], self.cfg['trend']['keep_points'])
-            self.log['counts']['stars_updated'] += 1
+        tracked = self.tracked_for_stars()
+        by_node = {c['node_id']: c for c in tracked}
+        # 100개씩 끊어 묻는다. 중간에 예산·오류가 나도 이미 받은 묶음은 반영하고, 못 받은 묶음은 옛 값을 그대로 둔다(0 으로 적지 않는다).
+        ids = list(by_node)
+        stop = None
+        size = int(self.cfg.get('budget', {}).get('graphql_chunk') or 100)
+        for i in range(0, len(ids), size):
+            chunk = ids[i:i + size]
+            try:
+                nodes = self.c.repos_by_node(chunk)
+            except ghapi.Budget as e:
+                stop = e
+                self.log['counts']['stars_failed'] += len(ids) - i
+                break
+            except Exception as e:  # noqa: BLE001
+                self.log['errors'].append(f'stars: {type(e).__name__}: {e}')
+                self.log['counts']['stars_failed'] += len(ids) - i
+                break
+            for nid in chunk:
+                c, n = by_node[nid], nodes.get(nid)
+                if not n:
+                    c['gone'] = True  # 접근 불가 — 지우지 않고 표시만
+                    self.log['counts']['gone'] += 1
+                    continue
+                c.pop('gone', None)
+                if n['nameWithOwner'] != c['full_name']:
+                    c.setdefault('former_names', []).append(c['full_name'])
+                    c['full_name'], c['url'] = n['nameWithOwner'], n['url']
+                    c['owner'], c['name'] = n['nameWithOwner'].split('/', 1)
+                    self.log['counts']['renamed'] += 1
+                c['stars'], c['stars_at'] = n['stargazerCount'], self.now
+                c['archived'], c['pushed_at'] = n['isArchived'], n['pushedAt']
+                key = str(c['repo_id'])
+                self.stars[key] = popularity.add_point(self.stars.get(key), self.now, n['stargazerCount'], self.cfg['trend']['keep_points'])
+                self.log['counts']['stars_updated'] += 1
+        if stop:
+            raise stop
 
     # ---------- 공개용 ----------
     def public_items(self):
