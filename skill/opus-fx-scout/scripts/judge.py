@@ -1,7 +1,7 @@
 """GitHub 후보 판정 (순수 함수, 외부 호출 없음).
 
 후보 하나 = 저장소 하나. 판정 결과
-  kind   : effect(개별 효과·데모) | collection(예제 모음) | library(제작용 라이브러리·프레임워크) | list(링크 자료집) | unknown
+  kind   : effect(개별 효과·데모) | collection(예제 모음) | library(제작용 라이브러리·프레임워크·도구) | app(앱·게임·학습 서비스) | list(링크 자료집) | unknown
   status : published(자동 공개) | held(보류 — 사유 기록) | source(자료집 → 추가 발굴 출처 후보) | rejected(시각 효과와 무관)
 라이브러리와 자료집은 완성된 작품처럼 공개하지 않는다. 원본에 없는 프롬프트를 만들지 않는다.
 """
@@ -89,19 +89,24 @@ def classify_repo(repo, readme, contents, cfg):
     # README 첫 문단의 자기소개("X is a component/library…")도 도구 신호
     intro = re.sub(r'!\[[^\]]*\]\([^)]*\)|<[^>]+>', ' ', (readme or '')[:800])
     self_tool = re.search(r'\b(is|are) an? (\w+ ){0,3}(component|library|framework|plugin|tool|toolkit|engine|sdk|package|module|wrapper)\b', intro, re.I) is not None
-    effect_sig = any_word(cfg['effect_words'], head)
+    # 작품 신호: 이름·설명에 있거나, 주제에만 있다면 시각 기술 주제(셰이더·파티클 등)와 함께 있을 때만
+    effect_sig = any_word(cfg['effect_words'], namedesc) or (
+        any_word(cfg['effect_words'], words(' '.join(t.replace('-', ' ') for t in topics))) if set(topics) & set(cfg.get('visual_topics', [])) else [])
+    app = any_word(cfg.get('app_words', []), namedesc + ' ' + ' '.join(topics).replace('-', ' ') + ' ')
     if 'awesome' in name or 'awesome-list' in topics or 'awesome' in topics or any_word(cfg['list_words'], namedesc) or (links > 60 and (only_docs or not code_files)):
         kind = 'list'
     elif tool or set(topics) & set(cfg['library_topics']) or npm_pkg or self_tool:
         # 도구·라이브러리·플랫폼·앱. 효과를 '만드는' 쪽이지 완성된 효과가 아니다.
         kind = 'library'
+    elif app:
+        kind = 'app'  # 앱·게임·학습 서비스 — 시각 효과를 보여 주려고 만든 작품이 아니다
     elif any_word(cfg['collection_words'], head) or (effect_sig and re.search(r'collection of|^#{1,3}\s*(examples|demos|experiments|sketches|gallery)\b', (readme or '')[:3000], re.I | re.M)):
         kind = 'collection'
     elif effect_sig and (code_files or repo.get('language')):
         kind = 'effect'
     else:
         kind = 'unknown'  # 작품이라는 신호가 없다 — 보류
-    return {'kind': kind, 'relevant': relevant, 'strong_topics': strong, 'hits': hits, 'tool_words': tool, 'effect_words': effect_sig,
+    return {'kind': kind, 'relevant': relevant, 'strong_topics': strong, 'hits': hits, 'tool_words': tool or app, 'effect_words': effect_sig,
             'has_code': bool(code_files) or (bool(repo.get('language')) and not only_docs), 'links': links}
 
 
@@ -140,6 +145,8 @@ def decide(c, cfg, homepage_owner=None):
         return 'rejected', ['시각 효과와 관련 낮음 (주제·설명에서 효과 어휘 부족)']
     if c['kind'] == 'list':
         return 'source', ['링크 자료집 — 작품이 아니라 추가 발굴 출처 후보']
+    if c['kind'] == 'app':
+        return 'held', ['앱·게임·학습 서비스 — 시각 효과 작품이 아님' + (f" ({', '.join(c.get('tool_words') or [])})" if c.get('tool_words') else '')]
     if c['kind'] == 'library':
         return 'held', ['제작용 라이브러리·프레임워크·도구 — 완성된 작품으로 공개하지 않음' + (f" ({', '.join(c.get('tool_words') or [])})" if c.get('tool_words') else '')]
     if c.get('fork'):

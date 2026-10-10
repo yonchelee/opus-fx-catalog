@@ -212,6 +212,28 @@ class Discovery(Base):
         created = [q for q in c.queries if 'topic:shader' in q and 'created:' in q]
         self.assertTrue(any('created:2026-09-26..2026-10-03' in q for q in created), created[:6])
 
+    def test_rules_change_withdraws_wrongly_published_but_same_rules_keep(self):
+        app = repo(107, 'snap-clone-demo', 'Snapchat clone demo with face filter animation', ['shader'], 50, home='https://maker.github.io/snap/')
+        READMES['maker/snap-clone-demo'] = '![s](s.gif)'
+        CONTENTS['maker/snap-clone-demo'] = ['index.html']
+        stars = {'N107': node(107, 'snap-clone-demo', 50)}
+        old = dict(self.cfg); old['judge'] = dict(self.cfg['judge'], app_words=[], rules_version=1)
+        (self.d / 'discovery/config.json').write_text(json.dumps(old))
+        self.run_once(FakeClient({'topic:shader': [app]}, stars=stars))
+        self.assertIn('gh:107', self.public(), '옛 규칙으로는 공개')
+        # 같은 규칙에서 별이 기준 아래로 떨어져도 내리지 않는다
+        stale = '2026-10-30T06:00:00Z'
+        self.run_once(FakeClient({}, stars={'N107': node(107, 'snap-clone-demo', 1)}), now=stale, today=date(2026, 10, 30))
+        self.assertIn('gh:107', self.public())
+        # 규칙이 고쳐지면 다시 판정해 내린다
+        (self.d / 'discovery/config.json').write_text(json.dumps(self.cfg))
+        log = self.run_once(FakeClient({}, stars=stars), now='2026-10-31T06:00:00Z', today=date(2026, 10, 31))
+        self.assertNotIn('gh:107', self.public())
+        c = self.cands()['107']
+        self.assertEqual((c['status'], c['kind']), ('held', 'app'))
+        self.assertIn('withdrawn', c)
+        self.assertEqual(log['counts'].get('withdrawn'), 1)
+
     def test_editorial_untouched(self):
         before = (self.d / 'editorial.json').read_bytes()
         self.run_once(FakeClient({'topic:shader': [EFFECT]}, stars={'N101': node(101, 'aurora-shader', 40)}))
@@ -275,6 +297,16 @@ class JudgeUnits(unittest.TestCase):
         for name, desc, topics in tools:
             k = judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'JavaScript'}, '## Examples\nexamples below', ['index.html'], cfg)['kind']
             self.assertIn(k, ('library', 'unknown'), f'{name} → {k}')
+        apps = [('snapchat-clone', 'A Snapchat clone built with React and Redux', ['demo', 'clone', 'face-filters']),
+                ('k8sgames', 'Learn Kubernetes by playing. 3D browser game, simulation', ['browser-game', 'education'])]
+        for name, desc, topics in apps:
+            self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'app', name)
+        for name, desc, topics in [('zig-gamedev', 'Dev repo for @zig-gamedev libs and sample applications', ['demos']),
+                                   ('remocn', 'Production-ready animations, transitions, backgrounds, and scenes for Remotion', ['remotion', 'shadcn'])]:
+            self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
+        for name, desc, topics in [('fieldplay', 'A vector field explorer', ['glsl', 'particles', 'webgl']),
+                                   ('HologramShader', 'Test of an hologram material made in Unity.', ['effect', 'shader'])]:
+            self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'GLSL'}, '', ['index.html'], cfg)['kind'], 'effect', name)
         effects = [('WebGL-Fluid-Simulation', 'Play with fluids in your browser (works even on mobile)', ['webgl', 'fluid-simulation']),
                    ('matrix', 'matrix (web-based green code rain, made with love)', ['webgl'])]
         for name, desc, topics in effects:

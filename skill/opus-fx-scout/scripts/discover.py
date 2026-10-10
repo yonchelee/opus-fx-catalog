@@ -192,6 +192,8 @@ class Run:
     def needs_enrich(self, c):
         if c.get('status') in ('new', None):
             return True
+        if c.get('rules_version') != self.cfg['judge'].get('rules_version'):
+            return True  # 판정 규칙이 바뀌었다 — 다시 판정
         last = c.get('last_checked')
         return not last or (popularity.parse(self.now) - popularity.parse(last)).days >= self.cfg['judge']['enrich_stale_days']
 
@@ -202,7 +204,8 @@ class Run:
     def enrich_and_judge(self):
         jc = self.cfg['judge']
         todo = [c for c in self.cands.values() if self.needs_enrich(c)]
-        todo.sort(key=lambda c: (c.get('status') != 'new', -(c.get('stars') or 0)))
+        # 이미 공개한 작품을 먼저 다시 보고(규칙 개정 반영), 그다음 새 후보를 별 많은 순으로
+        todo.sort(key=lambda c: ({'published': 0, 'new': 1}.get(c.get('status'), 2), -(c.get('stars') or 0)))
         homes = {judge.norm_url(c.get('demo_url')): c['id'] for c in self.cands.values() if c.get('status') == 'published' and c.get('demo_url')}
         for c in todo:
             was = c.get('status')
@@ -224,16 +227,25 @@ class Run:
                 dup = homes.get(judge.norm_url(c.get('demo_url')))
                 c['duplicate_of'] = dup if dup and dup != c['id'] else None
                 status, reasons = judge.decide(c, jc)
+            rv = self.cfg['judge'].get('rules_version')
             if was == 'published' and status != 'published':
-                # 한 번 공개한 작품은 재판정만으로 내리지 않는다. 사유는 남겨 사람이 본다.
-                c['recheck'] = {'at': self.now, 'would_be': status, 'reasons': reasons}
-                status, reasons = 'published', c.get('reasons', reasons)
+                if c.get('rules_version') == rv:
+                    # 같은 규칙인데 결과가 바뀜(별 감소·미리보기 일시 실패 등) — 한 번의 변동으로 내리지 않는다. 사유는 남긴다.
+                    c['recheck'] = {'at': self.now, 'would_be': status, 'reasons': reasons}
+                    status, reasons = 'published', c.get('reasons', reasons)
+                else:
+                    # 판정 규칙이 고쳐졌다 — 잘못 공개된 작품을 내린다. 기록은 남긴다.
+                    c['withdrawn'] = {'at': self.now, 'from_rules': c.get('rules_version'), 'to_rules': rv, 'reasons': reasons}
+                    self.log['counts']['withdrawn'] = self.log['counts'].get('withdrawn', 0) + 1
             else:
                 c.pop('recheck', None)
+            c['rules_version'] = rv
             if status != was:
                 c['status_since'] = self.now
                 if was in ('new', None):
                     self.log['counts'][{'published': 'published_new', 'held': 'held_new', 'source': 'source_new', 'rejected': 'rejected_new'}[status]] += 1
+                elif status == 'published':
+                    self.log['counts']['published_new'] += 1
                     if c.get('duplicate_of'):
                         self.log['counts']['duplicates'] += 1
             c['status'], c['reasons'], c['last_checked'] = status, reasons, self.now
