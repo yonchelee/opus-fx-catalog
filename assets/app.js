@@ -153,7 +153,9 @@ function freshness(gh) {
     if (s.ok) parts.push(`${name} ${when(s.last_success)} 성공`);
     else parts.push(`<b class="warnline">${name} 최근 실패(${when(s.last_attempt)})${s.last_success ? ` — ${when(s.last_success)} 자료 기준` : ''}</b>`);
   }
-  if (st.publish && st.publish.ok === false) parts.push(`<b class="warnline">공개 반영 실패 기록(${when(st.publish.last_attempt)})</b>`);
+  if (st.publish && st.publish.ok === false) parts.push(st.publish.missed_run
+    ? `지난 실행 공개 누락(${when(st.publish.last_attempt)} 확인) — 이번 갱신으로 다시 공개됨`
+    : `<b class="warnline">공개 반영 실패 기록(${when(st.publish.last_attempt)})</b>`);
   if (gh && gh.failed) parts.push('<b class="warnline">GitHub 작품 목록을 불러오지 못했습니다</b>');
   const lr = STATUS.last_run;
   const run = lr ? ` · 최근 실행(${lr.mode}): 새 후보 ${lr.candidates_new} · 공개 +${lr.published_new} · 보류 +${lr.held_new}${lr.withdrawn ? ` · 철회 ${lr.withdrawn}` : ''}${lr.errors ? ` · <b class="warnline">오류 ${lr.errors}건</b>` : ''}` : '';

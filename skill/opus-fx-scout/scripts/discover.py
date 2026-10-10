@@ -239,6 +239,8 @@ class Run:
     def judge_one(self, c, jc, homes):
         """후보 하나를 확인·판정한다. 오류는 호출한 쪽이 후보 단위로 받는다."""
         was = c.get('status')
+        if was not in ('new', None) and c.get('rules_version') != self.cfg['judge'].get('rules_version'):
+            self.log['counts']['rejudged'] = self.log['counts'].get('rejudged', 0) + 1
         if not self.head_relevant(c) or c.get('fork'):
             status, reasons = ('rejected', ['시각 효과와 관련 낮음 (이름·설명·주제)']) if not self.head_relevant(c) else ('held', ['포크 저장소'])
             c.update(kind=c.get('kind') or 'unknown', relevant=False if status == 'rejected' else c.get('relevant'))
@@ -423,6 +425,8 @@ class Run:
             self.log['stop'] = (self.log['stop'] or '') + f' / enrich: {e}'
         except Exception as e:  # noqa: BLE001
             self.log['errors'].append(f'judge: {type(e).__name__}: {e}')
+        rv = self.cfg['judge'].get('rules_version')
+        self.log['counts']['rejudge_left'] = sum(1 for c in self.cands.values() if c.get('status') not in ('new', None) and c.get('rules_version') != rv)
         try:
             self.refresh_stars()
         except ghapi.Budget as e:

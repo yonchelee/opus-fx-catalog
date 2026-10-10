@@ -47,6 +47,8 @@ def main():
                 d = log.get('discover') or {}
                 print('  기록:', mine[0], '| exit', log.get('exit'), '| 동기화 code', (log.get('sync') or {}).get('code'))
                 print('  발굴:', {k: v for k, v in (d.get('counts') or {}).items() if v}, '| 중단', d.get('stop'), '| 오류', len(d.get('errors') or []))
+                c = d.get('counts') or {}
+                print('  재판정:', c.get('rejudged', 0), '| 남음', c.get('rejudge_left', '?'), '| 공개 +', c.get('published_new', 0), '| 철회', c.get('withdrawn', 0))
                 print('  검증 문제:', log.get('validate'))
             else:
                 print('  main 에 이 실행의 기록 없음 → 커밋되지 않음(변경 없음 종료이거나 실패)')

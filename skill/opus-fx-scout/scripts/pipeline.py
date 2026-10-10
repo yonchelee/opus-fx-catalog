@@ -35,6 +35,9 @@ def reconcile_publish(stages, local_status, now):
     s = stage_status(stages, 'publish', ok, now, f'지난 실행 {prev} 공개됨' if ok else f'지난 실행 {prev} 이 공개 사이트에 반영되지 않음(사이트는 {live}) — 이번 실행이 다시 배포')
     if ok:
         s['last_success'] = local_status.get('updated', now)
+        s.pop('missed_run', None)
+    else:
+        s['missed_run'] = prev  # 이 기록이 사이트에 보이면 이번 실행이 다시 공개한 것 — 화면은 '복구'로 표시
     stages['publish'] = s
 
 HERE = Path(__file__).resolve().parent
@@ -144,7 +147,7 @@ def main():
     dc = (log.get('discover') or {}).get('counts') or {}
     last_run = {'run_id': run_id, 'mode': a.mode, 'at': log['finished'], 'exit': code,
                 'candidates_new': dc.get('new_candidates', 0), 'published_new': dc.get('published_new', 0), 'held_new': dc.get('held_new', 0),
-                'withdrawn': dc.get('withdrawn', 0), 'source_new': dc.get('source_new', 0), 'rejected_new': dc.get('rejected_new', 0),
+                'withdrawn': dc.get('withdrawn', 0), 'rejudged': dc.get('rejudged', 0), 'rejudge_left': dc.get('rejudge_left', 0), 'source_new': dc.get('source_new', 0), 'rejected_new': dc.get('rejected_new', 0),
                 'stars_updated': dc.get('stars_updated', 0), 'stars_failed': dc.get('stars_failed', 0),
                 'stop': (log.get('discover') or {}).get('stop'), 'errors': len((log.get('discover') or {}).get('errors') or [])}
     status = {'updated': log['finished'], 'run_id': run_id, 'mode': a.mode, 'stages': stages, 'last_run': last_run,

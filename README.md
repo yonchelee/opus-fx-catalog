@@ -41,9 +41,9 @@ python3 skill/opus-fx-scout/scripts/find.py --stats    # 효과별 개수
 | 사람 판단이 필요한 새 프롬프트 모음 발굴 | Claude 클라우드 Routine 「효과 카탈로그 주간 업데이트」 | 월 08:47 KST |
 
 예약 실행 점검(읽기 전용): `python3 skill/opus-fx-scout/scripts/check_runs.py` — 최근 실행의 원인(schedule/수동)·결과, 예약 실행의 기록, 공개 사이트 status.json 반영 여부를 보여 준다.
-겹침: 같은 작업 흐름은 한 번에 하나만 돈다(concurrency). 실행 중에 새 실행이 오면 대기하고, 대기 중인 것이 또 있으면 앞의 대기만 취소된다. 대기했던 실행은 시작할 때 최신 main 으로 갈아타므로 앞 실행의 결과 위에서 이어 간다(2026-10-10 수동 실행 2회 겹침으로 확인). 다른 곳(Routine)이 실행 도중 main 에 push 해 생성 파일이 충돌하면 그 실행은 커밋하지 않고 실패로 끝나며(자료 손실 없음), 다음 실행이 처음부터 다시 한다.
-재판정 순서: 규칙 버전이 바뀌면 공개 작품 → 새 후보 → 제외됐던 것 → 조건이 모자란 효과·모음 → 보류된 라이브러리·앱 순으로 실행당 최대 175개(REST 예산 350)씩 다시 본다. 전체 재판정에는 여러 날이 걸린다.
-배포 확인: 실행마다 공개 사이트 status.json 의 run_id 가 이번 실행과 같은지 확인한다. 다음 실행은 시작할 때 지난 실행이 실제로 반영됐는지 대조해 `stages.publish` 에 기록하고, 안 됐으면 이번 커밋·빌드로 회복한다. status.json 은 실행마다 바뀌므로 자료 변경이 없어도 커밋이 하나 생긴다.
+겹침: 같은 작업 흐름은 한 번에 하나만 돈다(concurrency). 실행 중에 새 실행이 오면 대기하고, 대기 중인 것이 또 있으면 앞의 대기만 취소된다. 대기했던 실행은 시작할 때 최신 main 으로 갈아타므로 앞 실행의 결과 위에서 이어 간다(2026-10-10 수동 실행 2회 겹침으로 확인). 다른 곳(Routine)이 실행 도중 main 에 push 해 생성 파일이 충돌하면 그 실행은 커밋하지 않고 실패로 끝나며(자료 손실 없음), 다음 실행이 처음부터 다시 한다. 커밋·push 와 Pages 단계는 `skill/opus-fx-scout/scripts/ci/` 의 스크립트이고, 임시 git 저장소와 가짜 gh·curl 로 `tests/test_ci.py` 에서 시험한다(Routine 동시 push, Pages 요청 실패·빌드 실패·사이트 미반영).
+재판정 순서: 규칙 버전이 바뀌면 공개 작품 → 새 후보 → 제외됐던 것 → 조건이 모자란 효과·모음 → 보류된 라이브러리·앱 순으로 실행당 최대 175개(REST 예산 350)씩 다시 본다. 전체 재판정에는 여러 날이 걸린다. 실행마다 처리 수와 남은 수를 `status.json` 의 `last_run.rejudged`·`rejudge_left` 와 `discovery/runs/` 기록에 남긴다.
+배포 확인: 실행마다 공개 사이트 status.json 의 run_id 가 이번 실행과 같은지 확인한다. 다음 실행은 시작할 때 지난 실행이 실제로 반영됐는지 대조해 `stages.publish` 에 기록하고, 안 됐으면 `missed_run` 과 함께 실패로 적고(성공 시각은 올리지 않음) 이번 커밋·빌드로 회복한다. 화면에는 '지난 실행 공개 누락 — 이번 갱신으로 다시 공개됨'으로 보인다. Pages 확인은 이번 커밋의 빌드만 본다(지난 회차의 실패 빌드가 남아 있어도 새 빌드를 기다림). status.json 은 실행마다 바뀌므로 자료 변경이 없어도 커밋이 하나 생긴다.
 
 수동 실행: Actions → catalog-update → Run workflow, 또는 로컬에서
 `GITHUB_TOKEN=$(gh auth token) python3 skill/opus-fx-scout/scripts/pipeline.py --dir . --mode daily`

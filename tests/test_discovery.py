@@ -466,6 +466,28 @@ class StarsPartial(Base):
         self.assertNotIn('maker/motionkit', names, '보류된 라이브러리는 재지 않는다')
 
 
+    def test_republished_item_is_tracked_again_and_rejudge_is_counted(self):
+        stars = {'N101': node(101, 'aurora-shader', 40), 'N102': node(102, 'motionkit', 9000)}
+        self.run_once(FakeClient({'topic:shader': [EFFECT, LIB]}, stars=stars))
+        lib = next(c for c in self.cands().values() if c['full_name'] == 'maker/motionkit')
+        self.assertEqual(lib['status'], 'held')
+        series = json.loads((self.d / 'discovery/stars.json').read_text())
+        self.assertNotIn(str(lib['repo_id']), series, '보류된 라이브러리는 별을 재지 않는다')
+        # 사람이 공개로 되돌리고 규칙도 바뀐 다음 회차
+        (self.d / 'editorial.json').write_text(json.dumps({'discovery_overrides': {'items': {lib['id']: {'status': 'published', 'reason': '시험'}}}}))
+        cfg = json.loads((self.d / 'discovery/config.json').read_text())
+        cfg['judge']['rules_version'] = cfg['judge']['rules_version'] + 1
+        (self.d / 'discovery/config.json').write_text(json.dumps(cfg))
+        log = self.run_once(FakeClient({}, stars={'N101': node(101, 'aurora-shader', 41), 'N102': node(102, 'motionkit', 9001)}),
+                            now='2026-10-11T06:00:00Z', today=TODAY + timedelta(days=1))
+        lib = next(c for c in self.cands().values() if c['full_name'] == 'maker/motionkit')
+        self.assertEqual(lib['status'], 'published')
+        self.assertEqual(log['counts']['rejudged'], 2)
+        self.assertEqual(log['counts']['rejudge_left'], 0)
+        series = json.loads((self.d / 'discovery/stars.json').read_text())
+        self.assertEqual(series[str(lib['repo_id'])][-1][1], 9001, '공개로 돌아오면 같은 회차부터 다시 잰다')
+
+
 class PipelineReconcile(unittest.TestCase):
     def test_live_mismatch_marks_publish_failed_not_success(self):
         import pipeline

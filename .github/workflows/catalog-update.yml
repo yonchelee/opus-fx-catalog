@@ -77,6 +77,7 @@ jobs:
           import json, pathlib
           p = pathlib.Path('status.json'); s = json.loads(p.read_text())
           s.setdefault('stages', {}).setdefault('publish', {})
+          s['stages']['publish'].pop('missed_run', None)
           s['stages']['publish'].update(ok=False, last_attempt=s['updated'],
               message='수집·생성·검증·시험 중 실패 — 이번 결과는 배포하지 않음 (pipeline=${{ steps.pipe.outputs.code }}, tests=${{ steps.tests.outcome }})')
           p.write_text(json.dumps(s, ensure_ascii=False, indent=1) + '\n')
@@ -91,38 +92,13 @@ jobs:
         run: |
           git config user.name "opus-fx-catalog bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then echo "변경 없음"; echo "pushed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           msg="catalog: ${{ steps.mode.outputs.mode }} 갱신 (run ${{ github.run_id }})"
-          [ -n "$FAILED" ] && msg="status: 갱신 실패 기록 (run ${{ github.run_id }})"
-          git commit -qm "$msg"
-          for i in 1 2 3; do
-            if git push origin HEAD:main; then echo "pushed=true" >> "$GITHUB_OUTPUT"; exit 0; fi
-            git pull --rebase origin main || { git rebase --abort; echo "rebase 충돌 — 다음 회차로"; exit 1; }
-            sleep $((i * 5))
-          done
-          exit 1
+          [ -n "${FAILED:-}" ] && msg="status: 갱신 실패 기록 (run ${{ github.run_id }})"
+          bash skill/opus-fx-scout/scripts/ci/commit_push.sh "$msg"
 
       - name: Pages 빌드 요청과 공개 확인
         if: steps.commit.outputs.pushed == 'true'
-        run: |
-          sha=$(git rev-parse HEAD)
-          gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "빌드 요청 실패 — push 로 시작된 빌드를 기다림"
-          for i in $(seq 1 30); do
-            s=$(gh api "repos/${{ github.repository }}/pages/builds/latest" --jq '.status + " " + .commit')
-            echo "$s"
-            case "$s" in "built $sha") break;; errored*) echo "Pages 빌드 실패"; exit 1;; esac
-            sleep 20
-          done
-          case "$s" in "built $sha") ;; *) echo "Pages 빌드를 확인하지 못함"; exit 1;; esac
-          for i in $(seq 1 12); do
-            rid=$(curl -s "https://yonchelee.github.io/opus-fx-catalog/status.json?v=$RANDOM$i" | python3 -c "import json,sys;print(json.load(sys.stdin).get('run_id'))" || true)
-            [ "$rid" = "${{ github.run_id }}" ] && { echo "공개 사이트 확인: status.json run_id=$rid"; break; }
-            sleep 15
-          done
-          [ "$rid" = "${{ github.run_id }}" ] || { echo "공개 사이트 status.json 이 이번 실행이 아님 ($rid)"; exit 1; }
-          code=$(curl -s -o /dev/null -w '%{http_code}' "https://yonchelee.github.io/opus-fx-catalog/github.json?v=$RANDOM")
-          [ "$code" = 200 ] || { echo "github.json $code"; exit 1; }
+        run: bash skill/opus-fx-scout/scripts/ci/pages_publish.sh "${{ github.repository }}" "${{ github.run_id }}"
 
       - name: 실패로 끝내기
         if: env.FAILED == '1'
