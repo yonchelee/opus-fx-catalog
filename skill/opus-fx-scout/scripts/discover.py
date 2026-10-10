@@ -261,8 +261,13 @@ class Run:
             dup = (same_demo if same_demo != c['id'] else None) or self.copy_of(c)
             c['duplicate_of'] = dup if dup and dup != c['id'] else None
             status, reasons = judge.decide(c, jc)
+        ov = self.overrides.get(c['id'])
+        human = bool(ov and ov.get('status') in ('held', 'published'))
+        if human:
+            # 사람이 정한 값이 자동 판정보다 우선한다 (공개·철회 집계도 사람이 정한 값 기준)
+            status, reasons = ov['status'], ['사람이 정함: ' + (ov.get('reason') or '')] + ([f'자동 판정은 {status}'] if status != ov['status'] else [])
         rv = self.cfg['judge'].get('rules_version')
-        if was == 'published' and status != 'published':
+        if was == 'published' and status != 'published' and not human:
             if c.get('rules_version') == rv:
                 # 같은 규칙인데 결과가 바뀜(별 감소·미리보기 일시 실패 등) — 한 번의 변동으로 내리지 않는다. 사유는 남긴다.
                 c['recheck'] = {'at': self.now, 'would_be': status, 'reasons': reasons}
@@ -282,10 +287,6 @@ class Run:
                 self.log['counts']['published_new'] += 1
         if was in ('new', None) and c.get('duplicate_of'):
             self.log['counts']['duplicates'] += 1
-        ov = self.overrides.get(c['id'])
-        if ov and ov.get('status') in ('held', 'published'):
-            # 사람이 정한 값이 자동 판정보다 우선한다
-            status, reasons = ov['status'], ['사람이 정함: ' + (ov.get('reason') or '')] + ([f'자동 판정은 {status}'] if status != ov['status'] else [])
         c['status'], c['reasons'], c['last_checked'] = status, reasons, self.now
         xs = self.xmap.get(c['full_name'].lower())
         c['x_ids'] = sorted(xs) if xs else []

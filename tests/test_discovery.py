@@ -488,6 +488,27 @@ class StarsPartial(Base):
         self.assertEqual(series[str(lib['repo_id'])][-1][1], 9001, '공개로 돌아오면 같은 회차부터 다시 잰다')
 
 
+    def test_override_counts_follow_human_decision(self):
+        stars = {'N101': node(101, 'aurora-shader', 40)}
+        self.run_once(FakeClient({'topic:shader': [EFFECT]}, stars=stars))
+        eff = next(c for c in self.cands().values() if c['full_name'] == 'maker/aurora-shader')
+        self.assertEqual(eff['status'], 'published')
+        # 사람이 보류로 정함 — 같은 규칙 버전이어도 내려가야 하고, 철회·공개 집계에 섞이지 않는다
+        (self.d / 'editorial.json').write_text(json.dumps({'discovery_overrides': {'items': {eff['id']: {'status': 'held', 'reason': '시험'}}}}))
+        cfg = json.loads((self.d / 'discovery/config.json').read_text())
+        cfg['judge']['enrich_stale_days'] = 0
+        (self.d / 'discovery/config.json').write_text(json.dumps(cfg))
+        log = self.run_once(FakeClient({}, stars=stars), now='2026-10-11T06:00:00Z', today=TODAY + timedelta(days=1))
+        eff = next(c for c in self.cands().values() if c['full_name'] == 'maker/aurora-shader')
+        self.assertEqual(eff['status'], 'held')
+        self.assertNotIn(eff['id'], self.public())
+        self.assertEqual((log['counts']['published_new'], log['counts'].get('withdrawn', 0)), (0, 0))
+        # 다시 확인해도 자동 판정(공개)이 공개 수로 세어지지 않는다
+        log = self.run_once(FakeClient({}, stars=stars), now='2026-10-12T06:00:00Z', today=TODAY + timedelta(days=2))
+        self.assertEqual(log['counts']['published_new'], 0)
+        self.assertIn('자동 판정은 published', ' '.join(next(c for c in self.cands().values() if c['full_name'] == 'maker/aurora-shader')['reasons']))
+
+
 class PipelineReconcile(unittest.TestCase):
     def test_live_mismatch_marks_publish_failed_not_success(self):
         import pipeline
