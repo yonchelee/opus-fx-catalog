@@ -21,11 +21,11 @@ done
 ```
 
 ## 적용 전 확인 (하나라도 아니면 멈추고 사용자에게 보고)
-1. 갤러리 링크가 열리는지: `curl -sI https://yonchelee.github.io/opus-fx-catalog/ | head -1` 가 `200`
+1. 갤러리 링크가 열리는지: `curl -sI https://yonchelee.github.io/opus-fx-catalog/ | head -1` 가 `200` (Pages는 2026-10-10에 켜졌고 빌드 성공 확인됨)
    - 404면 GitHub Pages가 아직 꺼져 있는 것 → 사용자에게 저장소 Settings → Pages에서 `main` / `/ (root)` 저장을 요청
 2. 홈페이지 저장소가 `main-release` 브랜치이고 작업 트리가 깨끗한지: `git status`, `git branch --show-current`
 3. 지금 배포된 사이트가 열리는지: `curl -sI https://www.yonchelee.com/ | head -1`, `curl -sI https://yonchelee.com/ | head -1`
-   - 클라우드 쪽 웹 조회 도구에서는 두 주소 모두 `getaddrinfo ENOTFOUND`가 났습니다(그 도구 하나의 결과라 단정 못 함). 맥미니에서 `dig +short www.yonchelee.com`, `dig +short yonchelee.com`도 함께 확인해서 결과를 보고에 적어 주세요
+   - 참고: 클라우드 세션에서 났던 `getaddrinfo ENOTFOUND`는 그 웹 조회 도구가 `example.com`도 찾지 못하는 환경 문제였습니다. 사이트 DNS 문제의 증거가 아니니 무시해도 됩니다
 
 ## 적용 순서
 1. **기존 작업 카드 형식 찾기.** 기존 작업 제목 하나로 검색해 카드가 어디서 오는지 확인합니다(HTML 직접 / JSON·YAML·MD 데이터 / 컴포넌트).
@@ -54,4 +54,4 @@ done
 ## 끝나면 보고할 것
 - 카드가 들어간 파일과 커밋
 - 배포 여부와 방법, 배포 URL
-- 적용 전 확인 1~3의 결과(특히 DNS 결과)
+- 적용 전 확인 1~3의 결과
