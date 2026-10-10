@@ -1389,6 +1389,17 @@
  },
  "discovery_overrides": {
   "about": "GitHub 자동 판정을 사람이 바로잡는 곳. 키는 gh:<저장소 번호>. status 는 held(공개에서 뺌) 또는 published(공개). 자동 판정은 이 값을 덮어쓰지 않는다.",
-  "items": {}
+  "items": {
+   "gh:170160188": {
+    "status": "held",
+    "reason": "Unity 볼륨 렌더링 라이브러리 — 바로 볼 수 있는 효과 작품이 아님",
+    "by": "Claude 검토 2026-10-10"
+   },
+   "gh:387173257": {
+    "status": "held",
+    "reason": "iOS용 컨페티 라이브러리(Swift 패키지) — 제작 도구",
+    "by": "Claude 검토 2026-10-10"
+   }
+  }
  }
 }

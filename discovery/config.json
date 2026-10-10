@@ -232,6 +232,7 @@
    "bindings",
    "boilerplate",
    "cad",
+   "capture",
    "chart library",
    "charting",
    "cli",
@@ -263,13 +264,17 @@
    "in android",
    "in ios",
    "injector",
+   "language",
    "lib",
    "libraries",
    "library",
    "libs",
+   "live coding",
    "machine learning",
    "maker",
    "mcp",
+   "modeler",
+   "modeller",
    "modifier",
    "modifiers",
    "mono-repository",
@@ -291,6 +296,8 @@
    "programmatically",
    "react components",
    "react hooks",
+   "recorder",
+   "recording",
    "registry",
    "renderer",
    "rendering engine",
@@ -453,7 +460,7 @@
    "code rain",
    "matrix rain"
   ],
-  "rules_version": 4,
+  "rules_version": 5,
   "app_words": [
    "admin",
    "bot",
@@ -514,7 +521,7 @@
   ],
   "tool_patterns": [
    "^\\W*(create|creates|generate|generates|convert|converts|draw|draws|make|makes|build|builds|run|runs|render|renders|turn|turns|transform|transforms|easily|automatically|export|exports)\\b",
-   "\\bfor (unity|unity3d|swiftui|compose|jetpack compose|compose multiplatform|react|react native|vue|svelte|angular|flutter|android|ios|godot|unreal|unreal engine|blender|after effects|figma|framer|webflow|tailwind)\\b",
+   "\\bfor (unity|unity3d|swiftui|compose|jetpack compose|compose multiplatform|react|react native|vue|svelte|angular|flutter|android|ios|godot|unreal|unreal engine|blender|after effects|figma|framer|webflow|tailwind|claude code|codex|cursor|agents|ai agents)\\b",
    "\\b(in|with|for) (go|golang|r|rust|python|julia|haskell|clojure|lisp|c\\+\\+|kotlin|swift|java|processing|openframeworks)\\b",
    "\\bturn (a|an|any|your|one|the) [\\w -]{1,30} into\\b"
   ]

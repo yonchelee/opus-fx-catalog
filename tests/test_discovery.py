@@ -324,11 +324,16 @@ class JudgeUnits(unittest.TestCase):
                                    ('livecanvas', '一句话做成 Live 图。Turn a sentence into a Live Photo with animation', ['animation']),
                                    ('ossos', 'Webbased Character Animation System', ['animation', 'webgl']),
                                    ('creative-viewpager', 'Creative View Pager easy to use in Android', ['animation']),
-                                   ('podcast-maker', 'Fully automated video maker using motion graphics', ['motion-graphics'])]:
+                                   ('podcast-maker', 'Fully automated video maker using motion graphics', ['motion-graphics']),
+                                   ('animate', 'Procedural animation in any style for Claude Code: short single-file scenes', ['animation']),
+                                   ('p5.capture', 'super easy recording for p5.js animations', ['p5js', 'animation']),
+                                   ('ShapeUp-public', 'A 3D Modeler Made in a Week', ['3d', 'graphics']),
+                                   ('webgpu-dummy', 'A rendering engine', ['webgpu'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'TypeScript'}, '', ['index.html'], cfg)['kind'], 'library', name)
         self.assertEqual(judge.decide({'relevant': True, 'kind': 'effect', 'owner': 'o', 'description': '', 'thumb': 'x', 'has_code': True, 'license': 'MIT', 'stars': 500}, cfg)[0], 'held', '설명 없음')
         self.assertEqual(judge.classify_repo({'name': 'portfolio', 'description': 'Personal portfolio (2018)', 'topics': ['threejs', 'animation'], 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'app')
         for name, desc, topics in [('fieldplay', 'A vector field explorer', ['glsl', 'particles', 'webgl']),
+                                   ('WebGPU-Ocean', 'A real-time 3D fluid simulation implemented in WebGPU', ['webgpu', 'fluid-simulation']),
                                    ('HologramShader', 'Test of an hologram material made in Unity.', ['effect', 'shader'])]:
             self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'GLSL'}, '', ['index.html'], cfg)['kind'], 'effect', name)
         effects = [('WebGL-Fluid-Simulation', 'Play with fluids in your browser (works even on mobile)', ['webgl', 'fluid-simulation']),
