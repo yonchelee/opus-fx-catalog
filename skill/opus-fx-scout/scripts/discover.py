@@ -206,8 +206,17 @@ class Run:
     def enrich_and_judge(self):
         jc = self.cfg['judge']
         todo = [c for c in self.cands.values() if self.needs_enrich(c)]
-        # 이미 공개한 작품을 먼저 다시 보고(규칙 개정 반영), 그다음 새 후보를 별 많은 순으로
-        todo.sort(key=lambda c: ({'published': 0, 'new': 1}.get(c.get('status'), 2), -(c.get('stars') or 0)))
+        # 확인 순서: 공개 작품(규칙 개정 반영) → 새 후보 → 제외됐던 것(관련성 관문의 오판 회복) → 조건이 모자란 효과·모음
+        #          → 보류된 라이브러리·앱 → 출처 후보. 같은 묶음 안에서는 별 많은 순. 예산을 넘긴 나머지는 다음 실행이 이어 본다.
+        def prio(c):
+            st, k = c.get('status'), c.get('kind')
+            if st == 'published': return 0
+            if st in ('new', None): return 1
+            if st == 'rejected': return 2
+            if st == 'held' and k in ('effect', 'collection', 'unknown'): return 3
+            if st == 'held': return 4
+            return 5
+        todo.sort(key=lambda c: (prio(c), -(c.get('stars') or 0)))
         homes = {judge.norm_url(c.get('demo_url')): c['id'] for c in self.cands.values() if c.get('status') == 'published' and c.get('demo_url')}
         # 포크 표시 없이 통째로 옮긴 복사본: 이름이 같고 설명이 거의 같으면 먼저 생긴(created_at) 쪽만 공개
         self.by_name = {}

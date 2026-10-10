@@ -42,6 +42,12 @@ jobs:
         with:
           node-version: '20'
 
+      - name: 최신 main 으로 (줄을 선 실행은 대기 시작 시점의 커밋을 받으므로, 앞 실행이 올린 결과 위에서 시작한다)
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          git log --oneline -1
+
       - name: 실행 모드
         id: mode
         run: |
