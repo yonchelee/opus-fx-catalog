@@ -1,32 +1,32 @@
 {
- "updated": "2026-10-10T10:20:11Z",
- "run_id": "38044333903",
+ "updated": "2026-10-10T10:58:21Z",
+ "run_id": "38046473253",
  "mode": "daily",
  "stages": {
   "sync": {
-   "last_attempt": "2026-10-10T10:16:46Z",
+   "last_attempt": "2026-10-10T10:53:30Z",
    "ok": true,
    "message": "wrote /home/runner/work/opus-fx-catalog/opus-fx-catalog/catalog.json (646 rows) - commit and push it",
-   "last_success": "2026-10-10T10:16:46Z"
+   "last_success": "2026-10-10T10:53:30Z"
   },
   "discover": {
-   "last_attempt": "2026-10-10T10:16:46Z",
+   "last_attempt": "2026-10-10T10:53:30Z",
    "ok": true,
-   "message": "후보 21 새로 · 공개 1 · 보류 8",
-   "last_success": "2026-10-10T10:16:46Z"
+   "message": "후보 21 새로 · 공개 11 · 보류 149 · 중단  / enrich: core",
+   "last_success": "2026-10-10T10:53:30Z"
   },
   "stars": {
-   "last_attempt": "2026-10-10T10:16:46Z",
+   "last_attempt": "2026-10-10T10:53:30Z",
    "ok": true,
-   "message": "별 기록 727",
-   "last_success": "2026-10-10T10:16:46Z"
+   "message": "별 기록 887",
+   "last_success": "2026-10-10T10:53:30Z"
   },
   "build": {
-   "last_attempt": "2026-10-10T10:16:46Z",
+   "last_attempt": "2026-10-10T10:53:30Z",
    "ok": true,
    "message": "생성·검증 통과",
-   "last_success": "2026-10-10T10:16:46Z"
+   "last_success": "2026-10-10T10:53:30Z"
   }
  },
- "published_github": 32
+ "published_github": 43
 }

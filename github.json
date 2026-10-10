@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-10T10:16:50Z",
+"updated": "2026-10-10T10:53:34Z",
 "items": [
 {
 "id": "gh:1506376",
@@ -23,7 +23,7 @@
 "pushed_at": "2022-10-24T19:04:28Z",
 "archived": false,
 "stars": 859,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/drojdjou/J3D/master/thumbs/proj_rectify.jpg",
@@ -54,6 +54,62 @@
 ]
 },
 {
+"id": "gh:16519400",
+"src": "gh",
+"slug": "ossia/libossia",
+"author": "ossia",
+"title": "libossia",
+"desc": "A modern C++, cross-environment distributed object model for creative coding and interaction scoring",
+"topics": [
+"c-plus-plus-14",
+"creative-coding",
+"floss",
+"midi",
+"open-sound-control",
+"osc",
+"oscquery",
+"ossia"
+],
+"kind": "effect",
+"repo": {
+"id": 16519400,
+"full_name": "ossia/libossia",
+"url": "https://github.com/ossia/libossia",
+"license": "LGPL-3.0",
+"created_at": "2014-02-04T17:27:26Z",
+"pushed_at": "2026-10-10T02:29:30Z",
+"archived": false,
+"stars": 231,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": null,
+"demo_url": "https://ossia.io",
+"demo_ok": true,
+"preview_ok": false,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"etc"
+],
+"needs": [],
+"level": 3,
+"env_text": "외부 프로그램·네이티브 환경 (C++)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-creative-coding"
+]
+},
+{
 "id": "gh:34776555",
 "src": "gh",
 "slug": "ykob/sketch-threejs",
@@ -75,7 +131,7 @@
 "pushed_at": "2025-04-29T08:13:09Z",
 "archived": false,
 "stars": 2549,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "http://ykob.github.io/sketch-threejs/img/common/ogp_common.jpg",
@@ -134,7 +190,7 @@
 "pushed_at": "2025-03-26T04:44:42Z",
 "archived": false,
 "stars": 450,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kbinani/colormap-shaders/master/sample/transform_rainbow.png",
@@ -188,7 +244,7 @@
 "pushed_at": "2016-12-15T01:22:24Z",
 "archived": false,
 "stars": 873,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/spite/polygon-shredder/master/snapshot.jpg",
@@ -242,7 +298,7 @@
 "pushed_at": "2018-07-24T08:21:42Z",
 "archived": false,
 "stars": 539,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "http://i.imgur.com/Mtznb1y.gif",
@@ -300,7 +356,7 @@
 "pushed_at": "2025-04-18T02:01:05Z",
 "archived": false,
 "stars": 1036,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "http://i.imgur.com/cNj4Ton.png",
@@ -353,7 +409,7 @@
 "pushed_at": "2024-11-12T13:29:23Z",
 "archived": false,
 "stars": 16708,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/PavelDoGreat/WebGL-Fluid-Simulation/master/screenshot.jpg?raw=true",
@@ -410,7 +466,7 @@
 "pushed_at": "2023-09-07T08:52:33Z",
 "archived": false,
 "stars": 989,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/andydbc/HologramShader/master/Screenshots/screen00.gif",
@@ -463,7 +519,7 @@
 "pushed_at": "2026-09-23T06:33:01Z",
 "archived": false,
 "stars": 1331,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://github.com/anvaka/fieldplay/wiki/images/field_1.png",
@@ -521,7 +577,7 @@
 "pushed_at": "2024-06-10T07:58:35Z",
 "archived": false,
 "stars": 909,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/andydbc/unity-frosted-glass/master/Screenshots/screen0.gif",
@@ -579,7 +635,7 @@
 "pushed_at": "2025-06-23T05:56:48Z",
 "archived": false,
 "stars": 3855,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Rezmason/matrix/master/screenshot.png?raw=true",
@@ -647,7 +703,7 @@
 "pushed_at": "2025-02-10T04:13:22Z",
 "archived": false,
 "stars": 860,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/BrutPitt/myRepos/master/glChAoSP/screenShots/cockpitSettings.jpg",
@@ -708,7 +764,7 @@
 "pushed_at": "2025-08-04T16:56:47Z",
 "archived": false,
 "stars": 582,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kousun12/eternal/master/nude.png",
@@ -740,6 +796,120 @@
 ]
 },
 {
+"id": "gh:238835562",
+"src": "gh",
+"slug": "quokka-astro/quokka",
+"author": "quokka-astro",
+"title": "quokka",
+"desc": "Two-moment AMR radiation hydrodynamics (with self-gravity, particles, chemistry, and magnetic fields) on CPUs/GPUs for astrophysics",
+"topics": [
+"adaptive-mesh-refinement",
+"amrex",
+"astrochemistry",
+"astrophysics",
+"cuda",
+"gpu",
+"hydrodynamics",
+"magnetohydrodynamics",
+"particles",
+"rocm",
+"self-gravity"
+],
+"kind": "effect",
+"repo": {
+"id": 238835562,
+"full_name": "quokka-astro/quokka",
+"url": "https://github.com/quokka-astro/quokka",
+"license": "MIT",
+"created_at": "2020-02-07T03:26:54Z",
+"pushed_at": "2026-10-10T10:00:15Z",
+"archived": false,
+"stars": 90,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/quokka-astro/quokka/development/extern/quokka_graphic.png",
+"demo_url": "https://quokka-astro.github.io/quokka/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"liquid",
+"particles"
+],
+"needs": [],
+"level": 3,
+"env_text": "외부 프로그램·네이티브 환경 (C++)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-particles"
+]
+},
+{
+"id": "gh:362584271",
+"src": "gh",
+"slug": "BelmuTM/Noble",
+"author": "BelmuTM",
+"title": "Noble",
+"desc": "A Minecraft shader pack that enhances your experience with the help of good-looking visuals and light simulations.",
+"topics": [
+"glsl",
+"minecraft",
+"opengl",
+"pathtracing",
+"raytracing",
+"shaders"
+],
+"kind": "effect",
+"repo": {
+"id": 362584271,
+"full_name": "BelmuTM/Noble",
+"url": "https://github.com/BelmuTM/Noble",
+"license": "GPL-3.0",
+"created_at": "2021-04-28T19:28:54Z",
+"pushed_at": "2026-10-08T23:05:17Z",
+"archived": false,
+"stars": 180,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/BelmuTM/Noble/master/images/branding/noble_banner.png",
+"demo_url": null,
+"demo_ok": null,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"shader"
+],
+"needs": [],
+"level": 2,
+"env_text": "코드 저장소 (실행 방법은 README 확인)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-glsl"
+]
+},
+{
 "id": "gh:437908603",
 "src": "gh",
 "slug": "Schneegans/Burn-My-Windows",
@@ -765,7 +935,7 @@
 "pushed_at": "2026-10-10T05:23:27Z",
 "archived": false,
 "stars": 3089,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Schneegans/Burn-My-Windows/main/docs/pics/custom.jpg",
@@ -796,6 +966,73 @@
 ]
 },
 {
+"id": "gh:530687417",
+"src": "gh",
+"slug": "trebeljahr/fractal-garden",
+"author": "trebeljahr",
+"title": "fractal-garden",
+"desc": "An Exhibition Of Mathematical Beauty. ",
+"topics": [
+"art",
+"barnsley",
+"barnsley-fern",
+"canvas",
+"fractal-geometry",
+"fractal-images",
+"fractal-rendering",
+"fractal-tree",
+"fractals",
+"generative-art",
+"hacktoberfest",
+"hacktoberfest2022",
+"javascript",
+"l-systems",
+"mandelbrot",
+"nextjs",
+"sierpinski-triangle",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 530687417,
+"full_name": "trebeljahr/fractal-garden",
+"url": "https://github.com/trebeljahr/fractal-garden",
+"license": "MIT",
+"created_at": "2022-08-30T14:11:33Z",
+"pushed_at": "2026-10-08T01:25:07Z",
+"archived": false,
+"stars": 161,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": null,
+"demo_url": "https://fractal.garden",
+"demo_ok": true,
+"preview_ok": null,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d",
+"cosmic"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-generative-art"
+]
+},
+{
 "id": "gh:554649203",
 "src": "gh",
 "slug": "hepengwei/visualization-collection",
@@ -823,7 +1060,7 @@
 "pushed_at": "2026-10-09T12:10:30Z",
 "archived": false,
 "stars": 4593,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/hepengwei/visualization-collection/master/src/images/readme/visualDesign.gif",
@@ -854,6 +1091,58 @@
 ]
 },
 {
+"id": "gh:630205250",
+"src": "gh",
+"slug": "ryanw-mobile/compose-pager-demo",
+"author": "ryanw-mobile",
+"title": "compose-pager-demo",
+"desc": "Jetpack Compose Endless Horizontal Pager Animation Demo",
+"topics": [
+"android",
+"compose-viewpager",
+"jetpack-compose",
+"kotlin-android"
+],
+"kind": "effect",
+"repo": {
+"id": 630205250,
+"full_name": "ryanw-mobile/compose-pager-demo",
+"url": "https://github.com/ryanw-mobile/compose-pager-demo",
+"license": "Apache-2.0",
+"created_at": "2023-04-19T22:26:36Z",
+"pushed_at": "2026-10-08T15:03:08Z",
+"archived": false,
+"stars": 80,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/ryanw-mobile/compose-pager-demo/main/screenshots/240801_animated_wide.gif",
+"demo_url": null,
+"demo_ok": null,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"etc"
+],
+"needs": [],
+"level": 3,
+"env_text": "외부 프로그램·네이티브 환경 (Kotlin)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:k-animation-demo"
+]
+},
+{
 "id": "gh:822946102",
 "src": "gh",
 "slug": "z2586300277/three-cesium-examples",
@@ -875,7 +1164,7 @@
 "pushed_at": "2026-10-05T22:58:18Z",
 "archived": false,
 "stars": 2198,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://z2586300277.github.io/3d-file-server/images/yy.jpg",
@@ -925,7 +1214,7 @@
 "pushed_at": "2025-01-21T02:41:35Z",
 "archived": false,
 "stars": 572,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": null,
@@ -952,6 +1241,62 @@
 "x_ids": [],
 "sources": [
 "popular:t-shader"
+]
+},
+{
+"id": "gh:1119335953",
+"src": "gh",
+"slug": "IT-NuanxinPro/wallpaper-gallery",
+"author": "IT-NuanxinPro",
+"title": "wallpaper-gallery",
+"desc": "基于 Vue 3 + Vite 7 的高清壁纸展示网站。支持 4K 预览下载、GSAP 动画、响应式设计、暗黑主题。",
+"topics": [
+"element-plus",
+"github-actions",
+"gsap",
+"postcss",
+"sass",
+"vant4",
+"vue3",
+"wallpaper"
+],
+"kind": "collection",
+"repo": {
+"id": 1119335953,
+"full_name": "IT-NuanxinPro/wallpaper-gallery",
+"url": "https://github.com/IT-NuanxinPro/wallpaper-gallery",
+"license": "MIT",
+"created_at": "2025-12-19T05:45:42Z",
+"pushed_at": "2026-10-10T07:41:17Z",
+"archived": false,
+"stars": 259,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": null,
+"demo_url": "https://wallpaper.061129.xyz/",
+"demo_ok": true,
+"preview_ok": null,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"etc"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-gsap"
 ]
 },
 {
@@ -984,7 +1329,7 @@
 "pushed_at": "2026-10-09T16:25:13Z",
 "archived": false,
 "stars": 5801,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/srizzon/git-city/main/public/og-image.png",
@@ -1051,7 +1396,7 @@
 "pushed_at": "2026-10-10T10:13:45Z",
 "archived": false,
 "stars": 636,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://mini-map-macau.app/og-image.png",
@@ -1081,6 +1426,235 @@
 ]
 },
 {
+"id": "gh:1232667976",
+"src": "gh",
+"slug": "theexperiencecompany/keyloom",
+"author": "theexperiencecompany",
+"title": "keyloom",
+"desc": "Design Beautiful Motion Graphics Videos 📹",
+"topics": [
+"agentic",
+"motion",
+"motion-graphics",
+"video"
+],
+"kind": "effect",
+"repo": {
+"id": 1232667976,
+"full_name": "theexperiencecompany/keyloom",
+"url": "https://github.com/theexperiencecompany/keyloom",
+"license": "MIT",
+"created_at": "2026-05-08T06:38:18Z",
+"pushed_at": "2026-10-03T18:21:03Z",
+"archived": false,
+"stars": 81,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/theexperiencecompany/keyloom/master/apps/web/public/images/clapperboard.png",
+"demo_url": "https://keyloom.app",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"etc"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-motion-graphics",
+"updated:k-motion-graphics"
+]
+},
+{
+"id": "gh:1386240537",
+"src": "gh",
+"slug": "mkturkcan/valdrada",
+"author": "mkturkcan",
+"title": "valdrada",
+"desc": "Valdrada is a real-time digital twin of New York City built from public data.",
+"topics": [
+"digital-twin",
+"new-york",
+"new-york-city",
+"simulation",
+"three-js",
+"threejs"
+],
+"kind": "effect",
+"repo": {
+"id": 1386240537,
+"full_name": "mkturkcan/valdrada",
+"url": "https://github.com/mkturkcan/valdrada",
+"license": "MIT",
+"created_at": "2026-09-24T19:23:55Z",
+"pushed_at": "2026-10-10T01:49:17Z",
+"archived": false,
+"stars": 73,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/mkturkcan/valdrada/main/docs/assets/figures/hero.jpg",
+"demo_url": "https://mkturkcan.github.io/valdrada/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-threejs"
+]
+},
+{
+"id": "gh:1405884090",
+"src": "gh",
+"slug": "kaganin/iwrzwr-visual-archive",
+"author": "kaganin",
+"title": "iwrzwr-visual-archive",
+"desc": "160+ experimental visualization studies across 25+ categories, built with javascript. explore waveform animations, spectrum-inspired displays, matrix patterns, particle fields, rhythm, memory, and mechanical motion. study the drawing code and adapt the live examples for your own creative-coding projects.",
+"topics": [
+"animation",
+"audio-visualization",
+"canvas",
+"creative-coding",
+"experimental",
+"generative-art",
+"input",
+"javascript",
+"motion-design",
+"music",
+"music-visualiser",
+"music-visualizer",
+"output",
+"record",
+"sound",
+"sound-visualizer",
+"voice",
+"waveform"
+],
+"kind": "collection",
+"repo": {
+"id": 1405884090,
+"full_name": "kaganin/iwrzwr-visual-archive",
+"url": "https://github.com/kaganin/iwrzwr-visual-archive",
+"license": "MIT",
+"created_at": "2026-10-05T14:16:19Z",
+"pushed_at": "2026-10-08T14:36:32Z",
+"archived": false,
+"stars": 91,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": null,
+"demo_url": "https://www.kagan.in/iwrzwr/visual-archive/",
+"demo_ok": true,
+"preview_ok": null,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"particles"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"new:t-generative-art",
+"new:t-creative-coding",
+"updated:t-generative-art",
+"updated:t-creative-coding"
+]
+},
+{
+"id": "gh:1406041130",
+"src": "gh",
+"slug": "deity6/softlab",
+"author": "deity6",
+"title": "softlab",
+"desc": "SOFT LAB — an index of digital matter. A personal collection of web interaction effects, rendered live in WebGL / canvas / CSS.",
+"topics": [
+"canvas",
+"interaction-design",
+"react",
+"vite",
+"webgl"
+],
+"kind": "collection",
+"repo": {
+"id": 1406041130,
+"full_name": "deity6/softlab",
+"url": "https://github.com/deity6/softlab",
+"license": "MIT",
+"created_at": "2026-10-05T16:07:09Z",
+"pushed_at": "2026-10-05T16:52:50Z",
+"archived": false,
+"stars": 99,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/deity6/softlab/main/docs/screenshots/home-light.png",
+"demo_url": "https://doit.loc.cc/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"new:t-webgl"
+]
+},
+{
 "id": "gh:134183000",
 "src": "gh",
 "slug": "faahim/happy-birthday",
@@ -1106,7 +1680,7 @@
 "pushed_at": "2025-04-05T14:09:38Z",
 "archived": false,
 "stars": 1546,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": null,
@@ -1158,7 +1732,7 @@
 "pushed_at": "2026-03-08T17:54:19Z",
 "archived": false,
 "stars": 494,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": null,
@@ -1214,7 +1788,7 @@
 "pushed_at": "2025-06-09T14:32:57Z",
 "archived": false,
 "stars": 559,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/5b008b16-7d46-4e09-af21-d70f6fa2ec20",
@@ -1270,7 +1844,7 @@
 "pushed_at": "2025-02-21T16:18:23Z",
 "archived": false,
 "stars": 401,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/7e0ce578-8084-4205-87d2-d836de155a5e",
@@ -1320,7 +1894,7 @@
 "pushed_at": "2024-04-21T18:58:30Z",
 "archived": false,
 "stars": 523,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": null,
@@ -1373,7 +1947,7 @@
 "pushed_at": "2018-05-23T10:55:28Z",
 "archived": true,
 "stars": 707,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/inconvergent/differential-line/master/img/ani2.gif?raw=true",
@@ -1425,7 +1999,7 @@
 "pushed_at": "2019-03-10T16:39:31Z",
 "archived": true,
 "stars": 313,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/inconvergent/sand-spline/master/img/img.png?raw=true",
@@ -1485,7 +2059,7 @@
 "pushed_at": "2026-06-09T12:25:14Z",
 "archived": false,
 "stars": 374,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/supermosh/supermosh.github.io/main/cover.png",
@@ -1537,7 +2111,7 @@
 "pushed_at": "2022-12-01T02:13:05Z",
 "archived": true,
 "stars": 357,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": null,
@@ -1589,7 +2163,7 @@
 "pushed_at": "2025-10-18T20:17:52Z",
 "archived": false,
 "stars": 308,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://user-images.githubusercontent.com/65209850/210824481-49e4b319-3a68-4cbd-98ec-43d07e35760f.png",
@@ -1645,7 +2219,7 @@
 "pushed_at": "2026-08-06T18:42:10Z",
 "archived": false,
 "stars": 1110,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": null,
@@ -1703,7 +2277,7 @@
 "pushed_at": "2026-02-28T22:18:03Z",
 "archived": false,
 "stars": 1218,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": null,
@@ -1760,7 +2334,7 @@
 "pushed_at": "2025-11-19T06:56:09Z",
 "archived": false,
 "stars": 344,
-"stars_at": "2026-10-10T10:16:50Z",
+"stars_at": "2026-10-10T10:53:34Z",
 "gone": false
 },
 "thumb": "https://github.com/HuangRunHua/swiftui-animation-demo/raw/main/cover.png",
@@ -1787,6 +2361,59 @@
 "x_ids": [],
 "sources": [
 "popular:k-animation-demo"
+]
+},
+{
+"id": "gh:30472949",
+"src": "gh",
+"slug": "martinblampied/MBTwitterScroll",
+"author": "martinblampied",
+"title": "MBTwitterScroll",
+"desc": "Recreate Twitter's profile page scrolling animation for UITableView and UIScrollViews.",
+"topics": [
+"animation",
+"objective-c",
+"twitter",
+"uiscrollview",
+"uitableview"
+],
+"kind": "effect",
+"repo": {
+"id": 30472949,
+"full_name": "martinblampied/MBTwitterScroll",
+"url": "https://github.com/martinblampied/MBTwitterScroll",
+"license": "MIT",
+"created_at": "2015-02-07T22:43:07Z",
+"pushed_at": "2016-05-25T10:38:32Z",
+"archived": false,
+"stars": 415,
+"stars_at": "2026-10-10T10:53:34Z",
+"gone": false
+},
+"thumb": "http://i.imgur.com/iz7BIxt.gif?1",
+"demo_url": null,
+"demo_ok": null,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"etc"
+],
+"needs": [],
+"level": 3,
+"env_text": "외부 프로그램·네이티브 환경 (Objective-C)",
+"first_seen": "2026-10-10T10:53:34Z",
+"last_checked": "2026-10-10T10:53:34Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"popular:k-scroll-animation"
 ]
 }
 ]
