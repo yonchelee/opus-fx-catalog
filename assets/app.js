@@ -1,10 +1,12 @@
 /* 효과 갤러리 화면. 상태(검색어·용도·필터·정렬)를 하나로 두고, 바뀔 때마다 화면과 주소를 함께 고친다.
    데이터 병합: data.js · 검색: search.js · 생성 페이지: skill/opus-fx-scout/scripts/pages.py */
-import {FX, FXN, CAT, LV, LV_LONG, NEED, VERIFY, mergeEditorial, usesOf, verifyOf, levelOf, titleOf, fmtLikes} from './data.js';
+import {FX, FXN, CAT, LV, LV_LONG, NEED, VERIFY, mergeEditorial, usesOf, verifyOf, levelOf, titleOf, fmtLikes, itemPath, SITE} from './data.js';
 import {synonymIndex, prepare, search} from './search.js';
 import {buildRequest} from './apply.js';
+import {shareLink} from './store.js';
 
 const PAGE = 48;
+const BASE_TITLE = document.title;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -73,6 +75,7 @@ function load() {
     $('total').textContent = DATA.length;
     status('');
     readURL(); syncControls(); buildUses(); buildIndex(); buildFeatured(); render();
+    openFromURL();
     document.dispatchEvent(new Event('fx:ready'));
   }).catch(() => {
     status('<h3>작품 목록을 불러오지 못했습니다</h3><p>네트워크가 잠시 끊겼거나 파일을 받지 못했습니다.</p><div class="row"><button type="button" id="retry">다시 시도</button></div>');
@@ -92,7 +95,8 @@ function buildUses() {
   const n = {};
   DATA.forEach(r => r._uses.forEach(u => n[u] = (n[u] || 0) + 1));
   $('uses').innerHTML = Object.entries(ED.uses).map(([k, u]) =>
-    `<button type="button" class="use" data-use="${k}" aria-pressed="${S.use === k}">${esc(u.title)}<small>${n[k] || 0}</small></button>`).join('');
+    `<button type="button" class="use" data-use="${k}" aria-pressed="${S.use === k}">${esc(u.title)}<small>${n[k] || 0}</small></button>`).join('') +
+    '<a class="use" href="use/">용도별 안내 →</a>';
 }
 function buildIndex() {
   const cnt = {};
@@ -265,10 +269,34 @@ document.addEventListener('click', e => {
 });
 
 /* ---------- 상세 ---------- */
-let opener = null;
-function openItem(r, from) {
+/* 작품 주소: ?item=<id>. 열 때 기록(pushState)해서 뒤로가기가 창을 닫게 한다.
+   직접 들어온 주소(새로고침 포함)는 기록을 더하지 않고, 닫을 때 주소에서 item 만 지운다. */
+let opener = null, pushed = null, popClosing = false;
+const itemParam = () => new URLSearchParams(location.search).get('item');
+function urlWithItem(id) {
+  const p = stateQuery(); if (id) p.set('item', id);
+  const qs = p.toString(); return location.pathname + (qs ? '?' + qs : '');
+}
+export function shareURL(r) {
+  return r.ed && r.ed.guide ? SITE + itemPath(r.id) : SITE + '?item=' + encodeURIComponent(r.id);
+}
+function openFromURL() {
+  const id = itemParam(); if (!id) return;
+  const r = BYID.get(id);
+  if (r) openItem(r, null, true);
+  else { status(`<h3>찾는 작품이 없습니다</h3><p>주소의 작품(${esc(id)})이 목록에서 빠졌거나 주소가 바뀌었습니다. 아래 전체 목록에서 찾아 주세요.</p>`);
+    history.replaceState(null, '', urlWithItem(null)); }
+}
+window.addEventListener('popstate', () => {
+  const id = itemParam(), dlg = $('dlg');
+  if (id && !dlg.open) { const r = BYID.get(id); if (r) openItem(r, null, true); }
+  else if (!id && dlg.open) { popClosing = true; dlg.close(); }
+});
+function openItem(r, from, fromURL) {
   if (!r) return;
   stopHover(); opener = from || document.activeElement;
+  if (!fromURL) { history.pushState({fxItem: r.id}, '', urlWithItem(r.id)); pushed = r.id; }
+  document.title = titleOf(r) + ' — 효과 갤러리';
   $('dlg').innerHTML = detail(r);
   bindDetail(r);
   $('dlg').showModal();
@@ -338,6 +366,7 @@ function bindApply(r) {
   $('cp-req').onclick = e => copyText($('ap-out').textContent, e.currentTarget, 'copy_request');
 }
 
+function flash(btn, text) { const o = btn.textContent; btn.textContent = text; setTimeout(() => btn.textContent = o, 1600); }
 function copyText(t, btn, ev) {
   const o = btn.textContent;
   navigator.clipboard.writeText(t).then(() => { btn.textContent = '복사됨'; track(ev, {id: btn.dataset.id}); })
@@ -346,7 +375,9 @@ function copyText(t, btn, ev) {
 }
 function bindDetail(r) {
   $('acts').innerHTML = `<button type="button" class="btn primary" id="cp-orig" data-id="${esc(r.id)}">${r.partial ? '원본 프롬프트 복사 (일부 공개)' : '원본 프롬프트 복사'}</button>`;
+  $('acts').insertAdjacentHTML('beforeend', `<button type="button" class="btn" id="share">공유</button>${r.ed && r.ed.guide ? `<a class="btn" href="${itemPath(r.id)}">작품 페이지</a>` : ''}`);
   $('cp-orig').onclick = e => copyText(r.prompt || '', e.currentTarget, 'copy_original');
+  $('share').onclick = async e => { const how = await shareLink({title: titleOf(r), url: shareURL(r)}, e.currentTarget, flash); track('share', {id: r.id, how}); };
   $('applyslot').outerHTML = applyBlock(r);
   bindApply(r);
   const m = $('dlg').querySelector('[data-media]');
@@ -356,6 +387,13 @@ function bindDetail(r) {
 $('dlg').addEventListener('close', () => {
   $('dlg').querySelector('video')?.pause();
   $('dlg').innerHTML = '';
+  document.title = BASE_TITLE;
+  if (popClosing) popClosing = false;
+  else if (itemParam()) {
+    if (pushed && history.state && history.state.fxItem === pushed) history.back();
+    else history.replaceState(null, '', urlWithItem(null));
+  }
+  pushed = null;
   if (opener && document.contains(opener)) opener.focus();
 });
 $('dlg').addEventListener('click', e => { if (e.target === $('dlg')) $('dlg').close(); });

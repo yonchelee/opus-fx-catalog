@@ -70,5 +70,50 @@ class Generated(unittest.TestCase):
         self.assertEqual(orphans, [])
 
 
+
+class Pages(unittest.TestCase):
+    """생성 페이지: 메타 정보, 사이트맵, 상대 링크가 실제 파일로 이어지는지."""
+    @classmethod
+    def setUpClass(cls):
+        import re
+        cls.re = re
+        cls.pages = sorted(p for d in ('fx', 'use') for p in (ROOT / d).rglob('index.html'))
+        cat, _ = build_site.load(ROOT)
+        cls.ids = {r['id'] for r in cat['items']}
+
+    def test_pages_exist(self):
+        self.assertGreaterEqual(len([p for p in self.pages if 'fx' in p.parts]), 12)
+        self.assertGreaterEqual(len([p for p in self.pages if 'use' in p.parts]), 5)
+
+    def test_meta(self):
+        for p in self.pages:
+            t = p.read_text()
+            rel = p.parent.relative_to(ROOT).as_posix() + '/'
+            canon = build_site.SITE + rel
+            self.assertIn(f'<link rel="canonical" href="{canon}">', t, p)
+            for tag in ('og:title', 'og:description', 'og:url', 'og:image', '<title>', 'name="description"'):
+                self.assertIn(tag, t, f'{p}: {tag}')
+
+    def test_sitemap_matches_pages(self):
+        sm = (ROOT / 'sitemap.xml').read_text()
+        locs = set(self.re.findall(r'<loc>([^<]+)</loc>', sm))
+        want = {build_site.SITE} | {build_site.SITE + p.parent.relative_to(ROOT).as_posix() + '/' for p in self.pages}
+        self.assertEqual(locs, want)
+
+    def test_relative_links_resolve(self):
+        from urllib.parse import unquote, urlsplit, parse_qs
+        for p in self.pages:
+            for ref in self.re.findall(r'(?:href|src)="([^"]+)"', p.read_text()):
+                if ref.startswith(('http', 'mailto:', '#', 'data:')):
+                    continue
+                u = urlsplit(ref)
+                target = (p.parent / unquote(u.path)).resolve()
+                if target.is_dir():
+                    target = target / 'index.html'
+                self.assertTrue(target.exists(), f'{p.relative_to(ROOT)} → {ref}')
+                for item in parse_qs(u.query).get('item', []):
+                    self.assertIn(item, self.ids, f'{p.relative_to(ROOT)} → ?item={item}')
+
+
 if __name__ == '__main__':
     unittest.main()

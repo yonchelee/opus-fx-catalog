@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>음악 플레이어 UI 모핑 — 효과 갤러리</title>
+<meta name="description" content="버튼 하나가 음악 플레이어·슬라이더·탭·차트로 끊김없이 모핑하는 UI 상태 전환 데모">
+<link rel="canonical" href="https://yonchelee.github.io/opus-fx-catalog/fx/yihui/twoclipping-402193/">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="효과 갤러리">
+<meta property="og:title" content="음악 플레이어 UI 모핑 — 효과 갤러리">
+<meta property="og:description" content="버튼 하나가 음악 플레이어·슬라이더·탭·차트로 끊김없이 모핑하는 UI 상태 전환 데모">
+<meta property="og:url" content="https://yonchelee.github.io/opus-fx-catalog/fx/yihui/twoclipping-402193/">
+<meta property="og:image" content="https://media.skillry.dev/opus-5-5/twoclipping-402193/original.9c664f011f.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFF3E2">
+<script>(function(){try{var d=document.documentElement,t=localStorage.getItem('yl-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');d.dataset.theme=t}catch(e){}})();</script>
+<link rel="icon" href="https://www.yonchelee.com/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "음악 플레이어 UI 모핑", "description": "버튼 하나가 음악 플레이어·슬라이더·탭·차트로 끊김없이 모핑하는 UI 상태 전환 데모", "url": "https://yonchelee.github.io/opus-fx-catalog/fx/yihui/twoclipping-402193/", "inLanguage": "ko", "author": {"@type": "Person", "name": "twoclipping"}, "isBasedOn": "https://x.com/twoclipping/status/2103273003555402193", "image": "https://media.skillry.dev/opus-5-5/twoclipping-402193/original.9c664f011f.webp"}</script>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="https://www.yonchelee.com/">이영채 작업실</a>
+  <a class="here" href="../../../">/ Effect Gallery</a>
+  <span class="sp"></span>
+  <a class="navbtn" href="../../../">갤러리</a>
+  <button class="theme-toggle" type="button" id="theme" aria-label="다크 모드 전환">
+    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+  </button>
+</nav>
+<main class="wrap doc">
+<div class="crumbs"><a href="../../../">효과 갤러리</a> › <a href="../../../use/product/">제품·UI 소개 애니메이션</a></div>
+<h1>음악 플레이어 UI 모핑</h1>
+<div class="orig">One-shape UI morph loop synced to music</div>
+<p class="lead">버튼 하나가 음악 플레이어·슬라이더·탭·차트로 끊김없이 모핑하는 UI 상태 전환 데모</p>
+<div class="badges"><span class="b env2">Claude Code</span><span class="b">프롬프트 전체 공개</span><span class="b v-unverified">미검증</span></div>
+<div class="dmedia"><video controls muted playsinline loop preload="none" poster="https://media.skillry.dev/opus-5-5/twoclipping-402193/original.9c664f011f.webp" src="https://video.twimg.com/amplify_video/2103272964967804928/vid/avc1/720x720/18beFxJGrO4tjaDQ.mp4?tag=29" data-media="1"></video><div class="none" hidden><span>미리보기를 불러오지 못했습니다.</span><a href="https://x.com/twoclipping/status/2103273003555402193" target="_blank" rel="noopener">원본 게시물에서 보기</a></div></div>
+<div class="acts" style="margin-top:14px">
+  <button type="button" class="btn primary" id="cp-orig">원본 프롬프트 복사</button>
+  <button type="button" class="btn" id="fav" aria-pressed="false">☆ 즐겨찾기</button>
+  <button type="button" class="btn" id="share">공유</button>
+  <a class="btn" href="../../../?item=yihui%3Atwoclipping-402193">갤러리에서 보기</a>
+</div>
+<p class="note" id="favnote">즐겨찾기는 이 브라우저에만 저장됩니다.</p>
+<section class="dsec"><h3><span class="n">1</span>어떤 효과인가</h3><p>검은 음악 플레이어 카드 하나가 버튼, 로더, 슬라이더, 토글, 탭, 차트, 커맨드팔레트까지 형태를 유지한 채 크기·모서리·색이 바뀌며 변신한다. 커서가 클릭과 드래그로 모든 전환을 이끈다.</p></section>
+<section class="dsec"><h3><span class="n">2</span>어디에 쓰면 좋은가</h3><p>제품 데모 영상이나 랜딩페이지 히어로에서 여러 UI 상태를 한 번에 보여줄 때 쓴다.</p><p class="note">추천 이유: 하나의 도형이 음악 플레이어부터 차트, 커맨드팔레트까지 커서 조작으로 끊김없이 모핑하는 과정을 썸네일에서 직접 확인했다.</p></section>
+<section class="dsec"><h3><span class="n">3</span>필요한 것</h3><ul><li>Claude Code 같은 개발 환경에서 파일을 만들어 실행</li><li>Claude Code</li><li>Node.js</li><li>Playwright</li><li>FFmpeg</li><li>Python(numpy)</li><li>내 자료 필요</li><li>Python</li><li>MP4 렌더링</li><li>내 자료: 120BPM 안팎의 로열티프리 음악 파일</li></ul></section>
+<section class="dsec"><h3><span class="n">4</span>실행 순서</h3><ol><li>표현하고 싶은 UI 상태 8~12개와 순서를 정한다</li><li>120BPM 안팎의 로열티프리 음악을 준비한다</li><li>Claude Code에 프롬프트를 붙여넣고 상태 목록부터 beat grid로 확인받는다</li><li>Playwright로 프레임별 렌더링 코드를 작성하게 한다</li><li>numpy로 음악의 비트를 분석해 전환 타이밍을 맞춘다</li><li>ffmpeg로 서브프레임을 합성해 모션 블러를 넣고 60fps로 출력한다</li></ol></section>
+<section class="dsec"><h3><span class="n">5</span>바꾸면 좋은 변수</h3><div class="vars"><div><b>UI 상태 목록</b><span>버튼·로더·슬라이더 등 보여줄 화면 종류와 순서를 바꾼다</span></div><div><b>액센트 컬러</b><span>검정·흰색 기본에 포인트 색 하나만 바꾼다</span></div><div><b>음악</b><span>BPM과 분위기에 맞는 다른 트랙으로 교체한다</span></div></div></section>
+<section class="dsec"><h3><span class="n">6</span>원본 프롬프트</h3><pre class="prompt" id="dprompt">&lt;inputs&gt;
+Ask me for: 8 to 12 UI states I want the shape to become (e.g. button, loader, player, slider, toggle, tabs, chart, command palette, toast), pure black and white or one accent color, and a royalty-free song around 120 BPM (e.g. Mixkit, free for commercial use).
+&lt;/inputs&gt;
+
+&lt;direction&gt;
+Dribbble-level UI motion. One shape, never cut: every state is the same element morphing its size, radius and color while its content swaps with a short blur. A cursor drives every change with real clicks and drags. Light warm-gray canvas, black and white components, one clean UI font (Geist). Springs everywhere, a tiny overshoot at most. The camera zooms so each state fills the frame. The last frame is the first frame, so it loops.
+Banned: bouncy easing, particle bursts, glows, gradients on UI chrome, mismatched icon strokes, dead time, anything that looks like a template.
+&lt;/direction&gt;
+
+&lt;structure&gt;
+120 BPM, 7 bars, something happens on every beat.
+Button → loader → check → dynamic island → music player with a play/pause morph → scrub the progress bar → it becomes a volume slider that stretches when dragged past max → a toggle flips on the beat → the knob becomes a liquid tab indicator → the tabs open into a chart that draws itself, with a tooltip on hover → it collapses into ⌘K → type to filter → enter → toast → back to the button.
+&lt;/structure&gt;
+
+&lt;build&gt;
+1. One HTML file, square 1440x1440. Every style is computed from time inside seek(t): no CSS transitions, no timers, no state carried between frames.
+2. Springs are closed-form step responses. A value that changes target many times is the sum of one spring per change, so it stays a pure function of time.
+3. The tab indicator&#x27;s two edges ride different springs, so the leading edge stretches ahead of the trailing one. Same trick for the toggle knob.
+4. Drags are direct manipulation: while the cursor is held, the value is computed from its position. On release it springs back from wherever it was.
+5. Analyze the song with numpy for the beat grid and start on a downbeat. Place every UI sound by its measured peak.
+6. Render with Playwright: 4 subframes per frame, blended with ffmpeg tmix for motion blur at 60fps.
+7. Render one frame per beat before the full render. Fix anything off the grid, cramped or hard to read.
+&lt;/build&gt;
+
+&lt;gotchas&gt;
+Never put will-change on anything the camera scales or the text renders blurry. Text that swaps inside a morphing container needs its own enter and exit timing or it overlaps. Make the last frame identical to the first, cursor position and speed included, or the loop stutters.
+&lt;/gotchas&gt;
+
+&lt;start&gt;
+Ask me for the inputs, then show me the state list on the beat grid before you write any code.
+&lt;/start&gt;</pre></section>
+<div id="applyslot"></div>
+<section class="dsec"><h3><span class="n">8</span>출처와 검증</h3><ul><li>원작자 @twoclipping · <a href="https://x.com/twoclipping/status/2103273003555402193" target="_blank" rel="noopener">원본 게시물</a> · <a href="https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/twoclipping-402193.md" target="_blank" rel="noopener">프롬프트 출처</a></li><li>검증: <b>미검증</b> — 이 사이트에서 직접 실행해 보지 않았습니다.</li><li>부족한 조건: Playwright 렌더링과 ffmpeg 합성까지 실제로 돌려 60fps 영상으로 매끄럽게 나오는지 확인 필요</li><li>원본 X 게시물 좋아요 1.3만 — 이 사이트의 평가가 아닙니다.</li><li class="note">영상·프롬프트의 권리는 원작자에게 있습니다. 작품 ID yihui:twoclipping-402193 · 수집 2026-09-26</li></ul></section>
+<section class="dsec"><h3><span class="n"></span>같은 용도의 다른 작품</h3><ul class="list"><li><a class="row" href="../../../fx/yihui/iamtanzil-120030/"><img src="https://media.skillry.dev/opus-5-5/iamtanzil-120030/original.31773009f1.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>e바이크 엑스레이 제품 히어로</b><span>마우스로 외관을 지우면 내부 구조가 드러나는 커서 추적 엑스레이 제품 히어로 섹션</span></div></a></li><li><a class="row" href="../../../fx/yihui/op7418-818226/"><img src="https://media.skillry.dev/opus-5-5/op7418-818226/original.bd3cd48590.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>모바일 게임 보상 연출</b><span>카드가 금빛 광선 속에서 열리며 등급마다 색과 파티클이 바뀌는 가챠 보상 화면.</span></div></a></li><li><a class="row" href="../../../fx/yihui/bthreeagency-827092/"><img src="https://media.skillry.dev/opus-5-5/bthreeagency-827092/original.353cb53c14.webp" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>뱃지 해금 애니메이션</b><span>금테 육각 뱃지가 커서를 따라 기울며 금빛 파티클과 함께 떠오르는 해금 연출.</span></div></a></li></ul></section>
+</main>
+<footer>
+  <div class="in">
+    <p>모든 영상과 프롬프트의 권리는 각 원작자에게 있습니다. 미리보기는 원본 게시물의 공개 주소를 그대로 불러오며, 원본이 지워지면 보이지 않을 수 있습니다.</p>
+    <p>데이터 출처: <a href="https://github.com/yihui-dev/awesome-opus5-5-videos">yihui-dev/awesome-opus5-5-videos</a> (MIT) · <a href="https://github.com/Li-Evan/awesome-opus-5.5-video-prompts">Li-Evan/awesome-opus-5.5-video-prompts</a> (CC BY 4.0). 카탈로그: <a href="https://github.com/yonchelee/opus-fx-catalog">yonchelee/opus-fx-catalog</a></p>
+    <div class="legal"><span>© 2026 YOUNGCHAE LEE</span><a href="https://www.yonchelee.com/">YONCHELEE.COM</a></div>
+  </div>
+</footer>
+<script type="application/json" id="item">{"id": "yihui:twoclipping-402193", "author": "twoclipping", "post_url": "https://x.com/twoclipping/status/2103273003555402193", "prompt": "<inputs>\nAsk me for: 8 to 12 UI states I want the shape to become (e.g. button, loader, player, slider, toggle, tabs, chart, command palette, toast), pure black and white or one accent color, and a royalty-free song around 120 BPM (e.g. Mixkit, free for commercial use).\n<\/inputs>\n\n<direction>\nDribbble-level UI motion. One shape, never cut: every state is the same element morphing its size, radius and color while its content swaps with a short blur. A cursor drives every change with real clicks and drags. Light warm-gray canvas, black and white components, one clean UI font (Geist). Springs everywhere, a tiny overshoot at most. The camera zooms so each state fills the frame. The last frame is the first frame, so it loops.\nBanned: bouncy easing, particle bursts, glows, gradients on UI chrome, mismatched icon strokes, dead time, anything that looks like a template.\n<\/direction>\n\n<structure>\n120 BPM, 7 bars, something happens on every beat.\nButton → loader → check → dynamic island → music player with a play/pause morph → scrub the progress bar → it becomes a volume slider that stretches when dragged past max → a toggle flips on the beat → the knob becomes a liquid tab indicator → the tabs open into a chart that draws itself, with a tooltip on hover → it collapses into ⌘K → type to filter → enter → toast → back to the button.\n<\/structure>\n\n<build>\n1. One HTML file, square 1440x1440. Every style is computed from time inside seek(t): no CSS transitions, no timers, no state carried between frames.\n2. Springs are closed-form step responses. A value that changes target many times is the sum of one spring per change, so it stays a pure function of time.\n3. The tab indicator's two edges ride different springs, so the leading edge stretches ahead of the trailing one. Same trick for the toggle knob.\n4. Drags are direct manipulation: while the cursor is held, the value is computed from its position. On release it springs back from wherever it was.\n5. Analyze the song with numpy for the beat grid and start on a downbeat. Place every UI sound by its measured peak.\n6. Render with Playwright: 4 subframes per frame, blended with ffmpeg tmix for motion blur at 60fps.\n7. Render one frame per beat before the full render. Fix anything off the grid, cramped or hard to read.\n<\/build>\n\n<gotchas>\nNever put will-change on anything the camera scales or the text renders blurry. Text that swaps inside a morphing container needs its own enter and exit timing or it overlaps. Make the last frame identical to the first, cursor position and speed included, or the loop stutters.\n<\/gotchas>\n\n<start>\nAsk me for the inputs, then show me the state list on the beat grid before you write any code.\n<\/start>", "partial": false, "level": 2, "fx": ["audio", "data", "liquid", "morph", "particles", "shader", "ui"], "title": "One-shape UI morph loop synced to music", "ed": {"guide": {"brief": "하나의 UI 요소가 잘리지 않고 크기·모서리·색을 바꾸며 여러 상태(버튼, 로더, 슬라이더, 탭, 차트, 커맨드팔레트 등)로 연속 변신하는 모션을 만든다. 모든 전환은 커서의 클릭과 드래그로 일어나고, 스프링 물성으로 자연스럽게 움직이며 마지막 장면이 첫 장면과 같아 루프된다. 음악 비트에 맞춰 전환 타이밍을 잡고 motion blur로 부드럽게 마무리한다."}, "title_ko": "음악 플레이어 UI 모핑"}, "uses": ["제품·UI 소개 애니메이션"]}</script>
+<script type="module" src="../../../assets/page.js"></script>
+</body>
+</html>
