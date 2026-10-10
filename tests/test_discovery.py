@@ -250,6 +250,20 @@ class Trend(unittest.TestCase):
 
 
 class JudgeUnits(unittest.TestCase):
+    def test_popular_tools_are_not_effects(self):
+        cfg = json.loads((ROOT / 'discovery/config.json').read_text())['judge']
+        tools = [('p5.js', 'p5.js is a client-side JS platform that empowers artists', ['creative-coding']),
+                 ('xterm.js', 'A terminal for the web', ['webgl']), ('wgpu', 'A cross-platform, safe, pure-Rust graphics API.', ['webgpu']),
+                 ('olive', 'Free open-source non-linear video editor', ['animation']), ('umbrella', 'Broadly scoped ecosystem & mono-repository of 215 TypeScript projects', ['generative-art']),
+                 ('cobe', '5KB WebGL globe lib.', ['webgl']), ('glslViewer', 'Console-based GLSL Sandbox for 2D/3D shaders', ['shader'])]
+        for name, desc, topics in tools:
+            k = judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind']
+            self.assertIn(k, ('library', 'unknown'), f'{name} → {k}')
+        effects = [('WebGL-Fluid-Simulation', 'Play with fluids in your browser (works even on mobile)', ['webgl', 'fluid-simulation']),
+                   ('matrix', 'matrix (web-based green code rain, made with love)', ['webgl'])]
+        for name, desc, topics in effects:
+            self.assertEqual(judge.classify_repo({'name': name, 'description': desc, 'topics': topics, 'language': 'JavaScript'}, '', ['index.html'], cfg)['kind'], 'effect', name)
+
     def test_badges_are_not_previews(self):
         md = '![ci](https://img.shields.io/badge/x)\n![demo](https://user-images.githubusercontent.com/1/a.gif)'
         self.assertEqual(judge.readme_media(md, 'a/b', 'main'), 'https://user-images.githubusercontent.com/1/a.gif')

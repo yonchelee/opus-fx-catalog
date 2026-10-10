@@ -81,18 +81,22 @@ def classify_repo(repo, readme, contents, cfg):
     def any_word(ws, text):
         return [w for w in ws if has_word(text, w)]
 
-    if 'awesome' in name or 'awesome-list' in topics or 'awesome' in topics or any_word(cfg['list_words'], words(name.replace('-', ' ') + ' ' + desc)) or (links > 60 and (only_docs or not code_files)):
+    namedesc = words(name.replace('-', ' ').replace('_', ' ') + ' ' + desc)
+    tool = any_word(cfg['library_words'], namedesc)
+    npm_pkg = 'package.json' in files and re.search(r'\b(npm|yarn|pnpm) (i|install|add) (?!-)', readme or '') is not None
+    effect_sig = any_word(cfg['effect_words'], head)
+    if 'awesome' in name or 'awesome-list' in topics or 'awesome' in topics or any_word(cfg['list_words'], namedesc) or (links > 60 and (only_docs or not code_files)):
         kind = 'list'
-    elif set(topics) & set(cfg['library_topics']) or any_word(cfg['library_words'], words(desc)) or \
-            ('package.json' in files and re.search(r'\b(npm|yarn|pnpm) (i|install|add)\b', readme or '') and not demo_url(repo, readme, cfg)):
+    elif tool or set(topics) & set(cfg['library_topics']) or npm_pkg:
+        # 도구·라이브러리·플랫폼·앱. 효과를 '만드는' 쪽이지 완성된 효과가 아니다.
         kind = 'library'
     elif any_word(cfg['collection_words'], head) or any_word(['collection of', 'examples', 'experiments'], words((readme or '')[:1500])):
         kind = 'collection'
-    elif code_files or repo.get('language'):
+    elif effect_sig and (code_files or repo.get('language')):
         kind = 'effect'
     else:
-        kind = 'unknown'
-    return {'kind': kind, 'relevant': relevant, 'strong_topics': strong, 'hits': hits,
+        kind = 'unknown'  # 작품이라는 신호가 없다 — 보류
+    return {'kind': kind, 'relevant': relevant, 'strong_topics': strong, 'hits': hits, 'tool_words': tool, 'effect_words': effect_sig,
             'has_code': bool(code_files) or (bool(repo.get('language')) and not only_docs), 'links': links}
 
 
@@ -132,7 +136,7 @@ def decide(c, cfg, homepage_owner=None):
     if c['kind'] == 'list':
         return 'source', ['링크 자료집 — 작품이 아니라 추가 발굴 출처 후보']
     if c['kind'] == 'library':
-        return 'held', ['제작용 라이브러리·프레임워크 — 완성된 작품으로 공개하지 않음']
+        return 'held', ['제작용 라이브러리·프레임워크·도구 — 완성된 작품으로 공개하지 않음' + (f" ({', '.join(c.get('tool_words') or [])})" if c.get('tool_words') else '')]
     if c.get('fork'):
         reasons.append('포크 저장소')
     if c.get('mirror'):
@@ -150,7 +154,7 @@ def decide(c, cfg, homepage_owner=None):
     if (c.get('stars') or 0) < cfg['min_stars_publish']:
         reasons.append(f"별 {c.get('stars') or 0}개 — 공개 기준 {cfg['min_stars_publish']}개 미만")
     if c['kind'] == 'unknown':
-        reasons.append('작품 유형 판단 불가')
+        reasons.append('작품 유형 판단 불가 — 이름·설명·주제에 데모·효과·애니메이션 같은 작품 신호가 없음')
     return ('held', reasons) if reasons else ('published', ['필수 조건 충족: 관련성·미리보기 또는 데모·코드·라이선스·원작자'])
 
 

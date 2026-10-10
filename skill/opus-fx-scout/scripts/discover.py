@@ -217,6 +217,7 @@ class Run:
                 has_prompt, prompt_url = judge.prompt_info(readme, contents, c['full_name'], c.get('default_branch'))
                 level, env_text = judge.environment(c, contents, jc)
                 c.update(kind=cl['kind'], relevant=cl['relevant'], has_code=cl['has_code'], strong_topics=cl['strong_topics'],
+                         tool_words=cl['tool_words'], effect_words=cl['effect_words'],
                          hits=cl['hits'], thumb=judge.readme_media(readme, c['full_name'], c.get('default_branch')),
                          demo_url=judge.demo_url(c, readme, jc), has_prompt=has_prompt, prompt_url=prompt_url,
                          level=level, env_text=env_text, ai_made=bool(re.search(r'\b(claude|opus|anthropic)\b', readme or '', re.I)))
