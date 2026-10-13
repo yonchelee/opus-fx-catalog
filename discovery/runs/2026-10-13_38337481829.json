@@ -1,0 +1,431 @@
+{
+ "run_id": "38337481829",
+ "mode": "daily",
+ "started": "2026-10-13T02:34:14Z",
+ "where": "github-actions",
+ "sync": {
+  "code": 0,
+  "out": "o 4-bit numbers u\n+ yihui:1234lust-671954 @1234lust 2026-10-12 · 채팅만 · 기타\n    I asked @claudeai for a 10-second film about a moose living in a code editor.  No animation software. Just one HTML file.\n+ yihui:superalesha-970412 @superalesha 2026-10-12 · 외부 AI·API · 페인터리·손그림\n    make an animated short that felt like Hedgehog in the Fog. I didn’t want to copy Yuri Norstein’s film, so we went with a new story.  It runs for 6.5 minutes. Al\n+ yihui:engmoelgaraihy-694832 @EngMoElgaraihy 2026-10-12 · 채팅만 · 3D 씬·카메라\n    إنشاء مشهد قارب تفاعلي يمر بجمال الطبيعة اليابانية باستخدام Three.js، مع طقس ديناميكي وانعكاسات ماء واقعية وتفاصيل معماريّة وشخصيات 3D\n+ yihui:perezalexa23-414045 @perezalexa23 2026-10-12 · 채팅만 · 페인터리·손그림,UI·제품 데모\n    Tell the Trojan Horse story in a 20-second HTML animation painted around an ancient Greek vase. Rotate the vase as the horse enters the city, night falls, and h\n+ yihui:meetarno-782464 @meetarno 2026-10-12 · 채팅만 · 기타\n    make a modern slick and punchy video for a modern startup that works on enabling people to grow on X, use our X Vision theme and website purpose.\n+ yihui:fanfulladev-063524 @Fanfulladev 2026-10-12 · 채팅만 · 기타\n    Do a full animation with sound of anthropic mascote with the newset model of Opus 5.5 fighting against OpenAI mascotte with the new astra models Sol etc like th\n~ yihui:deedydas-252537 (내용 갱신)\n~ yihui:ajith-io-208546 (내용 갱신)\n~ yihui:dannnnnok-716687 (내용 갱신)\n~ yihui:ajith-io-615243 (내용 갱신)\n~ yihui:majorbaguette-834228 (내용 갱신)\n~ yihui:miaai-lab-774895 (내용 갱신)\n~ yihui:pound75423-464968 (내용 갱신)\n~ yihui:mustaphafenzar-973906 (내용 갱신)\n~ yihui:bizibeast-505124 (내용 갱신)\n~ yihui:jhylee95-452427 (내용 갱신)\n~ yihui:anxuanng-990790 (내용 갱신)\n~ yihui:parkerrex-701462 (내용 갱신)\n~ yihui:deifosv-786581 (내용 갱신)\n~ yihui:mattbean-917572 (내용 갱신)\n~ yihui:lepadev-475414 (내용 갱신)\n~ yihui:fornyapayzeka-135914 (내용 갱신)\n~ yihui:thallisribeiro-829318 (내용 갱신)\nwrote /home/runner/work/opus-fx-catalog/opus-fx-catalog/catalog.json (986 rows) - commit and push it\n",
+  "err": ""
+ },
+ "discover": {
+  "mode": "daily",
+  "started": "2026-10-13T02:35:01Z",
+  "searches": [
+   {
+    "q": "topic:shader created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 2,
+    "probe": true
+   },
+   {
+    "q": "topic:shader created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "topic:glsl created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 5,
+    "probe": true
+   },
+   {
+    "q": "topic:glsl created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 5,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgl created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 23,
+    "probe": true
+   },
+   {
+    "q": "topic:webgl created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 23,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgpu created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 7,
+    "probe": true
+   },
+   {
+    "q": "topic:webgpu created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 7,
+    "incomplete": false
+   },
+   {
+    "q": "topic:threejs created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 33,
+    "probe": true
+   },
+   {
+    "q": "topic:threejs created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 33,
+    "incomplete": false
+   },
+   {
+    "q": "topic:gsap created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 10,
+    "probe": true
+   },
+   {
+    "q": "topic:gsap created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 10,
+    "incomplete": false
+   },
+   {
+    "q": "topic:svg-animation created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "topic:css-animation created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "topic:css-animation created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "topic:generative-art created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 8,
+    "probe": true
+   },
+   {
+    "q": "topic:generative-art created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 8,
+    "incomplete": false
+   },
+   {
+    "q": "topic:creative-coding created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 10,
+    "probe": true
+   },
+   {
+    "q": "topic:creative-coding created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 10,
+    "incomplete": false
+   },
+   {
+    "q": "topic:motion-graphics created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 4,
+    "probe": true
+   },
+   {
+    "q": "topic:motion-graphics created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 4,
+    "incomplete": false
+   },
+   {
+    "q": "topic:remotion created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 2,
+    "probe": true
+   },
+   {
+    "q": "topic:remotion created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "topic:p5js created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 2,
+    "probe": true
+   },
+   {
+    "q": "topic:p5js created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "topic:particles created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "topic:raymarching created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 2,
+    "probe": true
+   },
+   {
+    "q": "topic:raymarching created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "\"motion graphics\" in:name,description created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "\"motion graphics\" in:name,description created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "\"animation demo\" in:name,description created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"shader\" \"demo\" in:name,description created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"text effect\" in:name,description created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"scroll animation\" in:name,description created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "webgl effect in:name,description created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"made with claude\" animation in:readme created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 0,
+    "total": 2,
+    "probe": true
+   },
+   {
+    "q": "\"made with claude\" animation in:readme created:2026-10-11..2026-10-13 stars:>=1 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "topic:shader pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 15,
+    "incomplete": false
+   },
+   {
+    "q": "topic:glsl pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 20,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgl pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 94,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgpu pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 70,
+    "incomplete": false
+   },
+   {
+    "q": "topic:threejs pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 86,
+    "incomplete": false
+   },
+   {
+    "q": "topic:gsap pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 7,
+    "incomplete": false
+   },
+   {
+    "q": "topic:svg-animation pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "topic:css-animation pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "topic:generative-art pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 18,
+    "incomplete": false
+   },
+   {
+    "q": "topic:creative-coding pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 34,
+    "incomplete": false
+   },
+   {
+    "q": "topic:motion-graphics pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 21,
+    "incomplete": false
+   },
+   {
+    "q": "topic:remotion pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 21,
+    "incomplete": false
+   },
+   {
+    "q": "topic:p5js pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 7,
+    "incomplete": false
+   },
+   {
+    "q": "topic:particles pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 9,
+    "incomplete": false
+   },
+   {
+    "q": "topic:raymarching pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "\"motion graphics\" in:name,description pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 12,
+    "incomplete": false
+   },
+   {
+    "q": "\"animation demo\" in:name,description pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "\"shader\" \"demo\" in:name,description pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "\"text effect\" in:name,description pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "\"scroll animation\" in:name,description pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "webgl effect in:name,description pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "\"made with claude\" animation in:readme pushed:>=2026-10-11 stars:>=30 fork:false",
+    "page": 1,
+    "total": 9,
+    "incomplete": false
+   },
+   {
+    "q": "topic:motion-graphics stars:>=300 fork:false",
+    "page": 1,
+    "total": 32,
+    "incomplete": false
+   },
+   {
+    "q": "topic:remotion stars:>=300 fork:false",
+    "page": 1,
+    "total": 31,
+    "incomplete": false
+   },
+   {
+    "q": "topic:p5js stars:>=300 fork:false",
+    "page": 1,
+    "total": 21,
+    "incomplete": false
+   }
+  ],
+  "errors": [],
+  "stop": " / enrich: core",
+  "counts": {
+   "hits": 625,
+   "new_candidates": 80,
+   "seen_again": 545,
+   "enriched": 175,
+   "published_new": 2,
+   "held_new": 74,
+   "source_new": 2,
+   "rejected_new": 2,
+   "duplicates": 0,
+   "stars_updated": 526,
+   "stars_failed": 0,
+   "renamed": 0,
+   "gone": 2,
+   "truncated_windows": 0,
+   "rejudged": 93,
+   "rejudge_left": 987
+  },
+  "flows_done": [
+   "new",
+   "updated",
+   "popular"
+  ],
+  "totals": {
+   "held": 2360,
+   "published": 80,
+   "source": 95,
+   "rejected": 40
+  },
+  "published_total": 80,
+  "finished": "2026-10-13T02:39:11Z",
+  "api_used": {
+   "search": 62,
+   "core": 350,
+   "graphql": 6
+  },
+  "waits": []
+ },
+ "validate": [],
+ "finished": "2026-10-13T02:39:11Z",
+ "exit": 0
+}
