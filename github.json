@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-16T23:35:21Z",
+"updated": "2026-10-17T23:07:22Z",
 "items": [
 {
 "id": "gh:1506376",
@@ -23,7 +23,7 @@
 "pushed_at": "2022-10-24T19:04:28Z",
 "archived": false,
 "stars": 859,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/drojdjou/J3D/master/thumbs/proj_rectify.jpg",
@@ -47,7 +47,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-glsl"
@@ -75,7 +75,7 @@
 "pushed_at": "2025-04-29T08:13:09Z",
 "archived": false,
 "stars": 2548,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "http://ykob.github.io/sketch-threejs/img/common/ogp_common.jpg",
@@ -99,7 +99,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-webgl",
@@ -134,7 +134,7 @@
 "pushed_at": "2025-03-26T04:44:42Z",
 "archived": false,
 "stars": 450,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kbinani/colormap-shaders/master/sample/transform_rainbow.png",
@@ -158,7 +158,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-glsl"
@@ -188,7 +188,7 @@
 "pushed_at": "2016-12-15T01:22:24Z",
 "archived": false,
 "stars": 874,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/spite/polygon-shredder/master/snapshot.jpg",
@@ -213,7 +213,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-glsl"
@@ -242,7 +242,7 @@
 "pushed_at": "2018-07-24T08:21:42Z",
 "archived": false,
 "stars": 539,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "http://i.imgur.com/Mtznb1y.gif",
@@ -265,7 +265,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-shader"
@@ -300,7 +300,7 @@
 "pushed_at": "2025-04-18T02:01:05Z",
 "archived": false,
 "stars": 1038,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "http://i.imgur.com/cNj4Ton.png",
@@ -323,7 +323,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-glsl"
@@ -353,7 +353,7 @@
 "pushed_at": "2024-11-12T13:29:23Z",
 "archived": false,
 "stars": 16733,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/PavelDoGreat/WebGL-Fluid-Simulation/master/screenshot.jpg?raw=true",
@@ -376,8 +376,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 25,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-webgl"
@@ -410,7 +415,7 @@
 "pushed_at": "2023-09-07T08:52:33Z",
 "archived": false,
 "stars": 989,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/andydbc/HologramShader/master/Screenshots/screen00.gif",
@@ -433,7 +438,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-shader"
@@ -463,7 +468,7 @@
 "pushed_at": "2026-09-23T06:33:01Z",
 "archived": false,
 "stars": 1332,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/anvaka/fieldplay/wiki/images/field_1.png",
@@ -488,7 +493,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-glsl",
@@ -521,7 +526,7 @@
 "pushed_at": "2024-06-10T07:58:35Z",
 "archived": false,
 "stars": 909,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -545,7 +550,7 @@
 "added": "2026-10-10",
 "check": "discovered",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-shader"
@@ -579,7 +584,7 @@
 "pushed_at": "2025-06-23T05:56:48Z",
 "archived": false,
 "stars": 3856,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Rezmason/matrix/master/screenshot.png?raw=true",
@@ -602,7 +607,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-webgl"
@@ -647,7 +652,7 @@
 "pushed_at": "2025-02-10T04:13:22Z",
 "archived": false,
 "stars": 860,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/BrutPitt/myRepos/master/glChAoSP/screenShots/cockpitSettings.jpg",
@@ -672,7 +677,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-glsl",
@@ -708,7 +713,7 @@
 "pushed_at": "2025-08-04T16:56:47Z",
 "archived": false,
 "stars": 584,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kousun12/eternal/master/nude.png",
@@ -732,7 +737,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-glsl",
@@ -765,7 +770,7 @@
 "pushed_at": "2026-10-15T04:27:16Z",
 "archived": false,
 "stars": 3094,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Schneegans/Burn-My-Windows/main/docs/pics/custom.jpg",
@@ -787,8 +792,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 5,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:t-glsl",
@@ -832,7 +842,7 @@
 "pushed_at": "2026-10-08T01:25:07Z",
 "archived": false,
 "stars": 162,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -856,7 +866,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:t-generative-art"
@@ -890,7 +900,7 @@
 "pushed_at": "2026-10-16T06:49:35Z",
 "archived": false,
 "stars": 4594,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/hepengwei/visualization-collection/master/src/images/readme/visualDesign.gif",
@@ -913,7 +923,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:t-threejs",
@@ -952,8 +962,8 @@
 "created_at": "2023-01-17T10:12:32Z",
 "pushed_at": "2025-03-29T05:31:57Z",
 "archived": false,
-"stars": 777,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 778,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/Gaolingx/GenshinCelShaderURP/raw/main/Pictures/v2-a3d4261c39610463c839c9ecb0a07074_r.jpg",
@@ -976,7 +986,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-shader"
@@ -1005,7 +1015,7 @@
 "pushed_at": "2026-10-15T04:54:25Z",
 "archived": false,
 "stars": 80,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/ryanw-mobile/compose-pager-demo/main/screenshots/240801_animated_wide.gif",
@@ -1028,7 +1038,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:k-animation-demo"
@@ -1052,7 +1062,7 @@
 "pushed_at": "2026-10-03T03:03:23Z",
 "archived": false,
 "stars": 105,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/1a430aef-1d23-42b3-a392-de67d64f3da5",
@@ -1075,7 +1085,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:k-shader-demo"
@@ -1103,7 +1113,7 @@
 "pushed_at": "2026-10-05T22:58:18Z",
 "archived": false,
 "stars": 2199,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://z2586300277.github.io/3d-file-server/images/yy.jpg",
@@ -1126,7 +1136,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-webgl"
@@ -1153,7 +1163,7 @@
 "pushed_at": "2025-01-21T02:41:35Z",
 "archived": false,
 "stars": 571,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -1176,7 +1186,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-shader"
@@ -1207,8 +1217,8 @@
 "created_at": "2026-02-09T02:34:13Z",
 "pushed_at": "2026-10-11T06:33:18Z",
 "archived": false,
-"stars": 60,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 62,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/dynnbw/RE-Android-Live-Wallpapers/main/app/src/main/res/drawable/ic_launcher_wallpaper.png",
@@ -1230,8 +1240,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 8,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:t-glsl"
@@ -1264,10 +1279,10 @@
 "url": "https://github.com/srizzon/git-city",
 "license": "AGPL-3.0",
 "created_at": "2026-02-20T16:11:55Z",
-"pushed_at": "2026-10-16T22:58:07Z",
+"pushed_at": "2026-10-17T22:51:51Z",
 "archived": false,
-"stars": 5813,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 5815,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/srizzon/git-city/main/public/og-image.png",
@@ -1290,8 +1305,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 14,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:t-threejs",
@@ -1331,10 +1351,10 @@
 "url": "https://github.com/asdfghj1237890/mini-macau",
 "license": "MIT",
 "created_at": "2026-04-16T11:03:10Z",
-"pushed_at": "2026-10-16T22:07:53Z",
+"pushed_at": "2026-10-17T21:47:06Z",
 "archived": false,
-"stars": 636,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 637,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://mini-map-macau.app/og-image.png",
@@ -1357,7 +1377,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:t-webgl"
@@ -1385,10 +1405,10 @@
 "url": "https://github.com/mkturkcan/valdrada",
 "license": "MIT",
 "created_at": "2026-09-24T19:23:55Z",
-"pushed_at": "2026-10-15T12:05:09Z",
+"pushed_at": "2026-10-17T09:41:00Z",
 "archived": false,
-"stars": 175,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 182,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/mkturkcan/valdrada/main/docs/assets/figures/hero.jpg",
@@ -1410,8 +1430,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 109,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "updated:t-threejs",
@@ -1454,7 +1479,7 @@
 "pushed_at": "2026-09-26T19:30:43Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/cyanheads/tonoscope/main/docs/images/title.jpg",
@@ -1478,7 +1503,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-webgpu",
@@ -1513,7 +1538,7 @@
 "pushed_at": "2026-09-28T14:12:06Z",
 "archived": false,
 "stars": 4,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/sundyme/event-horizon/main/media/poster.jpg",
@@ -1536,7 +1561,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-generative-art",
@@ -1582,7 +1607,7 @@
 "pushed_at": "2026-10-06T10:33:52Z",
 "archived": false,
 "stars": 47,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/earthwalker17/map-of-middle-earth/main/docs/images/film-poster.png",
@@ -1605,8 +1630,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 15,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-webgpu",
@@ -1649,7 +1679,7 @@
 "pushed_at": "2026-10-16T14:23:39Z",
 "archived": false,
 "stars": 11,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/howardc38/motion-fx-lab/main/media/intro.gif?v=signal-1",
@@ -1674,7 +1704,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-glsl",
@@ -1711,7 +1741,7 @@
 "pushed_at": "2026-09-30T09:23:03Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/max-schwegele/stable-curves-visualizer/main/docs/assets/readme/genus-2-tour.gif",
@@ -1734,7 +1764,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-threejs"
@@ -1761,10 +1791,10 @@
 "url": "https://github.com/someone-in-texas/screensavers-for-mac",
 "license": "MIT",
 "created_at": "2026-10-01T22:58:22Z",
-"pushed_at": "2026-10-14T23:28:47Z",
+"pushed_at": "2026-10-17T18:08:14Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/someone-in-texas/screensavers-for-mac/main/docs/images/city-drift.png",
@@ -1787,7 +1817,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-generative-art"
@@ -1819,10 +1849,10 @@
 "url": "https://github.com/InariNGT-Ofiicial/DS-DFH-1",
 "license": "MIT",
 "created_at": "2026-10-03T09:47:56Z",
-"pushed_at": "2026-10-03T09:54:14Z",
+"pushed_at": "2026-10-17T14:52:43Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/InariNGT-Ofiicial/DS-DFH-1/main/assets/preview.png",
@@ -1847,7 +1877,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-generative-art"
@@ -1884,7 +1914,7 @@
 "pushed_at": "2026-10-12T10:26:33Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Daniele-Cangi/squishy-lab/main/docs/images/playground-desktop.png",
@@ -1909,7 +1939,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-webgl",
@@ -1946,7 +1976,7 @@
 "pushed_at": "2026-10-07T06:35:04Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Goldfish76/the-sky-that-night/main/docs/hero.jpg",
@@ -1970,7 +2000,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-generative-art"
@@ -2013,7 +2043,7 @@
 "pushed_at": "2026-10-08T14:36:32Z",
 "archived": false,
 "stars": 101,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -2035,8 +2065,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 9,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-generative-art",
@@ -2066,10 +2101,10 @@
 "url": "https://github.com/deity6/softlab",
 "license": "MIT",
 "created_at": "2026-10-05T16:07:09Z",
-"pushed_at": "2026-10-16T20:22:06Z",
+"pushed_at": "2026-10-17T21:08:02Z",
 "archived": false,
 "stars": 103,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/deity6/softlab/main/docs/screenshots/home-light.png",
@@ -2092,7 +2127,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-webgl",
@@ -2124,7 +2159,7 @@
 "pushed_at": "2026-10-06T15:59:42Z",
 "archived": false,
 "stars": 5,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Tunai-0511/meme67-art-history/main/docs/cover.jpg",
@@ -2147,7 +2182,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-generative-art",
@@ -2181,7 +2216,7 @@
 "pushed_at": "2026-10-10T10:45:42Z",
 "archived": false,
 "stars": 13,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/winchxyz/platen/main/docs/hero.jpg",
@@ -2206,7 +2241,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-threejs",
@@ -2239,8 +2274,8 @@
 "created_at": "2026-10-09T23:25:37Z",
 "pushed_at": "2026-10-10T00:06:04Z",
 "archived": false,
-"stars": 24,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 25,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/mrsarac/ff-unmute/master/docs/media/hero.webp",
@@ -2263,8 +2298,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 21,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "new:t-shader",
@@ -2297,7 +2337,7 @@
 "pushed_at": "2025-04-05T14:09:38Z",
 "archived": false,
 "stars": 1552,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -2319,8 +2359,13 @@
 "last_checked": "2026-10-10T12:46:08Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 6,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-gsap"
@@ -2349,7 +2394,7 @@
 "pushed_at": "2026-03-08T17:54:19Z",
 "archived": false,
 "stars": 494,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -2372,7 +2417,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-gsap"
@@ -2405,7 +2450,7 @@
 "pushed_at": "2025-06-09T14:32:57Z",
 "archived": false,
 "stars": 559,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/5b008b16-7d46-4e09-af21-d70f6fa2ec20",
@@ -2429,7 +2474,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-webgpu"
@@ -2461,7 +2506,7 @@
 "pushed_at": "2025-02-21T16:18:23Z",
 "archived": false,
 "stars": 403,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/7e0ce578-8084-4205-87d2-d836de155a5e",
@@ -2484,7 +2529,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-webgpu"
@@ -2511,8 +2556,8 @@
 "created_at": "2025-11-11T09:57:52Z",
 "pushed_at": "2026-03-13T09:06:47Z",
 "archived": false,
-"stars": 2474,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 2475,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/knight-L/sc-datav/main/public/demo_0.jpg",
@@ -2535,8 +2580,13 @@
 "last_checked": "2026-10-10T13:00:17Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
-"trend_note": "집계 중",
+"trend": {
+"delta": 34,
+"from": "2026-10-10T13:24:46Z",
+"to": "2026-10-17T23:07:22Z",
+"days": 7.4
+},
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-threejs"
@@ -2563,7 +2613,7 @@
 "pushed_at": "2024-04-21T18:58:30Z",
 "archived": false,
 "stars": 523,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -2586,7 +2636,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-generative-art"
@@ -2616,7 +2666,7 @@
 "pushed_at": "2018-05-23T10:55:28Z",
 "archived": true,
 "stars": 707,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/inconvergent/differential-line/master/img/ani2.gif?raw=true",
@@ -2639,7 +2689,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-generative-art"
@@ -2668,7 +2718,7 @@
 "pushed_at": "2019-03-10T16:39:31Z",
 "archived": true,
 "stars": 313,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/inconvergent/sand-spline/master/img/img.png?raw=true",
@@ -2691,7 +2741,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-generative-art"
@@ -2728,7 +2778,7 @@
 "pushed_at": "2026-10-15T16:30:07Z",
 "archived": false,
 "stars": 377,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/supermosh/supermosh.github.io/main/cover.png",
@@ -2751,7 +2801,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-generative-art",
@@ -2781,7 +2831,7 @@
 "pushed_at": "2022-12-01T02:13:05Z",
 "archived": true,
 "stars": 357,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -2804,7 +2854,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-generative-art"
@@ -2833,7 +2883,7 @@
 "pushed_at": "2025-10-18T20:17:52Z",
 "archived": false,
 "stars": 308,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://user-images.githubusercontent.com/65209850/210824481-49e4b319-3a68-4cbd-98ec-43d07e35760f.png",
@@ -2856,7 +2906,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-creative-coding"
@@ -2889,7 +2939,7 @@
 "pushed_at": "2026-08-06T18:42:10Z",
 "archived": false,
 "stars": 1112,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -2914,7 +2964,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:t-particles"
@@ -2938,7 +2988,7 @@
 "pushed_at": "2020-12-27T06:39:19Z",
 "archived": false,
 "stars": 1235,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/sureJiang/MSRotationTabBar/master/MSRotationTabBar.gif",
@@ -2961,7 +3011,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:k-animation-demo"
@@ -2995,7 +3045,7 @@
 "pushed_at": "2025-11-19T06:56:09Z",
 "archived": false,
 "stars": 344,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/HuangRunHua/swiftui-animation-demo/raw/main/cover.png",
@@ -3018,7 +3068,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "popular:k-animation-demo"
@@ -3048,7 +3098,7 @@
 "pushed_at": "2026-08-30T14:44:27Z",
 "archived": false,
 "stars": 91,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/amirmushichge/machine-vision/main/public/og.png",
@@ -3071,7 +3121,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-generative-art",
@@ -3104,7 +3154,7 @@
 "pushed_at": "2026-08-29T01:04:29Z",
 "archived": false,
 "stars": 8,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kaolti/omarchy-cosmos-screensaver/master/media/omarchy-cosmos.gif",
@@ -3129,7 +3179,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-shader",
@@ -3175,7 +3225,7 @@
 "pushed_at": "2026-09-18T12:38:10Z",
 "archived": false,
 "stars": 34,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/1133b926-5f54-47cf-82cd-0ba96b2522a5",
@@ -3200,7 +3250,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-generative-art",
@@ -3235,7 +3285,7 @@
 "pushed_at": "2026-09-01T09:13:38Z",
 "archived": false,
 "stars": 19,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/tantaneity/constellation-dice/main/docs/preview.gif",
@@ -3259,7 +3309,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-shader",
@@ -3295,7 +3345,7 @@
 "pushed_at": "2026-09-09T05:47:19Z",
 "archived": false,
 "stars": 523,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/PhiloLabs/fable51-worlds/main/union-square-sf-gpt-astra/media/preview.gif",
@@ -3318,7 +3368,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-webgl",
@@ -3364,7 +3414,7 @@
 "pushed_at": "2026-09-19T05:28:01Z",
 "archived": false,
 "stars": 56,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/xiyu519/MotionVault/master/docs/assets/demo-site.gif",
@@ -3388,7 +3438,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-threejs",
@@ -3422,10 +3472,10 @@
 "url": "https://github.com/kiaquila/fathom",
 "license": "MIT",
 "created_at": "2026-09-03T19:30:50Z",
-"pushed_at": "2026-10-15T22:35:07Z",
+"pushed_at": "2026-10-17T15:03:34Z",
 "archived": false,
 "stars": 11,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -3449,7 +3499,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-generative-art",
@@ -3487,10 +3537,10 @@
 "url": "https://github.com/Nailong-Studio/NaiLong-Universe",
 "license": "MIT",
 "created_at": "2026-09-05T16:11:47Z",
-"pushed_at": "2026-10-15T10:20:37Z",
+"pushed_at": "2026-10-17T17:09:34Z",
 "archived": false,
-"stars": 18,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 19,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Nailong-Studio/NaiLong-Universe/main/docs/readme-assets/desktop-home.jpg",
@@ -3513,7 +3563,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-creative-coding"
@@ -3548,7 +3598,7 @@
 "pushed_at": "2026-09-22T12:02:15Z",
 "archived": false,
 "stars": 25,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/yuanyang749/softie-webgpu/main/docs/images/promo-poster.png",
@@ -3572,7 +3622,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-webgpu",
@@ -3604,7 +3654,7 @@
 "pushed_at": "2026-10-11T08:20:59Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -3627,7 +3677,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-threejs"
@@ -3662,7 +3712,7 @@
 "pushed_at": "2026-10-07T13:40:24Z",
 "archived": false,
 "stars": 10,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -3685,7 +3735,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-webgl",
@@ -3717,7 +3767,7 @@
 "pushed_at": "2026-09-12T11:56:53Z",
 "archived": false,
 "stars": 5,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/1etu/MeltGL/main/Website/logo.png",
@@ -3742,7 +3792,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-webgl"
@@ -3773,7 +3823,7 @@
 "pushed_at": "2026-09-24T15:24:01Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Token-Gremlin/gremlin-church/main/assets/screenshots/exterior.png",
@@ -3796,7 +3846,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-webgl",
@@ -3829,7 +3879,7 @@
 "pushed_at": "2026-09-24T16:14:33Z",
 "archived": false,
 "stars": 28,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/axtonliu/moyun/main/media/preview.jpg",
@@ -3854,7 +3904,7 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": null,
-"trend_note": "집계 중",
+"trend_note": null,
 "x_ids": [],
 "sources": [
 "backfill:t-webgl",
@@ -3889,7 +3939,7 @@
 "pushed_at": "2026-10-14T15:57:26Z",
 "archived": false,
 "stars": 29,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -3943,7 +3993,7 @@
 "pushed_at": "2026-08-06T16:38:12Z",
 "archived": false,
 "stars": 40,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -3997,7 +4047,7 @@
 "pushed_at": "2026-08-04T08:29:21Z",
 "archived": false,
 "stars": 15,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -4055,7 +4105,7 @@
 "pushed_at": "2026-08-04T14:35:50Z",
 "archived": false,
 "stars": 5,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/aipulsedaily/lightning-sim/main/docs/images/hero.jpg",
@@ -4113,7 +4163,7 @@
 "pushed_at": "2026-08-08T00:48:11Z",
 "archived": false,
 "stars": 123,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Mr-funny/hbg-hanzi-chaizi-video/main/docs/imgs/cover.png",
@@ -4168,8 +4218,8 @@
 "created_at": "2026-08-15T19:38:20Z",
 "pushed_at": "2026-08-23T19:31:09Z",
 "archived": false,
-"stars": 12,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 13,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/VictorZakharov/beautiful-water/main/docs/open-water.jpg",
@@ -4228,7 +4278,7 @@
 "pushed_at": "2026-08-17T22:54:34Z",
 "archived": false,
 "stars": 12,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/V1999B/tidepool/main/screenshots/07_poster_brain_open_pilu_2800px.png",
@@ -4296,7 +4346,7 @@
 "pushed_at": "2026-08-17T18:35:44Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Appllama/animated-card-stack/main/docs/images/appllama-logo-light.png",
@@ -4356,7 +4406,7 @@
 "pushed_at": "2026-08-18T19:31:59Z",
 "archived": false,
 "stars": 55,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/squall01337/abyssal-ocean/main/docs/preview.gif",
@@ -4424,7 +4474,7 @@
 "pushed_at": "2026-08-20T07:41:57Z",
 "archived": false,
 "stars": 19,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/HelpFreedom/matrix-rain-saver/main/docs/demo.gif",
@@ -4492,7 +4542,7 @@
 "pushed_at": "2026-08-24T12:12:50Z",
 "archived": false,
 "stars": 27,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/poncippg-spec/liquidDX11/main/media/liquiddx11_intro.gif",
@@ -4545,7 +4595,7 @@
 "pushed_at": "2026-10-12T15:57:12Z",
 "archived": false,
 "stars": 59,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/markeasting/THREE-XPBD/master/videos/ezgif-3-06fe46f4ea.gif",
@@ -4601,7 +4651,7 @@
 "pushed_at": "2026-10-12T02:44:42Z",
 "archived": false,
 "stars": 16,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/hh-hang/3dgs-weather/main/public/preview.gif",
@@ -4657,7 +4707,7 @@
 "pushed_at": "2026-10-12T18:13:41Z",
 "archived": false,
 "stars": 4,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -4717,8 +4767,8 @@
 "created_at": "2026-10-13T07:28:20Z",
 "pushed_at": "2026-10-14T04:41:26Z",
 "archived": false,
-"stars": 32,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 38,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Kirito14IT/prompt-spider-ui/main/docs/preview.gif",
@@ -4774,7 +4824,7 @@
 "pushed_at": "2026-10-14T06:40:43Z",
 "archived": false,
 "stars": 802,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/77694823-f4ce-4731-963f-c8bb47c8d7c0",
@@ -4832,8 +4882,8 @@
 "created_at": "2024-03-06T05:45:46Z",
 "pushed_at": "2026-10-15T04:13:38Z",
 "archived": false,
-"stars": 39,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 38,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/BrokenSource/Pianola/main/website/assets/images/logo.png",
@@ -4887,8 +4937,8 @@
 "created_at": "2026-10-15T08:48:25Z",
 "pushed_at": "2026-10-15T08:49:17Z",
 "archived": false,
-"stars": 55,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 66,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Leonxlnx/golden-temple/main/docs/images/hero.jpg",
@@ -4926,62 +4976,6 @@
 ]
 },
 {
-"id": "gh:361413203",
-"src": "gh",
-"slug": "andeplane/atomify",
-"author": "andeplane",
-"title": "atomify",
-"desc": "Real time molecular dynamics in the browser using LAMMPS",
-"topics": [
-"atomistic-simulations",
-"lammps",
-"molecular-dynamics",
-"molecular-dynamics-simulation",
-"molecular-simulation",
-"visualization",
-"webassembly",
-"webgl"
-],
-"kind": "effect",
-"repo": {
-"id": 361413203,
-"full_name": "andeplane/atomify",
-"url": "https://github.com/andeplane/atomify",
-"license": "GPL-3.0",
-"created_at": "2021-04-25T11:45:35Z",
-"pushed_at": "2026-10-16T14:19:14Z",
-"archived": false,
-"stars": 76,
-"stars_at": "2026-10-16T23:35:21Z",
-"gone": false
-},
-"thumb": "https://raw.githubusercontent.com/andeplane/atomify/main/atomify.gif",
-"demo_url": "https://andeplane.github.io/atomify**",
-"demo_ok": false,
-"preview_ok": true,
-"has_code": true,
-"has_prompt": false,
-"prompt_url": null,
-"prompt": "",
-"partial": false,
-"fx": [
-"3d"
-],
-"needs": [],
-"level": 2,
-"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
-"first_seen": "2026-10-16T23:35:21Z",
-"last_checked": "2026-10-16T23:35:21Z",
-"added": "2026-10-16",
-"check": "preview",
-"trend": null,
-"trend_note": "집계 중",
-"x_ids": [],
-"sources": [
-"updated:t-webgl"
-]
-},
-{
 "id": "gh:176059452",
 "src": "gh",
 "slug": "stagerightlabs/Vue-Three-Demo",
@@ -5003,7 +4997,7 @@
 "pushed_at": "2026-10-16T20:11:39Z",
 "archived": false,
 "stars": 35,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": null,
@@ -5033,6 +5027,62 @@
 ]
 },
 {
+"id": "gh:361413203",
+"src": "gh",
+"slug": "andeplane/atomify",
+"author": "andeplane",
+"title": "atomify",
+"desc": "Real time molecular dynamics in the browser using LAMMPS",
+"topics": [
+"atomistic-simulations",
+"lammps",
+"molecular-dynamics",
+"molecular-dynamics-simulation",
+"molecular-simulation",
+"visualization",
+"webassembly",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 361413203,
+"full_name": "andeplane/atomify",
+"url": "https://github.com/andeplane/atomify",
+"license": "GPL-3.0",
+"created_at": "2021-04-25T11:45:35Z",
+"pushed_at": "2026-10-16T14:19:14Z",
+"archived": false,
+"stars": 76,
+"stars_at": "2026-10-17T23:07:22Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/andeplane/atomify/main/atomify.gif",
+"demo_url": "https://andeplane.github.io/atomify**",
+"demo_ok": false,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-16T23:35:21Z",
+"last_checked": "2026-10-16T23:35:21Z",
+"added": "2026-10-16",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"updated:t-webgl"
+]
+},
+{
 "id": "gh:755714696",
 "src": "gh",
 "slug": "fchavonet/creative_coding-flip_book",
@@ -5059,8 +5109,8 @@
 "created_at": "2024-02-10T21:35:21Z",
 "pushed_at": "2026-10-16T05:40:15Z",
 "archived": false,
-"stars": 65,
-"stars_at": "2026-10-16T23:35:21Z",
+"stars": 66,
+"stars_at": "2026-10-17T23:07:22Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/fchavonet/creative_coding-flip_book/main/assets/images/screenshots/desktop_page_screenshot-light.webp",
@@ -5087,6 +5137,122 @@
 "x_ids": [],
 "sources": [
 "updated:t-creative-coding"
+]
+},
+{
+"id": "gh:1421426888",
+"src": "gh",
+"slug": "luk3h/xmb-ps3-theme",
+"author": "luk3h",
+"title": "xmb-ps3-theme",
+"desc": "PS3 XMB-style login, lock and shut down screens, plus a live XMB wave wallpaper, for KDE Plasma 6",
+"topics": [
+"kde",
+"kde-plasma",
+"linux-theme",
+"lockscreen",
+"plasma",
+"ps3",
+"sddm",
+"shader",
+"wallpaper",
+"xmb",
+"xmb-wave"
+],
+"kind": "effect",
+"repo": {
+"id": 1421426888,
+"full_name": "luk3h/xmb-ps3-theme",
+"url": "https://github.com/luk3h/xmb-ps3-theme",
+"license": "GPL-3.0",
+"created_at": "2026-10-15T23:26:57Z",
+"pushed_at": "2026-10-17T18:36:34Z",
+"archived": false,
+"stars": 19,
+"stars_at": "2026-10-17T23:07:22Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/luk3h/xmb-ps3-theme/main/docs/login.jpg",
+"demo_url": null,
+"demo_ok": null,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"liquid",
+"shader"
+],
+"needs": [],
+"level": 2,
+"env_text": "코드 저장소 (실행 방법은 README 확인)",
+"first_seen": "2026-10-17T23:07:22Z",
+"last_checked": "2026-10-17T23:07:22Z",
+"added": "2026-10-17",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"new:t-shader"
+]
+},
+{
+"id": "gh:1422168547",
+"src": "gh",
+"slug": "eduardmur/tesla-roadster-simulator",
+"author": "eduardmur",
+"title": "tesla-roadster-simulator",
+"desc": "Tesla Roadster Simulator: the 2026 Roadster's upside-down ramp jump in your browser, with suction fans and cold-gas thrusters. Unofficial fan project, not affiliated with Tesla.",
+"topics": [
+"physics-simulation",
+"rapier",
+"react-three-fiber",
+"simulator",
+"threejs",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 1422168547,
+"full_name": "eduardmur/tesla-roadster-simulator",
+"url": "https://github.com/eduardmur/tesla-roadster-simulator",
+"license": "MIT",
+"created_at": "2026-10-16T13:00:47Z",
+"pushed_at": "2026-10-16T23:40:15Z",
+"archived": false,
+"stars": 3,
+"stars_at": "2026-10-17T23:07:22Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/eduardmur/tesla-roadster-simulator/main/docs/media/curl.gif",
+"demo_url": "https://eduardmur.github.io/tesla-roadster-simulator/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d",
+"liquid"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-17T23:07:22Z",
+"last_checked": "2026-10-17T23:07:22Z",
+"added": "2026-10-17",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"new:t-webgl",
+"new:t-threejs"
 ]
 }
 ]
