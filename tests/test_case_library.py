@@ -78,3 +78,22 @@ class Rows(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class DeadPromptLinks(unittest.TestCase):
+    SRC = {'id': 'yihui', 'prompt_url_tpl': 'https://github.com/o/r/blob/main/prompts/{slug}.md'}
+
+    def test_only_rows_gone_from_source_lose_the_link(self):
+        rows = [{'id': 'yihui:a', 'src': 'yihui', 'slug': 'a', 'prompt_url': 'https://github.com/o/r/blob/main/prompts/a.md'},
+                {'id': 'yihui:b', 'src': 'yihui', 'slug': 'b', 'prompt_url': 'https://github.com/o/r/blob/main/prompts/b.md'},
+                {'id': 'lievan:a', 'src': 'lievan', 'slug': 'a', 'prompt_url': 'https://github.com/o/r/blob/main/prompts/a.md'},
+                {'id': 'yihui:c', 'src': 'yihui', 'slug': 'c', 'prompt_url': 'https://elsewhere.example/c'}]
+        n = sync.drop_dead_prompt_links(rows, self.SRC, {'b'})
+        self.assertEqual(n, 1)
+        self.assertEqual([r['prompt_url'] for r in rows], ['', 'https://github.com/o/r/blob/main/prompts/b.md',
+                                                           'https://github.com/o/r/blob/main/prompts/a.md', 'https://elsewhere.example/c'])
+
+    def test_source_without_template_is_untouched(self):
+        rows = [{'id': 'x:a', 'src': 'x', 'slug': 'a', 'prompt_url': 'https://github.com/o/r/blob/main/prompts/a.md'}]
+        self.assertEqual(sync.drop_dead_prompt_links(rows, {'id': 'x'}, set()), 0)
+        self.assertTrue(rows[0]['prompt_url'])

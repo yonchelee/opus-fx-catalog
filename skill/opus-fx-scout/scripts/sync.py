@@ -112,6 +112,22 @@ def merge(current, incoming):
     return list(by_id.values()), new, changed
 
 
+def drop_dead_prompt_links(rows, src, present_slugs):
+    """원천이 지운 행은 카탈로그에 남기되(프롬프트 본문·원작자 링크는 그대로), 원천 저장소의
+    프롬프트 파일을 가리키던 링크는 404 가 되므로 비운다. 원천을 제대로 받았을 때만 부른다.
+    비운 행 수를 돌려준다."""
+    tpl = src.get('prompt_url_tpl') or ''
+    base = tpl.split('{', 1)[0]
+    if not base:
+        return 0
+    n = 0
+    for r in rows:
+        if r.get('src') == src['id'] and r['slug'] not in present_slugs and (r.get('prompt_url') or '').startswith(base):
+            r['prompt_url'] = ''
+            n += 1
+    return n
+
+
 def report(new, changed):
     print(f'NEW {len(new)} · UPDATED {len(changed)}')
     for r in sorted(new, key=lambda r: r['added'], reverse=True):
@@ -148,7 +164,7 @@ def main():
         return
 
     catalog = store.load_catalog()
-    incoming, errors = [], []
+    incoming, errors, fetched = [], [], {}
     if a.add:
         for v in json.loads(Path(a.add).read_text()):
             incoming.append(normalize(v['source'], v, model=v.get('model')))
@@ -164,11 +180,17 @@ def main():
                     rows, st = case_library.rows(src, case_library.fetch_files(src), catalog)
                     note = f"{st['files']} files · kept {st['kept']} · filtered {st['filtered']} · dup {st['dup']} · bad {st['bad']}"
                 incoming += [normalize(src['id'], v, src.get('prompt_url_tpl'), src.get('model')) for v in rows]
+                fetched[src['id']] = (src, {v['slug'] for v in rows})
                 print(f"source {src['id']}: {note}")
             except Exception as e:  # noqa: BLE001
                 errors.append(f"{src['id']}: {e}")
 
     merged, new, changed = merge(catalog, incoming)
+    for src, slugs in fetched.values():
+        dead = drop_dead_prompt_links(merged, src, slugs)
+        if dead:
+            print(f"source {src['id']}: 원천에서 사라진 {dead}행의 프롬프트 링크 비움 (행은 유지)")
+            changed += [r for r in merged if r.get('src') == src['id'] and r['slug'] not in slugs and not r.get('prompt_url')]
     # Save first, print second: a reader that closes the pipe early
     # (`| head`) must not cost us the write.
     if not a.dry_run and (new or changed or a.out):
