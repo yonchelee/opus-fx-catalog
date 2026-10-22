@@ -21,6 +21,7 @@ Claude(Opus 5.5 등)로 실제 만들어진 모션그래픽·3D·셰이더·인�
 모든 프롬프트와 영상의 권리는 각 원작자에게 있습니다. 항목은 아래 공개 모음에서 가져왔습니다.
 - [yihui-dev/awesome-opus5-5-videos](https://github.com/yihui-dev/awesome-opus5-5-videos) — MIT (`src: yihui` 항목)
 - [Li-Evan/awesome-opus-5.5-video-prompts](https://github.com/Li-Evan/awesome-opus-5.5-video-prompts) — CC BY 4.0 (`src: lievan` 항목)
+- [LeaddeOpenLab/awesome-opus-5-5-video-prompts](https://github.com/LeaddeOpenLab/awesome-opus-5-5-video-prompts) — 저장소 라이선스 없음, 권리 정책([RIGHTS.md](https://github.com/LeaddeOpenLab/awesome-opus-5-5-video-prompts/blob/main/data/docs/RIGHTS.md)): 프롬프트·미디어는 원작자 소유 (`src: leadde` 항목 — 프롬프트 공개 표기가 `full_original`인 사례만, 미리보기는 원작자 X 게시물 주소만 사용)
 
 새 소스가 추가되면 `sources.json`과 이 목록에 함께 기록합니다.
 

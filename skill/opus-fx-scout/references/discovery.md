@@ -61,7 +61,7 @@ python3 scripts/sync.py --dry-run   # 무엇이 새로 들어올지 보기
 이미 검토한 곳:
 - yihui-dev/awesome-opus5-5-videos: 채택 (메인, 475개, 자동 동기화)
 - Li-Evan/awesome-opus-5.5-video-prompts: 채택 (334개 원문 대조, CC BY 4.0, yihui와 안 겹치는 133개 반영, 수동)
-- LeaddeOpenLab/awesome-opus-5-5-video-prompts: 보류 — 안 겹치는 게시물 141개로 다음 후보지만 원문 그대로인지 밝히지 않음
+- LeaddeOpenLab/awesome-opus-5-5-video-prompts: 채택 (2026-10-22, 사용자 승인) — 사례 파일에 프롬프트 공개 표기가 생겨 `full_original` 195건만 자동 동기화(`type: case_library`, 다른 출처와 겹치는 16건 제외). `fragment` 533건은 받지 않음. 라이선스 파일 없음(RIGHTS.md: 원작자 소유)이라 미리보기는 원작자 X 주소만 씀
 - X-RayLuan, guanmo-ai, HiAPIAI, athemeroy의 모음: 보류
 - eastling(전부 중복), adela0414(원문이 아니라 다시 쓴 브리프), real-leo·BeatAPI(링크만 모음): 제외
 - zhuyansen 모음(940작품 중 전문 91개), opusvideo 모음(46개, 프롬프트 대부분 없음): 보류
@@ -81,6 +81,7 @@ GitHub 검색 CLI가 막혀 있으면 GitHub 커넥터의 저장소 검색이나
   J
   python3 scripts/sync.py --register /tmp/src.json && python3 scripts/sync.py
   ```
+- **게시물별 JSON 사례 파일이 있으면** (LeaddeOpenLab 형식, `data/library/<게시물 id>.json`): `"type":"case_library"`, `"path":"data/library/*.json"`, `"filter":{"prompt_status":["full_original"]}` 로 등록. `scripts/case_library.py`가 폴더만 부분 clone 해서 읽고, 분류·태그를 카탈로그 어휘로 바꾼다
 - **형식이 다르면** (YAML, README 목록, 웹페이지): 소스 정의는 `"type":"manual","status":"manual"`로 등록하고
   (sync.py가 자동으로 받지 않는다는 뜻), 항목을 직접 읽어 아래 형태로 정리한 뒤 `--add`
   ```json

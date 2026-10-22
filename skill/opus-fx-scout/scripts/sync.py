@@ -23,6 +23,7 @@ from classify import classify, FX_NAME, LEVEL_NAME  # noqa: E402
 import store  # noqa: E402
 import likes  # noqa: E402
 import build_site  # noqa: E402
+import case_library  # noqa: E402
 
 TODAY = datetime.date.today().isoformat()
 
@@ -153,12 +154,17 @@ def main():
             incoming.append(normalize(v['source'], v, model=v.get('model')))
     else:
         for src in store.load_sources():
-            if src.get('status') != 'active' or src.get('type') != 'videos_json':
+            if src.get('status') != 'active' or src.get('type') not in ('videos_json', 'case_library'):
                 continue
             try:
-                rows = json.loads(fetch_text(src))
+                if src['type'] == 'videos_json':
+                    rows = json.loads(fetch_text(src))
+                    note = f'{len(rows)} rows'
+                else:  # case_library: one JSON per post, filtered by prompt disclosure (see case_library.py)
+                    rows, st = case_library.rows(src, case_library.fetch_files(src), catalog)
+                    note = f"{st['files']} files · kept {st['kept']} · filtered {st['filtered']} · dup {st['dup']} · bad {st['bad']}"
                 incoming += [normalize(src['id'], v, src.get('prompt_url_tpl'), src.get('model')) for v in rows]
-                print(f"source {src['id']}: {len(rows)} rows")
+                print(f"source {src['id']}: {note}")
             except Exception as e:  # noqa: BLE001
                 errors.append(f"{src['id']}: {e}")
 
