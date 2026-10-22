@@ -1,0 +1,437 @@
+{
+ "run_id": "39757292334",
+ "mode": "daily",
+ "started": "2026-10-22T09:41:08Z",
+ "where": "github-actions",
+ "sync": {
+  "code": 0,
+  "out": "s my AI image platform (GitHub: zhs1234/gouo-canvas) featuring three workspaces: Ima\n+ leadde:2111492551781826753 @mhdy3d 2026-10-22 · 채팅만 · 모션 쇼릴,UI·제품 데모\n    make a motion design video shocasing you're proffesional animation skills to make a magic path animation demo launch video to show how an incredible motion desi\n+ leadde:2111513156589629941 @rubenssoto_ai 2026-10-22 · 채팅만 · 3D 씬·카메라,데이터·인포그래픽,유체·물리\n    Create a high-end cinematic and educational 3D animation in Three.js explaining how a Tesla-style electric motor works.  The animation must have an EXACT FIXED \n+ leadde:2111977880939061728 @chrisjdimarco 2026-10-22 · 채팅만 · 3D 씬·카메라,셰이더·글로우\n    make a thinklet that displays a new kind of animation born from SVG and three.js and webgl and other effects and graphical techniques merged into a new form of \n+ leadde:2112604044929712314 @olezhavich 2026-10-22 · 채팅만 · 3D 씬·카메라,우주·자연,페인터리·손그림,파티클·입자,셰이더·글로우,UI·제품 데모\n    GOAL: Create a highly detailed, cinematic, interactive 3D scene in Three.js where a futuristic Tesla Roadster launches from a massive rocket launch complex usin\n+ leadde:2112605599145832540 @0xKenny1st 2026-10-22 · 채팅만 · 3D 씬·카메라,셰이더·글로우\n    build a 3D jelly canal with a lock, a boat, and a windmill, right in the browser.\n+ leadde:2112635371716841661 @not_sacke 2026-10-22 · 채팅만 · 셰이더·글로우\n    a voxel coral reef with schools of fish, a sunken shipwreck and light rays coming down from the surface.\n~ yihui:deedydas-252537 (내용 갱신)\n~ yihui:ajith-io-208546 (내용 갱신)\n~ yihui:ajith-io-615243 (내용 갱신)\n~ yihui:majorbaguette-834228 (내용 갱신)\n~ yihui:miaai-lab-774895 (내용 갱신)\n~ yihui:pound75423-464968 (내용 갱신)\n~ yihui:bizibeast-505124 (내용 갱신)\n~ yihui:jhylee95-452427 (내용 갱신)\n~ yihui:parkerrex-701462 (내용 갱신)\n~ yihui:deifosv-786581 (내용 갱신)\n~ yihui:mattbean-917572 (내용 갱신)\n~ yihui:lepadev-475414 (내용 갱신)\n~ yihui:fornyapayzeka-135914 (내용 갱신)\n~ yihui:thallisribeiro-829318 (내용 갱신)\nwrote /home/runner/work/opus-fx-catalog/opus-fx-catalog/catalog.json (1154 rows) - commit and push it\n",
+  "err": ""
+ },
+ "discover": {
+  "mode": "daily",
+  "started": "2026-10-22T09:42:28Z",
+  "searches": [
+   {
+    "q": "topic:shader created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "topic:shader created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "topic:glsl created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 3,
+    "probe": true
+   },
+   {
+    "q": "topic:glsl created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 3,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgl created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 18,
+    "probe": true
+   },
+   {
+    "q": "topic:webgl created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 18,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgpu created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "topic:webgpu created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "topic:threejs created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 33,
+    "probe": true
+   },
+   {
+    "q": "topic:threejs created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 33,
+    "incomplete": false
+   },
+   {
+    "q": "topic:gsap created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 5,
+    "probe": true
+   },
+   {
+    "q": "topic:gsap created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 5,
+    "incomplete": false
+   },
+   {
+    "q": "topic:svg-animation created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 3,
+    "probe": true
+   },
+   {
+    "q": "topic:svg-animation created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 3,
+    "incomplete": false
+   },
+   {
+    "q": "topic:css-animation created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "topic:css-animation created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "topic:generative-art created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 8,
+    "probe": true
+   },
+   {
+    "q": "topic:generative-art created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 8,
+    "incomplete": false
+   },
+   {
+    "q": "topic:creative-coding created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 6,
+    "probe": true
+   },
+   {
+    "q": "topic:creative-coding created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 6,
+    "incomplete": false
+   },
+   {
+    "q": "topic:motion-graphics created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 5,
+    "probe": true
+   },
+   {
+    "q": "topic:motion-graphics created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 5,
+    "incomplete": false
+   },
+   {
+    "q": "topic:remotion created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 6,
+    "probe": true
+   },
+   {
+    "q": "topic:remotion created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 6,
+    "incomplete": false
+   },
+   {
+    "q": "topic:p5js created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "topic:particles created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "topic:particles created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "topic:raymarching created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"motion graphics\" in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 10,
+    "probe": true
+   },
+   {
+    "q": "\"motion graphics\" in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 10,
+    "incomplete": false
+   },
+   {
+    "q": "\"animation demo\" in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"shader\" \"demo\" in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"text effect\" in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"scroll animation\" in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "\"scroll animation\" in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "webgl effect in:name,description created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 0,
+    "probe": true
+   },
+   {
+    "q": "\"made with claude\" animation in:readme created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 0,
+    "total": 1,
+    "probe": true
+   },
+   {
+    "q": "\"made with claude\" animation in:readme created:2026-10-21..2026-10-22 stars:>=1 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "topic:shader pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 14,
+    "incomplete": false
+   },
+   {
+    "q": "topic:glsl pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 28,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgl pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 102,
+    "incomplete": false
+   },
+   {
+    "q": "topic:webgpu pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 71,
+    "incomplete": false
+   },
+   {
+    "q": "topic:threejs pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 80,
+    "incomplete": false
+   },
+   {
+    "q": "topic:gsap pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 9,
+    "incomplete": false
+   },
+   {
+    "q": "topic:svg-animation pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "topic:css-animation pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "topic:generative-art pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 21,
+    "incomplete": false
+   },
+   {
+    "q": "topic:creative-coding pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 37,
+    "incomplete": false
+   },
+   {
+    "q": "topic:motion-graphics pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 20,
+    "incomplete": false
+   },
+   {
+    "q": "topic:remotion pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 11,
+    "incomplete": false
+   },
+   {
+    "q": "topic:p5js pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 8,
+    "incomplete": false
+   },
+   {
+    "q": "topic:particles pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 7,
+    "incomplete": false
+   },
+   {
+    "q": "topic:raymarching pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 2,
+    "incomplete": false
+   },
+   {
+    "q": "\"motion graphics\" in:name,description pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 9,
+    "incomplete": false
+   },
+   {
+    "q": "\"animation demo\" in:name,description pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "\"shader\" \"demo\" in:name,description pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "\"text effect\" in:name,description pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "\"scroll animation\" in:name,description pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 1,
+    "incomplete": false
+   },
+   {
+    "q": "webgl effect in:name,description pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 0,
+    "incomplete": false
+   },
+   {
+    "q": "\"made with claude\" animation in:readme pushed:>=2026-10-21 stars:>=30 fork:false",
+    "page": 1,
+    "total": 7,
+    "incomplete": false
+   },
+   {
+    "q": "\"text effect\" in:name,description stars:>=300 fork:false",
+    "page": 1,
+    "total": 4,
+    "incomplete": false
+   },
+   {
+    "q": "\"scroll animation\" in:name,description stars:>=300 fork:false",
+    "page": 1,
+    "total": 9,
+    "incomplete": false
+   },
+   {
+    "q": "webgl effect in:name,description stars:>=300 fork:false",
+    "page": 1,
+    "total": 7,
+    "incomplete": false
+   }
+  ],
+  "errors": [],
+  "stop": null,
+  "counts": {
+   "hits": 551,
+   "new_candidates": 31,
+   "seen_again": 520,
+   "enriched": 62,
+   "published_new": 1,
+   "held_new": 27,
+   "source_new": 2,
+   "rejected_new": 1,
+   "duplicates": 0,
+   "stars_updated": 751,
+   "stars_failed": 0,
+   "renamed": 0,
+   "gone": 6,
+   "truncated_windows": 0,
+   "rejudged": 31,
+   "rejudge_left": 0
+  },
+  "flows_done": [
+   "new",
+   "updated",
+   "popular"
+  ],
+  "totals": {
+   "held": 3282,
+   "published": 115,
+   "source": 131,
+   "rejected": 56
+  },
+  "published_total": 115,
+  "finished": "2026-10-22T09:45:44Z",
+  "api_used": {
+   "search": 63,
+   "core": 124,
+   "graphql": 8
+  },
+  "waits": []
+ },
+ "validate": [],
+ "finished": "2026-10-22T09:45:44Z",
+ "exit": 0
+}
