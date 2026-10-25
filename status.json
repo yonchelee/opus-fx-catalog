@@ -1,56 +1,56 @@
 {
- "updated": "2026-10-24T23:15:46Z",
- "run_id": "40141695285",
- "mode": "daily",
+ "updated": "2026-10-25T22:59:33Z",
+ "run_id": "40241978092",
+ "mode": "weekly",
  "stages": {
   "sync": {
-   "last_attempt": "2026-10-24T23:11:28Z",
+   "last_attempt": "2026-10-25T22:49:47Z",
    "ok": true,
    "message": "wrote /home/runner/work/opus-fx-catalog/opus-fx-catalog/catalog.json (1154 rows) - commit and push it",
-   "last_success": "2026-10-24T23:11:28Z"
+   "last_success": "2026-10-25T22:49:47Z"
   },
   "discover": {
-   "last_attempt": "2026-10-24T23:11:28Z",
+   "last_attempt": "2026-10-25T22:49:47Z",
    "ok": true,
-   "message": "후보 63 새로 · 공개 1 · 보류 60 · 중단  / enrich: core",
-   "last_success": "2026-10-24T23:11:28Z"
+   "message": "후보 269 새로 · 공개 10 · 보류 252 · 중단  / enrich: core",
+   "last_success": "2026-10-25T22:49:47Z"
   },
   "stars": {
-   "last_attempt": "2026-10-24T23:11:28Z",
+   "last_attempt": "2026-10-25T22:49:47Z",
    "ok": true,
-   "message": "별 기록 787",
-   "last_success": "2026-10-24T23:11:28Z"
+   "message": "별 기록 844",
+   "last_success": "2026-10-25T22:49:47Z"
   },
   "build": {
-   "last_attempt": "2026-10-24T23:11:28Z",
+   "last_attempt": "2026-10-25T22:49:47Z",
    "ok": true,
    "message": "생성·검증 통과",
-   "last_success": "2026-10-24T23:11:28Z"
+   "last_success": "2026-10-25T22:49:47Z"
   },
   "publish": {
-   "last_attempt": "2026-10-24T23:11:28Z",
+   "last_attempt": "2026-10-25T22:49:47Z",
    "ok": true,
-   "message": "지난 실행 40041953634 공개됨",
-   "last_success": "2026-10-23T23:54:59Z"
+   "message": "지난 실행 40141695285 공개됨",
+   "last_success": "2026-10-24T23:15:46Z"
   }
  },
  "last_run": {
-  "run_id": "40141695285",
-  "mode": "daily",
-  "at": "2026-10-24T23:15:46Z",
+  "run_id": "40241978092",
+  "mode": "weekly",
+  "at": "2026-10-25T22:59:33Z",
   "exit": 0,
-  "candidates_new": 63,
-  "published_new": 1,
-  "held_new": 60,
+  "candidates_new": 269,
+  "published_new": 10,
+  "held_new": 252,
   "withdrawn": 0,
   "rejudged": 0,
   "rejudge_left": 0,
-  "source_new": 2,
-  "rejected_new": 0,
-  "stars_updated": 787,
+  "source_new": 4,
+  "rejected_new": 4,
+  "stars_updated": 844,
   "stars_failed": 0,
   "stop": " / enrich: core",
   "errors": 0
  },
- "published_github": 120
+ "published_github": 130
 }

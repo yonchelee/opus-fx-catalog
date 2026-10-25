@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-24T23:11:37Z",
+"updated": "2026-10-25T22:50:00Z",
 "items": [
 {
 "id": "gh:1506376",
@@ -23,7 +23,7 @@
 "pushed_at": "2022-10-24T19:04:28Z",
 "archived": false,
 "stars": 859,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/drojdjou/J3D/master/thumbs/proj_rectify.jpg",
@@ -75,7 +75,7 @@
 "pushed_at": "2025-04-29T08:13:09Z",
 "archived": false,
 "stars": 2548,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "http://ykob.github.io/sketch-threejs/img/common/ogp_common.jpg",
@@ -134,7 +134,7 @@
 "pushed_at": "2025-03-26T04:44:42Z",
 "archived": false,
 "stars": 450,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kbinani/colormap-shaders/master/sample/transform_rainbow.png",
@@ -188,7 +188,7 @@
 "pushed_at": "2016-12-15T01:22:24Z",
 "archived": false,
 "stars": 875,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/spite/polygon-shredder/master/snapshot.jpg",
@@ -242,7 +242,7 @@
 "pushed_at": "2018-07-24T08:21:42Z",
 "archived": false,
 "stars": 539,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "http://i.imgur.com/Mtznb1y.gif",
@@ -299,8 +299,8 @@
 "created_at": "2016-11-19T16:57:10Z",
 "pushed_at": "2025-04-18T02:01:05Z",
 "archived": false,
-"stars": 1041,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 1042,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "http://i.imgur.com/cNj4Ton.png",
@@ -352,8 +352,8 @@
 "created_at": "2017-08-22T21:30:33Z",
 "pushed_at": "2024-11-12T13:29:23Z",
 "archived": false,
-"stars": 16761,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 16762,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/PavelDoGreat/WebGL-Fluid-Simulation/master/screenshot.jpg?raw=true",
@@ -377,10 +377,10 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": {
-"delta": 28,
+"delta": 29,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -415,7 +415,7 @@
 "pushed_at": "2023-09-07T08:52:33Z",
 "archived": false,
 "stars": 990,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/andydbc/HologramShader/master/Screenshots/screen00.gif",
@@ -468,7 +468,7 @@
 "pushed_at": "2026-09-23T06:33:01Z",
 "archived": false,
 "stars": 1331,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/anvaka/fieldplay/wiki/images/field_1.png",
@@ -525,8 +525,8 @@
 "created_at": "2018-02-07T03:50:30Z",
 "pushed_at": "2024-06-10T07:58:35Z",
 "archived": false,
-"stars": 909,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 910,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/andydbc/unity-frosted-glass/master/Screenshots/screen0.gif",
@@ -583,8 +583,8 @@
 "created_at": "2018-08-22T04:59:32Z",
 "pushed_at": "2025-06-23T05:56:48Z",
 "archived": false,
-"stars": 3859,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 3858,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Rezmason/matrix/master/screenshot.png?raw=true",
@@ -652,7 +652,7 @@
 "pushed_at": "2025-02-10T04:13:22Z",
 "archived": false,
 "stars": 860,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/BrutPitt/myRepos/master/glChAoSP/screenShots/cockpitSettings.jpg",
@@ -713,7 +713,7 @@
 "pushed_at": "2025-08-04T16:56:47Z",
 "archived": false,
 "stars": 583,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kousun12/eternal/master/nude.png",
@@ -767,10 +767,10 @@
 "url": "https://github.com/Schneegans/Burn-My-Windows",
 "license": "GPL-3.0",
 "created_at": "2021-12-13T14:39:39Z",
-"pushed_at": "2026-10-21T03:50:30Z",
+"pushed_at": "2026-10-25T04:48:07Z",
 "archived": false,
 "stars": 3101,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Schneegans/Burn-My-Windows/main/docs/pics/custom.jpg",
@@ -795,8 +795,8 @@
 "trend": {
 "delta": 7,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -842,7 +842,7 @@
 "pushed_at": "2026-10-22T01:32:20Z",
 "archived": false,
 "stars": 162,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -901,7 +901,7 @@
 "pushed_at": "2026-10-23T09:23:51Z",
 "archived": false,
 "stars": 4597,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/hepengwei/visualization-collection/master/src/images/readme/visualDesign.gif",
@@ -963,8 +963,8 @@
 "created_at": "2023-01-17T10:12:32Z",
 "pushed_at": "2025-03-29T05:31:57Z",
 "archived": false,
-"stars": 780,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 781,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/Gaolingx/GenshinCelShaderURP/raw/main/Pictures/v2-a3d4261c39610463c839c9ecb0a07074_r.jpg",
@@ -1016,7 +1016,7 @@
 "pushed_at": "2026-10-21T01:00:28Z",
 "archived": false,
 "stars": 80,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/ryanw-mobile/compose-pager-demo/main/screenshots/240801_animated_wide.gif",
@@ -1063,7 +1063,7 @@
 "pushed_at": "2026-10-03T03:03:23Z",
 "archived": false,
 "stars": 105,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/1a430aef-1d23-42b3-a392-de67d64f3da5",
@@ -1114,7 +1114,7 @@
 "pushed_at": "2026-10-05T22:58:18Z",
 "archived": false,
 "stars": 2201,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://z2586300277.github.io/3d-file-server/images/yy.jpg",
@@ -1164,7 +1164,7 @@
 "pushed_at": "2025-01-21T02:41:35Z",
 "archived": false,
 "stars": 570,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -1219,7 +1219,7 @@
 "pushed_at": "2026-10-18T05:13:46Z",
 "archived": false,
 "stars": 68,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/dynnbw/RE-Android-Live-Wallpapers/main/app/src/main/res/drawable/ic_launcher_wallpaper.png",
@@ -1244,8 +1244,8 @@
 "trend": {
 "delta": 6,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -1282,8 +1282,8 @@
 "created_at": "2026-02-20T16:11:55Z",
 "pushed_at": "2026-10-23T22:35:56Z",
 "archived": false,
-"stars": 5900,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 5905,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/srizzon/git-city/main/public/og-image.png",
@@ -1307,10 +1307,10 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": {
-"delta": 85,
+"delta": 90,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -1352,10 +1352,10 @@
 "url": "https://github.com/asdfghj1237890/mini-macau",
 "license": "MIT",
 "created_at": "2026-04-16T11:03:10Z",
-"pushed_at": "2026-10-24T22:01:23Z",
+"pushed_at": "2026-10-25T21:19:52Z",
 "archived": false,
-"stars": 637,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 638,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://mini-map-macau.app/og-image.png",
@@ -1408,8 +1408,8 @@
 "created_at": "2026-09-24T19:23:55Z",
 "pushed_at": "2026-10-23T09:44:20Z",
 "archived": false,
-"stars": 203,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 213,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/mkturkcan/valdrada/main/docs/assets/figures/hero.jpg",
@@ -1432,10 +1432,10 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": {
-"delta": 21,
+"delta": 31,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -1480,7 +1480,7 @@
 "pushed_at": "2026-09-26T19:30:43Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/cyanheads/tonoscope/main/docs/images/title.jpg",
@@ -1539,7 +1539,7 @@
 "pushed_at": "2026-09-28T14:12:06Z",
 "archived": false,
 "stars": 4,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/sundyme/event-horizon/main/media/poster.jpg",
@@ -1608,7 +1608,7 @@
 "pushed_at": "2026-10-06T10:33:52Z",
 "archived": false,
 "stars": 51,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/earthwalker17/map-of-middle-earth/main/docs/images/film-poster.png",
@@ -1675,7 +1675,7 @@
 "pushed_at": "2026-10-16T14:23:39Z",
 "archived": false,
 "stars": 13,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/howardc38/motion-fx-lab/main/media/intro.gif?v=intro-6",
@@ -1737,7 +1737,7 @@
 "pushed_at": "2026-09-30T09:23:03Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/max-schwegele/stable-curves-visualizer/main/docs/assets/readme/genus-2-tour.gif",
@@ -1790,7 +1790,7 @@
 "pushed_at": "2026-10-23T20:13:42Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/someone-in-texas/screensavers-for-mac/main/docs/images/city-drift.png",
@@ -1848,7 +1848,7 @@
 "pushed_at": "2026-10-17T14:52:43Z",
 "archived": false,
 "stars": 4,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/InariNGT-Ofiicial/DS-DFH-1/main/assets/preview.png",
@@ -1910,7 +1910,7 @@
 "pushed_at": "2026-10-12T10:26:33Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Daniele-Cangi/squishy-lab/main/docs/images/playground-desktop.png",
@@ -1943,6 +1943,69 @@
 ]
 },
 {
+"id": "gh:1404778804",
+"src": "gh",
+"slug": "Khalidabdi1/factory",
+"author": "Khalidabdi1",
+"title": "factory",
+"desc": "A live isometric world in the browser: a seaside town, a new city, a farming village and a Starship launch site, all simulated in real time. Built with Claude Opus 5.5, three.js, TypeScript and Next.js.",
+"topics": [
+"city-simulation",
+"claude-code",
+"isometric",
+"nextjs",
+"simulation",
+"threejs",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 1404778804,
+"full_name": "Khalidabdi1/factory",
+"url": "https://github.com/Khalidabdi1/factory",
+"license": "MIT",
+"created_at": "2026-10-04T19:41:49Z",
+"pushed_at": "2026-10-11T19:10:04Z",
+"archived": false,
+"stars": 150,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/Khalidabdi1/factory/main/docs/factory-yard.png",
+"demo_url": null,
+"demo_ok": null,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-10T09:12:55Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-10",
+"check": "preview",
+"trend": {
+"delta": 13,
+"from": "2026-10-17T23:07:22Z",
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
+},
+"trend_note": null,
+"x_ids": [],
+"sources": [
+"new:t-webgl",
+"new:t-threejs",
+"updated:t-threejs",
+"updated:t-webgl"
+]
+},
+{
 "id": "gh:1404987538",
 "src": "gh",
 "slug": "Goldfish76/the-sky-that-night",
@@ -1972,7 +2035,7 @@
 "pushed_at": "2026-10-07T06:35:04Z",
 "archived": false,
 "stars": 3,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Goldfish76/the-sky-that-night/main/docs/hero.jpg",
@@ -2039,7 +2102,7 @@
 "pushed_at": "2026-10-08T14:36:32Z",
 "archived": false,
 "stars": 108,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -2064,8 +2127,8 @@
 "trend": {
 "delta": 7,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -2099,8 +2162,8 @@
 "created_at": "2026-10-05T16:07:09Z",
 "pushed_at": "2026-10-18T13:06:24Z",
 "archived": false,
-"stars": 110,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 111,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/deity6/softlab/main/docs/screenshots/home-light.png",
@@ -2123,10 +2186,10 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": {
-"delta": 7,
+"delta": 8,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -2159,8 +2222,8 @@
 "created_at": "2026-10-06T15:58:55Z",
 "pushed_at": "2026-10-06T15:59:42Z",
 "archived": false,
-"stars": 38,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 43,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Tunai-0511/meme67-art-history/main/docs/cover.jpg",
@@ -2183,10 +2246,10 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": {
-"delta": 33,
+"delta": 38,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -2222,7 +2285,7 @@
 "pushed_at": "2026-10-10T10:45:42Z",
 "archived": false,
 "stars": 15,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/winchxyz/platen/main/docs/hero.jpg",
@@ -2280,8 +2343,8 @@
 "created_at": "2026-10-09T23:25:37Z",
 "pushed_at": "2026-10-22T20:17:11Z",
 "archived": false,
-"stars": 28,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 29,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/mrsarac/ff-unmute/master/docs/media/hero.webp",
@@ -2338,7 +2401,7 @@
 "pushed_at": "2025-04-05T14:09:38Z",
 "archived": false,
 "stars": 1552,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -2389,8 +2452,8 @@
 "created_at": "2022-04-17T03:58:55Z",
 "pushed_at": "2026-03-08T17:54:19Z",
 "archived": false,
-"stars": 496,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 494,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -2446,7 +2509,7 @@
 "pushed_at": "2025-06-09T14:32:57Z",
 "archived": false,
 "stars": 564,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/5b008b16-7d46-4e09-af21-d70f6fa2ec20",
@@ -2472,8 +2535,8 @@
 "trend": {
 "delta": 5,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -2507,7 +2570,7 @@
 "pushed_at": "2025-02-21T16:18:23Z",
 "archived": false,
 "stars": 404,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/7e0ce578-8084-4205-87d2-d836de155a5e",
@@ -2557,8 +2620,8 @@
 "created_at": "2025-11-11T09:57:52Z",
 "pushed_at": "2026-03-13T09:06:47Z",
 "archived": false,
-"stars": 2502,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 2506,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/knight-L/sc-datav/main/public/demo_0.jpg",
@@ -2582,10 +2645,10 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": {
-"delta": 27,
+"delta": 31,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -2614,7 +2677,7 @@
 "pushed_at": "2024-04-21T18:58:30Z",
 "archived": false,
 "stars": 523,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -2667,7 +2730,7 @@
 "pushed_at": "2018-05-23T10:55:28Z",
 "archived": true,
 "stars": 707,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/inconvergent/differential-line/master/img/ani2.gif?raw=true",
@@ -2719,7 +2782,7 @@
 "pushed_at": "2019-03-10T16:39:31Z",
 "archived": true,
 "stars": 313,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/inconvergent/sand-spline/master/img/img.png?raw=true",
@@ -2779,7 +2842,7 @@
 "pushed_at": "2026-10-15T16:30:07Z",
 "archived": false,
 "stars": 379,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/supermosh/supermosh.github.io/main/cover.png",
@@ -2832,7 +2895,7 @@
 "pushed_at": "2022-12-01T02:13:05Z",
 "archived": true,
 "stars": 357,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -2884,7 +2947,7 @@
 "pushed_at": "2025-10-18T20:17:52Z",
 "archived": false,
 "stars": 308,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://user-images.githubusercontent.com/65209850/210824481-49e4b319-3a68-4cbd-98ec-43d07e35760f.png",
@@ -2940,7 +3003,7 @@
 "pushed_at": "2026-08-06T18:42:10Z",
 "archived": false,
 "stars": 1112,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -2989,7 +3052,7 @@
 "pushed_at": "2020-12-27T06:39:19Z",
 "archived": false,
 "stars": 1235,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/sureJiang/MSRotationTabBar/master/MSRotationTabBar.gif",
@@ -3046,7 +3109,7 @@
 "pushed_at": "2025-11-19T06:56:09Z",
 "archived": false,
 "stars": 342,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/HuangRunHua/swiftui-animation-demo/raw/main/cover.png",
@@ -3099,7 +3162,7 @@
 "pushed_at": "2026-08-30T14:44:27Z",
 "archived": false,
 "stars": 90,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/amirmushichge/machine-vision/main/public/og.png",
@@ -3155,7 +3218,7 @@
 "pushed_at": "2026-08-29T01:04:29Z",
 "archived": false,
 "stars": 8,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kaolti/omarchy-cosmos-screensaver/master/media/omarchy-cosmos.gif",
@@ -3226,7 +3289,7 @@
 "pushed_at": "2026-10-22T07:41:27Z",
 "archived": false,
 "stars": 35,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/1133b926-5f54-47cf-82cd-0ba96b2522a5",
@@ -3288,7 +3351,7 @@
 "pushed_at": "2026-09-01T09:13:38Z",
 "archived": false,
 "stars": 19,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/tantaneity/constellation-dice/main/docs/preview.gif",
@@ -3347,8 +3410,8 @@
 "created_at": "2026-09-02T18:19:55Z",
 "pushed_at": "2026-09-09T05:47:19Z",
 "archived": false,
-"stars": 525,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 528,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/PhiloLabs/fable51-worlds/main/union-square-sf-gpt-astra/media/preview.gif",
@@ -3370,7 +3433,12 @@
 "last_checked": "2026-10-24T23:11:37Z",
 "added": "2026-10-10",
 "check": "preview",
-"trend": null,
+"trend": {
+"delta": 5,
+"from": "2026-10-17T23:07:22Z",
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
+},
 "trend_note": null,
 "x_ids": [],
 "sources": [
@@ -3417,7 +3485,7 @@
 "pushed_at": "2026-09-19T05:28:01Z",
 "archived": false,
 "stars": 57,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/xiyu519/MotionVault/master/docs/assets/demo-site.gif",
@@ -3478,7 +3546,7 @@
 "pushed_at": "2026-10-24T13:38:20Z",
 "archived": false,
 "stars": 11,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -3542,8 +3610,8 @@
 "created_at": "2026-09-05T16:11:47Z",
 "pushed_at": "2026-10-17T17:09:34Z",
 "archived": false,
-"stars": 28,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 30,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Nailong-Studio/NaiLong-Universe/main/docs/readme-assets/desktop-home.jpg",
@@ -3566,10 +3634,10 @@
 "added": "2026-10-10",
 "check": "preview",
 "trend": {
-"delta": 9,
+"delta": 11,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -3606,7 +3674,7 @@
 "pushed_at": "2026-09-22T12:02:15Z",
 "archived": false,
 "stars": 25,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/yuanyang749/softie-webgpu/main/docs/images/promo-poster.png",
@@ -3662,7 +3730,7 @@
 "pushed_at": "2026-10-11T08:20:59Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -3720,7 +3788,7 @@
 "pushed_at": "2026-10-07T13:40:24Z",
 "archived": false,
 "stars": 10,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -3775,7 +3843,7 @@
 "pushed_at": "2026-09-12T11:56:53Z",
 "archived": false,
 "stars": 5,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/1etu/MeltGL/main/Website/logo.png",
@@ -3831,7 +3899,7 @@
 "pushed_at": "2026-09-24T15:24:01Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Token-Gremlin/gremlin-church/main/assets/screenshots/exterior.png",
@@ -3887,7 +3955,7 @@
 "pushed_at": "2026-09-24T16:14:33Z",
 "archived": false,
 "stars": 29,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/axtonliu/moyun/main/media/preview.jpg",
@@ -3947,7 +4015,7 @@
 "pushed_at": "2026-10-18T15:00:02Z",
 "archived": false,
 "stars": 29,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -4001,7 +4069,7 @@
 "pushed_at": "2026-08-06T16:38:12Z",
 "archived": false,
 "stars": 40,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -4055,7 +4123,7 @@
 "pushed_at": "2026-08-04T08:29:21Z",
 "archived": false,
 "stars": 18,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -4113,7 +4181,7 @@
 "pushed_at": "2026-08-04T14:35:50Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/aipulsedaily/lightning-sim/main/docs/images/hero.jpg",
@@ -4171,7 +4239,7 @@
 "pushed_at": "2026-08-08T00:48:11Z",
 "archived": false,
 "stars": 124,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Mr-funny/hbg-hanzi-chaizi-video/main/docs/imgs/cover.png",
@@ -4227,7 +4295,7 @@
 "pushed_at": "2026-08-23T19:31:09Z",
 "archived": false,
 "stars": 14,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/VictorZakharov/beautiful-water/main/docs/open-water.jpg",
@@ -4286,7 +4354,7 @@
 "pushed_at": "2026-08-17T22:54:34Z",
 "archived": false,
 "stars": 12,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/V1999B/tidepool/main/screenshots/07_poster_brain_open_pilu_2800px.png",
@@ -4354,7 +4422,7 @@
 "pushed_at": "2026-08-17T18:35:44Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Appllama/animated-card-stack/main/docs/images/appllama-logo-light.png",
@@ -4414,7 +4482,7 @@
 "pushed_at": "2026-08-18T19:31:59Z",
 "archived": false,
 "stars": 56,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/squall01337/abyssal-ocean/main/docs/preview.gif",
@@ -4482,7 +4550,7 @@
 "pushed_at": "2026-08-20T07:41:57Z",
 "archived": false,
 "stars": 19,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/HelpFreedom/matrix-rain-saver/main/docs/demo.gif",
@@ -4549,8 +4617,8 @@
 "created_at": "2026-08-24T12:02:47Z",
 "pushed_at": "2026-08-24T12:12:50Z",
 "archived": false,
-"stars": 31,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 32,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/poncippg-spec/liquidDX11/main/media/liquiddx11_intro.gif",
@@ -4573,7 +4641,12 @@
 "last_checked": "2026-10-12T00:01:27Z",
 "added": "2026-10-12",
 "check": "preview",
-"trend": null,
+"trend": {
+"delta": 5,
+"from": "2026-10-17T23:07:22Z",
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
+},
 "trend_note": null,
 "x_ids": [],
 "sources": [
@@ -4603,7 +4676,7 @@
 "pushed_at": "2026-10-12T15:57:12Z",
 "archived": false,
 "stars": 60,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/markeasting/THREE-XPBD/master/videos/ezgif-3-06fe46f4ea.gif",
@@ -4659,7 +4732,7 @@
 "pushed_at": "2026-10-22T00:54:08Z",
 "archived": false,
 "stars": 20,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/hh-hang/3dgs-weather/main/public/preview.gif",
@@ -4715,7 +4788,7 @@
 "pushed_at": "2026-10-20T17:31:37Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -4775,8 +4848,8 @@
 "created_at": "2026-10-13T07:28:20Z",
 "pushed_at": "2026-10-23T15:44:21Z",
 "archived": false,
-"stars": 59,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 64,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Kirito14IT/prompt-spider-ui/main/docs/preview.gif",
@@ -4799,10 +4872,10 @@
 "added": "2026-10-14",
 "check": "preview",
 "trend": {
-"delta": 21,
+"delta": 26,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -4836,8 +4909,8 @@
 "created_at": "2025-06-11T09:43:04Z",
 "pushed_at": "2026-10-14T06:40:43Z",
 "archived": false,
-"stars": 812,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 815,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/77694823-f4ce-4731-963f-c8bb47c8d7c0",
@@ -4861,10 +4934,10 @@
 "added": "2026-10-14",
 "check": "preview",
 "trend": {
-"delta": 10,
+"delta": 13,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -4901,7 +4974,7 @@
 "pushed_at": "2026-10-22T05:18:39Z",
 "archived": false,
 "stars": 38,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/BrokenSource/Pianola/main/website/assets/images/logo.png",
@@ -4955,8 +5028,8 @@
 "created_at": "2026-10-15T08:48:25Z",
 "pushed_at": "2026-10-15T08:49:17Z",
 "archived": false,
-"stars": 102,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 106,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Leonxlnx/golden-temple/main/docs/images/hero.jpg",
@@ -4980,10 +5053,10 @@
 "added": "2026-10-15",
 "check": "preview",
 "trend": {
-"delta": 36,
+"delta": 40,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -5020,7 +5093,7 @@
 "pushed_at": "2026-10-21T17:11:34Z",
 "archived": false,
 "stars": 35,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -5076,7 +5149,7 @@
 "pushed_at": "2026-10-22T08:27:07Z",
 "archived": false,
 "stars": 77,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/andeplane/atomify/main/atomify.gif",
@@ -5132,8 +5205,8 @@
 "created_at": "2024-02-10T21:35:21Z",
 "pushed_at": "2026-10-16T05:40:15Z",
 "archived": false,
-"stars": 67,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 68,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/fchavonet/creative_coding-flip_book/main/assets/images/screenshots/desktop_page_screenshot-light.webp",
@@ -5192,7 +5265,7 @@
 "pushed_at": "2026-10-18T23:33:02Z",
 "archived": false,
 "stars": 28,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/luk3h/xmb-ps3-theme/main/docs/login.jpg",
@@ -5218,8 +5291,8 @@
 "trend": {
 "delta": 9,
 "from": "2026-10-17T23:07:22Z",
-"to": "2026-10-24T23:11:37Z",
-"days": 7.0
+"to": "2026-10-25T22:50:00Z",
+"days": 8.0
 },
 "trend_note": null,
 "x_ids": [],
@@ -5252,7 +5325,7 @@
 "pushed_at": "2026-10-16T23:40:15Z",
 "archived": false,
 "stars": 7,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/eduardmur/tesla-roadster-simulator/main/docs/media/curl.gif",
@@ -5312,7 +5385,7 @@
 "pushed_at": "2026-09-19T20:17:01Z",
 "archived": false,
 "stars": 9,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/AbstractOcclusion-gif/unity6-webgpu-interactive-water/main/docs/screenshot.png",
@@ -5378,7 +5451,7 @@
 "pushed_at": "2026-06-30T10:18:07Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/456599bf-d18a-4d8a-b1be-3d5f88e52514",
@@ -5436,7 +5509,7 @@
 "pushed_at": "2026-07-03T07:58:26Z",
 "archived": false,
 "stars": 15,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/LinHao-city/StoryMind/main/assets/logo.png",
@@ -5491,7 +5564,7 @@
 "pushed_at": "2026-07-10T14:53:57Z",
 "archived": false,
 "stars": 18,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/KilledByAPixel/VirtualPlotter/master/screenshot.png",
@@ -5559,7 +5632,7 @@
 "pushed_at": "2026-07-17T22:32:49Z",
 "archived": false,
 "stars": 5,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/CreativeInquiry/GameTrak-Liberation/main/img/gametrak_overview_demo.gif",
@@ -5611,10 +5684,10 @@
 "url": "https://github.com/matt-w-horn/morningprint",
 "license": "MIT",
 "created_at": "2026-07-03T16:42:25Z",
-"pushed_at": "2026-10-23T15:43:30Z",
+"pushed_at": "2026-10-25T21:20:40Z",
 "archived": false,
 "stars": 17,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/matt-w-horn/morningprint/main/example/example_2.jpeg",
@@ -5673,7 +5746,7 @@
 "pushed_at": "2026-08-23T17:56:07Z",
 "archived": false,
 "stars": 131,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/unable12/codebase-posters/main/docs/posters/react-chrono-grid.png",
@@ -5728,7 +5801,7 @@
 "pushed_at": "2026-07-07T10:58:27Z",
 "archived": false,
 "stars": 5,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -5782,7 +5855,7 @@
 "pushed_at": "2026-08-27T06:46:13Z",
 "archived": false,
 "stars": 6,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/IngTian/manifold/main/docs/saver-dark.gif",
@@ -5841,10 +5914,10 @@
 "url": "https://github.com/Yyyangshenghao/simple-music",
 "license": "GPL-3.0",
 "created_at": "2026-07-11T12:04:37Z",
-"pushed_at": "2026-10-24T17:05:01Z",
+"pushed_at": "2026-10-25T16:10:15Z",
 "archived": false,
 "stars": 10,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Yyyangshenghao/simple-music/master/docs/screenshots/2.3.4/lyrics.jpg",
@@ -5906,8 +5979,8 @@
 "created_at": "2026-07-11T14:34:47Z",
 "pushed_at": "2026-07-14T17:59:31Z",
 "archived": false,
-"stars": 20,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 21,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/egorthinks/git-bonsai/main/assets/bonsai-growth.gif",
@@ -5960,7 +6033,7 @@
 "pushed_at": "2026-07-14T11:57:43Z",
 "archived": false,
 "stars": 7,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/bob6664569/open-water/main/site/ogimage.png",
@@ -6015,7 +6088,7 @@
 "pushed_at": "2026-07-14T20:26:29Z",
 "archived": false,
 "stars": 98,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/amirmushichge/world-cup-letter-flags/main/docs/preview.png",
@@ -6069,7 +6142,7 @@
 "pushed_at": "2026-10-14T19:07:46Z",
 "archived": false,
 "stars": 31,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/kajukabla/3d-life-sim/main/docs/demo2.webp",
@@ -6124,7 +6197,7 @@
 "pushed_at": "2026-07-21T09:43:45Z",
 "archived": false,
 "stars": 14,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -6184,7 +6257,7 @@
 "pushed_at": "2026-07-23T08:56:33Z",
 "archived": false,
 "stars": 10,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://img.youtube.com/vi/9APVoE65qfs/maxresdefault.jpg",
@@ -6239,7 +6312,7 @@
 "pushed_at": "2026-10-12T21:38:55Z",
 "archived": false,
 "stars": 7,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -6292,7 +6365,7 @@
 "pushed_at": "2026-08-11T12:41:13Z",
 "archived": false,
 "stars": 65,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Steve245270533/three-stylized/master/cover.jpeg",
@@ -6347,7 +6420,7 @@
 "pushed_at": "2026-10-19T08:24:49Z",
 "archived": false,
 "stars": 166,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/owenmcateer/Motus-Art/master/assets/img/preview/genuary2026.png",
@@ -6406,7 +6479,7 @@
 "pushed_at": "2026-10-19T11:19:43Z",
 "archived": false,
 "stars": 51,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://user-images.githubusercontent.com/1194059/193450370-278ae448-c71b-4282-9045-2f8097a3f6cf.gif",
@@ -6461,8 +6534,8 @@
 "created_at": "2026-10-10T13:34:45Z",
 "pushed_at": "2026-10-17T16:18:32Z",
 "archived": false,
-"stars": 181,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 187,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Azure12355/weilanx-claude-videos/main/docs/assets/styles/blackgold.jpg",
@@ -6517,7 +6590,7 @@
 "pushed_at": "2026-10-20T08:04:27Z",
 "archived": false,
 "stars": 35,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://github.com/user-attachments/assets/3c924fb5-54d0-4c53-9e04-9701cd5661d6",
@@ -6565,7 +6638,7 @@
 "pushed_at": "2026-10-20T11:07:38Z",
 "archived": false,
 "stars": 62,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://tympanus.net/codrops/wp-content/uploads/2023/08/ConnectedGrid_feat.jpg",
@@ -6620,8 +6693,8 @@
 "created_at": "2026-10-20T19:15:00Z",
 "pushed_at": "2026-10-20T19:16:32Z",
 "archived": false,
-"stars": 56,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 59,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/willwaltz/globes/main/docs/images/hero.jpg",
@@ -6679,7 +6752,7 @@
 "pushed_at": "2026-10-22T06:53:37Z",
 "archived": false,
 "stars": 8,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/SiddDevZ/horizon/main/docs/media/hero.png",
@@ -6739,7 +6812,7 @@
 "pushed_at": "2026-10-22T20:01:33Z",
 "archived": false,
 "stars": 56,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/YALDAKHOSHPEY/Burger_Builder/main/images/banner.jpg",
@@ -6796,7 +6869,7 @@
 "pushed_at": "2026-10-24T07:20:58Z",
 "archived": false,
 "stars": 516,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "http://nudibranchrecords.github.io/hedron/title.gif",
@@ -6848,7 +6921,7 @@
 "pushed_at": "2026-10-23T16:37:38Z",
 "archived": false,
 "stars": 30,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/vinhnx/tui-shimmer/main/resources/vtcode.gif",
@@ -6901,8 +6974,8 @@
 "created_at": "2026-10-23T19:46:42Z",
 "pushed_at": "2026-10-23T19:46:49Z",
 "archived": false,
-"stars": 58,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars": 81,
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": "https://raw.githubusercontent.com/Leonxlnx/napali/main/media/overview.jpg",
@@ -6960,7 +7033,7 @@
 "pushed_at": "2026-10-24T17:40:06Z",
 "archived": false,
 "stars": 480,
-"stars_at": "2026-10-24T23:11:37Z",
+"stars_at": "2026-10-25T22:50:00Z",
 "gone": false
 },
 "thumb": null,
@@ -6986,7 +7059,537 @@
 "trend_note": "집계 중",
 "x_ids": [],
 "sources": [
-"updated:t-webgpu"
+"updated:t-webgpu",
+"popular:t-webgpu"
+]
+},
+{
+"id": "gh:1258791035",
+"src": "gh",
+"slug": "i4w7w4a/Liquid_Prnc_Glass",
+"author": "i4w7w4a",
+"title": "Liquid_Prnc_Glass",
+"desc": "Standalone WebGL/GLSL optics lab for reusable liquid-glass edge refraction on video and image sources.",
+"topics": [
+"creative-coding",
+"glsl",
+"liquid-glass",
+"mediabunny",
+"react",
+"refraction",
+"shader",
+"threejs",
+"typescript",
+"video-processing",
+"vite",
+"webcodecs",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 1258791035,
+"full_name": "i4w7w4a/Liquid_Prnc_Glass",
+"url": "https://github.com/i4w7w4a/Liquid_Prnc_Glass",
+"license": "MIT",
+"created_at": "2026-06-03T23:29:44Z",
+"pushed_at": "2026-07-20T09:22:00Z",
+"archived": false,
+"stars": 13,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/i4w7w4a/Liquid_Prnc_Glass/main/assets/readme/hero.gif",
+"demo_url": "http://liquid-prince.online/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d",
+"liquid",
+"shader"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-shader",
+"backfill:t-glsl",
+"backfill:t-webgl",
+"backfill:t-threejs",
+"backfill:t-creative-coding"
+]
+},
+{
+"id": "gh:1280492144",
+"src": "gh",
+"slug": "zaroutt/Niri-glass",
+"author": "zaroutt",
+"title": "Niri-glass",
+"desc": "Niri with glass / refraction effect ",
+"topics": [
+"glsl",
+"liquid-glass",
+"niri",
+"refraction"
+],
+"kind": "collection",
+"repo": {
+"id": 1280492144,
+"full_name": "zaroutt/Niri-glass",
+"url": "https://github.com/zaroutt/Niri-glass",
+"license": "GPL-3.0",
+"created_at": "2026-06-25T16:30:24Z",
+"pushed_at": "2026-09-17T01:11:22Z",
+"archived": false,
+"stars": 138,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": "https://github.com/user-attachments/assets/a10b40c7-b147-4dfa-8208-28ebb4003cfc",
+"demo_url": null,
+"demo_ok": null,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"liquid",
+"shader"
+],
+"needs": [],
+"level": 3,
+"env_text": "외부 프로그램·네이티브 환경 (Rust)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-glsl"
+]
+},
+{
+"id": "gh:1274741475",
+"src": "gh",
+"slug": "obook/artouste",
+"author": "obook",
+"title": "artouste",
+"desc": "Open-source helicopter flight simulator for the Alouette II SE.3130, powered by the Turbomeca Artouste IIC turbine. C++20, OpenGL 3.3, Linux/Windows, GPL v2.",
+"topics": [
+"alouette-ii",
+"artouste",
+"aviation",
+"cmake",
+"cpp",
+"flight-simulator",
+"glsl",
+"helicopter-simulator",
+"linux",
+"open-source",
+"opengl",
+"physics-simulation",
+"rotorcraft",
+"turbine"
+],
+"kind": "effect",
+"repo": {
+"id": 1274741475,
+"full_name": "obook/artouste",
+"url": "https://github.com/obook/artouste",
+"license": "GPL-2.0",
+"created_at": "2026-06-19T20:59:25Z",
+"pushed_at": "2026-10-25T15:58:27Z",
+"archived": false,
+"stars": 6,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/obook/artouste/main/docs/artouste-en-vol.png",
+"demo_url": "https://obook.github.io/artouste/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"liquid",
+"shader"
+],
+"needs": [],
+"level": 3,
+"env_text": "외부 프로그램·네이티브 환경 (C++)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-glsl"
+]
+},
+{
+"id": "gh:1258064737",
+"src": "gh",
+"slug": "mrdoob/draco.js",
+"author": "mrdoob",
+"title": "draco.js",
+"desc": "A small, drop-in, pure-JavaScript Draco mesh loader for three.js.",
+"topics": [
+"3d",
+"draco",
+"geometry",
+"gltf",
+"loader",
+"mesh-compression",
+"threejs",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 1258064737,
+"full_name": "mrdoob/draco.js",
+"url": "https://github.com/mrdoob/draco.js",
+"license": "MIT",
+"created_at": "2026-06-03T08:44:06Z",
+"pushed_at": "2026-09-25T07:48:24Z",
+"archived": false,
+"stars": 202,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": null,
+"demo_url": "https://mrdoob.github.io/draco.js/",
+"demo_ok": true,
+"preview_ok": null,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-webgl",
+"backfill:t-threejs"
+]
+},
+{
+"id": "gh:1270726315",
+"src": "gh",
+"slug": "Xebet/3d-packing-simulator",
+"author": "Xebet",
+"title": "3d-packing-simulator",
+"desc": "A high-performance 3D bin packing simulator and interactive layout visualizer built with Three.js and parallel multi-core Web Workers.  基于 Three.js 与多核并发 Web Workers 的高性能 3D 智能装箱模拟器与交互式三维排布可视化系统。",
+"topics": [
+"3d-bin-packing",
+"backtracking-algorithm",
+"github-pages",
+"heuristics",
+"offline-first",
+"threejs",
+"web-worker",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 1270726315,
+"full_name": "Xebet/3d-packing-simulator",
+"url": "https://github.com/Xebet/3d-packing-simulator",
+"license": "MIT",
+"created_at": "2026-06-16T01:57:21Z",
+"pushed_at": "2026-09-08T08:17:12Z",
+"archived": false,
+"stars": 5,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": null,
+"demo_url": "https://xebet.github.io/3d-packing-simulator/",
+"demo_ok": true,
+"preview_ok": null,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-webgl",
+"backfill:t-threejs"
+]
+},
+{
+"id": "gh:1272222462",
+"src": "gh",
+"slug": "Makakashan/F1TrackViewer",
+"author": "Makakashan",
+"title": "F1TrackViewer",
+"desc": "Boxlane — every Formula 1 circuit in 3D in the browser: real terrain, baked cities around the track, and a race simulation. Next.js + Three.js.",
+"topics": [
+"3d",
+"f1",
+"formula-one",
+"formula1",
+"nextjs",
+"racing",
+"react-three-fiber",
+"threejs",
+"typescript",
+"webgl"
+],
+"kind": "effect",
+"repo": {
+"id": 1272222462,
+"full_name": "Makakashan/F1TrackViewer",
+"url": "https://github.com/Makakashan/F1TrackViewer",
+"license": "MIT",
+"created_at": "2026-06-17T12:01:39Z",
+"pushed_at": "2026-10-19T21:09:55Z",
+"archived": false,
+"stars": 5,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/Makakashan/F1TrackViewer/main/docs/screenshots/monaco.webp",
+"demo_url": "https://makakashan.github.io/F1TrackViewer/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-webgl",
+"backfill:t-threejs"
+]
+},
+{
+"id": "gh:1265091045",
+"src": "gh",
+"slug": "shakeebshaan/packet-highway",
+"author": "shakeebshaan",
+"title": "packet-highway",
+"desc": "Your network traffic as rush hour - live packets rendered as 3D vehicles on a night highway, running behind your Windows desktop icons. Zero dependencies. Built with Claude Fable 5.",
+"topics": [
+"anthropic",
+"built-with-claude",
+"claude",
+"claude-fable-5",
+"csharp",
+"desktop",
+"live-wallpaper",
+"network-monitoring",
+"packet-capture",
+"pktmon",
+"threejs",
+"visualization",
+"wallpaper",
+"windows"
+],
+"kind": "effect",
+"repo": {
+"id": 1265091045,
+"full_name": "shakeebshaan/packet-highway",
+"url": "https://github.com/shakeebshaan/packet-highway",
+"license": "MIT",
+"created_at": "2026-06-10T13:05:43Z",
+"pushed_at": "2026-06-24T16:33:52Z",
+"archived": false,
+"stars": 12,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/shakeebshaan/packet-highway/main/media/demo.gif",
+"demo_url": "https://shakeebshaan.github.io/packet-highway/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "코드 저장소 (실행 방법은 README 확인)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-threejs"
+]
+},
+{
+"id": "gh:1254571582",
+"src": "gh",
+"slug": "kaltwrk/experiment-001",
+"author": "kaltwrk",
+"title": "experiment-001",
+"desc": "Face tracking experiment",
+"topics": [
+"mediapipe",
+"mediapipe-face",
+"mediapipe-face-detection",
+"mediapipe-facemesh",
+"svelte",
+"svelte5",
+"threejs"
+],
+"kind": "effect",
+"repo": {
+"id": 1254571582,
+"full_name": "kaltwrk/experiment-001",
+"url": "https://github.com/kaltwrk/experiment-001",
+"license": "MIT",
+"created_at": "2026-05-30T18:29:14Z",
+"pushed_at": "2026-09-04T18:25:09Z",
+"archived": false,
+"stars": 5,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": null,
+"demo_url": "https://experiment-001.madebyhex.workers.dev/",
+"demo_ok": true,
+"preview_ok": null,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"3d"
+],
+"needs": [],
+"level": 2,
+"env_text": "Node.js 프로젝트 (내려받아 npm 설치 후 실행)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-threejs"
+]
+},
+{
+"id": "gh:1260352704",
+"src": "gh",
+"slug": "sakuraoxo-clio/sakura-animate-text",
+"author": "sakuraoxo-clio",
+"title": "sakura-animate-text",
+"desc": "做AI 视频必备字体动效库",
+"topics": [
+"agent-skill",
+"animation",
+"claude-skill",
+"gsap",
+"motion",
+"text-animation",
+"waapi",
+"web-animations"
+],
+"kind": "effect",
+"repo": {
+"id": 1260352704,
+"full_name": "sakuraoxo-clio/sakura-animate-text",
+"url": "https://github.com/sakuraoxo-clio/sakura-animate-text",
+"license": "MIT",
+"created_at": "2026-06-05T12:02:11Z",
+"pushed_at": "2026-06-20T16:47:46Z",
+"archived": false,
+"stars": 46,
+"stars_at": "2026-10-25T22:50:00Z",
+"gone": false
+},
+"thumb": "https://raw.githubusercontent.com/sakuraoxo-clio/sakura-animate-text/main/demo/media/preview.gif",
+"demo_url": "https://sakuraoxo-clio.github.io/sakura-animate-text/demo/",
+"demo_ok": true,
+"preview_ok": true,
+"has_code": true,
+"has_prompt": false,
+"prompt_url": null,
+"prompt": "",
+"partial": false,
+"fx": [
+"kinetic"
+],
+"needs": [],
+"level": 2,
+"env_text": "코드 저장소 (실행 방법은 README 확인)",
+"first_seen": "2026-10-25T22:50:00Z",
+"last_checked": "2026-10-25T22:50:00Z",
+"added": "2026-10-25",
+"check": "preview",
+"trend": null,
+"trend_note": "집계 중",
+"x_ids": [],
+"sources": [
+"backfill:t-gsap"
 ]
 }
 ]
