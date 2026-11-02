@@ -30,6 +30,9 @@ from classify import classify  # noqa: E402
 GH_LINK = re.compile(r'github\.com/([A-Za-z0-9-]+)/([A-Za-z0-9._-]+)', re.I)
 
 
+PUBLIC_KINDS = ('effect', 'collection')  # pipeline.validate 와 같은 기준
+
+
 def now_iso():
     return popularity.iso(datetime.now(timezone.utc))
 
@@ -242,6 +245,7 @@ class Run:
     def judge_one(self, c, jc, homes):
         """후보 하나를 확인·판정한다. 오류는 호출한 쪽이 후보 단위로 받는다."""
         was = c.get('status')
+        was_kind = c.get('kind')
         if was not in ('new', None) and c.get('rules_version') != self.cfg['judge'].get('rules_version'):
             self.log['counts']['rejudged'] = self.log['counts'].get('rejudged', 0) + 1
         if not self.head_relevant(c) or c.get('fork'):
@@ -273,7 +277,10 @@ class Run:
         if was == 'published' and status != 'published' and not human:
             if c.get('rules_version') == rv:
                 # 같은 규칙인데 결과가 바뀜(별 감소·미리보기 일시 실패 등) — 한 번의 변동으로 내리지 않는다. 사유는 남긴다.
-                c['recheck'] = {'at': self.now, 'would_be': status, 'reasons': reasons}
+                # 분류(kind)도 공개 때 값으로 되돌린다 — 상태만 남기고 kind 가 바뀌면 공개 검증이 전체 배포를 막는다
+                c['recheck'] = {'at': self.now, 'would_be': status, 'would_be_kind': c.get('kind'), 'reasons': reasons}
+                if was_kind in PUBLIC_KINDS:
+                    c['kind'] = was_kind
                 status, reasons = 'published', c.get('reasons', reasons)
             else:
                 # 판정 규칙이 고쳐졌다 — 잘못 공개된 작품을 내린다. 기록은 남긴다.
@@ -381,6 +388,11 @@ class Run:
         for c in sorted(self.cands.values(), key=lambda c: c['first_seen']):
             ov = self.overrides.get(c['id'])
             if (ov.get('status') if ov else c.get('status')) != 'published':
+                continue
+            if c.get('kind') not in PUBLIC_KINDS:
+                # 공개할 수 없는 유형이 섞여도 이 작품만 빼고 나머지는 배포한다(빠진 사실은 기록)
+                self.log['errors'].append(f"publish: {c['id']} ({c.get('full_name')}): 공개할 수 없는 유형 {c.get('kind')} — 공개 목록에서 뺌")
+                self.log['counts']['excluded'] = self.log['counts'].get('excluded', 0) + 1
                 continue
             t = popularity.trend(self.stars.get(str(c['repo_id'])), self.now, tc)
             fx, _, _ = classify(' '.join([c.get('name') or '', c.get('description') or ''] + c.get('topics', [])), [])
