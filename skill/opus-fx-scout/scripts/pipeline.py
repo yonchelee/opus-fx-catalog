@@ -70,7 +70,7 @@ def validate(root):
         for k in ('id', 'author', 'title', 'kind', 'repo', 'first_seen', 'added', 'level'):
             if r.get(k) in (None, ''):
                 problems.append(f"{r.get('id')}: {k} 없음")
-        if r.get('kind') not in ('effect', 'collection'):
+        if r.get('kind') not in discover.PUBLIC_KINDS:
             problems.append(f"{r['id']}: 공개할 수 없는 유형 {r.get('kind')}")
         if r.get('prompt'):
             problems.append(f"{r['id']}: GitHub 작품에 프롬프트 문자열(만들어 넣지 않는다)")
@@ -120,6 +120,7 @@ def main():
             stages['discover'] = stage_status(stages, 'discover', ok, now,
                                               f"후보 {dl['counts']['new_candidates']} 새로 · 공개 {dl['counts']['published_new']} · 보류 {dl['counts']['held_new']}"
                                               + (f" · 중단 {dl['stop']}" if dl['stop'] else '')
+                                              + (f" · 공개 제외 {dl['counts']['excluded']}건" if dl['counts'].get('excluded') else '')
                                               + (f" · 확인 오류 {len([e for e in dl['errors'] if e.startswith('judge')])}건" if any(e.startswith('judge') for e in dl['errors']) else ''))
             stars_ok = dl['counts']['stars_failed'] == 0 and not [e for e in dl['errors'] if e.startswith('stars')]
             stages['stars'] = stage_status(stages, 'stars', stars_ok, now, f"별 기록 {dl['counts']['stars_updated']}")

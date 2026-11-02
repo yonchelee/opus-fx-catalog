@@ -234,6 +234,36 @@ class Discovery(Base):
         self.assertIn('withdrawn', c)
         self.assertEqual(log['counts'].get('withdrawn'), 1)
 
+    def test_same_rules_kind_flip_keeps_published_kind(self):
+        # 실제 사례(2026-11-01): 같은 규칙에서 README 가 바뀌어 effect → library 로 판정됨.
+        # 상태만 published 로 남고 kind 가 library 로 바뀌어 공개 검증이 전체 배포를 막았다.
+        spider = repo(112, 'spider-ui', 'Canvas spider animation demo', ['shader'], 60, home='https://maker.github.io/spider-ui/')
+        READMES['maker/spider-ui'] = '![s](s.gif)'
+        CONTENTS['maker/spider-ui'] = ['index.html', 'app.js']
+        stars = {'N112': node(112, 'spider-ui', 60)}
+        self.run_once(FakeClient({'topic:shader': [spider]}, stars=stars))
+        self.assertEqual(self.public()['gh:112']['kind'], 'effect')
+        READMES['maker/spider-ui'] = '# Spider UI\n![s](s.gif)\n```\nnpm install spider-ui\n```\n'
+        CONTENTS['maker/spider-ui'] = ['index.html', 'app.js', 'package.json']
+        self.run_once(FakeClient({}, stars=stars), now='2026-10-30T06:00:00Z', today=date(2026, 10, 30))
+        c = self.cands()['112']
+        self.assertEqual(c['recheck']['would_be_kind'], 'library', '재확인 결과는 남긴다')
+        self.assertEqual((c['status'], c['kind']), ('published', 'effect'))
+        self.assertEqual(self.public()['gh:112']['kind'], 'effect')
+
+    def test_unpublishable_kind_is_left_out_not_fatal(self):
+        # 사람이 공개로 정한 라이브러리 등 — 그 작품만 빼고 나머지는 공개한다
+        ed = json.loads((self.d / 'editorial.json').read_text())
+        ed['discovery_overrides'] = {'items': {'gh:102': {'status': 'published', 'reason': '시험'}}}
+        (self.d / 'editorial.json').write_text(json.dumps(ed))
+        log = self.run_once(FakeClient({'topic:shader': [EFFECT, LIB]}, stars={'N101': node(101, 'aurora-shader', 40), 'N102': node(102, 'motionkit', 9000)}))
+        self.assertEqual(self.cands()['102']['kind'], 'library')
+        self.assertNotIn('gh:102', self.public())
+        self.assertIn('gh:101', self.public())
+        self.assertEqual(log['counts'].get('excluded'), 1)
+        self.assertTrue(any(e.startswith('publish: gh:102') for e in log['errors']))
+        self.assertTrue(all(r['kind'] in discover.PUBLIC_KINDS for r in self.public().values()))
+
     def test_human_override_wins(self):
         ed = json.loads((self.d / 'editorial.json').read_text())
         ed['discovery_overrides'] = {'items': {'gh:101': {'status': 'held', 'reason': '라이브러리'}}}
