@@ -29,6 +29,18 @@
   "note": "334개 프롬프트를 작성자 원 게시물에서 원문 그대로 옮긴 모음 (CC BY 4.0, 출처 표기 필요). YAML 형식이라 sync.py 자동 동기화 대상이 아님 → discovery.md의 수동 반영 절차. yihui와 겹치지 않는 133개를 2026-10-03에 반영."
  },
  {
+  "id": "sam-flat3d",
+  "name": "Sam1983Aing/flat-to-3d",
+  "type": "manual",
+  "repo": "Sam1983Aing/flat-to-3d",
+  "branch": "main",
+  "path": "*/PROMPT.md",
+  "prompt_url_tpl": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/{slug}/PROMPT.md",
+  "model": "Opus 5.5",
+  "status": "manual",
+  "note": "건축 도면(분해 액소노·단면·입면)을 스크롤 3D로 여는 데모 7종과 시작 프롬프트(MIT, Opus 5.5 제작). 프롬프트는 [괄호]를 채우는 시작용 템플릿 — 원문 그대로 옮김. 사용자 승인 2026-11-09."
+ },
+ {
   "id": "yihui",
   "name": "yihui-dev/awesome-opus5-5-videos",
   "type": "videos_json",

@@ -62,6 +62,7 @@ python3 scripts/sync.py --dry-run   # 무엇이 새로 들어올지 보기
 - yihui-dev/awesome-opus5-5-videos: 채택 (메인, 475개, 자동 동기화)
 - Li-Evan/awesome-opus-5.5-video-prompts: 채택 (334개 원문 대조, CC BY 4.0, yihui와 안 겹치는 133개 반영, 수동)
 - LeaddeOpenLab/awesome-opus-5-5-video-prompts: 채택 (2026-10-22, 사용자 승인) — 사례 파일에 프롬프트 공개 표기가 생겨 `full_original` 195건만 자동 동기화(`type: case_library`, 다른 출처와 겹치는 16건 제외). `fragment` 533건은 받지 않음. 라이선스 파일 없음(RIGHTS.md: 원작자 소유)이라 미리보기는 원작자 X 주소만 씀
+- Sam1983Aing/flat-to-3d: 채택 (2026-11-09, 사용자 승인) — 건축 도면을 스크롤 3D로 여는 데모 7종의 시작 프롬프트(Opus 5.5, MIT). `[괄호]`를 채우는 템플릿이지만 원문 그대로 수동 반영(`type: manual`)
 - X-RayLuan, guanmo-ai, HiAPIAI, athemeroy의 모음: 보류
 - eastling(전부 중복), adela0414(원문이 아니라 다시 쓴 브리프), real-leo·BeatAPI(링크만 모음): 제외
 - zhuyansen 모음(940작품 중 전문 91개), opusvideo 모음(46개, 프롬프트 대부분 없음): 보류

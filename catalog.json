@@ -1,5 +1,5 @@
 {
-"synced": "2026-11-08",
+"synced": "2026-11-09",
 "items": [
 {
 "id": "leadde:2102493035393372363",
@@ -8766,6 +8766,183 @@
 "mp4_hd": "https://video.twimg.com/amplify_video/2103746447338344448/vid/avc1/1280x720/Ea9fgCvRHLcRLywc.mp4?tag=29",
 "likes": 6,
 "likes_at": "2026-11-08"
+},
+{
+"id": "sam-flat3d:sam1983aing-01-exploded-house",
+"src": "sam-flat3d",
+"slug": "sam1983aing-01-exploded-house",
+"author": "Sam1983Aing",
+"post_url": "https://github.com/Sam1983Aing/flat-to-3d/tree/main/01-exploded-house",
+"video_url": "",
+"prompt_url": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/01-exploded-house/PROMPT.md",
+"model": "Opus 5.5",
+"category": "3d",
+"tech": [
+"threejs"
+],
+"prompt": "I want to build a scroll-driven landing page for [a timber house builder, a prefab\ncompany, your subject].\n\nThe idea: the page opens on an exploded axonometric, the drawing you see on competition\nboards. A [timber house with a pitched roof] hangs apart in six layers over its own ground\nfloor plan: [slab, walls, glazing, cladding, rafters, roof]. Ink on pale paper, numbered\nlabels in a column on the right, and dotted lines from each layer to where it lands.\n\nThe scroll, in order:\n1. The loader is a plotter. A pen front sweeps up the model from the ground to the roof,\n   lines first in amber, then ink, then the fills. The headline slides up.\n2. The layers land one by one, in building order. Everything above a layer drops with it.\n   The landing layer turns amber and its label lights up.\n3. The camera comes down to [the porch]. The lens widens until the drawing becomes a room\n   at eye height, and the glass door slides open.\n4. The walk: [the dining table, the stove, up the ladder to the loft], with a caption at\n   each stop, ending on a view back across the house.\n\nWhat I care about:\n- The axo is not a picture. It is the real 3D model seen through a 1.5 degree lens from\n  about a kilometre away. Widening the lens as the camera comes in (a dolly zoom) turns\n  it into eye-level perspective.\n- Slab, walls and roof float upward. Glazing and cladding slide out sideways from their\n  own wall.\n- It stays a drawing inside: crease edges as screen-space lines in three weights, pale\n  fills with grain drawn in code.\n- Inside, the camera stays level, and a small plan in the corner shows where you stand.\n- The look: a CAD screen. Paper #f2efe7, ink #1d1c19, one amber accent #e85d04, Chakra\n  Petch for headlines, IBM Plex Mono for labels, a thin frame with corner marks.\n- three.js 0.169 from a CDN, plain files, no build step. One scroll value from 0 to 1\n  drives everything. No image files.\n\nBefore you write any code, propose the house with sizes I can picture and the camera path\nstop by stop, and wait for my answer. Then build in checkpoints. First checkpoint only:\nthe plotter loader, the layers landing, and the dolly zoom to [the porch]. Record it and\nshow me before you go further.",
+"partial": false,
+"added": "2026-11-09",
+"fx": [
+"3d",
+"paint",
+"ui"
+],
+"needs": [],
+"level": 1
+},
+{
+"id": "sam-flat3d:sam1983aing-02-section-sweep",
+"src": "sam-flat3d",
+"slug": "sam1983aing-02-section-sweep",
+"author": "Sam1983Aing",
+"post_url": "https://github.com/Sam1983Aing/flat-to-3d/tree/main/02-section-sweep",
+"video_url": "",
+"prompt_url": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/02-section-sweep/PROMPT.md",
+"model": "Opus 5.5",
+"category": "3d",
+"tech": [
+"threejs"
+],
+"prompt": "I want to build a scroll-driven landing page for [an architecture studio, your subject].\n\nThe idea: the page opens on a flat section drawing of [a house on a slope], cut at A-A.\nBlack poché where the cut passes through walls and slabs, hatched earth, grid bubbles,\nlevel marks, dimensions and room names. Three dashed amber lines show the sun angles on\n[21 December, 21 March and 21 June]. Nothing looks 3D.\n\nThe scroll, in order:\n1. The loader is a small key plan with the cut line A-A drawing across it. Then the\n   section draws itself: earth and poché first, then the lines behind the cut from front\n   to back, then the notes.\n2. The lens opens. The camera comes in while the field of view widens, so the cut keeps\n   its size on screen and the rooms behind it open into a section perspective. Then the\n   view turns to three quarters.\n3. The sweep. A vertical scan plane crosses the house from [the garden to the hill]. On\n   one side the house is still ink, on the other it is lit material. When the plane\n   passes the glass, the dashed sun lines fade and real sunbeams come in at the\n   [December] angle.\n4. The walk. In through the cut at eye height, through [the living room, the study, the\n   mezzanine, the snug, the bedroom, the lower garden], slowing at each room with a label.\n5. Back out through the cut. The scan runs back, the lens closes, and the flat sheet\n   returns with [Start a project].\n\nWhat I care about:\n- The drawing is not a picture. It is the 3D model cut at A-A, seen through one\n  perspective camera with a 0.12 degree lens about 12 km away, so it reads as flat. A\n  full-screen shader inks it from a normal and depth pass, and mixes in the lit render\n  by the position of the scan.\n- The camera never cuts. Opening the lens is one continuous dolly zoom.\n- The look: a CAD screen. Paper #f2efe7, ink #1d1c19, one amber accent #e85d04, Chakra\n  Petch for headlines, IBM Plex Mono for labels. Corner registration marks, a lens\n  readout in mm, a title block, and a small live section that shows where the camera is.\n- three.js 0.160 from a CDN, plain files, no build step. No image files, every texture\n  is drawn in code.\n\nBefore you write any code, propose the house with sizes I can picture and the camera path\nstop by stop, and wait for my answer. Then build in checkpoints. First checkpoint only:\nthe loader, the section drawing itself, and the lens opening. Record it and show me before\nyou go further.",
+"partial": false,
+"added": "2026-11-09",
+"fx": [
+"3d",
+"paint",
+"shader",
+"ui"
+],
+"needs": [],
+"level": 1
+},
+{
+"id": "sam-flat3d:sam1983aing-03-open-section",
+"src": "sam-flat3d",
+"slug": "sam1983aing-03-open-section",
+"author": "Sam1983Aing",
+"post_url": "https://github.com/Sam1983Aing/flat-to-3d/tree/main/03-open-section",
+"video_url": "",
+"prompt_url": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/03-open-section/PROMPT.md",
+"model": "Opus 5.5",
+"category": "3d",
+"tech": [
+"threejs"
+],
+"prompt": "I want to build a scroll-driven landing page for [an architecture studio, a house on a\nslope, your subject].\n\nThe idea: the page opens on a flat section at 1:100. Walls and slabs cut in solid black,\nhatched earth, grid bubbles, level marks, room names, small figures and trees. Nothing\nlooks 3D. On load, amber pen lines sweep from left to right and the section plots itself.\n\nThe scroll, in order:\n1. The lens opens. The rooms behind the cut fall back into depth while the cut keeps\n   exactly its size on screen. The flat section becomes a sectional perspective.\n2. An amber scan line crosses the house and turns the ink into material, sunlight and\n   shadow.\n3. The camera visits the house floor by floor at eye height, always facing the cut:\n   [the stair, the kitchen, the bedroom, the living room, the pool], with a card for each.\n4. It pulls back to the flat section, now in colour.\n5. A closing section on paper: the studio, the facts of the house, [three other houses]\n   drawn as small sections, and [Start a project].\n\nWhat I care about:\n- The section is not a picture. It is the real 3D model cut by one clipping plane, with a\n  black lid on every solid the plane passes through, seen straight on through a 1.6\n  degree lens about 1 km away.\n- Opening the lens moves the camera in so the frame on the cut never changes size:\n  distance = frame height / tan(lens / 2). The camera never orbits.\n- Give the depth something to show: [three levels down a hill, one stair, a courtyard\n  behind the cut], real furniture.\n- The look: a CAD screen. Paper #f2efe7, ink #1d1c19, one amber accent #e85d04, Chakra\n  Petch for headlines, IBM Plex Mono for labels. Corner registration marks, a title\n  block, a bar scale, a live readout of the lens angle, and a small 3D key that shows\n  where the camera is.\n- three.js 0.160 from a CDN, plain files, no build step. No image files, every texture is\n  drawn in code.\n\nBefore you write any code, propose the house in section with sizes I can picture and the\ncamera stops in order, and wait for my answer. Then build in checkpoints. First checkpoint\nonly: the loader, the section plotting itself, the lens opening and the colour scan.\nRecord it and show me before you go further.",
+"partial": false,
+"added": "2026-11-09",
+"fx": [
+"3d",
+"cosmic",
+"glitch",
+"paint",
+"ui"
+],
+"needs": [],
+"level": 1
+},
+{
+"id": "sam-flat3d:sam1983aing-04-build-time-lapse",
+"src": "sam-flat3d",
+"slug": "sam1983aing-04-build-time-lapse",
+"author": "Sam1983Aing",
+"post_url": "https://github.com/Sam1983Aing/flat-to-3d/tree/main/04-build-time-lapse",
+"video_url": "",
+"prompt_url": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/04-build-time-lapse/PROMPT.md",
+"model": "Opus 5.5",
+"category": "3d",
+"tech": [
+"threejs"
+],
+"prompt": "I want to build a scroll-driven landing page for [a design and build company, your\nsubject], around one [concrete house on a slope].\n\nThe idea: the page opens on a construction sequence sheet. Six small axonometric line\ndrawings of the same house, one per stage: [dig and footings, lower level, ground slab,\nwalls, roof, glazing and fit out], each with its weeks. Next to the headline sits the\nprogramme, one bar per phase.\n\nThe scroll, in order:\n1. The loader is the programme drawing its bars. Then all six drawings draw at once on one\n   clock, fresh lines in amber that cool to black.\n2. The paper zooms into drawing 01 until it fills the screen. Behind the ink, the real\n   site pours in, in build order, with an amber edge.\n3. The lens opens from 2 to 50 degrees while the frame holds, and lands at eye height at\n   the edge of the excavation.\n4. Now the scroll is the calendar. The house goes up week by week while the camera walks\n   [down to the garden, up a scaffold stair, onto the terrace]. The backfill rises from\n   the bottom of the hole.\n5. At [week 18] the camera walks through a forest of steel props under the fresh roof,\n   with the sun cutting between them.\n6. The finishes and the furniture arrive around the camera: [the mezzanine, the kitchen,\n   the living room], up to handover.\n7. On handover day the camera backs out into drawing 06, the house turns back into its\n   drawing in reverse order, and the sheet returns with every bar full and [Book a site\n   visit].\n\nWhat I care about:\n- The drawings are the 3D model itself, drawn live by an edge shader through a 2 degree\n  lens, each tile at its own week. Every part of the house carries the week it is built,\n  so one number decides what exists.\n- One list of phases drives the programme, the drawings and the site.\n- The look: a CAD screen. Paper #f2efe7, ink #1d1c19, one amber accent #e85d04, Chakra\n  Petch for headlines, IBM Plex Mono for labels, corner registration marks, a week chip,\n  and the programme docked bottom left with a \"now\" line.\n- three.js 0.160 from a CDN, plain files, no build step. No image files, every texture is\n  drawn in code.\n\nBefore you write any code, propose the house with sizes I can picture, the week of each\nphase and the camera path stop by stop, and wait for my answer. Then build in checkpoints.\nFirst checkpoint only: the loader, the sheet drawing itself, and the dive into drawing 01\ndown to eye height. Record it and show me before you go further.",
+"partial": false,
+"added": "2026-11-09",
+"fx": [
+"3d",
+"cosmic",
+"paint",
+"shader",
+"ui"
+],
+"needs": [],
+"level": 1
+},
+{
+"id": "sam-flat3d:sam1983aing-05-schedule-build",
+"src": "sam-flat3d",
+"slug": "sam1983aing-05-schedule-build",
+"author": "Sam1983Aing",
+"post_url": "https://github.com/Sam1983Aing/flat-to-3d/tree/main/05-schedule-build",
+"video_url": "",
+"prompt_url": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/05-schedule-build/PROMPT.md",
+"model": "Opus 5.5",
+"category": "3d",
+"tech": [
+"threejs"
+],
+"prompt": "I want to build a landing page for [a design and build company, your subject] that\npromises \"Your house in [14 weeks].\"\n\nThe idea: a construction programme, the Gantt chart builders work from, sits in a\nfull-width dock along the bottom of the screen: hatched bars, the weeks along the top, an\norange \"today\" line. Above it is the site, still empty. The mouse wheel moves the today\nline, and the house builds itself in construction order: [fence and cabin, dig,\nfoundations, timber frames, floors, walls, roof, windows, cladding and finishes,\nfurniture]. Scroll back and it comes apart again.\n\nWhat the visitor sees, in order:\n1. Site set-up and the dig: a fence goes up, a digger digs the pit.\n2. A crane lowers each frame, wall and roof panel into place, with a little sway and a\n   soft landing.\n3. The cladding goes on, the lawn grows, the lights come on inside.\n4. At handover the site kit leaves, the front door swings open, and the camera walks in\n   through [the entry, the living room, the kitchen, up the stair to the loft], ending on\n   [the gallery over the double height].\n\nWhat I care about:\n- The chart is not a picture. One table of phases (name, start week, end week) draws the\n  bars and decides when each part of the house exists. Every part knows its phase and its\n  order in it.\n- The live phase is orange in both places: its bar fills, and the piece being placed gets\n  orange edges.\n- The camera holds one high three-quarter view during the build, so the building is what\n  moves. Dragging the chart scrubs it too, and a play button runs it.\n- Not cartoonish: concrete, glulam, OSB, charred larch, zinc and oak, textured in code,\n  soft shadows, a sun that climbs with the weeks, faint ink edges. Dates count working\n  days.\n- The look: paper #f2efe7, ink #1d1c19, one orange #e85d04, Chakra Petch for headlines,\n  IBM Plex Mono for labels, CAD corner marks, and a dark readout with the week, the date\n  and the phase.\n- three.js 0.169 from a CDN, plain files, no build step. No image files.\n\nBefore you write any code, propose the house with sizes, the phases with their weeks, and\nthe camera for the build and for the walk inside, and wait for my answer. Then build in\ncheckpoints. First checkpoint only: the dock with the programme, the site, and the build\nup to the frames. Record it and show me before you go further.",
+"partial": false,
+"added": "2026-11-09",
+"fx": [
+"3d",
+"data",
+"paint",
+"ui"
+],
+"needs": [],
+"level": 1
+},
+{
+"id": "sam-flat3d:sam1983aing-06-card-model",
+"src": "sam-flat3d",
+"slug": "sam1983aing-06-card-model",
+"author": "Sam1983Aing",
+"post_url": "https://github.com/Sam1983Aing/flat-to-3d/tree/main/06-card-model",
+"video_url": "",
+"prompt_url": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/06-card-model/PROMPT.md",
+"model": "Opus 5.5",
+"category": "3d",
+"tech": [
+"threejs"
+],
+"prompt": "I want to build a scroll-driven landing page for [an architecture studio, your subject].\n\nThe idea: a white card study model of [a house on a slope] sits on an architect's desk at\nnight. Card walls, acetate windows, greyboard contour layers for the land, card trees and\none tiny scale figure. A desk lamp lights it, and drawings of the same house are pinned on\nthe dark wall behind.\n\nThe scroll, in order:\n1. The loader: a scalpel scores a line across a sheet of card, then the sheet parts along\n   the cut.\n2. The hero builds itself: the lamp clicks on, the contour layers drop in, the house slots\n   into its site, the trees stand up.\n3. The dive. The camera comes down to the scale figure's eye height. Every halving of the\n   height costs the same amount of scroll. A readout shows the height in centimetres on\n   the desk and in metres in the house.\n4. The turn. A sphere grows from the lamp's bulb. Inside it the card becomes concrete,\n   oak, glass and grass, with a thin amber scan line where it cuts each surface. The\n   camera takes the figure's place, and the lamp's light becomes a low sun from the same\n   direction. The sphere stops once the house and its land are done, and the dark studio\n   stays around them. No sky.\n5. The walk: through the sliding door into [the living room], up to [the study], where the\n   same card model sits on the desk.\n6. Back out. The sphere shrinks, the house turns back into card, the lamp clicks off, and\n   [Start a project] comes in.\n\nWhat I care about:\n- The model is not a picture. 1 unit is 1 m of house, the desk is built 100 times bigger\n  around it, and one parts list renders either as card or as real materials, at the same\n  coordinates.\n- Card and house are lit separately: the card by the lamp, the house by the sun.\n- The look: a near black page, cream card #f2efe7, one amber accent #e85d04, Chakra Petch\n  for headlines, IBM Plex Mono for labels, corner registration marks.\n- three.js 0.160 from a CDN, plain files, no build step. No image files, every texture is\n  drawn in code.\n\nBefore you write any code, propose the house with sizes I can picture and the camera path\nstop by stop, and wait for my answer. Then build in checkpoints. First checkpoint only:\nthe loader, the hero and the dive to the figure. Record it and show me before you go\nfurther.",
+"partial": false,
+"added": "2026-11-09",
+"fx": [
+"3d",
+"cosmic",
+"glitch",
+"ui"
+],
+"needs": [],
+"level": 1
+},
+{
+"id": "sam-flat3d:sam1983aing-07-sunlit-elevation",
+"src": "sam-flat3d",
+"slug": "sam1983aing-07-sunlit-elevation",
+"author": "Sam1983Aing",
+"post_url": "https://github.com/Sam1983Aing/flat-to-3d/tree/main/07-sunlit-elevation",
+"video_url": "",
+"prompt_url": "https://github.com/Sam1983Aing/flat-to-3d/blob/main/07-sunlit-elevation/PROMPT.md",
+"model": "Opus 5.5",
+"category": "3d",
+"tech": [
+"threejs"
+],
+"prompt": "I want to build a scroll-driven landing page for [a townhouse for sale, your subject].\n\nThe idea: the page opens on a front elevation, the building drawn straight on. Ink on\ncream paper, level marks, a title block, a person for scale, and 45 degree hatching in\nevery shadow. After the loader, the drawing drafts itself from the ground up, then the\nhatching pours in along the light.\n\nThe scroll, in order:\n1. Relief. The lens opens a little and the camera turns, so the porch falls back and the\n   balcony comes forward.\n2. The sun. A thin amber line sweeps across the facade at 45 degrees and turns paper into\n   brick, stone, zinc and glass. Not one shadow moves.\n3. Then the sun moves to [late afternoon] and the shadows slide across the brick.\n4. The camera climbs the steps, the front door swings open, and it walks through [the\n   hall, the parlour, the kitchen and dining room] at eye height to [the courtyard].\n5. A last card with the facts and [Book a viewing].\n\nWhat I care about:\n- The elevation is the real 3D model seen straight on through a 2 degree lens. Each\n  camera key is a frame (target, frame height, lens) and the distance follows, so the\n  lens can open to 55 degrees without a jump.\n- The hatching is computed, not drawn. The sun starts at the drafting convention, light\n  from the upper left at 45 degrees, (-1, 1, 1) normalised. Every pixel the shadow map\n  puts in shade gets hatched, so the drawn shadows and the real shadows are the same\n  shapes.\n- One material per surface, paper or real, chosen per pixel by the sweep.\n- The look: a CAD sheet. Paper #f2efe7, ink #1d1c19, one amber accent #e85d04, Chakra\n  Petch for headlines, IBM Plex Mono for labels, a sheet frame with corner marks, a live\n  sun and lens readout, and a small plan that shows where the camera is.\n- three.js 0.160 and Lenis from a CDN, plain files, no build step. No image files, every\n  texture is drawn in code.\n\nBefore you write any code, propose the facade and the plan with sizes I can picture and\nthe camera path stop by stop, and wait for my answer. Then build in checkpoints. First\ncheckpoint only: the drawing drafting itself, the relief and the sweep. Record it and show\nme before you go further.",
+"partial": false,
+"added": "2026-11-09",
+"fx": [
+"3d",
+"data",
+"paint",
+"pixel",
+"ui"
+],
+"needs": [],
+"level": 1
 },
 {
 "id": "yihui:0xchuckstock-879327",
