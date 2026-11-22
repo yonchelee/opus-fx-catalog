@@ -23,6 +23,8 @@ Claude(Opus 5.5 등)로 실제 만들어진 모션그래픽·3D·셰이더·인�
 - [Li-Evan/awesome-opus-5.5-video-prompts](https://github.com/Li-Evan/awesome-opus-5.5-video-prompts) — CC BY 4.0 (`src: lievan` 항목)
 - [LeaddeOpenLab/awesome-opus-5-5-video-prompts](https://github.com/LeaddeOpenLab/awesome-opus-5-5-video-prompts) — 저장소 라이선스 없음, 권리 정책([RIGHTS.md](https://github.com/LeaddeOpenLab/awesome-opus-5-5-video-prompts/blob/main/data/docs/RIGHTS.md)): 프롬프트·미디어는 원작자 소유 (`src: leadde` 항목 — 프롬프트 공개 표기가 `full_original`인 사례만, 미리보기는 원작자 X 게시물 주소만 사용)
 - [Sam1983Aing/flat-to-3d](https://github.com/Sam1983Aing/flat-to-3d) — MIT (`src: sam-flat3d` 항목, 건축 도면 → 스크롤 3D 시작 프롬프트 7종, 수동)
+- [yihui-dev/awesome-fable5-2-videos](https://github.com/yihui-dev/awesome-fable5-2-videos) — MIT (`src: yihui-fable` 항목, Fable 5.2 작품 중 작성자가 프롬프트를 공개한 21편, 수동)
+- [tong0619453646-dev/awesome-claude-fable-5.2-video-prompts](https://github.com/tong0619453646-dev/awesome-claude-fable-5.2-video-prompts) — CC BY 4.0 (`src: tong-fable` 항목, Fable 5.2 프롬프트 33편 중 겹치지 않는 18편, 수동, 출처 표기 필요)
 
 새 소스가 추가되면 `sources.json`과 이 목록에 함께 기록합니다.
 

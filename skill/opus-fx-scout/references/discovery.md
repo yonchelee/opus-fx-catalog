@@ -63,6 +63,10 @@ python3 scripts/sync.py --dry-run   # 무엇이 새로 들어올지 보기
 - Li-Evan/awesome-opus-5.5-video-prompts: 채택 (334개 원문 대조, CC BY 4.0, yihui와 안 겹치는 133개 반영, 수동)
 - LeaddeOpenLab/awesome-opus-5-5-video-prompts: 채택 (2026-10-22, 사용자 승인) — 사례 파일에 프롬프트 공개 표기가 생겨 `full_original` 195건만 자동 동기화(`type: case_library`, 다른 출처와 겹치는 16건 제외). `fragment` 533건은 받지 않음. 라이선스 파일 없음(RIGHTS.md: 원작자 소유)이라 미리보기는 원작자 X 주소만 씀
 - Sam1983Aing/flat-to-3d: 채택 (2026-11-09, 사용자 승인) — 건축 도면을 스크롤 3D로 여는 데모 7종의 시작 프롬프트(Opus 5.5, MIT). `[괄호]`를 채우는 템플릿이지만 원문 그대로 수동 반영(`type: manual`)
+- yihui-dev/awesome-fable5-2-videos: 채택 (2026-11-22, 주간 Routine) — 메인과 같은 관리자·형식의 Fable 5.2 모음(MIT). 182편 중 프롬프트 공개 21편만 수동 반영(`type: manual`). `videos_json` 자동 등록은 프롬프트 없는 행까지 들어오므로 보류 — 프롬프트 있는 행만 받는 필터가 생기면 자동으로 바꿀 것
+- tong0619453646-dev/awesome-claude-fable-5.2-video-prompts: 채택 (2026-11-22, 주간 Routine) — Fable 5.2 프롬프트 33편 원문(CC BY 4.0), yihui-fable 과 겹치는 15편 빼고 18편 수동 반영. 원본 `complete:false` 는 `prompt_partial` 로 옮김
+- Fable 5.2 모음 중 보류: LeaddeOpenLab/awesome-fable-5.2-video-prompts(43건, 공개 표기 필드 없음·트윗 문구 인용), sandbase-lab/awesome-fable-5-2(프롬프트 63개가 게시글 본문 인용), liang8989·mofa-si·VibeClip·hideewsj-maker(프롬프트 적음·yihui-fable과 대부분 겹침), ruirui125/claude-fable-code-video(중국어 해설 위주, yihui-fable과 191건 겹침), pagepop/awesome-fable5.5-prompts(모델 표기 'Fable 5.5'가 게시 시점과 안 맞음)
+- sasateguh/awesome-claude-motion-prompts(저장소 작성자가 직접 쓴 프롬프트, 커뮤니티 원문 아님): 보류
 - X-RayLuan, guanmo-ai, HiAPIAI, athemeroy의 모음: 보류
 - eastling(전부 중복), adela0414(원문이 아니라 다시 쓴 브리프), real-leo·BeatAPI(링크만 모음): 제외
 - zhuyansen 모음(940작품 중 전문 91개), opusvideo 모음(46개, 프롬프트 대부분 없음): 보류

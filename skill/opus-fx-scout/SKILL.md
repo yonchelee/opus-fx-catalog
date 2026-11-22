@@ -102,4 +102,4 @@ python3 scripts/find.py --kw scroll parallax typography --any-fx kinetic morph -
 - Claude는 영상을 직접 그리지 않고 코드를 짜서 렌더링합니다. 채팅에서는 HTML이 나오고, MP4는 Claude Code 같은 실행 환경이 필요합니다.
 - level 4 작품의 실사·캐릭터·음성은 외부 생성 AI가 만든 것입니다.
 - 카탈로그는 잘 나온 결과만 모인 것이라 같은 프롬프트로도 몇 번 다시 시켜야 할 수 있습니다.
-- 모든 원본의 권리는 각 작성자에게 있습니다. Li-Evan 소스(src가 lievan) 항목은 CC BY 4.0이라 다시 공개할 때 출처 표기가 필요합니다. 응용해서 공개할 때는 영감을 준 원본을 밝히길 권합니다.
+- 모든 원본의 권리는 각 작성자에게 있습니다. Li-Evan 소스(src가 lievan)와 tong-fable 항목은 CC BY 4.0이라 다시 공개할 때 출처 표기가 필요합니다. 응용해서 공개할 때는 영감을 준 원본을 밝히길 권합니다.

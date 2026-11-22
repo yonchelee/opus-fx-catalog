@@ -41,6 +41,18 @@
   "note": "건축 도면(분해 액소노·단면·입면)을 스크롤 3D로 여는 데모 7종과 시작 프롬프트(MIT, Opus 5.5 제작). 프롬프트는 [괄호]를 채우는 시작용 템플릿 — 원문 그대로 옮김. 사용자 승인 2026-11-09."
  },
  {
+  "id": "tong-fable",
+  "name": "tong0619453646-dev/awesome-claude-fable-5.2-video-prompts",
+  "type": "manual",
+  "repo": "tong0619453646-dev/awesome-claude-fable-5.2-video-prompts",
+  "branch": "main",
+  "path": "data/library.json",
+  "prompt_url_tpl": "https://github.com/tong0619453646-dev/awesome-claude-fable-5.2-video-prompts/blob/main/README.md#{id}",
+  "model": "Fable 5.2",
+  "status": "manual",
+  "note": "Fable 5.2 프롬프트 33편, 작성자 게시 원문 그대로(CC BY 4.0, 출처 표기 필요). yihui-fable 과 겹치는 15편 제외 18편 반영(2026-11-22). 원본 complete:false 표기는 prompt_partial 로 옮김. 제목은 모음 작성자가 붙인 것."
+ },
+ {
   "id": "yihui",
   "name": "yihui-dev/awesome-opus5-5-videos",
   "type": "videos_json",
@@ -51,5 +63,17 @@
   "model": "Opus 5.5",
   "status": "active",
   "note": "메인 소스. X에 올라온 Opus 5.5 영상의 프롬프트 모음. 영상은 skillry.dev 링크."
+ },
+ {
+  "id": "yihui-fable",
+  "name": "yihui-dev/awesome-fable5-2-videos",
+  "type": "manual",
+  "repo": "yihui-dev/awesome-fable5-2-videos",
+  "branch": "main",
+  "path": "data/videos.json",
+  "prompt_url_tpl": "https://github.com/yihui-dev/awesome-fable5-2-videos/blob/main/prompts/{slug}.md",
+  "model": "Fable 5.2",
+  "status": "manual",
+  "note": "메인 소스(yihui)와 같은 관리자·같은 형식의 Fable 5.2 모음(MIT). 182편 중 작성자가 프롬프트를 공개한 21편만 원문 그대로 반영(2026-11-22). videos_json 으로 자동 등록하면 프롬프트 없는 161행이 들어오므로 수동."
  }
 ]
